@@ -7,5 +7,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("Connected to ", port);
+  console.log("Connected to THE", port);
 });
