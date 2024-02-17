@@ -1,9 +1,12 @@
 import "./App.css";
-
+import Header from "./Components/Header/Header";
+import LoginSignup from "./Components/Login/LoginSignup";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">hello</header>
+      <Header />
+      
+      <LoginSignup />
     </div>
   );
 }
