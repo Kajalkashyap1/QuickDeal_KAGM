@@ -1,13 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Inter:wght@800;900&family=Rubik:wght@800&display=swap');
-
-
-.Header{
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Inter:wght@800;900&family=Rubik:wght@800&display=swap");
+.Header {
     background-color: var(--purple);
     color: var(--lp);
-    padding: 1.5rem;
+    padding: 1.2rem;
     text-align: left;
-    font-size: 18px;
-    font-family: 'DM Sans', sans-serif;
-    font-family: 'Inter', sans-serif;
-    font-family: 'Rubik', sans-serif;
+    font-size: 13px;
+    font-family: "DM Sans", sans-serif;
+    /* Add flexbox for layout */
+    display: flex;
+    justify-content: space-between; /* Adjust spacing between items */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Ensure header covers full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Responsive Styling */
+@media only screen and (max-width: 768px) {
+    .Header {
+        padding: 1rem; /* Adjust padding for smaller screens */
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .Header {
+        font-size: 16px; /* Decrease font size for smaller screens */
+    }
 }
