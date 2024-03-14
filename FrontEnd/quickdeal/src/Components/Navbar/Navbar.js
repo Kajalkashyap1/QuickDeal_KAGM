@@ -9,7 +9,7 @@ function Navbar() {
                 <input type="text" placeholder="Search..." />
                 <button>Search</button>
             </div>
-            <a href="#">Dummy Link</a>
+            <a href="/">Dummy Link</a>
         </div>
     );
 }

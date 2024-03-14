@@ -5,6 +5,7 @@ import pwd_icon from "../Assets/password.png";
 import Header from "../Header/Header";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Googlelogin from "../Googlelogin/Googleloginsignup";
 
 function LoginSignup() {
     const nevigate = useNavigate();
@@ -74,6 +75,7 @@ function LoginSignup() {
                         <div className="forgot-password">
                             <span>Forgot Password</span>
                         </div>
+                        <Googlelogin></Googlelogin>
                         <div className="submit-container">
                             <div className={"submit gray"}>
                                 <NavLink

@@ -14,9 +14,12 @@ const Home = () => {
             })
             .catch((err) => console.log(err));
     };
-    const [isauth, setauth] = useState("false");
+
+    const [isauth, setauth] = useState("");
     const [name, setname] = useState("");
     const [useremail, setuseremail] = useState("");
+    const [image, setimage] = useState("");
+
     useEffect(() => {
         axios
             .get("http://localhost:8000/auth/islogin")
@@ -27,36 +30,36 @@ const Home = () => {
                     setauth(true);
                     setname(res.data.name);
                     setuseremail(res.data.email);
+                    setimage(res.data.image);
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-
     return (
         <>
             {isauth ? (
                 <>
-                    {/* <center>
+                    <Navbar></Navbar>
+                    <center>
+                        <img src={image} alt={name} />
                         <h1>
                             Welcome {name} you have logged in successfully
                             <br />
                             mail id - {useremail}
                         </h1>
                         <button onClick={handlelogout}>Logout</button>
-                    </center> */}
-                    <Navbar/>
+                    </center>
                 </>
             ) : (
-                <> 
-                    
-                    {/* <center>
+                <>
+                    <center>
                         <h1>You are not authenticated </h1>
                         <NavLink to="/login" activeclassname="active_class">
                             <button>Login</button>
                         </NavLink>
-                    </center> */}
+                    </center>
                 </>
             )}
         </>

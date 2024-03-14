@@ -12,30 +12,42 @@ function checkpassword(value) {
     });
 }
 
+function checknumber(value) {
+    const val = value.toString().length;
+    return val >= 10;
+}
+
 const register = async (req, res) => {
     let fullname;
     let email;
     let Npassword;
     let contactNo;
+    let isgoogle = false;
+    let imageurl = "";
     if (req.body.isgoogle) {
-        fullname = req.body.value.name;
-        email = req.body.value.email;
-        Npassword = "Google@#231";
-        contactNo = 99999999999;
+        fullname = req.body.fullname;
+        email = req.body.email;
+        Npassword = "";
+        isgoogle = true;
+        imageurl = req.body.picture;
     } else {
         fullname = req.body.fullname;
         email = req.body.email;
         Npassword = req.body.password;
         contactNo = req.body.contactNo;
     }
-    if (!checkpassword(Npassword)) {
+    if (
+        !req.body.isgoogle &&
+        !checkpassword(Npassword) &&
+        !checknumber(contactNo)
+    ) {
         return res.json({
             status: "error",
             message: "Password does not meet the criteria",
         });
     }
     const password = await bcrypt.hash(Npassword, 12);
-    const data = { fullname, email, contactNo, password };
+    const data = { isgoogle, fullname, email, contactNo, password, imageurl };
     const insertdata = new userdata(data);
     try {
         const indata = await insertdata.save();

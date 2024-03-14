@@ -4,6 +4,7 @@ const loggedin = (req, res) => {
         name: req.name,
         email: req.email,
         id: req.id,
+        image: req.imageurl,
     });
 };
 module.exports = loggedin;

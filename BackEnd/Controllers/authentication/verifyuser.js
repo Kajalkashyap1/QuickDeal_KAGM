@@ -21,7 +21,7 @@ const verifyuser = (req, res, next) => {
                         req.name = decoded.fullname;
                         req.email = decoded.email;
                         req.id = decoded.id;
-                        // console.log("Decoded ", decoded);
+                        req.imageurl = decoded.imageurl;
                         next();
                     }
                 }

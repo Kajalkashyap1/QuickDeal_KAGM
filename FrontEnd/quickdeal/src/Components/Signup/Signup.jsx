@@ -6,8 +6,13 @@ import userimg from "../Assets/person.png";
 import Header from "../../Components/Header/Header";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Googlelogin from "../Googlelogin/Googleloginsignup";
+
 const Signupui = () => {
     const [user, setUser] = useState({
+        isgoogle: false,
         fullname: "",
         email: "",
         contactNo: "",
@@ -27,6 +32,10 @@ const Signupui = () => {
     axios.defaults.withCredentials = true;
     const submithandel = (event) => {
         event.preventDefault();
+        if (user.password !== user.cnfpassword) {
+            toast.error("Password Did not matched ", { autoClose: 2500 });
+            return;
+        }
         axios
             .post("http://localhost:8000/auth/register", user)
             .then((res) => {
@@ -46,6 +55,20 @@ const Signupui = () => {
 
     return (
         <>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition="Bounce"
+            />
+            <ToastContainer />
             <Header></Header>
             <div className="container">
                 <div className="header">
@@ -114,6 +137,7 @@ const Signupui = () => {
                         <div>
                             <button type="submit">Submit</button>
                         </div>
+                        <Googlelogin></Googlelogin>
                         <div className="forgot-password">
                             <span>Forgot Password</span>
                         </div>

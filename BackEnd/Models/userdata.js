@@ -5,21 +5,12 @@ const validator = require("validator");
 function isMNNITEmail(email) {
     return email.endsWith("@mnnit.ac.in");
 }
-function checkpassword(value) {
-    return validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-    });
-}
 
-function checknumber(value) {
-    const val = value.toString().length;
-    return val >= 10;
-}
 const user = new mongoose.Schema({
+    isGooglelogin: {
+        type: Boolean,
+        default: false,
+    },
     fullname: {
         type: String,
         lowercase: true,
@@ -44,20 +35,16 @@ const user = new mongoose.Schema({
     contactNo: {
         type: Number,
         unique: true,
-        required: true,
-        validate: {
-            validator: checknumber,
-            message: "Enter valid number !",
-        },
+        default: 0,
     },
     password: {
         type: String,
         required: true,
-        required: true,
-        validate: {
-            validator: checkpassword,
-            message: "Please enter strong password ! ",
-        },
+        default: "",
+    },
+    imageurl: {
+        type: String,
+        default: null,
     },
 });
 
