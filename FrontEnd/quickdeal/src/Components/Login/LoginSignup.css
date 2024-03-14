@@ -76,6 +76,7 @@
 }
 
 .submit {
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,6 +91,23 @@
 }
 
 .gray {
+    text-decoration: none;
     background: #eaeaea;
     color: #676767;
+}
+
+/* customize number input  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+.active {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
 }

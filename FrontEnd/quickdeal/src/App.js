@@ -1,12 +1,16 @@
-import "./App.css";
-import Header from "./Components/Header/Header";
-import LoginSignup from "./Components/HandleloginSignup/LoginSignup";
+import { Routes, Route } from "react-router-dom";
+import Login from "./Components/Login/Login";
+import Signin from "./Components/Signup/Signup";
+import Home from "./Components/Dashboard/Home";
 function App() {
     return (
-        <div className="App">
-            <Header />
-            <LoginSignup />
-        </div>
+        <>
+            <Routes>
+                <Route exact path="/" Component={Home} />
+                <Route path="/login" Component={Login} />
+                <Route path="/signin" Component={Signin} />
+            </Routes>
+        </>
     );
 }
 

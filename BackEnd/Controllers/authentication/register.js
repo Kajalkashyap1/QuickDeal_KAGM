@@ -17,7 +17,6 @@ const register = async (req, res) => {
     let email;
     let Npassword;
     let contactNo;
-
     if (req.body.isgoogle) {
         fullname = req.body.value.name;
         email = req.body.value.email;
@@ -30,7 +29,7 @@ const register = async (req, res) => {
         contactNo = req.body.contactNo;
     }
     if (!checkpassword(Npassword)) {
-        return res.status(400).json({
+        return res.json({
             status: "error",
             message: "Password does not meet the criteria",
         });
@@ -39,12 +38,10 @@ const register = async (req, res) => {
     const data = { fullname, email, contactNo, password };
     const insertdata = new userdata(data);
     try {
-        // console.log(data);
         const indata = await insertdata.save();
-        res.status(200).json({
+        return res.json({
             status: "success",
             message: "User created",
-            // indata,
         });
     } catch (e) {
         let error;
@@ -54,8 +51,8 @@ const register = async (req, res) => {
             const errortarget = Object.keys(e.errors)[0];
             error = e.errors[errortarget].message;
         }
-        res.status(201).json({
-            status: "Invalid credentials",
+        return res.json({
+            status: "error",
             message: error,
         });
     }
