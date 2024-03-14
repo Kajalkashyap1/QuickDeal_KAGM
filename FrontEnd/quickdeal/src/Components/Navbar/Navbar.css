@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Inter:wght@800;900&family=Rubik:wght@800&display=swap");
+.Header {
+    background-color: var(--purple);
+    color: var(--lp);
+    padding: 1.2rem;
+    text-align: left;
+    font-size: 11px;
+    font-family: "DM Sans", sans-serif;
+    /* Add flexbox for layout */
+    display: flex;
+    justify-content: space-between; /* Adjust spacing between items */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Ensure header covers full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.SearchBar {
+    flex: 1; /* Take remaining space */
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    
+}
+
+.SearchBar input {
+    margin-right: 2px; /* Add some space between input and button */
+    width: 40%;
+    height: 2rem;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.SearchBar button{
+    height: 2.8rem;
+    padding: 5px;
+    width: 4rem;
+}
+
+
+/* Style for dummy link */
+.Header a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px; /* Add some space between search bar and link */
+    font-size: 1.5rem;
+}
+
+/* Responsive Styling */
+@media only screen and (max-width: 768px) {
+    .Header {
+        padding: 1rem; /* Adjust padding for smaller screens */
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .Header {
+        font-size: 16px; /* Decrease font size for smaller screens */
+    }
+}

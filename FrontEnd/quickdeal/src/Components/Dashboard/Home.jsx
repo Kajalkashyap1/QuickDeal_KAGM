@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 const Home = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -37,23 +38,25 @@ const Home = () => {
         <>
             {isauth ? (
                 <>
-                    <center>
+                    {/* <center>
                         <h1>
                             Welcome {name} you have logged in successfully
                             <br />
                             mail id - {useremail}
                         </h1>
                         <button onClick={handlelogout}>Logout</button>
-                    </center>
+                    </center> */}
+                    <Navbar/>
                 </>
             ) : (
-                <>
-                    <center>
+                <> 
+                    
+                    {/* <center>
                         <h1>You are not authenticated </h1>
                         <NavLink to="/login" activeclassname="active_class">
                             <button>Login</button>
                         </NavLink>
-                    </center>
+                    </center> */}
                 </>
             )}
         </>
