@@ -9,6 +9,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Signupui = () => {
     const [user, setUser] = useState({
@@ -51,6 +53,12 @@ const Signupui = () => {
             password: "",
             cnfpassword: "",
         });
+    };
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handlepasswordtoggle = () => {
+        setShowPassword((prevState) => !prevState);
     };
 
     return (
@@ -115,24 +123,50 @@ const Signupui = () => {
                         <div className="input">
                             <img src={pwd_icon} alt="" />
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Password"
                                 onChange={handeler}
                                 value={user.password}
                                 name="password"
                                 required
                             />
+                            <span
+                                style={{
+                                    cursor: "pointer",
+                                    marginRight: "7px",
+                                }}
+                                onMouseDown={handlepasswordtoggle}
+                                onMouseUp={handlepasswordtoggle}>
+                                {showPassword ? (
+                                    <VisibilityIcon />
+                                ) : (
+                                    <VisibilityOffIcon />
+                                )}
+                            </span>
                         </div>
                         <div className="input">
                             <img src={pwd_icon} alt="" />
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Confirm Password"
                                 onChange={handeler}
                                 value={user.cnfpassword}
                                 name="cnfpassword"
                                 required
                             />
+                            <span
+                                style={{
+                                    cursor: "pointer",
+                                    marginRight: "7px",
+                                }}
+                                onMouseDown={handlepasswordtoggle}
+                                onMouseUp={handlepasswordtoggle}>
+                                {showPassword ? (
+                                    <VisibilityIcon />
+                                ) : (
+                                    <VisibilityOffIcon />
+                                )}
+                            </span>
                         </div>
                         <div>
                             <button type="submit">Submit</button>

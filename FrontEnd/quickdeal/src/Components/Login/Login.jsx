@@ -40,7 +40,7 @@ function LoginSignup() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleMouseDown = () => {
+    const handlepasswordtoggle = () => {
         setShowPassword((prevState) => !prevState);
     };
 
@@ -82,8 +82,8 @@ function LoginSignup() {
                                     cursor: "pointer",
                                     marginRight: "7px",
                                 }}
-                                onMouseDown={handleMouseDown}
-                                onMouseUp={handleMouseDown}>
+                                onMouseDown={handlepasswordtoggle}
+                                onMouseUp={handlepasswordtoggle}>
                                 {showPassword ? (
                                     <VisibilityIcon />
                                 ) : (
