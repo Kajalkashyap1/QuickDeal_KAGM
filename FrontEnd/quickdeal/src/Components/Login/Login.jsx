@@ -6,13 +6,11 @@ import Header from "../Header/Header";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
-
-
-
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 function LoginSignup() {
     const nevigate = useNavigate();
-        
+
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -40,12 +38,11 @@ function LoginSignup() {
         setUser({ email: "", password: "" });
     };
 
-    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleTogglePassword = () => {
-        setShowPassword(prevState => !prevState);
-      };
+    const handleMouseDown = () => {
+        setShowPassword((prevState) => !prevState);
+    };
 
     return (
         <>
@@ -70,19 +67,31 @@ function LoginSignup() {
                         </div>
                         <div className="input">
                             <img src={pwd_icon} alt="" />
-                            { <input
-                                type={showPassword ? 'text' : 'password'}
-                                placeholder="Password"
-                                onChange={handeler}
-                                value={user.password}
-                                name="password"
-                                required
-                            /> }
-                            <span onClick={handleTogglePassword}>
-                                {showPassword ? "hide" : "show"} 
+                            {
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    onChange={handeler}
+                                    value={user.password}
+                                    name="password"
+                                    required
+                                />
+                            }
+                            <span
+                                style={{
+                                    cursor: "pointer",
+                                    marginRight: "7px",
+                                }}
+                                onMouseDown={handleMouseDown}
+                                onMouseUp={handleMouseDown}>
+                                {showPassword ? (
+                                    <VisibilityIcon />
+                                ) : (
+                                    <VisibilityOffIcon />
+                                )}
                             </span>
                         </div>
-                        
+
                         <div>
                             <button type="submit">Submit</button>
                         </div>
