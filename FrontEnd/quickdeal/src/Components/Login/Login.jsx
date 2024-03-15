@@ -7,9 +7,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
 
+
+
+
 function LoginSignup() {
     const nevigate = useNavigate();
-
+        
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -37,6 +40,13 @@ function LoginSignup() {
         setUser({ email: "", password: "" });
     };
 
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleTogglePassword = () => {
+        setShowPassword(prevState => !prevState);
+      };
+
     return (
         <>
             <Header></Header>
@@ -60,15 +70,19 @@ function LoginSignup() {
                         </div>
                         <div className="input">
                             <img src={pwd_icon} alt="" />
-                            <input
-                                type="password"
+                            { <input
+                                type={showPassword ? 'text' : 'password'}
                                 placeholder="Password"
                                 onChange={handeler}
                                 value={user.password}
                                 name="password"
                                 required
-                            />
+                            /> }
+                            <span onClick={handleTogglePassword}>
+                                {showPassword ? "hide" : "show"} 
+                            </span>
                         </div>
+                        
                         <div>
                             <button type="submit">Submit</button>
                         </div>
