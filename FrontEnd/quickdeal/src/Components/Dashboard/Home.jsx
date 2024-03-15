@@ -39,9 +39,10 @@ const Home = () => {
     }, []);
     return (
         <>
-            {isauth ? (
+            <Navbar></Navbar>
+            {/* {isauth ? (
                 <>
-                    <Navbar></Navbar>
+                    
                     <center>
                         <img src={image} alt={name} />
                         <h1>
@@ -61,7 +62,7 @@ const Home = () => {
                         </NavLink>
                     </center>
                 </>
-            )}
+            )} */}
         </>
     );
 };

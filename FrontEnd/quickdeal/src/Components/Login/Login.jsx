@@ -45,78 +45,81 @@ function LoginSignup() {
     return (
         <>
             <Header></Header>
-            <div className="container">
-                <div className="header">
-                    <div className="text">Login</div>
-                    <div className="underline"></div>
-                </div>
-                <form onSubmit={submithandel}>
-                    <div className="inputs">
-                        <div className="input">
-                            <img src={email_icon} alt="" />
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                onChange={handeler}
-                                value={user.email}
-                                name="email"
-                                required
-                            />
-                        </div>
-                        <div className="input">
-                            <img src={pwd_icon} alt="" />
-                            {
+            <div className="wrapper">
+                <div className="container">
+                    <div className="header">
+                        <div className="text">Login</div>
+                        <div className="underline"></div>
+                    </div>
+                    <form onSubmit={submithandel}>
+                        <div className="inputs">
+                            <div className="input">
+                                <img src={email_icon} alt="" />
                                 <input
-                                    type={showPassword ? "text" : "password"}
-                                    placeholder="Password"
+                                    type="email"
+                                    placeholder="Email"
                                     onChange={handeler}
-                                    value={user.password}
-                                    name="password"
+                                    value={user.email}
+                                    name="email"
                                     required
                                 />
-                            }
-                            <span
-                                style={{
-                                    cursor: "pointer",
-                                    marginRight: "7px",
-                                }}
-                                onMouseDown={handlepasswordtoggle}
-                                onMouseUp={handlepasswordtoggle}>
-                                {showPassword ? (
-                                    <VisibilityIcon />
-                                ) : (
-                                    <VisibilityOffIcon />
-                                )}
-                            </span>
-                        </div>
+                            </div>
+                            <div className="input">
+                                <img src={pwd_icon} alt="" />
+                                {
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Password"
+                                        onChange={handeler}
+                                        value={user.password}
+                                        name="password"
+                                        required
+                                    />
+                                }
+                                <span
+                                    style={{
+                                        cursor: "pointer",
+                                        marginRight: "7px",
+                                    }}
+                                    onMouseDown={handlepasswordtoggle}
+                                    onMouseUp={handlepasswordtoggle}>
+                                    {showPassword ? (
+                                        <VisibilityIcon />
+                                    ) : (
+                                        <VisibilityOffIcon />
+                                    )}
+                                </span>
+                            </div>
 
-                        <div>
-                            <button type="submit">Submit</button>
-                        </div>
-                        <div className="forgot-password">
-                            <span>Forgot Password</span>
-                        </div>
-                        <Googlelogin></Googlelogin>
-                        <div className="submit-container">
-                            <div className={"submit gray"}>
-                                <NavLink
-                                    style={{ textDecoration: "none" }}
-                                    activeclassname="active_class"
-                                    to="/signin">
-                                    Sign Up
-                                </NavLink>
+                            <div >
+                                <button className={"submit_btn"} type="submit">Submit</button>
                             </div>
-                            <div className={"submit"}>
-                                <NavLink
-                                    style={{ textDecoration: "none" }}
-                                    activeclassname="active_class"
-                                    to="/login">
-                                    Login
-                                </NavLink>
+                            <div className="forgot-password">
+                                <span>Forgot Password?</span>
                             </div>
+                            <Googlelogin></Googlelogin>
+                            <div>Don't have an account?<b><a href="../signin">Register</a></b></div>
+                            {/* <div className="submit-container">
+                                <div className={"submit gray"}>
+                                    <NavLink
+                                        style={{ textDecoration: "none" }}
+                                        activeclassname="active_class"
+                                        to="/signin">
+                                        Sign Up
+                                    </NavLink>
+                                </div>
+                                <div className={"submit"}>
+                                    <NavLink
+                                        style={{ textDecoration: "none" }}
+                                        activeclassname="active_class"
+                                        to="/login">
+                                        Login
+                                    </NavLink>
+                                </div>
+                            </div> */}
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </>
     );

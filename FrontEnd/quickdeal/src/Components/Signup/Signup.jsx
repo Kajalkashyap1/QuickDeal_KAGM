@@ -180,13 +180,16 @@ const Signupui = () => {
                             </span>
                         </div>
                         <div>
-                            <button type="submit">Submit</button>
+                            <button className="submit_btn"  type="submit">Submit</button>
                         </div>
                         <Googlelogin></Googlelogin>
-                        <div className="forgot-password">
-                            <span>Forgot Password</span>
+                        <div>
+                            Already have an account?<b><a href="../login">LogIn</a></b>
                         </div>
-                        <div className="submit-container">
+                        {/* <div className="forgot-password">
+                            <span>Forgot Password</span>
+                        </div> */}
+                        {/* <div className="submit-container">
                             <div className={"submit"}>
                                 <NavLink
                                     style={{ textDecoration: "none" }}
@@ -203,7 +206,7 @@ const Signupui = () => {
                                     Login
                                 </NavLink>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </form>
             </div>
