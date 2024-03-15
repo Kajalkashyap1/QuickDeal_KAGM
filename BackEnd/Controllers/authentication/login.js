@@ -13,7 +13,7 @@ const login = async (req, res) => {
         if (!user) {
             return res.json({
                 status: "error",
-                message: "user not registered",
+                message: "User not registered",
             });
         }
         const payload = {
@@ -49,7 +49,7 @@ const login = async (req, res) => {
         } else {
             return res.json({
                 status: "error",
-                message: "password do not match",
+                message: "password did not match",
             });
         }
     } catch (error) {

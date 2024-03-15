@@ -20,7 +20,7 @@ const Googleloginhelp = () => {
             const userdata = jwtDecode(credentialResponse.credential);
             const { email, name, picture } = userdata;
             if (!email.endsWith("@mnnit.ac.in")) {
-                toast.error("Please use MNNIT email", { autoClose: 2500 });
+                toast.error("Please use MNNIT email", { autoClose: 1200 });
                 return;
             }
             const data = { isgoogle: true, email, fullname: name, picture };

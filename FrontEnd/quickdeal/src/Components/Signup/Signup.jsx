@@ -13,6 +13,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Signupui = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    const handlepasswordtoggle = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setShowPassword(!showPassword);
+    };
+    const [showPassword2, setShowPassword2] = useState(false);
+    const handlepasswordtoggle2 = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setShowPassword2(!showPassword2);
+    };
     const [user, setUser] = useState({
         isgoogle: false,
         fullname: "",
@@ -35,17 +47,22 @@ const Signupui = () => {
     const submithandel = (event) => {
         event.preventDefault();
         if (user.password !== user.cnfpassword) {
-            toast.error("Password Did not matched ", { autoClose: 2500 });
-            return;
+            toast.error("Password did not matched ", { autoClose: 1000 });
+        } else {
+            axios
+                .post("http://localhost:8000/auth/register", user)
+                .then((res) => {
+                    if (res.data.status === "success") {
+                        nevigate("/login");
+                    } else {
+                        let str = res.data.message;
+                        toast.error(str, {
+                            autoClose: 1000,
+                        });
+                    }
+                })
+                .catch((err) => console.log(err));
         }
-        axios
-            .post("http://localhost:8000/auth/register", user)
-            .then((res) => {
-                if (res.data.status === "success") nevigate("/login");
-                else alert(res.data.message);
-            })
-            .catch((err) => console.log(err));
-
         setUser({
             fullname: "",
             email: "",
@@ -55,17 +72,11 @@ const Signupui = () => {
         });
     };
 
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handlepasswordtoggle = () => {
-        setShowPassword((prevState) => !prevState);
-    };
-
     return (
         <>
             <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={1000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -147,7 +158,7 @@ const Signupui = () => {
                         <div className="input">
                             <img src={pwd_icon} alt="" />
                             <input
-                                type={showPassword ? "text" : "password"}
+                                type={showPassword2 ? "text" : "password"}
                                 placeholder="Confirm Password"
                                 onChange={handeler}
                                 value={user.cnfpassword}
@@ -159,9 +170,9 @@ const Signupui = () => {
                                     cursor: "pointer",
                                     marginRight: "7px",
                                 }}
-                                onMouseDown={handlepasswordtoggle}
-                                onMouseUp={handlepasswordtoggle}>
-                                {showPassword ? (
+                                onMouseDown={handlepasswordtoggle2}
+                                onMouseUp={handlepasswordtoggle2}>
+                                {showPassword2 ? (
                                     <VisibilityIcon />
                                 ) : (
                                     <VisibilityOffIcon />

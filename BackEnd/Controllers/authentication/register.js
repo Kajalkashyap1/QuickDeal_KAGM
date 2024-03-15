@@ -36,14 +36,16 @@ const register = async (req, res) => {
         Npassword = req.body.password;
         contactNo = req.body.contactNo;
     }
-    if (
-        !req.body.isgoogle &&
-        !checkpassword(Npassword) &&
-        !checknumber(contactNo)
-    ) {
+    if (!req.body.isgoogle && !checkpassword(Npassword)) {
         return res.json({
             status: "error",
             message: "Password does not meet the criteria",
+        });
+    }
+    else if (!req.body.isgoogle && !checknumber(contactNo)) {
+        return res.json({
+            status: "error",
+            message: "Please enter valid Number",
         });
     }
     const password = await bcrypt.hash(Npassword, 12);
@@ -59,9 +61,11 @@ const register = async (req, res) => {
         let error;
         if (e.keyPattern != undefined) {
             error = Object.keys(e.keyPattern)[0] + " already exists !";
+            error = error.charAt(0).toUpperCase() + error.slice(1);
         } else {
             const errortarget = Object.keys(e.errors)[0];
             error = e.errors[errortarget].message;
+            error = error.charAt(0).toUpperCase() + error.slice(1);
         }
         return res.json({
             status: "error",

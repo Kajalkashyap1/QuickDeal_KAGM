@@ -9,6 +9,10 @@ import Googlelogin from "../Googlelogin/Googleloginsignup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 function LoginSignup() {
+    const [showPassword, setShowPassword] = useState(false);
+    const handlepasswordtoggle = () => {
+        setShowPassword(!showPassword);
+    };
     const nevigate = useNavigate();
 
     const [user, setUser] = useState({
@@ -36,12 +40,6 @@ function LoginSignup() {
             .catch((err) => console.log(err));
 
         setUser({ email: "", password: "" });
-    };
-
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handlepasswordtoggle = () => {
-        setShowPassword((prevState) => !prevState);
     };
 
     return (
