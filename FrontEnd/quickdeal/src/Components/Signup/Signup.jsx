@@ -15,14 +15,14 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 const Signupui = () => {
     const [showPassword, setShowPassword] = useState(false);
     const handlepasswordtoggle = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+        // event.preventDefault();
+        // event.stopPropagation();
         setShowPassword(!showPassword);
     };
     const [showPassword2, setShowPassword2] = useState(false);
     const handlepasswordtoggle2 = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+        // event.preventDefault();
+        // event.stopPropagation();
         setShowPassword2(!showPassword2);
     };
     const [user, setUser] = useState({
@@ -47,7 +47,12 @@ const Signupui = () => {
     const submithandel = (event) => {
         event.preventDefault();
         if (user.password !== user.cnfpassword) {
-            toast.error("Password did not matched ", { autoClose: 1000 });
+            console.log("Password did not matched ");
+            toast.error("Password did not matched ", {
+                autoClose: 1000,
+                position: "top-center",
+            });
+            return;
         } else {
             axios
                 .post("http://localhost:8000/auth/register", user)
@@ -56,9 +61,12 @@ const Signupui = () => {
                         nevigate("/login");
                     } else {
                         let str = res.data.message;
+                        console.log(str);
                         toast.error(str, {
                             autoClose: 1000,
+                            position: "top-center",
                         });
+                        return;
                     }
                 })
                 .catch((err) => console.log(err));
@@ -74,20 +82,23 @@ const Signupui = () => {
 
     return (
         <>
-            <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                transition="Bounce"
-            />
-            <ToastContainer />
+            <div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition="Bounce"
+                />
+
+                <ToastContainer />
+            </div>
             <Header></Header>
             <div className="container">
                 <div className="header">
@@ -128,7 +139,7 @@ const Signupui = () => {
                                 value={user.contactNo}
                                 name="contactNo"
                                 required
-                                onWheel={(e) => e.target.blur()}
+                                // onWheel={(e) => e.target.blur()}
                             />
                         </div>
                         <div className="input">
@@ -180,11 +191,20 @@ const Signupui = () => {
                             </span>
                         </div>
                         <div>
-                            <button className="submit_btn"  type="submit">Submit</button>
+                            <button className="submit_btn" type="submit">
+                                Submit
+                            </button>
                         </div>
                         <Googlelogin></Googlelogin>
                         <div>
-                            Already have an account?<b><a href="../login">LogIn</a></b>
+                            Already have an account? &emsp;
+                            <b>
+                                <NavLink
+                                    to="/login"
+                                    style={{ textDecoration: "none" }}>
+                                    <a>LogIn</a>
+                                </NavLink>
+                            </b>
                         </div>
                         {/* <div className="forgot-password">
                             <span>Forgot Password</span>

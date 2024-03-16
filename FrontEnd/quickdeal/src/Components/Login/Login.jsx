@@ -68,7 +68,9 @@ function LoginSignup() {
                                 <img src={pwd_icon} alt="" />
                                 {
                                     <input
-                                        type={showPassword ? "text" : "password"}
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
                                         placeholder="Password"
                                         onChange={handeler}
                                         value={user.password}
@@ -91,14 +93,25 @@ function LoginSignup() {
                                 </span>
                             </div>
 
-                            <div >
-                                <button className={"submit_btn"} type="submit">Submit</button>
+                            <div>
+                                <button className={"submit_btn"} type="submit">
+                                    Submit
+                                </button>
                             </div>
                             <div className="forgot-password">
                                 <span>Forgot Password?</span>
                             </div>
                             <Googlelogin></Googlelogin>
-                            <div>Don't have an account?<b><a href="../signin">Register</a></b></div>
+                            <div>
+                                Don't have an account? &emsp;
+                                <b>
+                                    <NavLink
+                                        to="/signin"
+                                        style={{ textDecoration: "none" }}>
+                                        <a>Sign up</a>
+                                    </NavLink>
+                                </b>
+                            </div>
                             {/* <div className="submit-container">
                                 <div className={"submit gray"}>
                                     <NavLink

@@ -20,7 +20,10 @@ const Googleloginhelp = () => {
             const userdata = jwtDecode(credentialResponse.credential);
             const { email, name, picture } = userdata;
             if (!email.endsWith("@mnnit.ac.in")) {
-                toast.error("Please use MNNIT email", { autoClose: 1200 });
+                toast.error("Please use MNNIT email", {
+                    autoClose: 1000,
+                    position: "top-center",
+                });
                 return;
             }
             const data = { isgoogle: true, email, fullname: name, picture };
@@ -32,7 +35,13 @@ const Googleloginhelp = () => {
                         .post("http://localhost:8000/auth/login", data)
                         .then((res) => {
                             if (res.data.status === "success") navigate("/");
-                            else alert(res.data.message);
+                            else {
+                                toast.error(res.data.message, {
+                                    autoClose: 1000,
+                                    position: "top-center",
+                                });
+                                return;
+                            }
                         });
                 })
                 .catch((err) => console.log(err));
