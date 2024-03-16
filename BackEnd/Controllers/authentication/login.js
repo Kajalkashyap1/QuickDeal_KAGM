@@ -23,7 +23,7 @@ const login = async (req, res) => {
             imageurl: user.imageurl,
         };
         //verify password and generate a JWT token
-        // console.log(payload);
+        
         let flag = true;
         if (!req.body.isgoogle) {
             flag = await bcrypt.compare(password, user.password);
@@ -44,7 +44,7 @@ const login = async (req, res) => {
             res.cookie("userRegistered", token, cookieOptions);
             return res.json({
                 status: "success",
-                message: "User login and cookie stored !",
+                message: "User logged in !",
             });
         } else {
             return res.json({

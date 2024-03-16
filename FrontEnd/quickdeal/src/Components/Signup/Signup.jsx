@@ -58,7 +58,13 @@ const Signupui = () => {
                 .post("http://localhost:8000/auth/register", user)
                 .then((res) => {
                     if (res.data.status === "success") {
-                        nevigate("/login");
+                        toast.success(res.data.message, {
+                            autoClose: 1000,
+                            position: "top-center",
+                        });
+                        setTimeout(() => {
+                            nevigate("/login");
+                        }, 1500);
                     } else {
                         let str = res.data.message;
                         console.log(str);

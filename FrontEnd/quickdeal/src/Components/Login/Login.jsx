@@ -37,7 +37,13 @@ function LoginSignup() {
             .post("http://localhost:8000/auth/login", user)
             .then((res) => {
                 if (res.data.status === "success") {
-                    nevigate("/");
+                    toast.success(res.data.message, {
+                        autoClose: 1000,
+                        position: "top-center",
+                    });
+                    setTimeout(() => {
+                        nevigate("/");
+                    }, 1500);
                     setUser({ email: "", password: "" });
                 } else {
                     toast.error(res.data.message, {

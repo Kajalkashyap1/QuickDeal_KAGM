@@ -37,9 +37,10 @@ const Home = () => {
                 console.log(err);
             });
     }, []);
+    const authdetail = { isauth, name, useremail, image };
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar auth={authdetail}></Navbar>
             {/* {isauth ? (
                 <>
                     
