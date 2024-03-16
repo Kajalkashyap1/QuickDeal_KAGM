@@ -49,7 +49,7 @@ const login = async (req, res) => {
         } else {
             return res.json({
                 status: "error",
-                message: "password did not match",
+                message: "Wrong Password !",
             });
         }
     } catch (error) {

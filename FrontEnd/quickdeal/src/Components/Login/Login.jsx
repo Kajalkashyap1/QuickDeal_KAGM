@@ -4,10 +4,12 @@ import email_icon from "../Assets/email.png";
 import pwd_icon from "../Assets/password.png";
 import Header from "../Header/Header";
 import { NavLink, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 function LoginSignup() {
     const [showPassword, setShowPassword] = useState(false);
     const handlepasswordtoggle = () => {
@@ -34,16 +36,39 @@ function LoginSignup() {
         axios
             .post("http://localhost:8000/auth/login", user)
             .then((res) => {
-                if (res.data.status === "success") nevigate("/");
-                else alert(res.data.message);
+                if (res.data.status === "success") {
+                    nevigate("/");
+                    setUser({ email: "", password: "" });
+                } else {
+                    toast.error(res.data.message, {
+                        autoClose: 1000,
+                        position: "top-center",
+                    });
+                    return;
+                }
             })
             .catch((err) => console.log(err));
-
-        setUser({ email: "", password: "" });
     };
 
     return (
         <>
+            <div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition="Bounce"
+                />
+
+                <ToastContainer />
+            </div>
             <Header></Header>
             <div className="wrapper">
                 <div className="container">
