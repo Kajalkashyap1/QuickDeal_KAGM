@@ -1,14 +1,11 @@
-
 .container {
     display: flex;
     flex-direction: column;
-    
+
     margin: auto;
     background: #ffffff;
     padding-bottom: 30px;
     width: 80%;
-   
-
 }
 
 .header {
@@ -37,19 +34,21 @@
     /* margin-top: 45px; Decreased margin top */
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Decreased gap */
-    margin: 1em;
+    gap: 20px;
+    margin: auto;
+    justify-content: center;
     align-items: center;
+    width: 50%;
 }
 
 .input {
     display: flex;
     align-items: center;
-    /* margin: auto; */
-    width: 37%; /* Decreased width */
+    width: 25rem; /* Decreased width */
     height: 50px; /* Kept height */
     background: #eaeaea;
     border-radius: 6px;
+    /* margin-top: 1px; */
 }
 
 .input img {
@@ -84,17 +83,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 160px; 
-    height: 45px; 
+    width: 160px;
+    height: 45px;
     color: #fff;
     background: #4c00b4;
     border-radius: 50px;
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: 700;
-    cursor: pointer; 
+    cursor: pointer;
 }
-
-
 
 .gray {
     text-decoration: none;
@@ -109,16 +106,14 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-
 .active {
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
 
-
 .submit_btn {
     align-items: center;
-    background-color: #0A66C2;
+    background-color: #0a66c2;
     border: 0;
     border-radius: 600px;
     box-sizing: border-box;
@@ -138,16 +133,17 @@ input::-webkit-inner-spin-button {
     padding-right: 20px;
     text-align: center;
     /* touch-action: manipulation; */
-    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     user-select: none;
     -webkit-user-select: none;
     vertical-align: middle;
     text-decoration: none;
-  }
-  
-  .submit_btn:hover,
-  .submit_btn:focus { 
-    background-color: #16437E;
+}
+
+.submit_btn:hover,
+.submit_btn:focus {
+    background-color: #16437e;
     color: #ffffff;
-  }
-  
+}
