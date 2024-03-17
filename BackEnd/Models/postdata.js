@@ -6,11 +6,17 @@ function currentTime() {
     return new Date().getTime(); // Returns current timestamp
 }
 const advertisementPostSchema = new mongoose.Schema({
-    id: {
+    userid: {
+        type: String,
+    },
+    useremail: {
+        type: String,
+    },
+    username: {
         type: String,
     },
     imageurl: {
-        type: String,
+        type: [String],
     },
     date: {
         type: Date,
@@ -21,19 +27,19 @@ const advertisementPostSchema = new mongoose.Schema({
         default: currentTime,
     },
     productname: {
-        type: string,
+        type: String,
     },
     adtitle: {
-        type: string,
+        type: String,
     },
     description: {
-        type: string,
+        type: String,
     },
     price: {
         type: Number,
     },
     location: {
-        type: string,
+        type: String,
     },
 });
 

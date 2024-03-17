@@ -13,7 +13,12 @@ cloudinary.cloudinaryConnect();
 //connect to database
 require("./Connections/DatabaseConn.js");
 
-app.use(fileupload());
+app.use(
+    fileupload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+    })
+);
 app.use(bodyParser.json());
 app.use(
     cors({
@@ -31,6 +36,6 @@ app.get("/", (req, res) => {
 
 app.use("/auth", require("./Routers/auth.js"));
 
-app.use("/users", require("./Routers/users.js"));
+app.use("/dashboard", require("./Routers/HandleAds.js"));
 
 app.listen(port);

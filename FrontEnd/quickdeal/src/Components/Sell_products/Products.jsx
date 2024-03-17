@@ -1,9 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Products.css";
-// import ImageUpload from "./image_files";
+import axios from "axios";
 import Header from "../Header/Header";
-
+import { useNavigate } from "react-router-dom";
 const Products = () => {
+    const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
+    const [userid, setuserid] = useState("");
+    const [name, setname] = useState("");
+    const [useremail, setuseremail] = useState("");
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    setuserid(false);
+                } else if (res.data.status === "success") {
+                    setuserid(res.data.id);
+                    setname(res.data.name);
+                    setuseremail(res.data.email);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+    const creatorDetails = { userid, name, useremail };
     const [formData, setFormData] = useState({
         productName: "",
         adTitle: "",
@@ -59,11 +81,32 @@ const Products = () => {
         // Combine form data and images into an array
         const dataWithImages = {
             ...formData,
-            image: images,
+            images,
+            userid: creatorDetails.userid,
+            useremail: creatorDetails.useremail,
+            username: creatorDetails.name,
         };
-
-        // Do something with dataWithImages array
-        console.log(dataWithImages);
+        const config = {
+            headers: { "Content-Type": "multipart/form-data" },
+        };
+        axios
+            .post(
+                "http://localhost:8000/dashboard/uploadimage",
+                dataWithImages,
+                config
+            )
+            .then((res) => {
+                setFormData({
+                    productName: "",
+                    adTitle: "",
+                    description: "",
+                    price: "",
+                    location: "",
+                });
+                setImages([]);
+                navigate("/");
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -74,7 +117,7 @@ const Products = () => {
                 <div className="container">
                     <h3>INCLUDE THE DETAILS OF YOUR PRODUCT</h3>
                     (field contains * is required)
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <div className="input_field">
                             Product Name: *
                             <input
