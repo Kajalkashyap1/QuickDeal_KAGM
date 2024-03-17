@@ -6,16 +6,6 @@ import Card from "./card";
 const Home = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
-    const handlelogout = () => {
-        axios
-            .get("http://localhost:8000/auth/logout")
-            .then((res) => {
-                if (res.data.status === "success") navigate("/login");
-                else alert(res.data.message);
-            })
-            .catch((err) => console.log(err));
-    };
-
     const [isauth, setauth] = useState("");
     const [name, setname] = useState("");
     const [useremail, setuseremail] = useState("");

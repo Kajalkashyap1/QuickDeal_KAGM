@@ -1,12 +1,20 @@
-require("./Connections/conn");
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 8000;
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+const fileupload = require("express-fileupload");
 
+// connect to cloudinary
+const cloudinary = require("./Connections/CloudinaryConn.js");
+cloudinary.cloudinaryConnect();
+
+//connect to database
+require("./Connections/DatabaseConn.js");
+
+app.use(fileupload());
+app.use(bodyParser.json());
 app.use(
     cors({
         origin: ["http://localhost:3000"],
@@ -20,6 +28,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("ok");
 });
+
 app.use("/auth", require("./Routers/auth.js"));
+
 app.use("/users", require("./Routers/users.js"));
+
 app.listen(port);

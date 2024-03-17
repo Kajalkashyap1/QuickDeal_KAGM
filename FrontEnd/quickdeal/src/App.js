@@ -10,7 +10,7 @@ function App() {
                 <Route exact path="/" Component={Home} />
                 <Route path="/login" Component={Login} />
                 <Route path="/signin" Component={Signin} />
-                <Route path="/sell" Component={Products}/>
+                <Route path="/sell" Component={Products} />
             </Routes>
         </>
     );

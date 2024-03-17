@@ -34,6 +34,9 @@ function Navbar(props) {
                     &emsp;
                     <h1>{props.auth.name}</h1>
                     &emsp;
+                    <NavLink to="/sell">
+                        <button>SELL</button>
+                    </NavLink>
                     <button onClick={handlelogout}>Logout</button>
                 </>
             ) : (
