@@ -19,7 +19,6 @@
     display: flex;
     justify-content: center; /* Center items horizontally */
     align-items: center; /* Center items vertically */
-    
 }
 
 .SearchBar input {
@@ -31,12 +30,11 @@
     font-size: 1.5rem;
 }
 
-.SearchBar button{
+.SearchBar button {
     height: 2.8rem;
     padding: 5px;
     width: 4rem;
 }
-
 
 /* Style for dummy link */
 .Header a {
