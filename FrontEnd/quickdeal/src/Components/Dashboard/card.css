@@ -1,0 +1,43 @@
+.main{
+    margin-top: 50px;
+}
+
+.div-main{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: grid;
+    gap:20px;
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-auto-rows: minmax(150px, auto); */
+    align-content: center;
+
+}
+
+.cards{
+    border: 1px solid black;
+    align-self: center;
+    max-width: 300px;
+    max-height: 600px;
+    /* align-content: center; */
+    
+}
+
+.card-img{
+    width: 275px;
+    height: 200px;
+    /* align-content: center; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 50%; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.description-content{
+    align-items: center;
+    /* display: block; */
+    margin-left: 15px;
+    margin-right: auto;
+}

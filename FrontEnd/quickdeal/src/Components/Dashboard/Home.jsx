@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
+import Card from "./card";
 const Home = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -64,6 +65,8 @@ const Home = () => {
                     </center>
                 </>
             )} */}
+
+            <Card></Card>
         </>
     );
 };
