@@ -50,8 +50,10 @@ const register = async (req, res) => {
     }
     const password = await bcrypt.hash(Npassword, 12);
     const data = { isgoogle, fullname, email, contactNo, password, imageurl };
+
     const insertdata = new userdata(data);
     try {
+        
         const indata = await insertdata.save();
         return res.json({
             status: "success",

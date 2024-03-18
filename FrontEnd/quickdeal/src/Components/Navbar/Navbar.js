@@ -2,16 +2,18 @@ import React from "react";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 function Navbar(props) {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
+
     const handlelogout = () => {
         axios
             .get("http://localhost:8000/auth/logout")
             .then((res) => {
-                if (res.data.status === "success") navigate("/login");
-                else alert(res.data.message);
+                if (res.data.status === "success") {
+                    navigate("/", { replace: true });
+                    window.location.replace("/");
+                } else alert(res.data.message);
             })
             .catch((err) => console.log(err));
     };

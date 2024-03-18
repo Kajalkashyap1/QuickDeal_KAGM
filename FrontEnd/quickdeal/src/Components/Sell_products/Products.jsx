@@ -223,6 +223,7 @@ const Products = () => {
                                                 type="file"
                                                 accept="image/*"
                                                 id="addImage"
+                                                required
                                                 onChange={(event) =>
                                                     handleImageChange(
                                                         images.length,
