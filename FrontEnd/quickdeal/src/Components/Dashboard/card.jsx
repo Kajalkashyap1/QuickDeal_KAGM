@@ -64,8 +64,8 @@ const Card = () => {
                         <div className="description-content">
                             <div className="price">
                                 {item.productname}
-                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                ₹ {item.price}/-
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ₹{" "}
+                                {item.price}/-
                             </div>
                             {/* Assuming you have a 'price' property in your item object */}
                             <div className="Ad-title">{item.adtitle}</div>

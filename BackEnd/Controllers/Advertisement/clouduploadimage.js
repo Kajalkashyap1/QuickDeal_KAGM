@@ -16,6 +16,7 @@ const clouduploadimage = async (req, res) => {
                     file.tempFilePath,
                     {
                         folder: process.env.CLOUDINARY_FOLDER_NAME,
+                        quality: "30",
                         use_filename: true,
                     }
                 );
