@@ -25,6 +25,7 @@ const register = async (req, res) => {
         contactNo = req.body.contactNo;
         inputotp = req.body.inputotp;
     }
+
     // if (!req.body.isgoogle && !checkpassword(Npassword)) {
     //     return res.json({
     //         status: "error",
@@ -37,21 +38,23 @@ const register = async (req, res) => {
     //         message: "Please enter valid Number",
     //     });
     // }
-    const otpvalues = await optdata.findOne({ email: email });
-    if (!otpvalues) {
-        return res.json({
-            status: "error",
-            message: "OTP expired",
-        });
-    }
+    if (!isgoogle) {
+        const otpvalues = await optdata.findOne({ email: email });
+        if (!otpvalues) {
+            return res.json({
+                status: "error",
+                message: "OTP expired",
+            });
+        }
 
-    const otp = otpvalues.otp.toString();
-    const emailid = otpvalues.email;
-    if (otp != inputotp) {
-        return res.json({
-            status: "error",
-            message: "OTP not matched",
-        });
+        const otp = otpvalues.otp.toString();
+        const emailid = otpvalues.email;
+        if (otp != inputotp) {
+            return res.json({
+                status: "error",
+                message: "OTP not matched",
+            });
+        }
     }
     const password = await bcrypt.hash(Npassword, 12);
     const data = { isgoogle, fullname, email, contactNo, password, imageurl };

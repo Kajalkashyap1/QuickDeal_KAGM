@@ -52,35 +52,47 @@ const Signupui = () => {
     //send opt and store to databse
     const submithandel = (event) => {
         event.preventDefault();
-        setloading(true);
         axios
-            .post("http://localhost:8000/auth/sendotp", user)
+            .post("http://localhost:8000/auth/validateuser", user)
             .then((res) => {
-                setloading(false);
                 if (res.data.status === "success") {
-                    toast.success(res.data.message, {
-                        autoClose: 1000,
-                        position: "top-center",
-                    });
-                    setotpui(true);
+                    setloading(true);
+                    axios
+                        .post("http://localhost:8000/auth/sendotp", user)
+                        .then((res) => {
+                            setloading(false);
+                            if (res.data.status === "success") {
+                                toast.success(res.data.message, {
+                                    autoClose: 1000,
+                                    position: "top-center",
+                                });
+                                setotpui(true);
+                            } else {
+                                let str = res.data.message;
+                                toast.error(str, {
+                                    autoClose: 1000,
+                                    position: "top-center",
+                                });
+                            }
+                        })
+                        .catch((err) => {
+                            setloading(false);
+                            console.log(err);
+                        });
                 } else {
-                    let str = res.data.message;
-                    console.log(str);
-                    toast.error(str, {
+                    toast.error(res.data.message, {
                         autoClose: 1000,
                         position: "top-center",
                     });
                 }
             })
             .catch((err) => {
-                setloading(false);
                 console.log(err);
             });
     };
 
     // adding data to databse and confirming the OTP
     const submithandelregister = (event) => {
-        console.log(user);
         user.inputotp = otp;
         event.preventDefault();
         axios
@@ -147,6 +159,7 @@ const Signupui = () => {
                     {/* Rest of your component code */}
                     {!showotpui ? (
                         <>
+                            <Header></Header>
                             <div>
                                 <ToastContainer
                                     position="top-right"
@@ -164,7 +177,6 @@ const Signupui = () => {
 
                                 <ToastContainer />
                             </div>
-                            <Header></Header>
                             <div className="container">
                                 <div className="header">
                                     <div className="text">Sign Up</div>

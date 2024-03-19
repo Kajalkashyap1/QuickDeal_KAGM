@@ -23,7 +23,7 @@ const login = async (req, res) => {
             imageurl: user.imageurl,
         };
         //verify password and generate a JWT token
-        
+
         let flag = true;
         if (!req.body.isgoogle) {
             flag = await bcrypt.compare(password, user.password);
