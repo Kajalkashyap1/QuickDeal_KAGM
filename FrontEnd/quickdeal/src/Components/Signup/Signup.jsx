@@ -12,8 +12,14 @@ import Googlelogin from "../Googlelogin/Googleloginsignup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Hourglass } from "react-loader-spinner";
-
+import OtpInput from "react-otp-input";
 const Signupui = () => {
+    const [isvanish, setisvanish] = useState(null);
+
+    // Callback function to receive state from Googleloginhelp
+    const handleGoogleStateChange = (newState) => {
+        setisvanish(newState);
+    };
     const [showPassword, setShowPassword] = useState(false);
     const [showotpui, setotpui] = useState(false);
     const [isloading, setloading] = useState(false);
@@ -112,6 +118,7 @@ const Signupui = () => {
                         autoClose: 1000,
                         position: "top-center",
                     });
+                    if (str === "OTP expired") window.location.reload();
                     return;
                 }
             })
@@ -150,7 +157,7 @@ const Signupui = () => {
                         />
                         <br />
                         <i>
-                            <h6>Sending OTP on Mail...</h6>
+                            <h6>Sending verification code on Mail...</h6>
                         </i>
                     </div>
                 </>
@@ -290,7 +297,7 @@ const Signupui = () => {
                                                 Submit
                                             </button>
                                         </div>
-                                        <Googlelogin></Googlelogin>
+                                        <Googlelogin />
                                         <div>
                                             Already have an account? &emsp;
                                             <b>
@@ -310,7 +317,6 @@ const Signupui = () => {
                     ) : (
                         <>
                             <Header></Header>
-
                             <div>
                                 <ToastContainer
                                     position="top-right"
@@ -333,10 +339,9 @@ const Signupui = () => {
                                     <div className="text">Enter OTP</div>
                                     <div className="underline"></div>
                                 </div>
-
                                 <form onSubmit={submithandelregister}>
                                     <div className="inputs">
-                                        <div className="input">
+                                        {/* <div className="input">
                                             <img src={pwd_icon} alt="" />
                                             <input
                                                 type="number"
@@ -349,6 +354,43 @@ const Signupui = () => {
                                             />
                                         </div>
 
+                                        <div>
+                                            <button
+                                                className="submit_btn"
+                                                type="submit">
+                                                Submit
+                                            </button>
+                                        </div> */}
+                                        <OtpInput
+                                            value={otp}
+                                            onChange={setotp}
+                                            numInputs={6}
+                                            renderSeparator={<span>-</span>}
+                                            renderInput={(props) => (
+                                                <input {...props} required />
+                                            )}
+                                            inputStyle={{
+                                                width: "40px",
+                                                height: "40px",
+                                                fontSize: "20px",
+                                                margin: "0 10px",
+                                                textAlign: "center",
+                                                borderRadius: "5px",
+                                                border: "1px solid #ccc",
+                                                WebkitUserSelect:
+                                                    "none" /* Safari */,
+                                                MozUserSelect:
+                                                    "none" /* Firefox */,
+                                                msUserSelect:
+                                                    "none" /* IE 10+/Edge */,
+                                                userSelect:
+                                                    "none" /* Standard syntax */,
+                                            }}
+                                        />
+                                        <span>
+                                            *verification code expires in 5
+                                            minutes
+                                        </span>
                                         <div>
                                             <button
                                                 className="submit_btn"
