@@ -139,7 +139,7 @@ function LoginSignup() {
                                     <NavLink
                                         to="/signin"
                                         style={{ textDecoration: "none" }}>
-                                        <a>Sign up</a>
+                                        Sign up
                                     </NavLink>
                                 </b>
                             </div>

@@ -8,14 +8,14 @@ const register = async (req, res) => {
     let email;
     let Npassword;
     let contactNo;
-    let isgoogle = false;
+    var isGooglelogin = false;
     let imageurl = "";
     let inputotp;
     if (req.body.isgoogle) {
         fullname = req.body.fullname;
         email = req.body.email;
         Npassword = "";
-        isgoogle = true;
+        isGooglelogin = true;
         imageurl = req.body.picture;
         inputotp = req.body.inputotp;
     } else {
@@ -38,7 +38,8 @@ const register = async (req, res) => {
     //         message: "Please enter valid Number",
     //     });
     // }
-    if (!isgoogle) {
+
+    if (!isGooglelogin) {
         const otpvalues = await optdata.findOne({ email: email });
         if (!otpvalues) {
             return res.json({
@@ -52,12 +53,19 @@ const register = async (req, res) => {
         if (otp != inputotp) {
             return res.json({
                 status: "error",
-                message: "OTP not matched",
+                message: "Invalid OTP !",
             });
         }
     }
     const password = await bcrypt.hash(Npassword, 12);
-    const data = { isgoogle, fullname, email, contactNo, password, imageurl };
+    const data = {
+        isGooglelogin,
+        fullname,
+        email,
+        contactNo,
+        password,
+        imageurl,
+    };
 
     const insertdata = new userdata(data);
     try {

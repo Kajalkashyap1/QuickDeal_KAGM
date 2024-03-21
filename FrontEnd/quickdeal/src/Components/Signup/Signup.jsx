@@ -13,13 +13,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Hourglass } from "react-loader-spinner";
 import OtpInput from "react-otp-input";
-const Signupui = () => {
-    const [isvanish, setisvanish] = useState(null);
 
-    // Callback function to receive state from Googleloginhelp
-    const handleGoogleStateChange = (newState) => {
-        setisvanish(newState);
-    };
+const Signupui = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showotpui, setotpui] = useState(false);
     const [isloading, setloading] = useState(false);
@@ -46,10 +41,6 @@ const Signupui = () => {
                 [event.target.name]: event.target.value,
             };
         });
-    };
-
-    const otphandeler = (e) => {
-        setotp(e.target.value);
     };
 
     const navigate = useNavigate();
@@ -82,6 +73,7 @@ const Signupui = () => {
                             }
                         })
                         .catch((err) => {
+                            console.log("second");
                             setloading(false);
                             console.log(err);
                         });
@@ -93,6 +85,7 @@ const Signupui = () => {
                 }
             })
             .catch((err) => {
+                console.log("first");
                 console.log(err);
             });
     };
@@ -306,7 +299,7 @@ const Signupui = () => {
                                                     style={{
                                                         textDecoration: "none",
                                                     }}>
-                                                    <a>LogIn</a>
+                                                    LogIn
                                                 </NavLink>
                                             </b>
                                         </div>
@@ -376,7 +369,7 @@ const Signupui = () => {
                                                 margin: "0 10px",
                                                 textAlign: "center",
                                                 borderRadius: "5px",
-                                                border: "1px solid #ccc",
+                                                border: "1px solid #4a4360",
                                                 WebkitUserSelect:
                                                     "none" /* Safari */,
                                                 MozUserSelect:

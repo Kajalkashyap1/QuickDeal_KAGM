@@ -23,7 +23,7 @@ function checknumber(value) {
 
 const sendotp = async (req, res) => {
     try {
-        const { email, isgoogle } = req.body;
+        const { email, isgoogle, fullname } = req.body;
 
         if (isgoogle) {
             let checkuser = await userdata.findOne({ email: email });
@@ -72,7 +72,7 @@ const sendotp = async (req, res) => {
             lowerCaseAlphabets: false,
             digits: true,
         });
-        const data = { otp: otp, email: email };
+        const data = { otp: otp, email: email, fullname };
         const otps = new otpdata(data);
         const indata = await otps.save();
         res.json({
