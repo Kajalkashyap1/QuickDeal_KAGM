@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./card.css";
 import axios from "axios";
-import Carousel from "react-bootstrap/Carousel";
 const Card = ({ onClick }) => {
     const [items, setitems] = useState([]);
 
@@ -25,44 +24,15 @@ const Card = ({ onClick }) => {
                         className="cards"
                         key={index}
                         onClick={() => onClick(item._id)}>
-                        <Carousel
-                            prevIcon={
-                                <span
-                                    style={{
-                                        color: "black",
-                                        fontSize: "40px",
-                                    }}>
-                                    ‹
-                                </span>
-                            }
-                            nextIcon={
-                                <span
-                                    style={{
-                                        color: "black",
-                                        fontSize: "40px",
-                                    }}>
-                                    ›
-                                </span>
-                            }>
-                            {item.imageurl.map((images, index) => (
-                                <Carousel.Item key={index}>
-                                    <img
-                                        src={images}
-                                        alt="item.productname"
-                                        style={{
-                                            width: "100%",
-                                            height: "250px",
-                                            objectFit: "contain",
-                                        }}
-                                    />
-                                </Carousel.Item>
-                            ))}
-                        </Carousel>
-                        {/* <img
-                            className="card-img"
-                            src={item.imageurl[0]} // Assuming you have an 'image' property in your item object
-                            alt={item.productName} // Assuming you have a 'productName' property in your item object
-                        /> */}
+                        <img
+                            src={item.imageurl[0]}
+                            alt="item.productname"
+                            style={{
+                                width: "100%",
+                                height: "250px",
+                                objectFit: "contain",
+                            }}
+                        />
                         <div className="description-content">
                             <div className="price">
                                 {item.productname}
