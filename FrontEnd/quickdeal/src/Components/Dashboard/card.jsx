@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./card.css";
 import axios from "axios";
 import Carousel from "react-bootstrap/Carousel";
-const Card = () => {
+const Card = ({ onClick }) => {
     const [items, setitems] = useState([]);
 
     useEffect(() => {
@@ -15,14 +15,16 @@ const Card = () => {
                 console.log(err);
             });
     }, []);
-
     return (
         <div className="main">
             <h2>Filters will appear here</h2>
             <hr></hr>
             <div className="div-main">
                 {items.map((item, index) => (
-                    <div className="cards" key={index}>
+                    <div
+                        className="cards"
+                        key={index}
+                        onClick={() => onClick(item._id)}>
                         <Carousel
                             prevIcon={
                                 <span

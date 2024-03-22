@@ -14,6 +14,7 @@
     max-height: 600px;
     flex: 1 0 calc(25% - 20px); /* Adjust the flex value to fit 4 cards per row */
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .card-img {

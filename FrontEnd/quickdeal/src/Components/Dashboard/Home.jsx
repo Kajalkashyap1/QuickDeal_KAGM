@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import Card from "./card";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
-    const navigate = useNavigate();
     axios.defaults.withCredentials = true;
     const [isauth, setauth] = useState("");
     const [name, setname] = useState("");
@@ -29,6 +29,11 @@ const Home = () => {
             });
     }, []);
     const authdetail = { isauth, name, useremail, image };
+    const navigate = useNavigate();
+
+    const handleClick = (id) => {
+        navigate(`/product/${id}`);
+    };
     return (
         <>
             <Navbar auth={authdetail}></Navbar>
@@ -56,7 +61,7 @@ const Home = () => {
                 </>
             )} */}
 
-            <Card></Card>
+            <Card onClick={handleClick}></Card>
         </>
     );
 };

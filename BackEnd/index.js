@@ -37,5 +37,6 @@ app.get("/", (req, res) => {
 app.use("/auth", require("./Routers/auth.js"));
 
 app.use("/dashboard", require("./Routers/HandleAds.js"));
+app.use("/profile", require("./Routers/users.js"));
 
 app.listen(port);
