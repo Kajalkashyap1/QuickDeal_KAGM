@@ -20,9 +20,13 @@ function Navbar(props) {
     return (
         <div className="Header">
             <h1>QUICK DEAL</h1>
-            <div className="SearchBar">
+            {/* <div className="SearchBar">
                 <input type="text" placeholder="Search..." />
                 <button>Search</button>
+            </div> */}
+            <div class="InputContainer">
+                <input placeholder="Search.." id="input" class="input" name="text" type="text"/>
+
             </div>
             {/* <a href="/">Dummy Link</a> */}
             {props.auth.isauth ? (
