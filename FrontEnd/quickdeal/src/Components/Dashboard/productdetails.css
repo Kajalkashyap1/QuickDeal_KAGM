@@ -1,4 +1,4 @@
-.maincontainer {
+/* .maincontainer {
     display: flex;
     margin: 50px;
     justify-content: center;
@@ -12,7 +12,6 @@
 }
 .description {
     background-color: #ffffff;
-    /* height: 45px; */
     padding: 20px;
     box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.4);
     font-size: large;
@@ -33,7 +32,6 @@ body {
     box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.4);
     font-size: 20px;
     margin: 0px 0px 20px 20px;
-    /* align-items: center; */
     text-align: center;
 }
 .sellerinfo {
@@ -57,23 +55,20 @@ body {
 }
 
 .productdetails h1 {
-    /* font-size: ; */
     color: #333333;
 }
 
 .productdetails p {
-    /* font-size: 16px; */
     color: #32474a;
     font-weight: 500;
     margin: 5px 0;
 }
 .sellerdetails p {
-    /* font-size: 16px; */
     color: #32474a;
     font-weight: 500;
     margin: 5px 0;
 }
-
+*/
 .chatbutton {
     color: "black";
     border: "1px solid black";
@@ -85,4 +80,86 @@ body {
     border: 2px solid #333c4d;
     background-color: #314366;
     color: white;
+}
+
+.maincontainer {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    margin: 50px;
+    justify-content: center;
+}
+
+.leftdiv {
+    flex: 1 1 60%; /* Take up 60% of the container's width */
+    max-width: 60%;
+    margin-right: 20px; /* Add some space between left and right div */
+}
+
+.rightdiv {
+    flex: 1 1 35%; /* Take up 35% of the container's width */
+    max-width: 35%;
+}
+
+.image {
+    background-color: black;
+    border-radius: 2%;
+    width: 100%; /* Image takes full width of its container */
+}
+
+.description {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.4);
+    font-size: large;
+}
+
+.location,
+.sellerinfo,
+.productdetails {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px; /* Add space between each section */
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.4);
+    font-size: large;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .maincontainer {
+        margin: 20px; /* Reduce margin on smaller screens */
+    }
+    .leftdiv {
+        max-width: 100%; /* Take up full width on smaller screens */
+        margin-right: 0; /* Remove margin between left and right div */
+    }
+    .rightdiv {
+        max-width: 100%; /* Take up full width on smaller screens */
+    }
+}
+
+/* Base font size */
+body {
+    font-size: 16px;
+}
+
+/* Adjust font sizes for different sections */
+.description,
+.location,
+.sellerinfo,
+.productdetails {
+    font-size: 1em; /* Base font size */
+}
+.sellerinfo {
+    text-align: center;
+}
+/* Adjust font sizes for smaller screens */
+@media (max-width: 768px) {
+    .description,
+    .location,
+    .sellerinfo,
+    .productdetails {
+        font-size: 0.9em; /* Reduce font size on smaller screens */
+    }
 }
