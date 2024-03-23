@@ -121,7 +121,6 @@ const Signupui = () => {
     return (
         <>
             {isloading ? (
-                // Loading component code here
                 <>
                     <Header></Header>
                     <div
@@ -156,7 +155,6 @@ const Signupui = () => {
                 </>
             ) : (
                 <>
-                    {/* Rest of your component code */}
                     {!showotpui ? (
                         <>
                             <Header></Header>
@@ -174,8 +172,6 @@ const Signupui = () => {
                                     theme="light"
                                     transition="Bounce"
                                 />
-
-                                <ToastContainer />
                             </div>
                             <div className="container">
                                 <div className="header">
@@ -324,8 +320,6 @@ const Signupui = () => {
                                     theme="light"
                                     transition="Bounce"
                                 />
-
-                                <ToastContainer />
                             </div>
                             <div className="container">
                                 <div className="header">

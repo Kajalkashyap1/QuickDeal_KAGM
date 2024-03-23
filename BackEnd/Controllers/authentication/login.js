@@ -1,6 +1,6 @@
 const userdata = require("../../Models/userdata");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const validator = require("validator");
 
 const login = async (req, res) => {

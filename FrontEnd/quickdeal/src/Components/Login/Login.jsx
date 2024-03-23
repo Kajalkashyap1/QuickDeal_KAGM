@@ -17,6 +17,10 @@ function LoginSignup() {
     };
     const nevigate = useNavigate();
 
+    const handelforgetpassword = () => {
+        nevigate("/resetpasscode");
+    };
+
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -129,7 +133,9 @@ function LoginSignup() {
                                     Submit
                                 </button>
                             </div>
-                            <div className="forgot-password">
+                            <div
+                                className="forgot-password"
+                                onClick={handelforgetpassword}>
                                 <span>Forgot Password?</span>
                             </div>
                             <Googlelogin></Googlelogin>
