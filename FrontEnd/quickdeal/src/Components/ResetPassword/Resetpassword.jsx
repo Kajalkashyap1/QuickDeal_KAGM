@@ -121,7 +121,7 @@ const Resetpassword = () => {
             <div className="center">
                 {isloading ? (
                     <>
-                        <div
+                        <div 
                             style={{
                                 position: "fixed",
                                 top: "50%",
@@ -145,26 +145,33 @@ const Resetpassword = () => {
                 ) : (
                     <>
                         <div className="main">
-                            <div className="container">
-                                <h2>Reset Password</h2>
-                                <p>Enter your registered email </p>
-                                <form onSubmit={sendotp}>
-                                    <div className="input">
-                                        <img src={email_icon} alt="" />
-                                        <input
-                                            type="email"
-                                            placeholder="Email"
-                                            onChange={handeler}
-                                            value={email}
-                                            name="email"
-                                            required
-                                            disabled={disable}
-                                        />
-                                    </div>
-                                    <button disabled={disable} type="submit">
-                                        Get OTP
-                                    </button>
-                                </form>
+                            <div className="forget-pass-container">
+                                <div className="header">
+                                    <div className="text"><h2>Reset Password</h2></div>
+                                    <div className="text-underline"></div>
+                                </div>
+                                
+                                <div className="forget-pass-container">
+                                    <span>Enter your registered email </span>
+                                    <form onSubmit={sendotp}>
+                                        <div className="input">
+                                            <img src={email_icon} alt="" />
+                                            <input
+                                                type="email"
+                                                placeholder="Email"
+                                                onChange={handeler}
+                                                value={email}
+                                                name="email"
+                                                required
+                                                disabled={disable}
+                                            />
+                                        </div>
+                                        <button className="forget-pass-submit_btn" disabled={disable} type="submit">
+                                            Get OTP
+                                        </button>
+                                    </form>
+                                </div>
+                                
                                 {showotpinput && (
                                     <div>
                                         <h3>Enter OTP:</h3>

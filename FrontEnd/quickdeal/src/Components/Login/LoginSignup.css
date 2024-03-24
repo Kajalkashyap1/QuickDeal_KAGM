@@ -117,6 +117,8 @@ input::-webkit-inner-spin-button {
     color: rgb(255, 255, 255);
 }
 
+/* submit button styling */
+
 .submit_btn {
     align-items: center;
     background-color: #0a66c2;

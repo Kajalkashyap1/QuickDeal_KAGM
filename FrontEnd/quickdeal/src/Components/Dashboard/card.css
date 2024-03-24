@@ -5,16 +5,19 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px; /* Adjust the gap value as needed */
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .cards {
     border: 1px solid black;
-    max-width: 250px;
+    max-width: 270px;
     max-height: 600px;
     flex: 1 0 calc(25% - 20px); /* Adjust the flex value to fit 4 cards per row */
     box-sizing: border-box;
     cursor: pointer;
+    padding: 2px;
+    background-color: rgb(236, 233, 230);
+    offset-distance: 2;
 }
 
 .card-img {
@@ -23,8 +26,23 @@
 }
 
 .description-content {
-    padding: 10px;
+    /* padding: 5px; */
     text-align: center;
+    /* justify-content: flex-end; */
+}
+
+.price{
+    font-weight: 700;
+    justify-content: flex-end;
+}
+
+.date{
+    font-size: smaller;
+    justify-items: right;
+}
+
+.Ad-title{
+    font-weight: 300
 }
 
 @media (max-width: 768px) {

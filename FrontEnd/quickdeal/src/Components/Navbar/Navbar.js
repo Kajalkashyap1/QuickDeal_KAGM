@@ -2,6 +2,9 @@ import React from "react";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 function Navbar(props) {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -30,27 +33,27 @@ function Navbar(props) {
             </div>
             {/* <a href="/">Dummy Link</a> */}
             {props.auth.isauth ? (
-                <>
+                <div >
                     <img
                         src={props.auth.image}
                         alt={props.auth.name}
                         height="40em"
                         style={{ borderRadius: "40px" }}
                     />
-                    &emsp;
-                    <h1>{props.auth.name}</h1>
-                    &emsp;
+
+                     {/* button for logout  */}
+                    <button onClick={handlelogout}><KeyboardArrowDownIcon /></button>
                     <NavLink to="/sell">
-                        <button>SELL</button>
+                        <button className="login-sell-btn">SELL</button>
                     </NavLink>
-                    <button onClick={handlelogout}>Logout</button>
-                </>
+                    
+                </div>
             ) : (
-                <>
+                <div >
                     <NavLink to="/login" activeclassname="active_class">
-                        <button>Login</button>
+                        <button className="login-sell-btn">Login</button>
                     </NavLink>
-                </>
+                </div>
             )}
         </div>
     );

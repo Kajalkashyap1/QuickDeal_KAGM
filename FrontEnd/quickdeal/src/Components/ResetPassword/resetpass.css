@@ -1,6 +1,81 @@
+/* .forget-pass-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: #ffffff;
+    padding-bottom: 30px;
+    width: 80%;
+} */
+
+
+
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 60vh;
+    gap: 50px;
+    /* border: 1px solid black; */
+    
 }
+
+.forget-pass-container{
+    /* display: flex; */
+    gap: 10px;
+    /* margin-left: 20px; */
+}
+
+.text-underline{
+    width: 100px;
+    height: 4px;
+    background-color: #3c009d;
+    border-radius: 9px;
+    margin-bottom: 3px;
+    /* margin-left: 50px; */
+    align-items: center;
+}
+
+.forget-pass-submit_btn{
+
+}
+
+/* get otp button styling */
+
+.forget-pass-submit_btn {
+    align-items: center;
+    background-color: #0a66c2;
+    border: 0;
+    border-radius: 600px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 500px;
+    min-height: 40px;
+    min-width: 170px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    /* touch-action: manipulation; */
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.forget-pass-submit_btn:hover,
+.forget-pass-submit_btn:focus {
+    background-color: #16437e;
+    color: #ffffff;
+}
+
+

@@ -14,27 +14,7 @@
     box-sizing: border-box; /* Include padding in width calculation */
 }
 
-.SearchBar {
-    flex: 1; /* Take remaining space */
-    display: flex;
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-}
 
-.SearchBar input {
-    margin-right: 2px; /* Add some space between input and button */
-    width: 40%;
-    height: 2rem;
-    padding: 5px;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-.SearchBar button {
-    height: 2.8rem;
-    padding: 5px;
-    width: 4rem;
-}
 
 /* Style for dummy link */
 .Header a {
@@ -44,10 +24,10 @@
     font-size: 1.5rem;
 }
 
-/* search button styling */
+/* search bar styling */
 
 .InputContainer {
-    width: 210px;
+    width: 350px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -60,7 +40,7 @@
   }
   
   .input {
-    width: 200px;
+    width: 280px;
     height: 40px;
     border: none;
     outline: none;
@@ -85,4 +65,43 @@
     .Header {
         font-size: 16px; /* Decrease font size for smaller screens */
     }
+}
+
+/* login/sell button styling */
+
+.login-sell-btn {
+    align-items: center;
+    background-color: #ccace8;
+    border: 0;
+    border-radius: 800px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 500px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    /* touch-action: manipulation; */
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.login-sell-btn:hover,
+.login-sell-btn:focus {
+    background-color: #16437e;
+    color: #ffffff;
 }
