@@ -14,7 +14,7 @@ const register = async (req, res) => {
     if (req.body.isgoogle) {
         fullname = req.body.fullname;
         email = req.body.email;
-        Npassword = "";
+        Npassword = "GHghghhghhasghsgahsg##@#@#@$@@$%3213216546546546";
         isGooglelogin = true;
         imageurl = req.body.picture;
         inputotp = req.body.inputotp;
