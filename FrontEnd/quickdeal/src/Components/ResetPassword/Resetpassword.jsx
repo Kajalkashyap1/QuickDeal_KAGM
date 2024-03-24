@@ -7,7 +7,7 @@ import { Hourglass } from "react-loader-spinner";
 import axios from "axios";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import "./resetpass.css";
+import style from "./resetpass.module.css";
 import { useNavigate } from "react-router-dom";
 
 const Resetpassword = () => {
@@ -118,7 +118,7 @@ const Resetpassword = () => {
     return (
         <>
             <Header></Header>
-            <div className="center">
+            <div className={style.center}>
                 {isloading ? (
                     <>
                         <div 
@@ -144,17 +144,17 @@ const Resetpassword = () => {
                     </>
                 ) : (
                     <>
-                        <div className="main">
-                            <div className="forget-pass-container">
-                                <div className="header">
-                                    <div className="text"><h2>Reset Password</h2></div>
-                                    <div className="text-underline"></div>
+                        <div className={style.main}>
+                            <div >
+                                <div className={style.header}>
+                                    <div className={style.text}><h2>Reset Password</h2></div>
+                                    <div className={style.underline}></div>
                                 </div>
                                 
-                                <div className="forget-pass-container">
+                                <div className={style.container}>
                                     <span>Enter your registered email </span>
                                     <form onSubmit={sendotp}>
-                                        <div className="input">
+                                        <div className={style.input}>
                                             <img src={email_icon} alt="" />
                                             <input
                                                 type="email"
@@ -166,14 +166,16 @@ const Resetpassword = () => {
                                                 disabled={disable}
                                             />
                                         </div>
-                                        <button className="forget-pass-submit_btn" disabled={disable} type="submit">
+                                        
+                                        <button className={style.submit} disabled={disable} type="submit">
                                             Get OTP
                                         </button>
+                                        
                                     </form>
                                 </div>
                                 
                                 {showotpinput && (
-                                    <div>
+                                    <div className={style.container}>
                                         <h3>Enter OTP:</h3>
                                         <form onSubmit={handleVerifyOtp}>
                                             <OtpInput
@@ -210,7 +212,7 @@ const Resetpassword = () => {
                                                 minutes
                                             </span>
                                             <br />
-                                            <button className="otpbutton">
+                                            <button className={style.submit}>
                                                 Submit
                                             </button>
                                         </form>
@@ -250,7 +252,7 @@ const Resetpassword = () => {
                                                 )}
                                             </span>
                                         </div>
-                                        <button>Submit</button>
+                                        <button className={style.submit}>Submit</button>
                                     </form>
                                 )}
                             </div>

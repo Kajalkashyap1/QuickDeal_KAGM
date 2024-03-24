@@ -1,10 +1,38 @@
-.container {
+/* .forget-pass-container {
     display: flex;
     flex-direction: column;
     margin: auto;
     background: #ffffff;
     padding-bottom: 30px;
     width: 80%;
+} */
+
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    gap: 50px;
+   
+    
+}
+
+.container{
+    /* display: grid;
+    justify-content: center;
+    align-items: center; */
+    /* min-height: 60vh; */
+    /* gap: 10px; */
+    /* display: flex;
+    flex-direction: column;
+    margin: auto;
+    background: #ffffff;
+    padding-bottom: 30px;
+    width: 80%; */
+
+
 }
 
 .header {
@@ -31,7 +59,7 @@
     margin-bottom: 3px;
 }
 
-.inputs {
+.container {
     /* margin-top: 45px; Decreased margin top */
     display: flex;
     flex-direction: column;
@@ -68,60 +96,13 @@
     font-size: 16px; /* Decreased font size */
 }
 
-.forgot-password {
-    padding-left: 15px; /* Adjusted padding */
-    margin-top: 25px; /* Decreased margin top */
-    color: #797979;
-    font-size: 16px; /* Decreased font size */
-    cursor: pointer;
-}
-.forgot-password:hover {
-    color: #0d6efd;
-    font-weight: 400;
-}
 
-.submit-container {
-    display: flex;
-    gap: 20px; /* Decreased gap */
-    margin: auto; /* Decreased margin */
-}
+
+
+
+/* get otp button styling */
 
 .submit {
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 160px;
-    height: 45px;
-    color: #fff;
-    background: #4c00b4;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.gray {
-    text-decoration: none;
-    background: #eaeaea;
-    color: #676767;
-}
-
-/* customize number input  */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.active {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-}
-
-/* submit button styling */
-
-.submit_btn {
     align-items: center;
     background-color: #0a66c2;
     border: 0;
@@ -134,9 +115,9 @@ input::-webkit-inner-spin-button {
     font-weight: 600;
     justify-content: center;
     line-height: 20px;
-    max-width: 500px;
-    min-height: 40px;
-    min-width: 170px;
+    max-width: 250px;
+    min-height: 35px;
+    min-width: 120px;
     overflow: hidden;
     padding: 0px;
     padding-left: 20px;
@@ -150,10 +131,15 @@ input::-webkit-inner-spin-button {
     -webkit-user-select: none;
     vertical-align: middle;
     text-decoration: none;
+    margin-top: 15px;
+    margin-left: 140px;
+    margin-bottom: 10px;
 }
 
-.submit_btn:hover,
-.submit_btn:focus {
+.submit:hover,
+.submit:focus {
     background-color: #16437e;
     color: #ffffff;
 }
+
+
