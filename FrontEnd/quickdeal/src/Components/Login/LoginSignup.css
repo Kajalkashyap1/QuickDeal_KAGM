@@ -31,6 +31,15 @@
     margin-bottom: 3px;
 }
 
+.input {
+    display: flex;
+    align-items: center;
+    width: 25rem; /* Decreased width */
+    height: 50px; /* Kept height */
+    background: #eaeaea;
+    border-radius: 6px;
+}
+
 .inputs {
     /* margin-top: 45px; Decreased margin top */
     display: flex;
@@ -40,32 +49,23 @@
     justify-content: center;
     align-items: center;
     width: 50%;
+    
 }
 
-.input {
-    display: flex;
-    align-items: center;
-    width: 25rem; /* Decreased width */
-    height: 50px; /* Kept height */
-    background: #eaeaea;
-    /* background-color: #eaeaea; */
-    /* background: #16437e; */
-    border-radius: 6px;
-    /* margin-top: 1px; */
-}
+
 
 .input img {
     margin: 0 20px; /* Adjusted margin */
 }
 
 .input input {
-    height: 40px; /* Kept height */
-    width: 100%; /* Decreased width */
+    height: 40px; 
+    width: 100%; 
     background: transparent;
     border: none;
     outline: none;
     color: #797979;
-    font-size: 16px; /* Decreased font size */
+    font-size: 16px; 
 }
 
 .forgot-password {

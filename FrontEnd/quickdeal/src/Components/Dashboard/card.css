@@ -1,11 +1,14 @@
 .div-main {
     margin-top: 50px;
-    margin-left: 50px;
+    margin-left: 80px;
     margin-right: 50px;
+    margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Adjust the gap value as needed */
+    gap: 50px; /* Adjust the gap value as needed */
     /* justify-content: center; */
+    
+    
 }
 
 .cards {
@@ -18,6 +21,7 @@
     padding: 2px;
     background-color: rgb(236, 233, 230);
     offset-distance: 2;
+    /* justify-content: space-evenly; */
 }
 
 .card-img {

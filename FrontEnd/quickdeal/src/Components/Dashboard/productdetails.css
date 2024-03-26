@@ -154,6 +154,8 @@ body {
 .sellerinfo {
     text-align: center;
 }
+
+
 /* Adjust font sizes for smaller screens */
 @media (max-width: 768px) {
     .description,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Products.css";
+import style from "./Products.module.css";
 import axios from "axios";
 import Header from "../Header/Header";
 import { useNavigate } from "react-router-dom";
@@ -149,16 +149,20 @@ const Products = () => {
                     </i>
                 </div>
             ) : (
-                <div className="wrapper">
-                    <div className="title">POST YOUR AD</div>
-                    <div className="container">
+                <div className={style.wrapper}>
+                    <div className={style.header}>
+                        <div className={style.title}>POST YOUR AD</div>
+                        <div className={style.underline}></div>
+                    </div>
+                    
+                    <div className={style.container}>
                         <h3>INCLUDE THE DETAILS OF YOUR PRODUCT</h3>
                         (field contains * is required)
                         <form
                             onSubmit={handleSubmit}
                             encType="multipart/form-data">
-                            <div className="input_field">
-                                Product Name: *
+                            <div className={style.input_field}>
+                                <b>Product Name: *</b>
                                 <input
                                     type="text"
                                     name="productName"
@@ -169,8 +173,8 @@ const Products = () => {
                                 <span>example: mobile</span>
                             </div>
 
-                            <div className="input_field">
-                                Ad Title: *
+                            <div className={style.input_field}>
+                                <b>Ad Title: *</b>
                                 <input
                                     type="text"
                                     name="adTitle"
@@ -184,8 +188,8 @@ const Products = () => {
                                 </span>
                             </div>
 
-                            <div className="input_area">
-                                Description: *
+                            <div className={style.input_field}>
+                                <b>Description: *</b>
                                 <input
                                     type="text"
                                     name="description"
@@ -210,7 +214,7 @@ const Products = () => {
                                 />
                             </div>
 
-                            <div className="photo">
+                            <div className={style.photo}>
                                 <h5>UPLOAD PHOTOS (MAX-5) *</h5>
                                 <div>
                                     {renderImages()}
@@ -236,7 +240,7 @@ const Products = () => {
                                 </div>
                             </div>
 
-                            <div className="input_field">
+                            <div className={style.input_field}>
                                 Location:
                                 <input
                                     type="text"
@@ -246,7 +250,7 @@ const Products = () => {
                                 />
                             </div>
                             <div>
-                                <button type="submit">Submit</button>
+                                <button type="submit" className={style.submit_btn}>Submit</button>
                             </div>
                         </form>
                     </div>

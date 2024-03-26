@@ -4,7 +4,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import IconButton from '@material-ui/core/IconButton';
+import { Tooltip } from "@mui/material";
 function Navbar(props) {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -42,7 +44,10 @@ function Navbar(props) {
                     />
 
                      {/* button for logout  */}
-                    <button onClick={handlelogout}><KeyboardArrowDownIcon /></button>
+                     <Tooltip title="Logout" className="logout">
+                        <button onClick={handlelogout}><LogoutIcon /></button>
+                    </Tooltip>
+                    
                     <NavLink to="/sell">
                         <button className="login-sell-btn">SELL</button>
                     </NavLink>

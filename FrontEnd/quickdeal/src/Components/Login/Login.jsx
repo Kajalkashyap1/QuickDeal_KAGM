@@ -88,7 +88,7 @@ function LoginSignup() {
                     </div>
                     <form onSubmit={submithandel}>
                         <div className="inputs">
-                            <div className="input">
+                            <div className="input" >
                                 <img src={email_icon} alt="" />
                                 <input
                                     type="email"

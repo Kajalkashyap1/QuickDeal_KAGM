@@ -14,6 +14,11 @@
     box-sizing: border-box; /* Include padding in width calculation */
 }
 
+.Header img{
+    width: fit-content;
+    height: fit-content;
+}
+
 /* Responsive Styling */
 @media only screen and (max-width: 768px) {
     .Header {
