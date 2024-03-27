@@ -4,6 +4,7 @@ import "react-chat-elements/dist/main.css";
 import Header from "../Header/Header";
 import { MessageList } from "react-chat-elements";
 import { MessageBox } from "react-chat-elements";
+import SendIcon from "@mui/icons-material/Send";
 import { ChatItem } from "react-chat-elements";
 import Card from "react-bootstrap/Card";
 import { io } from "socket.io-client";
@@ -67,7 +68,7 @@ const Chatting = () => {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [buyer, seller]);
 
     // console.log("seller info >>>> ", sellerinfo);
     // console.log("buyer info >>>> ", buyerinfo);
@@ -114,12 +115,14 @@ const Chatting = () => {
     }, []);
 
     const sendMessage = () => {
-        socket?.emit("sendMessage", {
-            senderId: buyer,
-            receiverId: seller,
-            message: mess,
-            date: new Date(),
-        });
+        if (mess != "") {
+            socket?.emit("sendMessage", {
+                senderId: buyer,
+                receiverId: seller,
+                message: mess,
+                date: new Date(),
+            });
+        }
         setmess("");
     };
 
@@ -173,7 +176,7 @@ const Chatting = () => {
             }
         }
     }, [messArray, Messages]);
-
+    console.log(sellerinfo);
     return (
         <>
             <Header />
@@ -218,7 +221,16 @@ const Chatting = () => {
                                                     ]
                                                         ? "rgba(0, 0, 0, 0.4) 2px 1px 5px 0px"
                                                         : "none", // Adding shadow effect
-                                                    overflow: "auto",
+                                                    overflowY: "auto",
+                                                    /* Hide scrollbar */
+                                                    scrollbarWidth:
+                                                        "none" /* Firefox */,
+                                                    msOverflowStyle:
+                                                        "none" /* IE/Edge */,
+                                                    "&::-webkit-scrollbar": {
+                                                        display:
+                                                            "none" /* Chrome, Safari, Opera */,
+                                                    },
                                                 }}>
                                                 <div className="d-flex align-items-center p-0 profileicon">
                                                     <img
@@ -260,6 +272,18 @@ const Chatting = () => {
                     </div>
                 </div>
                 <div className="chatbox">
+                    <Card.Body
+                        className="messagehading p-1"
+                        style={{ color: "black" }}>
+                        <img
+                            src={sellerinfo[0]?.imageurl}
+                            className="rounded-circle mr-3"
+                            width="40"
+                            height="40"
+                            alt={sellerinfo[0]?.fullname}
+                        />
+                        {sellerinfo[0]?.fullname}
+                    </Card.Body>
                     <div
                         className="messagecontainer"
                         ref={messageListReferance}>
@@ -301,13 +325,28 @@ const Chatting = () => {
                                 )
                         )}
                     </div>
-                    <input
-                        type="text"
-                        onChange={messagehandel}
-                        value={mess}
-                        placeholder="Type a message"
-                    />
-                    <button onClick={sendMessage}>Send</button>
+                    <div messageinputdiv>
+                        <input
+                            type="text"
+                            onChange={messagehandel}
+                            value={mess}
+                            placeholder="&emsp;&emsp;Type a message"
+                            style={{
+                                width: "calc(95% - 50px)",
+                                height: "50px",
+                                borderRadius: "10px",
+                                border: "1px solid #4a4360d1",
+                                margin: "10px",
+                                color: "black",
+                                backgroundColor: "rgba(255, 255, 255, 0.555)",
+                            }}
+                        />
+                        <SendIcon
+                            className="button"
+                            onClick={sendMessage}
+                            style={{ fontSize: "3em", marginLeft: "10px" }}
+                        />
+                    </div>
                 </div>
             </div>
         </>
