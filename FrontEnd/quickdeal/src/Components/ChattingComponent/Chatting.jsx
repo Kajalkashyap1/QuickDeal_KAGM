@@ -55,7 +55,7 @@ const Chatting = () => {
             .get(`http://localhost:8000/profile/getuserinfo/${buyer}`)
             .then((res) => {
                 setbuyerinfo(res.data.data);
-                console.log(res.data);
+                // console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -75,13 +75,14 @@ const Chatting = () => {
     useEffect(() => {
         socket?.emit("addUser", buyer);
         socket?.on("getUsers", (users) => {
-            console.log("activeUsers :>> ", users);
+            /// we can seee online users from here
+            // console.log("activeUsers :>> ", users);
         });
         const audio = new Audio(tune);
 
         socket?.on("getMessage", (data) => {
             // audio.play();
-            console.log("recieved ", data);
+            // console.log("recieved ", data);
             setMessArray((prevMessages) => [
                 ...prevMessages,
                 {
@@ -98,7 +99,7 @@ const Chatting = () => {
                     message: data.message,
                 })
                 .then((res) => {
-                    console.log("message saved successfully ! ");
+                    // console.log("message saved successfully ! ");
                 })
                 .catch((error) => {
                     console.log(
@@ -176,7 +177,6 @@ const Chatting = () => {
             }
         }
     }, [messArray, Messages]);
-    console.log(sellerinfo);
     return (
         <>
             <Header />
@@ -251,21 +251,6 @@ const Chatting = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <ChatItem
-                                            avatar={data.imageurl}
-                                            alt={"Reactjs"}
-                                            title={data.fullname}
-                                            subtitle={data.email}
-                                            unread={5}
-                                            onClick={() => {
-                                                showMessages(buyer, data._id);
-                                            }}
-                                            statusColor={"green"}
-                                            statusColorType={"encircle"}
-                                            lazyLoadingImage={
-                                                "https://res.cloudinary.com/dsaaqhang/image/upload/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"
-                                            }
-                                        /> */}
                                     </div>
                                 )
                         )}
@@ -287,8 +272,6 @@ const Chatting = () => {
                     <div
                         className="messagecontainer"
                         ref={messageListReferance}>
-                        {/* <p>From : {data.sender.fullname}</p>
-                            <h4>Message : {data.message}</h4> */}
                         <MessageList
                             className="message-list"
                             lockable={true}

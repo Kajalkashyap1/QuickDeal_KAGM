@@ -25,118 +25,10 @@ const io = new Server(server, {
     },
 });
 // ----------------------------------------Socket io implementations----------------------------------------------------------
-// const connectedUsers = {};
-// const offlineMessageQueue = {}; // Message queue for offline users
-
-// io.on("connection", (socket) => {
-//     socket.on("login", (userId) => {
-//         socket.userId = userId;
-//         connectedUsers[userId] = socket;
-//         console.log("User logged in: ", socket.userId);
-//         console.log("Connected users:", Object.keys(connectedUsers));
-
-//         // Check if the user has any pending offline messages
-//         if (offlineMessageQueue[userId]) {
-//             offlineMessageQueue[userId].forEach((offlineMessage) => {
-//                 socket.emit("recieved", offlineMessage);
-//             });
-//             delete offlineMessageQueue[userId]; // Clear the offline message queue
-//         }
-//     });
-
-//     socket.on("send-message", ({ recipientId, message }) => {
-//         const recipientSocket = connectedUsers[recipientId];
-//         if (recipientSocket) {
-//             // Recipient is online, send the message directly
-//             recipientSocket.emit("recieved", {
-//                 senderId: socket.userId,
-//                 message,
-//             });
-//             console.log(
-//                 "Private message sent from",
-//                 socket.userId,
-//                 "to",
-//                 recipientId
-//             );
-//         } else {
-//             // Recipient is offline, add the message to the offline message queue
-//             if (!offlineMessageQueue[recipientId]) {
-//                 offlineMessageQueue[recipientId] = [];
-//             }
-//             offlineMessageQueue[recipientId].push({
-//                 senderId: socket.userId,
-//                 message,
-//             });
-//             console.log(
-//                 "Recipient is not online, message added to offline queue"
-//             );
-//         }
-//     });
-
-//     socket.on("disconnect", () => {
-//         // Cleanup on disconnect
-//         if (socket.userId) {
-//             delete connectedUsers[socket.userId];
-//             console.log("User disconnected:", socket.userId);
-//         }
-//     });
-// });
-// ---------------------------------------------------------------------
-// const connectedUsers = {};
-
-// io.on("connection", (socket) => {
-//     // console.log(`User Conneced ${socket.id}`);
-
-//     socket.on("login", (user_id) => {
-//         socket.user_id = user_id;
-//         connectedUsers[user_id] = socket;
-//         console.log("User logged in: ", socket.user_id);
-//         console.log(connectedUsers.length);
-//         for (const userId in connectedUsers) {
-//             console.log(
-//                 `User ID: ${userId}, Socket ID: ${connectedUsers[userId].id}`
-//             );
-//         }
-//     });
-
-//     socket.on("send-message", ({ recipientId, message }) => {
-//         console.log(recipientId);
-//         const recipientSocket = connectedUsers[recipientId];
-//         if (recipientSocket) {
-//             recipientSocket.emit("recieved", {
-//                 senderId: socket.user_id,
-//                 message,
-//             });
-//             console.log(
-//                 "Private message sent from",
-//                 socket.user_id,
-//                 "to",
-//                 recipientId
-//             );
-//         } else {
-//             console.log("Recipient is not online");
-//         }
-//     });
-// });
-
-////////////////////////////////////////////////////////////////////////////////////
-// io.on("connection", (socket) => {
-//     console.log(`User Conneced ${socket.id}`);
-//     socket.on("send-message", (data) => {
-//         const messageWithSocketId = {
-//             socketId: socket.id,
-//             message: data.message,
-//         };
-//         io.emit("recieved", messageWithSocketId);
-//     });
-// });
-
-////////////////////////////????????????????????????????????????????????????????????????
-
 // Socket.io
 let users = [];
 io.on("connection", (socket) => {
-    console.log("User connected", socket.id);
+    // console.log("User connected", socket.id);
     socket.on("addUser", (userId) => {
         const isUserExist = users.find((user) => user.userId === userId);
         if (!isUserExist) {
@@ -153,7 +45,7 @@ io.on("connection", (socket) => {
             const sender = users.find((user) => user.userId === senderId);
             const senderinfo = await userdata.findById(senderId);
             const recieverinfo = await userdata.findById(receiverId);
-            console.log("sender :>> ", sender, receiver);
+            // console.log("sender :>> ", sender, receiver);
             if (receiver) {
                 io.to(receiver.socketId)
                     .to(sender.socketId)
@@ -174,7 +66,7 @@ io.on("connection", (socket) => {
                             email: recieverinfo.email,
                         },
                     });
-                console.log(`Message sent from ${senderinfo.fullname}`);
+                // console.log(`Message sent from ${senderinfo.fullname}`);
             } else {
                 io.to(sender.socketId).emit("getMessage", {
                     senderId,
