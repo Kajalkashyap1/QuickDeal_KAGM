@@ -2,7 +2,7 @@ const postdata = require("../../Models/postdata.js");
 
 const getpostdatas = async (req, res) => {
     try {
-        const data = await postdata.find();
+        var data = await postdata.find();
         res.json({
             status: "Success",
             result: data,

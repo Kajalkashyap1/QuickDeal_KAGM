@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginSignup.css";
 import email_icon from "../Assets/email.png";
 import pwd_icon from "../Assets/password.png";
 import Header from "../Header/Header";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
@@ -11,11 +11,35 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function LoginSignup() {
+    const nevigate = useNavigate();
+    const [isauth, setauth] = useState("");
+    const [name, setname] = useState("");
+    const [useremail, setuseremail] = useState("");
+    const [image, setimage] = useState("");
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    setauth(false);
+                } else if (res.data.status === "success") {
+                    setauth(true);
+                    setname(res.data.name);
+                    setuseremail(res.data.email);
+                    setimage(res.data.image);
+                    nevigate("/");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     const [showPassword, setShowPassword] = useState(false);
     const handlepasswordtoggle = () => {
         setShowPassword(!showPassword);
     };
-    const nevigate = useNavigate();
 
     const handelforgetpassword = () => {
         nevigate("/resetpasscode");
@@ -88,7 +112,7 @@ function LoginSignup() {
                     </div>
                     <form onSubmit={submithandel}>
                         <div className="inputs">
-                            <div className="input" >
+                            <div className="input">
                                 <img src={email_icon} alt="" />
                                 <input
                                     type="email"

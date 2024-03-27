@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Login/LoginSignup.css";
 import email_icon from "../Assets/email.png";
 import pwd_icon from "../Assets/password.png";
@@ -15,6 +15,33 @@ import { Hourglass } from "react-loader-spinner";
 import OtpInput from "react-otp-input";
 
 const Signupui = () => {
+    const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
+
+    const [isauth, setauth] = useState("");
+    const [name, setname] = useState("");
+    const [useremail, setuseremail] = useState("");
+    const [image, setimage] = useState("");
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    setauth(false);
+                } else if (res.data.status === "success") {
+                    setauth(true);
+                    setname(res.data.name);
+                    setuseremail(res.data.email);
+                    setimage(res.data.image);
+                    navigate("/");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     const [showPassword, setShowPassword] = useState(false);
     const [showotpui, setotpui] = useState(false);
     const [isloading, setloading] = useState(false);
@@ -42,9 +69,6 @@ const Signupui = () => {
             };
         });
     };
-
-    const navigate = useNavigate();
-    axios.defaults.withCredentials = true;
 
     //send opt and store to databse
     const submithandel = (event) => {

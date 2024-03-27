@@ -32,7 +32,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     const handleClick = (id) => {
-        navigate(`/product/${id}`);
+        if (isauth) navigate(`/product/${id}`);
     };
     return (
         <>
@@ -61,7 +61,7 @@ const Home = () => {
                 </>
             )} */}
 
-            <Card onClick={handleClick}></Card>
+            <Card onClick={handleClick} usermail={useremail}></Card>
         </>
     );
 };
