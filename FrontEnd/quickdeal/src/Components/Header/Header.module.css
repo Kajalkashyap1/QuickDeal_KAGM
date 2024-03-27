@@ -12,11 +12,13 @@
     align-items: center; /* Align items vertically */
     width: 100%; /* Ensure header covers full width */
     box-sizing: border-box; /* Include padding in width calculation */
+    max-height: 80px;
 }
 
 .Header img {
-    width: fit-content;
-    height: fit-content;
+    width: 100px;
+    height: 60px;
+    padding: "2px";
 }
 
 /* Responsive Styling */
