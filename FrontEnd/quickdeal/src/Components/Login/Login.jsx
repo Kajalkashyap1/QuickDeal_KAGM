@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./LoginSignup.css";
+import style from "./LoginSignup.module.css";
 import email_icon from "../Assets/email.png";
 import pwd_icon from "../Assets/password.png";
 import Header from "../Header/Header";
@@ -104,15 +104,15 @@ function LoginSignup() {
                 <ToastContainer />
             </div>
             <Header></Header>
-            <div className="wrapper">
-                <div className="container">
-                    <div className="header">
-                        <div className="text">Login</div>
-                        <div className="underline"></div>
+            <div className={style.wrapper}>
+                <div className={style.container}>
+                    <div className={style.header}>
+                        <div className={style.text}>Login</div>
+                        <div className={style.underline}></div>
                     </div>
                     <form onSubmit={submithandel}>
-                        <div className="inputs">
-                            <div className="input">
+                        <div className={style.inputs}>
+                            <div className={style.input}>
                                 <img src={email_icon} alt="" />
                                 <input
                                     type="email"
@@ -123,7 +123,7 @@ function LoginSignup() {
                                     required
                                 />
                             </div>
-                            <div className="input">
+                            <div className={style.input}>
                                 <img src={pwd_icon} alt="" />
                                 {
                                     <input
@@ -153,12 +153,12 @@ function LoginSignup() {
                             </div>
 
                             <div>
-                                <button className={"submit_btn"} type="submit">
+                                <button className={style.submit_btn} type="submit">
                                     Submit
                                 </button>
                             </div>
                             <div
-                                className="forgot-password"
+                                className={style.forgot_password}
                                 onClick={handelforgetpassword}>
                                 <span>Forgot Password?</span>
                             </div>
@@ -173,24 +173,7 @@ function LoginSignup() {
                                     </NavLink>
                                 </b>
                             </div>
-                            {/* <div className="submit-container">
-                                <div className={"submit gray"}>
-                                    <NavLink
-                                        style={{ textDecoration: "none" }}
-                                        activeclassname="active_class"
-                                        to="/signin">
-                                        Sign Up
-                                    </NavLink>
-                                </div>
-                                <div className={"submit"}>
-                                    <NavLink
-                                        style={{ textDecoration: "none" }}
-                                        activeclassname="active_class"
-                                        to="/login">
-                                        Login
-                                    </NavLink>
-                                </div>
-                            </div> */}
+                           
                         </div>
                     </form>
                 </div>

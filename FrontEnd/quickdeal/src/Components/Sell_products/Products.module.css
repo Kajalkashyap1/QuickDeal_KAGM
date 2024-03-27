@@ -11,10 +11,24 @@
 .input_field{
     display: grid;
     margin-bottom: 10px;
+    /* border-radius: 20px; */
+    
 }
 
 .input_area{
     display: grid;
+}
+
+.input_field input{
+    background: transparent;
+    border: none;
+    outline:none;
+    color: #797979;
+    font-size: 16px; 
+    background: #eaeaea ;
+    border-radius: 10px;
+    height: 30px;
+    width: 100%;
 }
 
 .header {

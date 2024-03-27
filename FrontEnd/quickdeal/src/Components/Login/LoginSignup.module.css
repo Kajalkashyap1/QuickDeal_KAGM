@@ -68,23 +68,20 @@
     font-size: 16px; 
 }
 
-.forgot-password {
+.forgot_password {
     padding-left: 15px; /* Adjusted padding */
     margin-top: 25px; /* Decreased margin top */
     color: #797979;
     font-size: 16px; /* Decreased font size */
     cursor: pointer;
 }
-.forgot-password:hover {
+.forgot_password:hover {
     color: #0d6efd;
     font-weight: 400;
 }
 
-.submit-container {
-    display: flex;
-    gap: 20px; /* Decreased gap */
-    margin: auto; /* Decreased margin */
-}
+
+
 
 .submit {
     text-decoration: none;
@@ -123,7 +120,7 @@ input::-webkit-inner-spin-button {
 
 .submit_btn {
     align-items: center;
-    background-color: #0a66c2;
+    background-color: #3c009d;
     border: 0;
     border-radius: 600px;
     box-sizing: border-box;

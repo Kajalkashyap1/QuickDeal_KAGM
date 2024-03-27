@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../Login/LoginSignup.css";
+import style from "../Login/LoginSignup.module.css";
 import email_icon from "../Assets/email.png";
 import pwd_icon from "../Assets/password.png";
 import userimg from "../Assets/person.png";
@@ -197,15 +197,15 @@ const Signupui = () => {
                                     transition="Bounce"
                                 />
                             </div>
-                            <div className="container">
-                                <div className="header">
-                                    <div className="text">Sign Up</div>
-                                    <div className="underline"></div>
+                            <div className={style.container}>
+                                <div className={style.header}>
+                                    <div className={style.text}>Sign Up</div>
+                                    <div className={style.underline}></div>
                                 </div>
 
                                 <form onSubmit={submithandel}>
-                                    <div className="inputs">
-                                        <div className="input">
+                                    <div className={style.inputs}>
+                                        <div className={style.input}>
                                             <img src={userimg} alt="" />
                                             <input
                                                 type="text"
@@ -216,7 +216,7 @@ const Signupui = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input">
+                                        <div className={style.input}>
                                             <img src={email_icon} alt="" />
                                             <input
                                                 type="email"
@@ -227,7 +227,7 @@ const Signupui = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input">
+                                        <div className={style.input}>
                                             <img src={email_icon} alt="" />
                                             <input
                                                 type="number"
@@ -239,7 +239,7 @@ const Signupui = () => {
                                                 // onWheel={(e) => e.target.blur()}
                                             />
                                         </div>
-                                        <div className="input">
+                                        <div className={style.input}>
                                             <img src={pwd_icon} alt="" />
                                             <input
                                                 type={
@@ -271,7 +271,7 @@ const Signupui = () => {
                                                 )}
                                             </span>
                                         </div>
-                                        <div className="input">
+                                        <div className={style.input}>
                                             <img src={pwd_icon} alt="" />
                                             <input
                                                 type={
@@ -305,7 +305,7 @@ const Signupui = () => {
                                         </div>
                                         <div>
                                             <button
-                                                className="submit_btn"
+                                                className={style.submit_btn}
                                                 type="submit">
                                                 Submit
                                             </button>
@@ -345,13 +345,13 @@ const Signupui = () => {
                                     transition="Bounce"
                                 />
                             </div>
-                            <div className="container">
-                                <div className="header">
-                                    <div className="text">Enter OTP</div>
-                                    <div className="underline"></div>
+                            <div className={style.container}>
+                                <div className={style.header}>
+                                    <div className={style.text}>Enter OTP</div>
+                                    <div className={style.underline}></div>
                                 </div>
                                 <form onSubmit={submithandelregister}>
-                                    <div className="inputs">
+                                    <div className={style.inputs}>
                                         {/* <div className="input">
                                             <img src={pwd_icon} alt="" />
                                             <input
@@ -404,7 +404,7 @@ const Signupui = () => {
                                         </span>
                                         <div>
                                             <button
-                                                className="submit_btn"
+                                                className={style.submit_btn}
                                                 type="submit">
                                                 Submit
                                             </button>

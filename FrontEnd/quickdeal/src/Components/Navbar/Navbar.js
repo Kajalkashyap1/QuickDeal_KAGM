@@ -5,6 +5,7 @@ import axios from "axios";
 import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from '@material-ui/core/IconButton';
 import { Tooltip } from "@mui/material";
+import logout from "../Assets/logout.jpg";
 function Navbar(props) {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -44,7 +45,7 @@ function Navbar(props) {
 
                      {/* button for logout  */}
                      <Tooltip title="Logout" className="logout">
-                        <button onClick={handlelogout}><LogoutIcon /></button>
+                        <button onClick={handlelogout}><LogoutIcon style={{ fill: '#0072ea', color: '#0072ea' }} /></button>
                     </Tooltip>
                     
                     <NavLink to="/sell">
