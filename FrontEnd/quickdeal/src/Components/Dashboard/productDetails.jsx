@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Carousel from "react-bootstrap/Carousel";
 import "./productdetails.css";
@@ -17,6 +17,8 @@ const ProductDetails = () => {
     // let id = match.params.id;
     const { id } = useParams();
     const [item, setitem] = useState([]);
+    const Navigate = useNavigate();
+    axios.defaults.withCredentials = true;
 
     useEffect(() => {
         axios
@@ -28,7 +30,19 @@ const ProductDetails = () => {
                 console.log(err);
             });
     }, [id]);
+
     const formattedDate = formatDate(item.date);
+    const handleGetBuyerinfo = () => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                const buyer_id = res.data.id;
+                Navigate(`/chat/${buyer_id}/${item.userid}`);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <>
             <Header></Header>
@@ -89,7 +103,11 @@ const ProductDetails = () => {
                             {item.useremail}
                         </p>
                         {/* <p>{item.userid}</p> */}
-                        <button className="chatbutton">Chat with Seller</button>
+                        <button
+                            className="chatbutton"
+                            onClick={handleGetBuyerinfo}>
+                            Chat with Seller
+                        </button>
                     </div>
                     <div className="location">
                         <p>

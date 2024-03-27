@@ -14,7 +14,7 @@
     box-sizing: border-box; /* Include padding in width calculation */
 }
 
-.Header img{
+.Header img {
     width: fit-content;
     height: fit-content;
 }

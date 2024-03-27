@@ -1,0 +1,92 @@
+.maindiv {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+    margin: 10px;
+}
+
+.inbox {
+    width: 100%;
+    max-width: 400px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    margin: 0px;
+}
+
+.chatbox {
+    width: 100%;
+    max-width: 800px;
+}
+
+.messagecontainer {
+    height: 489px;
+    width: 100%;
+    border: 1px solid rgb(152, 152, 152);
+    overflow-y: auto;
+    background-color: rgb(103 98 98 /24%);
+}
+
+input[type="text"] {
+    width: calc(100% - 90px);
+    margin-right: 10px;
+}
+
+button {
+    width: 80px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .maindiv {
+        padding: 10px;
+    }
+
+    .inbox,
+    .chatbox {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.message-item {
+    margin-top: 20px; /* Adjust the margin value as needed */
+    color: black;
+}
+
+.rce-citem-body {
+    padding: 0px;
+}
+.rce-citem-body--top-time {
+    display: none;
+}
+
+.inboxHeading {
+    font-size: 23px;
+    font-weight: 600;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    background-color: #4a4360d1;
+    /* border-bottom: 2px solid rgb(255, 255, 255); */
+    /* margin-bottom: 6px; */
+    color: aliceblue;
+}
+
+.card {
+    cursor: pointer;
+    margin: 1px;
+    border: 5px solid red;
+}
+
+.chatuserinfo h5 {
+    font-size: large;
+}
+.chatuserinfo p {
+    font-size: small;
+}
+.chatuserinfo {
+    margin-left: 10px;
+}
+.profileicon img {
+    margin: 1px;
+}

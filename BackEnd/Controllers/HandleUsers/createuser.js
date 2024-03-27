@@ -1,4 +1,4 @@
-const userdata = require("../Models/userdata");
+const userdata = require("../../Models/userdata");
 
 const updatedata = async (req, res) => {
     const data = req.body;

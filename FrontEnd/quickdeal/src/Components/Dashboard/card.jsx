@@ -10,12 +10,12 @@ const formatDate = (dateString) => {
 
 function cropText(text, maxLength) {
     if (text.length <= maxLength) {
-      return text;
+        return text;
     } else {
-      // Crop the text to the desired length and append '...' to indicate it's cropped
-      return text.substring(0, maxLength) + '...';
+        // Crop the text to the desired length and append '...' to indicate it's cropped
+        return text.substring(0, maxLength) + "...";
     }
-  }
+}
 const Card = ({ onClick }) => {
     const [items, setitems] = useState([]);
 
@@ -55,9 +55,13 @@ const Card = ({ onClick }) => {
                                 {item.price}/-
                             </div>
                             {/* Assuming you have a 'price' property in your item object */}
-                            <div className="Ad-title">{cropText(item.adtitle,35)}</div>
+                            <div className="Ad-title">
+                                {cropText(item.adtitle, 35)}
+                            </div>
                             {/* Assuming you have an 'adTitle' property in your item object */}
-                            <div className="date">📅{formatDate(item.date)}</div>
+                            <div className="date">
+                                📅{formatDate(item.date)}
+                            </div>
                         </div>
                     </div>
                 ))}

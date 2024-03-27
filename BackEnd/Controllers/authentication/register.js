@@ -24,6 +24,7 @@ const register = async (req, res) => {
         Npassword = req.body.password;
         contactNo = req.body.contactNo;
         inputotp = req.body.inputotp;
+        imageurl = `https://res.cloudinary.com/dsaaqhang/image/upload/v1711527687/QuickDeal/user_hl1hcs.png`;
     }
 
     // if (!req.body.isgoogle && !checkpassword(Npassword)) {
