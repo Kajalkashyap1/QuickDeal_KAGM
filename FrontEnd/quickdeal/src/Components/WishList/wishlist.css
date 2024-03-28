@@ -1,0 +1,108 @@
+.hearticon {
+    font-weight: 100;
+    color: orangered;
+    margin: 1rem;
+}
+.wishlistmainheading h2 {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+}
+.wishlistContainer {
+    margin: 2rem;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(118, 118, 118, 0.178);
+    border-radius: 10px;
+    width: 77%;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    box-shadow: 2px 20px 22px 20px rgba(49, 40, 60, 0.2);
+}
+
+.listcontainer {
+    margin: auto;
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 1300px !important;
+    overflow-x: auto;
+}
+.postheading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.postholder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    padding: 1rem;
+}
+
+.wishlistdata {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* Align items vertically in the center */
+    text-align: center;
+    /* padding: 0.5rem; */
+}
+
+@media screen and (max-width: 768px) {
+    .listcontainer {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .postheading h4,
+    .wishlistdata {
+        font-size: 8px; /* Adjust font size for small screens */
+    }
+    .wishlistdata img {
+        max-width: 80px; /* Adjust maximum width */
+    }
+}
+/* Adjust image size */
+.wishlistdata img {
+    width: 100%; /* Ensure image scales proportionally */
+    max-width: 100px; /* Set a maximum width */
+    height: auto; /* Allow the height to adjust proportionally */
+}
+
+.listcontainer table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+.listcontainer th {
+    padding: 8px;
+}
+.listcontainer td {
+    border-top: 1px solid black;
+    padding: 8px;
+    font-size: large;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.listcontainer th {
+    background-color: #ffffff; /* Add a background color to table headers for better visual separation */
+}
+
+.deletebutton {
+    color: orangered;
+    margin: 1rem;
+}
+
+.imageanddelete {
+    display: flex;
+}
+
+.checkoutbutton {
+    color: rgb(2, 72, 2);
+    margin: 1rem;
+}
+
+.postitems {
+    background-color: rgba(255, 252, 252, 0);
+}

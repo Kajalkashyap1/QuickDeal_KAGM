@@ -18,6 +18,10 @@ const advertisementPostSchema = new mongoose.Schema({
     imageurl: {
         type: [String],
     },
+    likedby: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "userdata", // Collection name of the userdata schema
+    },
     date: {
         type: Date,
         default: Date.now,

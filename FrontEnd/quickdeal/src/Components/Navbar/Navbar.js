@@ -97,7 +97,9 @@ function Navbar(props) {
                                 <span className="droptext">My ads</span>
                             </NavLink>
 
-                            <NavLink to="/wishlist" className="dropdownitems">
+                            <NavLink
+                                to={`/wishlist/${props.auth.userid}`}
+                                className="dropdownitems">
                                 &ensp;
                                 <FavoriteBorderIcon
                                     fontSize="medium"
@@ -108,7 +110,7 @@ function Navbar(props) {
                                 &emsp;
                                 <span className="droptext">Wishlist</span>
                             </NavLink>
-                            
+
                             <NavDropdown.Divider />
                             <NavLink
                                 className="dropdownitems"

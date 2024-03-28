@@ -7,18 +7,58 @@ import Header from "../Header/Header";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 const formatDate = (dateString) => {
     const options = { day: "numeric", month: "long", year: "numeric" };
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options);
 };
+
 const ProductDetails = () => {
     // let id = match.params.id;
     const { id } = useParams();
+    const [liked, setliked] = useState(false);
+
     const [item, setitem] = useState([]);
     const Navigate = useNavigate();
     axios.defaults.withCredentials = true;
+    const [isauth, setauth] = useState("");
+    const [userid, setuserid] = useState("");
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    setauth(false);
+                    Navigate("/");
+                } else if (res.data.status === "success") {
+                    setauth(true);
+                    setuserid(res.data.id);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+    const handlelike = () => {
+        axios
+            .post(
+                `http://localhost:8000/dashboard/updatePostLikes/${id}/${userid}`
+            )
+            .then((res) => {
+                if (res.data.status === "success") {
+                    setliked(!liked);
+                }
+            })
+            .catch((err) => {
+                console.log("error in updating likes ", err.message);
+            });
+    };
 
     useEffect(() => {
         axios
@@ -29,7 +69,7 @@ const ProductDetails = () => {
             .catch((err) => {
                 console.log(err);
             });
-    }, [id]);
+    }, [id, liked]);
 
     const formattedDate = formatDate(item.date);
     const handleGetBuyerinfo = () => {
@@ -82,7 +122,37 @@ const ProductDetails = () => {
                 </div>
                 <div className="rightdiv">
                     <div className="productdetails">
-                        <h1> ₹ {item.price} /-</h1>
+                        <div className="priceandheart">
+                            <h1> ₹ {item.price} /-</h1>
+                            <div className="favoriteIcon">
+                                {item?.likedby?.includes(userid) ? (
+                                    <Tooltip
+                                        title="Remove from wishlist"
+                                        onClick={handlelike}>
+                                        <IconButton>
+                                            <FavoriteIcon
+                                                fontSize="large"
+                                                className="likedIcon"
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip
+                                        title="Add to wishlist"
+                                        onClick={handlelike}>
+                                        <IconButton>
+                                            <FavoriteBorderIcon
+                                                fontSize="large"
+                                                className="favoriteIcon"
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                )}
+                                <span className="likescount">
+                                    {item.likedby?.length}
+                                </span>
+                            </div>
+                        </div>
                         <hr />
                         <h4>{item.productname}</h4>
                         <p>👉 {item.adtitle}</p>
