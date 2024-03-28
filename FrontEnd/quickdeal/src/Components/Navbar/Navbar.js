@@ -1,12 +1,18 @@
 import React from "react";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
-import LogoutIcon from '@mui/icons-material/Logout';
-import IconButton from '@material-ui/core/IconButton';
+import LogoutIcon from "@mui/icons-material/Logout";
+import IconButton from "@material-ui/core/IconButton";
 import { Tooltip } from "@mui/material";
 import logout from "../Assets/logout.jpg";
+import AddCardIcon from "@mui/icons-material/AddCard";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 function Navbar(props) {
+    console.log(props);
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
 
@@ -22,7 +28,6 @@ function Navbar(props) {
             .catch((err) => console.log(err));
     };
 
-    
     return (
         <div className="Header">
             <div className="logo">
@@ -31,11 +36,16 @@ function Navbar(props) {
                 </NavLink>
             </div>
             <div class="InputContainer">
-                <input placeholder="Search.." id="input" class="input" name="text" type="text"/>
-
+                <input
+                    placeholder="Search.."
+                    id="input"
+                    class="input"
+                    name="text"
+                    type="text"
+                />
             </div>
             {props.auth.isauth ? (
-                <div >
+                <div className="profile_dragdown">
                     <img
                         src={props.auth.image}
                         alt={props.auth.name}
@@ -43,18 +53,84 @@ function Navbar(props) {
                         style={{ borderRadius: "40px" }}
                     />
 
-                     {/* button for logout  */}
-                     <Tooltip title="Logout" className="logout">
-                        <button onClick={handlelogout}><LogoutIcon style={{ fill: '#0072ea', color: '#0072ea' }} /></button>
-                    </Tooltip>
-                    
+                    <NavDropdown
+                        id="nav-dropdown-light-example"
+                        className="custom-nav-dropdown"
+                        title={<KeyboardArrowDownIcon fontSize="large" />}
+                        menuVariant="light">
+                        <div
+                            style={{
+                                boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+                            }}>
+                            <div className="profilecard">
+                                <div className="p-3">
+                                    <div className="d-flex align-items-center p-0 ">
+                                        <img
+                                            src={props.auth.image}
+                                            className="rounded-circle"
+                                            width="58"
+                                            height="54"
+                                            alt={props.auth.name}
+                                        />
+                                        <div className="userInfo w-auto d-flex">
+                                            <span
+                                                className="truncate"
+                                                style={{ padding: "0px" }}>
+                                                {props.auth.name}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button className="viewandupdatebutton">
+                                    View and edit profile
+                                </button>
+                            </div>
+                            <NavDropdown.Divider />
+                            <div className="dropdownitems">
+                                &emsp;
+                                <AddCardIcon
+                                    fontSize="medium"
+                                    style={{
+                                        fill: "purple",
+                                    }}
+                                />
+                                &emsp;
+                                <span className="droptext">My ads</span>
+                            </div>
+                            <div className="dropdownitems">
+                                &emsp;
+                                <FavoriteBorderIcon
+                                    fontSize="medium"
+                                    style={{
+                                        fill: "orangered",
+                                    }}
+                                />
+                                &emsp;
+                                <span className="droptext">Wishlist</span>
+                            </div>
+                            <NavDropdown.Divider />
+                            <div
+                                className="dropdownitems"
+                                onClick={handlelogout}>
+                                &emsp;
+                                <LogoutIcon
+                                    fontSize="medium"
+                                    style={{
+                                        fill: "#0072ea",
+                                    }}
+                                />
+                                &emsp;
+                                <span className="droptext">Logout</span>
+                            </div>
+                        </div>
+                    </NavDropdown>
+
                     <NavLink to="/sell">
                         <button className="login-sell-btn">SELL</button>
                     </NavLink>
-                    
                 </div>
             ) : (
-                <div >
+                <div>
                     <NavLink to="/login" activeclassname="active_class">
                         <button className="login-sell-btn">Login</button>
                     </NavLink>

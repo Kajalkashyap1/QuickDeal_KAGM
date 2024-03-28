@@ -14,8 +14,6 @@
     box-sizing: border-box; /* Include padding in width calculation */
 }
 
-
-
 /* Style for dummy link */
 .Header a {
     color: white;
@@ -32,14 +30,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom,rgb(227, 213, 255),rgb(255, 231, 231));
+    background: linear-gradient(
+        to bottom,
+        rgb(227, 213, 255),
+        rgb(255, 231, 231)
+    );
     border-radius: 30px;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
-  }
-  
-  .input {
+}
+
+.input {
     width: 280px;
     height: 40px;
     border: none;
@@ -51,9 +53,9 @@
     letter-spacing: 0.8px;
     color: rgb(19, 19, 19);
     font-size: 13.4px;
-  }
+}
 
-  .logo img {
+.logo img {
     width: 100px;
     height: 60px;
     padding: "2px";
@@ -109,4 +111,72 @@
 .login-sell-btn:focus {
     background-color: #16437e;
     color: #ffffff;
+}
+
+.profile_dragdown {
+    display: flex;
+}
+
+.custom-nav-dropdown .dropdown-toggle::after {
+    display: none;
+}
+.profilecard {
+    margin: 1px;
+    border: 1px solid rgb(255, 255, 255);
+    width: auto;
+}
+
+.userInfo span {
+    text-transform: capitalize;
+    font-size: 1.5em;
+}
+
+.userInfo {
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.viewandupdatebutton {
+    color: "black";
+    min-width: 250px;
+    margin: 10px;
+    padding: 6px;
+    color: white;
+    background-color: #4a4360;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    border: 3px solid #4a4360;
+}
+
+.viewandupdatebutton:hover {
+    border: 3px solid #202938;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.droptext {
+    font-size: large;
+}
+.dropdownitems:hover {
+    background-color: #00a49e1d;
+}
+.dropdownitems {
+    width: auto;
+    height: 4em;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
 }

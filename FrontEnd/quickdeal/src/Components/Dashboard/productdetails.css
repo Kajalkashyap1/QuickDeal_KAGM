@@ -99,7 +99,10 @@ body {
     flex: 1 1 35%; /* Take up 35% of the container's width */
     max-width: 35%;
 }
-
+.profilecard {
+    display: flex;
+    flex-direction: column;
+}
 .image {
     background-color: black;
     border-radius: 2%;
@@ -154,7 +157,6 @@ body {
 .sellerinfo {
     text-align: center;
 }
-
 
 /* Adjust font sizes for smaller screens */
 @media (max-width: 768px) {
