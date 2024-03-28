@@ -10,6 +10,7 @@ const Home = () => {
     const [name, setname] = useState("");
     const [useremail, setuseremail] = useState("");
     const [image, setimage] = useState("");
+    const [userid, setuserid] = useState("");
 
     useEffect(() => {
         axios
@@ -19,6 +20,7 @@ const Home = () => {
                     setauth(false);
                 } else if (res.data.status === "success") {
                     setauth(true);
+                    setuserid(res.data.id);
                     setname(res.data.name);
                     setuseremail(res.data.email);
                     setimage(res.data.image);
@@ -28,7 +30,7 @@ const Home = () => {
                 console.log(err);
             });
     }, []);
-    const authdetail = { isauth, name, useremail, image };
+    const authdetail = { isauth, name, useremail, image, userid };
     const navigate = useNavigate();
 
     const handleClick = (id) => {

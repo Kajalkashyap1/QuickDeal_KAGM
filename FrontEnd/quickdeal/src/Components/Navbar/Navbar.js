@@ -2,13 +2,9 @@ import React from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import axios from "axios";
 import LogoutIcon from "@mui/icons-material/Logout";
-import IconButton from "@material-ui/core/IconButton";
-import { Tooltip } from "@mui/material";
-import logout from "../Assets/logout.jpg";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 function Navbar(props) {
@@ -86,8 +82,11 @@ function Navbar(props) {
                                 </button>
                             </div>
                             <NavDropdown.Divider />
-                            <div className="dropdownitems">
-                                &emsp;
+
+                            <NavLink
+                                to={`myads/${props.auth.userid}`}
+                                className="dropdownitems">
+                                &ensp;
                                 <AddCardIcon
                                     fontSize="medium"
                                     style={{
@@ -96,9 +95,10 @@ function Navbar(props) {
                                 />
                                 &emsp;
                                 <span className="droptext">My ads</span>
-                            </div>
-                            <div className="dropdownitems">
-                                &emsp;
+                            </NavLink>
+
+                            <NavLink to="/wishlist" className="dropdownitems">
+                                &ensp;
                                 <FavoriteBorderIcon
                                     fontSize="medium"
                                     style={{
@@ -107,12 +107,13 @@ function Navbar(props) {
                                 />
                                 &emsp;
                                 <span className="droptext">Wishlist</span>
-                            </div>
+                            </NavLink>
+                            
                             <NavDropdown.Divider />
-                            <div
+                            <NavLink
                                 className="dropdownitems"
                                 onClick={handlelogout}>
-                                &emsp;
+                                &ensp;
                                 <LogoutIcon
                                     fontSize="medium"
                                     style={{
@@ -121,7 +122,7 @@ function Navbar(props) {
                                 />
                                 &emsp;
                                 <span className="droptext">Logout</span>
-                            </div>
+                            </NavLink>
                         </div>
                     </NavDropdown>
 
