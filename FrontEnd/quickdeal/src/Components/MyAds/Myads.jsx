@@ -21,6 +21,7 @@ const Myads = () => {
                 console.log("error in fetching my ads ", err);
             });
     }, []);
+    console.log(ads);
     const formatDate = (dateString) => {
         const options = { day: "numeric", month: "long", year: "numeric" };
         const date = new Date(dateString);
@@ -34,81 +35,60 @@ const Myads = () => {
                 <div className={style.underline}></div>
             </div>
             {ads.map((item, index) => (
-
-                
                 <div className={style.cards} key={index}>
-
-                    
                     <div className={style.card}>
-
-                         {/* image of the product posted by user  */}
+                        {/* image of the product posted by user  */}
                         <div className={style.product_img}>
                             <img src={item.imageurl[0]} height={100}></img>
                         </div>
 
-                         {/* all the details of the product */}
+                        {/* all the details of the product */}
                         <div className={style.product_content}>
-
-                            
-
                             {/* product price */}
                             <div className={style.product_price}>
-                               <b>👉Price:</b> 
-                            
-                            ₹{" "}
-                                {item.price}
-                           
+                                <b>👉Price:</b>₹ {item.price}
                             </div>
 
                             {/* products name */}
                             <div className={style.product_name}>
-                                <b>👉Product Name:</b>
-                                {" "}
-                                {item.productname}
+                                <b>👉Product Name:</b> {item.productname}
                             </div>
 
                             {/* product title */}
                             <div className={style.product_title}>
-                                <b>👉Product Title:</b>
-                                {" "}
-                                {item.adtitle}
+                                <b>👉Product Title:</b> {item.adtitle}
                             </div>
 
                             {/* product description */}
                             <div className={style.product_description}>
-                                <b>👉Description:</b>
-                                {" "}
-                                {item.description}
+                                <b>👉Description:</b> {item.description}
                             </div>
 
                             {/* product published date */}
                             <div className={style.publish_date}>
-                                <b>👉Published on:</b>
-                                {" "}
-                                📅{formatDate(item.date)}
+                                <b>👉Published on:</b> 📅{formatDate(item.date)}
                             </div>
 
-                            
                             <div className={style.icon_btn}>
                                 <div className={style.likes}>
-                                            <FavoriteIcon
-                                                fontSize="large"
-                                                className="likedIcon"
-                                        
-                                            />
-                                            
-                                         {item.likedby?.length}
-                                        </div>
+                                    <FavoriteIcon
+                                        fontSize="large"
+                                        className="likedIcon"
+                                    />
+
+                                    {item.likedby?.length}
+                                </div>
 
                                 {/* all the important links */}
                                 <div className={style.imp_btns}>
-                                    <button className={style.btn} type="submit">Mark as Sold</button>
-                                    <button className={style.btn} type="submit">Edit Post</button>
+                                    <button className={style.btn} type="submit">
+                                        Mark as Sold
+                                    </button>
+                                    <button className={style.btn} type="submit">
+                                        Edit Post
+                                    </button>
                                 </div>
-
                             </div>
-
-                            
                         </div>
                     </div>
                 </div>
