@@ -22,6 +22,10 @@ const advertisementPostSchema = new mongoose.Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: "userdata", // Collection name of the userdata schema
     },
+    hasSold: {
+        type: Boolean,
+        default: false,
+    },
     date: {
         type: Date,
         default: Date.now,

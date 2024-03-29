@@ -101,21 +101,51 @@ const Wishlist = () => {
                                     </td>
                                     <td>{item.adtitle}</td>
                                     <td>{item.price}</td>
-                                    <td>Available</td>
                                     <td>
-                                        <Tooltip
-                                            title="Checkout"
-                                            arrow
-                                            onClick={() => {
-                                                handlecheckout(item._id);
-                                            }}>
-                                            <IconButton>
-                                                <ShoppingCartOutlinedIcon
-                                                    fontSize="large"
-                                                    className="checkoutbutton"
-                                                />
-                                            </IconButton>
-                                        </Tooltip>
+                                        {item.hasSold ? (
+                                            <img
+                                                src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711726840/sold_1_soa3b5.png"
+                                                alt=""
+                                                height="50em"
+                                            />
+                                        ) : (
+                                            <img
+                                                src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711726381/available_mbj74i.png"
+                                                alt=""
+                                                height="50em"
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {!item.hasSold ? (
+                                            <Tooltip
+                                                title="Checkout"
+                                                arrow
+                                                onClick={() => {
+                                                    handlecheckout(item._id);
+                                                }}>
+                                                <IconButton>
+                                                    <ShoppingCartOutlinedIcon
+                                                        fontSize="large"
+                                                        className="checkoutbutton"
+                                                    />
+                                                </IconButton>
+                                            </Tooltip>
+                                        ) : (
+                                            <Tooltip
+                                                title="Checkout"
+                                                arrow
+                                                style={{
+                                                    pointerEvents: "none",
+                                                }}>
+                                                <IconButton>
+                                                    <ShoppingCartOutlinedIcon
+                                                        fontSize="large"
+                                                        className="checkoutbutton"
+                                                    />
+                                                </IconButton>
+                                            </Tooltip>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
