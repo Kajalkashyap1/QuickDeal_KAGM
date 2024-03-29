@@ -1,30 +1,133 @@
 
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.text {
+    color: #3c009d;
+    font-size: 36px; /* Decreased font size */
+    font-weight: 700;
+}
+
+.underline {
+    width: 60px;
+    height: 4px;
+    background-color: #3c009d;
+    border-radius: 9px;
+    margin-bottom: 3px;
+}
 .cards{
     margin: 50px;
    
 }
 
 .card{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: grid;
     justify-content: space-between;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: minmax(150px,auto);
     padding: 5px;
+    box-shadow: 15px 15px 30px #bebebe,
+    -15px -15px 30px #ffffff;
 }
 
+
+
 .product_img{
-    align-items: left;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    /* border: 1px solid black; */
+}
+
+.product_img img{
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
 }
 
 .product_content{
     padding: 5px;
-    align-items: right;
+    /* align-items: right; */
     
 }
 
 .product_price{
-    
+    font-size: medium;
+}
+
+.icon_btns{
+    display: flex;
+}
+
+.likes{
+
+    color: orangered;
+    /* background-color: orangered; */
+    align-items: left;
+    text-align: left;
+    justify-content: left;
+    width: 8px;
+    height: 8px;
+}
+
+.imp_btns{
+    justify-content: right;
+    align-items: right;
+    text-align: right;
+}
+
+.imp_btns button{
+    align-items: right;
+    justify-content: right;
+    /* display: block; */
+    margin: 2px;
 }
 
 
+/* button styling */
+.imp_btns button {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+    border-radius: 10px;
+    border: 1px solid #8F9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    background-color: #4c00b4;
+    text-shadow: 0 1px #fff;
+  }
+ 
+   .imp_btns button:hover {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+  }
+  
+  .imp_btns button:active {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+  }
+  
+  .imp_btns button:focus {
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+  } 
+  
+ 

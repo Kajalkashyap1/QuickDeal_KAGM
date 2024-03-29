@@ -220,7 +220,7 @@ const Resetpassword = () => {
                                 )}
                                 {passwordinputUI && (
                                     <form onSubmit={updatepass}>
-                                        <div className="input">
+                                        <div className={style.input}>
                                             <img src={passicon} alt="" />
                                             <input
                                                 type={
