@@ -25,7 +25,7 @@
     box-shadow: 15px 15px 30px #bebebe,
              -15px -15px 30px #ffffff;
   border-radius: 10px;
-  background: #e0e0e0;
+  background: #ffffff;
 }
 
 .cards img {
@@ -36,25 +36,38 @@
 
 .description-content {
     /* padding: 5px; */
-    text-align: center;
+    /* text-align: center; */
     /* justify-content: flex-end; */
 }
 
 .price{
     font-weight: 700;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: left; */
+    /* margin-left: 20px; */
+}
+
+.product_name{
+    text-align: center;
 }
 
 .Ad-title{
     font-weight: 300;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .date{
     font-size: smaller;
-    /* justify-items: right; */
+    justify-items: right;
+    text-align: right;
+    font-weight: 300;
     
 }
+
+
 
 
 

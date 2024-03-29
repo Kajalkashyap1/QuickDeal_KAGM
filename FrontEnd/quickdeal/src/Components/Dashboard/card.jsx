@@ -51,10 +51,17 @@ const Card = ({ onClick, usermail }) => {
                                     }}
                                 />
                                 <div className="description-content">
-                                    <div className="price">
-                                        {item.productname}
-                                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ₹{" "}
+                                    <div>
+                                        
+                                        {/* &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  */}
+                                        <div className="price">
+                                        ₹{" "}
                                         {item.price}/-
+                                        </div>
+                                        <div className="product_name">
+                                        {item.productname}
+                                        </div>
+                                        
                                     </div>
                                     {/* Assuming you have a 'price' property in your item object */}
                                     <div className="Ad-title">

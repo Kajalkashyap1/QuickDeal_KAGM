@@ -1,0 +1,30 @@
+
+.cards{
+    margin: 50px;
+   
+}
+
+.card{
+    border: 1px solid black;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: minmax(150px,auto);
+    padding: 5px;
+}
+
+.product_img{
+    align-items: left;
+}
+
+.product_content{
+    padding: 5px;
+    align-items: right;
+    
+}
+
+.product_price{
+    
+}
+
+
