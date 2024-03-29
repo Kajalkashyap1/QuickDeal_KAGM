@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import style from './Myads.module.css'
+import style from "./Myads.module.css";
 import Header from "../Header/Header";
 
 const Myads = () => {
@@ -18,34 +18,45 @@ const Myads = () => {
                 console.log("error in fetching my ads ", err);
             });
     }, []);
-
+    const formatDate = (dateString) => {
+        const options = { day: "numeric", month: "long", year: "numeric" };
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", options);
+    };
     return (
-    <div className={style.main}>
-        <Header></Header>
-        <div className={style.cards}>
-            <div className={style.card}>
-              
-                    <div className={style.product_img}>
-                    <img src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"></img>
-                    </div>
-                    <div className={style.product_content}>
-                        <div className={style.product_price}>345678909</div>
-                        <div className={style.product_name}> charger </div>
-                        <div className={style.product_title}>oppo 36V charger</div>
-                        <div className={style.product_description}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi labore delectus optio qui totam sed quibusdam earum, rerum, illo eligendi libero modi explicabo, exercitationem officia dicta sint recusandae suscipit! Aut.</div>
-                        <div className={style.publish_date}>Published on: 589538</div>
-                        <div className={style.imp_btns}>
-                            <button type="submit">Mark as Sold</button>
-                            <button type="submit">Edit Post</button>
+        <div className={style.main}>
+            <Header></Header>
+            {ads.map((item, index) => (
+                <div className={style.cards} key={index}>
+                    <div className={style.card}>
+                        <div className={style.product_img}>
+                            <img src={item.imageurl[0]} height={100}></img>
+                        </div>
+                        <div className={style.product_content}>
+                            <div className={style.product_price}>
+                                {item.price}
+                            </div>
+                            <div className={style.product_name}>
+                                {item.productname}
+                            </div>
+                            <div className={style.product_title}>
+                                {item.adtitle}
+                            </div>
+                            <div className={style.product_description}>
+                                {item.description}
+                            </div>
+                            <div className={style.publish_date}>
+                                Published on: {formatDate(item.date)}
+                            </div>
+                            <div className={style.imp_btns}>
+                                <button type="submit">Mark as Sold</button>
+                                <button type="submit">Edit Post</button>
+                            </div>
                         </div>
                     </div>
-                
-            </div>
+                </div>
+            ))}
         </div>
-
-    </div>
-    
-    
     );
 };
 
