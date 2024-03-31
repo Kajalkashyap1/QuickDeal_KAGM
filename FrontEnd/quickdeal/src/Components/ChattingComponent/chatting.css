@@ -1,0 +1,136 @@
+.maindiv {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+    margin: 4px;
+}
+
+.inbox {
+    width: 100%;
+    max-width: 400px;
+    background-color: rgb(255, 255, 255);
+    border-right: none;
+    border: 1px solid rgba(152, 152, 152, 0.393);
+    margin: 0px;
+}
+
+.chatbox {
+    width: 100%;
+    max-width: 800px;
+
+    ::-webkit-scrollbar {
+        width: 6px; /* Width of the scrollbar */
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Color of the scrollbar track */
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888; /* Color of the scrollbar handle */
+        border-radius: 4px; /* Rounded corners of the scrollbar handle */
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Color of the scrollbar handle on hover */
+    }
+}
+
+.messagecontainer {
+    height: 440px;
+    width: 100%;
+    border: 1px solid rgb(152, 152, 152);
+    border-left: none;
+    overflow-y: auto;
+    background-color: rgb(103 98 98 /24%);
+}
+.messageinputdiv {
+    align-items: center;
+}
+.button {
+    cursor: pointer;
+    color: rgb(54, 106, 202);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .maindiv {
+        padding: 10px;
+    }
+
+    .inbox,
+    .chatbox {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+.message-item {
+    margin-top: 20px; /* Adjust the margin value as needed */
+    color: black;
+}
+
+.rce-citem-body {
+    padding: 0px;
+}
+.rce-citem-body--top-time {
+    display: none;
+}
+
+.inboxHeading {
+    font-size: 23px;
+    font-weight: 600;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    background-color: #4a4360d1;
+    /* border-bottom: 2px solid rgb(255, 255, 255); */
+    /* margin-bottom: 6px; */
+    color: aliceblue;
+}
+
+.card {
+    cursor: pointer;
+    margin: 1px;
+    border: 1px solid rgb(152, 152, 152);
+    text-transform: capitalize;
+    /* border: 5px solid red; */
+}
+
+.chatuserinfo h5 {
+    font-size: large;
+}
+.chatuserinfo p {
+    font-size: small;
+}
+.chatuserinfo {
+    margin-left: 10px;
+}
+.profileicon img {
+    margin: 1px;
+}
+
+.messagehading {
+    border: 1px solid rgb(152, 152, 152);
+    text-transform: capitalize;
+    font-size: 34px;
+    font-weight: 500;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+
+    background-color: #ffffffd1;
+    border: 1px solid rgb(152, 152, 152);
+    border-left: none;
+    padding: 0;
+    /* border-bottom: 2px solid rgb(255, 255, 255); */
+    /* margin-bottom: 6px; */
+}
+
+.messagehading img {
+    padding: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+}

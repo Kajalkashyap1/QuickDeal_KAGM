@@ -34,8 +34,15 @@ const Googleloginhelp = () => {
                     axios
                         .post("http://localhost:8000/auth/login", data)
                         .then((res) => {
-                            if (res.data.status === "success") navigate("/");
-                            else {
+                            if (res.data.status === "success") {
+                                toast.success(res.data.message, {
+                                    autoClose: 1000,
+                                    position: "top-center",
+                                });
+                                setTimeout(() => {
+                                    navigate("/");
+                                }, 1500);
+                            } else {
                                 toast.error(res.data.message, {
                                     autoClose: 1000,
                                     position: "top-center",

@@ -1,0 +1,232 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.text {
+    color: #3c009d;
+    font-size: 36px; /* Decreased font size */
+    font-weight: 700;
+}
+
+.underline {
+    width: 60px;
+    height: 4px;
+    background-color: #3c009d;
+    border-radius: 9px;
+    margin-bottom: 3px;
+}
+.cards {
+    margin: 50px;
+}
+
+.card {
+    /* border: 1px solid black; */
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: minmax(150px, auto);
+    padding: 5px;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+}
+
+.product_img {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    /* border: 1px solid black; */
+}
+
+.product_img img {
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    background-color: #5c424915;
+}
+
+.product_content {
+    padding: 5px;
+}
+
+.product_price {
+    font-size: medium;
+}
+/* .Icon{
+    margin: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+} */
+
+.likes {
+    color: orangered;
+    /* background-color: orangered; */
+    /* align-items: left;
+    text-align: left;
+    justify-content: left; */
+    width: 10px;
+    height: 8px;
+}
+
+.likes, .available_icon{
+    margin-top: 25px;
+    margin-right: 50px;
+}
+
+
+
+.card_bottom{
+    display: flex;
+    /* background-color: #4c00b4; */
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* like icon and available icon */
+.imp_icons {
+    display: flex;
+    /* align-items: left;
+    justify-content: left;
+    text-align: left;
+     */
+}
+
+
+.imp_btns button {
+    /* align-items: right; */
+    /* justify-content: right; */
+    margin: 2px;
+    
+}
+
+.imp_btns button {
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    background-image: linear-gradient(
+        to top,
+        #d8d9db 0%,
+        #fff 80%,
+        #fdfdfd 100%
+    );
+    border-radius: 10px;
+    border: 1px solid #8f9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    background-color: #4c00b4;
+    text-shadow: 0 1px #fff;
+}
+
+.imp_btns button:hover {
+    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1,
+        0 -6px 4px #fefefe, inset 0 0 3px 3px #cecfd1;
+}
+
+.imp_btns button:active {
+    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1,
+        0 -6px 4px #fefefe, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+
+.imp_btns button:focus {
+    box-shadow: 0 4px 3px 1px #fcfcfc, 0 6px 8px #d6d7d9, 0 -4px 4px #cecfd1,
+        0 -6px 4px #fefefe, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+}
+
+.currentstatus img {
+    aspect-ratio: 3/2;
+    object-fit: contain;
+    height: 1px;
+}
+
+.submit {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 45px;
+    color: #fff;
+    background: #4c00b4;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+/* customize number input  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.active {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* submit button styling */
+
+.submit_btn {
+    align-items: center;
+    background-color: #3c009d;
+    border: 0;
+    border-radius: 600px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 500px;
+    min-height: 40px;
+    min-width: 170px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    /* touch-action: manipulation; */
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.submit_btn:hover,
+.submit_btn:focus {
+    background-color: #16437e;
+    color: #ffffff;
+}
+
+
+.btn{
+    text-align: center;
+}

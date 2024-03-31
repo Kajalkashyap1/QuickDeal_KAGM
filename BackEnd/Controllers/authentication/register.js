@@ -1,61 +1,79 @@
 const userdata = require("../../Models/userdata");
 const bcrypt = require("bcryptjs");
 const validator = require("validator");
-
-function checkpassword(value) {
-    return validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-    });
-}
-
-function checknumber(value) {
-    const val = value.toString().length;
-    return val >= 10;
-}
+const optdata = require("../../Models/otpschema");
 
 const register = async (req, res) => {
     let fullname;
     let email;
     let Npassword;
     let contactNo;
-    let isgoogle = false;
+    var isGooglelogin = false;
     let imageurl = "";
+    let inputotp;
     if (req.body.isgoogle) {
         fullname = req.body.fullname;
         email = req.body.email;
-        Npassword = "";
-        isgoogle = true;
+        Npassword = "GHghghhghhasghsgahsg##@#@#@$@@$%3213216546546546";
+        isGooglelogin = true;
         imageurl = req.body.picture;
+        inputotp = req.body.inputotp;
     } else {
         fullname = req.body.fullname;
         email = req.body.email;
         Npassword = req.body.password;
         contactNo = req.body.contactNo;
+        inputotp = req.body.inputotp;
+        imageurl = `https://res.cloudinary.com/dsaaqhang/image/upload/v1711527687/QuickDeal/user_hl1hcs.png`;
     }
-    if (!req.body.isgoogle && !checkpassword(Npassword)) {
-        return res.json({
-            status: "error",
-            message: "Password does not meet the criteria",
-        });
-    }
-    else if (!req.body.isgoogle && !checknumber(contactNo)) {
-        return res.json({
-            status: "error",
-            message: "Please enter valid Number",
-        });
+
+    // if (!req.body.isgoogle && !checkpassword(Npassword)) {
+    //     return res.json({
+    //         status: "error",
+    //         message: "Password does not meet the criteria",
+    //     });
+    // }
+    // else if (!req.body.isgoogle && !checknumber(contactNo)) {
+    //     return res.json({
+    //         status: "error",
+    //         message: "Please enter valid Number",
+    //     });
+    // }
+
+    if (!isGooglelogin) {
+        const otpvalues = await optdata.findOne({ email: email });
+        if (!otpvalues) {
+            return res.json({
+                status: "error",
+                message: "OTP expired",
+            });
+        }
+
+        const otp = otpvalues.otp.toString();
+        const emailid = otpvalues.email;
+        if (otp != inputotp) {
+            return res.json({
+                status: "error",
+                message: "Invalid OTP !",
+            });
+        }
     }
     const password = await bcrypt.hash(Npassword, 12);
-    const data = { isgoogle, fullname, email, contactNo, password, imageurl };
+    const data = {
+        isGooglelogin,
+        fullname,
+        email,
+        contactNo,
+        password,
+        imageurl,
+    };
+
     const insertdata = new userdata(data);
     try {
         const indata = await insertdata.save();
         return res.json({
             status: "success",
-            message: "User created",
+            message: "Registered succssfully ! Login now",
         });
     } catch (e) {
         let error;

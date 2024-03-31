@@ -1,19 +1,49 @@
-import React, { useState } from "react";
-import "./LoginSignup.css";
+import React, { useState, useEffect } from "react";
+import style from "./LoginSignup.module.css";
 import email_icon from "../Assets/email.png";
 import pwd_icon from "../Assets/password.png";
 import Header from "../Header/Header";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 function LoginSignup() {
+    const nevigate = useNavigate();
+    const [isauth, setauth] = useState("");
+    const [name, setname] = useState("");
+    const [useremail, setuseremail] = useState("");
+    const [image, setimage] = useState("");
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    setauth(false);
+                } else if (res.data.status === "success") {
+                    setauth(true);
+                    setname(res.data.name);
+                    setuseremail(res.data.email);
+                    setimage(res.data.image);
+                    nevigate("/");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     const [showPassword, setShowPassword] = useState(false);
     const handlepasswordtoggle = () => {
         setShowPassword(!showPassword);
     };
-    const nevigate = useNavigate();
+
+    const handelforgetpassword = () => {
+        nevigate("/resetpasscode");
+    };
 
     const [user, setUser] = useState({
         email: "",
@@ -34,26 +64,55 @@ function LoginSignup() {
         axios
             .post("http://localhost:8000/auth/login", user)
             .then((res) => {
-                if (res.data.status === "success") nevigate("/");
-                else alert(res.data.message);
+                if (res.data.status === "success") {
+                    toast.success(res.data.message, {
+                        autoClose: 1000,
+                        position: "top-center",
+                    });
+                    setTimeout(() => {
+                        nevigate("/");
+                    }, 1500);
+                    setUser({ email: "", password: "" });
+                } else {
+                    toast.error(res.data.message, {
+                        autoClose: 1000,
+                        position: "top-center",
+                    });
+                    return;
+                }
             })
             .catch((err) => console.log(err));
-
-        setUser({ email: "", password: "" });
     };
 
     return (
         <>
+            <div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition="Bounce"
+                />
+
+                <ToastContainer />
+            </div>
             <Header></Header>
-            <div className="wrapper">
-                <div className="container">
-                    <div className="header">
-                        <div className="text">Login</div>
-                        <div className="underline"></div>
+            <div className={style.wrapper}>
+                <div className={style.container}>
+                    <div className={style.header}>
+                        <div className={style.text}>Login</div>
+                        <div className={style.underline}></div>
                     </div>
                     <form onSubmit={submithandel}>
-                        <div className="inputs">
-                            <div className="input">
+                        <div className={style.inputs}>
+                            <div className={style.input}>
                                 <img src={email_icon} alt="" />
                                 <input
                                     type="email"
@@ -64,7 +123,7 @@ function LoginSignup() {
                                     required
                                 />
                             </div>
-                            <div className="input">
+                            <div className={style.input}>
                                 <img src={pwd_icon} alt="" />
                                 {
                                     <input
@@ -94,11 +153,13 @@ function LoginSignup() {
                             </div>
 
                             <div>
-                                <button className={"submit_btn"} type="submit">
+                                <button className={style.submit_btn} type="submit">
                                     Submit
                                 </button>
                             </div>
-                            <div className="forgot-password">
+                            <div
+                                className={style.forgot_password}
+                                onClick={handelforgetpassword}>
                                 <span>Forgot Password?</span>
                             </div>
                             <Googlelogin></Googlelogin>
@@ -108,28 +169,11 @@ function LoginSignup() {
                                     <NavLink
                                         to="/signin"
                                         style={{ textDecoration: "none" }}>
-                                        <a>Sign up</a>
+                                        Sign up
                                     </NavLink>
                                 </b>
                             </div>
-                            {/* <div className="submit-container">
-                                <div className={"submit gray"}>
-                                    <NavLink
-                                        style={{ textDecoration: "none" }}
-                                        activeclassname="active_class"
-                                        to="/signin">
-                                        Sign Up
-                                    </NavLink>
-                                </div>
-                                <div className={"submit"}>
-                                    <NavLink
-                                        style={{ textDecoration: "none" }}
-                                        activeclassname="active_class"
-                                        to="/login">
-                                        Login
-                                    </NavLink>
-                                </div>
-                            </div> */}
+                           
                         </div>
                     </form>
                 </div>

@@ -1,6 +1,6 @@
 const userdata = require("../../Models/userdata");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const validator = require("validator");
 
 const login = async (req, res) => {
@@ -23,7 +23,7 @@ const login = async (req, res) => {
             imageurl: user.imageurl,
         };
         //verify password and generate a JWT token
-        // console.log(payload);
+
         let flag = true;
         if (!req.body.isgoogle) {
             flag = await bcrypt.compare(password, user.password);
@@ -44,12 +44,12 @@ const login = async (req, res) => {
             res.cookie("userRegistered", token, cookieOptions);
             return res.json({
                 status: "success",
-                message: "User login and cookie stored !",
+                message: "User logged in !",
             });
         } else {
             return res.json({
                 status: "error",
-                message: "password did not match",
+                message: "Wrong Password !",
             });
         }
     } catch (error) {

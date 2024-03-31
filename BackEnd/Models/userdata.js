@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const validator = require("validator");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 function isMNNITEmail(email) {
     return email.endsWith("@mnnit.ac.in");

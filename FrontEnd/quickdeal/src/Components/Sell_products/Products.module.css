@@ -1,0 +1,113 @@
+
+.wrapper{
+    /* text-align: center; */
+    /* padding-top: 50px; */
+    /* margin: 50px; */
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.title {
+    color: #3c009d;
+    font-size: 36px; /* Decreased font size */
+    font-weight: 700;
+}
+.underline {
+    width: 60px;
+    height: 4px;
+    background-color: #3c009d;
+    border-radius: 9px;
+    margin-bottom: 3px;
+}
+
+.input_field{
+    display: grid;
+    margin-bottom: 10px;
+    /* border-radius: 20px; */
+    
+}
+
+.inner_input_field{
+    display: flex;
+    
+}
+
+.input_field input{
+    width: 10px;
+    height: auto;
+    
+}
+
+/* .input_area{
+    display: grid;
+} */
+
+.input_field input{
+    background: transparent;
+    border: none;
+    outline:none;
+    color: #797979;
+    font-size: 16px; 
+    background: #eaeaea ;
+    border-radius: 10px;
+    height: 30px;
+    width: 100%;
+    border: 1px solid rgb(175, 172, 172);
+}
+
+
+.btn{
+
+    text-align: center;
+    justify-content: center;
+}
+
+.submit_btn {
+    align-items: center;
+    
+    background-color: #3c009d;
+    border: 0;
+    border-radius: 600px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 500px;
+    min-height: 40px;
+    min-width: 170px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    /* touch-action: manipulation; */
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.submit_btn:hover,
+.submit_btn:focus {
+    background-color: #16437e;
+    color: #ffffff;
+}
