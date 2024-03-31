@@ -43,18 +43,24 @@ function Navbar(props) {
             </div>
             {props.auth.isauth ? (
                 <div className="profile_dragdown">
-                    <img
-                        className="admin-icon"
-                        src={admin}
-                        alt={props.auth.name}
-                        height="60em"
-                        style={{ borderRadius: "40px" }}
-                    />
-
                     <NavDropdown
                         id="nav-dropdown-light-example"
                         className="custom-nav-dropdown"
-                        title={<KeyboardArrowDownIcon fontSize="large" />}
+                        title={
+                            <>
+                                <img
+                                    className="admin-icon"
+                                    src={admin}
+                                    alt={props.auth.name}
+                                    height="60em"
+                                    style={{
+                                        borderRadius: "40px",
+                                        marginRight: "1px",
+                                    }}
+                                />
+                                <KeyboardArrowDownIcon fontSize="large" />
+                            </>
+                        }
                         menuVariant="light">
                         <div
                             style={{

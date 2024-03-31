@@ -4,7 +4,7 @@ import axios from "axios";
 import Header from "../Header/Header";
 import { useNavigate } from "react-router-dom";
 import { Hourglass } from "react-loader-spinner";
-
+import { ToastContainer, toast } from "react-toastify";
 const Products = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -108,9 +108,15 @@ const Products = () => {
                     price: "",
                     location: "",
                 });
-                setloading(false);
+                // setloading(false);
                 setImages([]);
-                navigate("/");
+                toast.success("Post created !", {
+                    position: "top-center",
+                    autoClose: 1500,
+                });
+                setTimeout(() => {
+                    navigate(`/myads/${userid}`);
+                }, 1600);
             })
             .catch((err) => console.log(err));
     };
@@ -118,6 +124,7 @@ const Products = () => {
     return (
         <>
             <Header></Header>
+            <ToastContainer />
             {isloading ? (
                 <div
                     style={{
@@ -127,7 +134,6 @@ const Products = () => {
                         transform: "translate(-50%, -50%)",
                         textAlign: "center",
                     }}>
-                    
                     <Hourglass
                         visible={true}
                         height="90"
@@ -137,7 +143,7 @@ const Products = () => {
                     />
                     <br />
                     <i>
-                        <h6>Posting Advertisement...</h6>
+                        <h6>Posting Advertisement ! Don't close the page...</h6>
                     </i>
                 </div>
             ) : (
@@ -146,7 +152,7 @@ const Products = () => {
                         <div className={style.title}>POST YOUR AD</div>
                         <div className={style.underline}></div>
                     </div>
-                    
+
                     <div className={style.container}>
                         <h3>INCLUDE THE DETAILS OF YOUR PRODUCT</h3>
                         (field contains * is required)
@@ -154,7 +160,6 @@ const Products = () => {
                             onSubmit={handleSubmit}
                             encType="multipart/form-data">
                             <div className={style.input_field}>
-                               
                                 <b>*Product Name:</b>
                                 <input
                                     type="text"
@@ -163,7 +168,7 @@ const Products = () => {
                                     onChange={handleInputChange}
                                     required
                                 />
-                                
+
                                 <span>example: mobile</span>
                             </div>
 
@@ -244,7 +249,11 @@ const Products = () => {
                                 />
                             </div>
                             <div className={style.btn}>
-                                <button type="submit" className={style.submit_btn}>Submit</button>
+                                <button
+                                    type="submit"
+                                    className={style.submit_btn}>
+                                    Submit
+                                </button>
                             </div>
                         </form>
                     </div>

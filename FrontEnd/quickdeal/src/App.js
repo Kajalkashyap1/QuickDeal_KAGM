@@ -6,10 +6,10 @@ import Products from "./Components/Sell_products/Products";
 import ProductDetails from "./Components/Dashboard/productDetails";
 import Resetpassword from "./Components/ResetPassword/Resetpassword";
 import ChattingComponent from "./Components/ChattingComponent/Chatting";
-import io from "socket.io-client";
 import Myads from "./Components/MyAds/Myads";
+import Pagenotfound from "./Components/NotfoundComponent/pagenotfound";
 import Wishlist from "./Components/WishList/Wishlist";
-const socket = io.connect("http://localhost:8000");
+
 function App() {
     return (
         <>
@@ -32,6 +32,7 @@ function App() {
                 />
                 <Route path="/myads/:userid" element={<Myads />} />
                 <Route path="/wishlist/:userid" element={<Wishlist />} />
+                <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>
     );
