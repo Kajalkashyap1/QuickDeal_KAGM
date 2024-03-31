@@ -7,6 +7,7 @@ import axios from "axios";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import admin from "../Assets/user1.png";
 function Navbar(props) {
     console.log(props);
     const navigate = useNavigate();
@@ -43,9 +44,10 @@ function Navbar(props) {
             {props.auth.isauth ? (
                 <div className="profile_dragdown">
                     <img
-                        src={props.auth.image}
+                        className="admin-icon"
+                        src={admin}
                         alt={props.auth.name}
-                        height="40em"
+                        height="60em"
                         style={{ borderRadius: "40px" }}
                     />
 

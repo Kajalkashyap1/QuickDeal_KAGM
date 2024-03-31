@@ -31,8 +31,8 @@ const Card = ({ onClick, usermail }) => {
     }, []);
     return (
         <div className="main">
-            <h2>Filters will appear here</h2>
-            <hr></hr>
+            {/* <h2>Filters will appear here</h2>
+            <hr></hr> */}
             <div className="div-main">
                 {items.map(
                     (item, index) =>

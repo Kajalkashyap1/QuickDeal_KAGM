@@ -129,30 +129,47 @@ const Myads = () => {
                                 <b>&emsp;👉&emsp;Published on:</b> 📅
                                 {formatDate(item.date)}
                             </div>
-                            <div className="currentstatus">
-                                {item.hasSold ? (
-                                    <img
-                                        src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711726840/sold_1_soa3b5.png"
-                                        alt=""
-                                        height="50em"
-                                    />
-                                ) : (
-                                    <img
-                                        src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711726381/available_mbj74i.png"
-                                        alt=""
-                                        height="50em"
-                                    />
-                                )}
-                            </div>
-                            <div className={style.icon_btn}>
-                                <div className={style.likes}>
-                                    <FavoriteIcon
-                                        fontSize="large"
-                                        className="likedIcon"
-                                    />
-                                    {item.likedby?.length}
-                                </div>
 
+                            {/* card bottom starts */}
+                            <div className={style.card_bottom}>
+                            
+                            {/* like icon and availablity icon */}
+                            <div className={style.imp_icons}>
+                                        
+
+                                            <div className={style.likes}>
+                                                <FavoriteIcon
+                                                    fontSize="large"
+                                                    className={style.Icon}
+                                                />
+                                                
+                                                <div>{item.likedby?.length}</div>
+                                            </div>
+
+                                            {/* available or sold */}
+                                        <div className={style.available_icon}>
+                                            {item.hasSold ? (
+                                                    <img
+                                                        src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711726840/sold_1_soa3b5.png"
+                                                        alt=""
+                                                        height="50em"
+                                                        className={style.Icon}
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711726381/available_mbj74i.png"
+                                                        alt=""
+                                                        height="50em"
+                                                        className={style.Icon}
+                                                    />
+                                                )}
+                                        </div>
+                                       
+
+                             </div>
+                             {/* like icon and availablity icon end */}
+                                    
+                            {/* all button starts */}
                                 {/* all the important links */}
                                 <div className={style.imp_btns}>
                                     {!item.hasSold && (
@@ -222,11 +239,15 @@ const Myads = () => {
                                         </IconButton>
                                     </Tooltip>
                                 </div>
-                            </div>
+                           
+                            {/* all button ends */}
+                        </div>
+                           {/* card bottom end */}
                         </div>
                         <br />
+                        <br />
                         {showeditField[item._id] && (
-                            <div className="editfield ">
+                            <div className="editfield">
                                 <hr />
                                 <center>
                                     <h2> Edit Post</h2>
@@ -239,7 +260,7 @@ const Myads = () => {
                                             <label
                                                 htmlFor="productname"
                                                 className="form-label">
-                                                Product Name
+                                                <b>Product Name:</b>
                                             </label>
                                             <input
                                                 type="text"
@@ -254,7 +275,7 @@ const Myads = () => {
                                             <label
                                                 htmlFor="adtitle"
                                                 className="form-label">
-                                                Ad Title
+                                                <b>Ad Title:</b>
                                             </label>
                                             <input
                                                 type="text"
@@ -271,7 +292,7 @@ const Myads = () => {
                                             <label
                                                 htmlFor="price"
                                                 className="form-label">
-                                                Ad Title
+                                                <b>Price:</b>
                                             </label>
                                             <input
                                                 type="Number"
@@ -286,7 +307,7 @@ const Myads = () => {
                                             <label
                                                 htmlFor="location"
                                                 className="form-label">
-                                                Ad Title
+                                                <b>Location:</b>
                                             </label>
                                             <input
                                                 type="text"
@@ -303,7 +324,7 @@ const Myads = () => {
                                             <label
                                                 htmlFor="floatingTextarea2"
                                                 className="form-label">
-                                                Ad Title
+                                                <b>Description:</b>
                                             </label>
                                             <textarea
                                                 className="form-control"
@@ -316,7 +337,10 @@ const Myads = () => {
                                                 }}></textarea>
                                         </div>
                                     </div>
-                                    <button type="submit">Update</button>
+                                    <div className={style.btn}>
+                                    <button className={style.submit_btn} type="submit" >Update</button>
+                                    </div>
+                                    
                                 </form>
                             </div>
                         )}

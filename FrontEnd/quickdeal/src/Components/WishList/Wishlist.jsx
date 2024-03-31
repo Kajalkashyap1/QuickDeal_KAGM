@@ -51,13 +51,17 @@ const Wishlist = () => {
         <>
             <Header />
             <div className="wishlistContainer">
-                <center className="wishlistmainheading">
+                {/* <center className="wishlistmainheading">
                     <FavoriteBorderIcon
                         className="hearticon"
                         sx={{ fontSize: 60 }}
                     />
                     <h2>My Wishlist</h2>
-                </center>
+                </center> */}
+                <div className="header">
+                    <div className="text"> Wishlist</div>
+                    <div className="underline"></div>
+                </div>
                 <div className="listcontainer">
                     <table>
                         <thead>

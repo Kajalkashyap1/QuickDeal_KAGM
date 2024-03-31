@@ -127,15 +127,7 @@ const Products = () => {
                         transform: "translate(-50%, -50%)",
                         textAlign: "center",
                     }}>
-                    {/* <RotatingLines
-                        visible={true}
-                        height="96"
-                        width="96"
-                        strokeColor="#4a4ad2"
-                        strokeWidth="5"
-                        animationDuration="1"
-                        ariaLabel="rotating-lines-loading"
-                    /> */}
+                    
                     <Hourglass
                         visible={true}
                         height="90"
@@ -162,7 +154,8 @@ const Products = () => {
                             onSubmit={handleSubmit}
                             encType="multipart/form-data">
                             <div className={style.input_field}>
-                                <b>Product Name: *</b>
+                               
+                                <b>*Product Name:</b>
                                 <input
                                     type="text"
                                     name="productName"
@@ -170,6 +163,7 @@ const Products = () => {
                                     onChange={handleInputChange}
                                     required
                                 />
+                                
                                 <span>example: mobile</span>
                             </div>
 
@@ -249,7 +243,7 @@ const Products = () => {
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <div>
+                            <div className={style.btn}>
                                 <button type="submit" className={style.submit_btn}>Submit</button>
                             </div>
                         </form>

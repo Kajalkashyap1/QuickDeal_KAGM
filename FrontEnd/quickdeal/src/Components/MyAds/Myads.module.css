@@ -63,31 +63,54 @@
 .product_price {
     font-size: medium;
 }
-
-.icon_btns {
-    display: flex;
-}
+/* .Icon{
+    margin: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+} */
 
 .likes {
     color: orangered;
     /* background-color: orangered; */
-    align-items: left;
+    /* align-items: left;
     text-align: left;
-    justify-content: left;
-    width: 8px;
+    justify-content: left; */
+    width: 10px;
     height: 8px;
 }
 
-.imp_btns {
-    justify-content: right;
-    align-items: right;
-    text-align: right;
+.likes, .available_icon{
+    margin-top: 25px;
+    margin-right: 50px;
 }
 
+
+
+.card_bottom{
+    display: flex;
+    /* background-color: #4c00b4; */
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* like icon and available icon */
+.imp_icons {
+    display: flex;
+    /* align-items: left;
+    justify-content: left;
+    text-align: left;
+     */
+}
+
+
 .imp_btns button {
-    align-items: right;
-    justify-content: right;
+    /* align-items: right; */
+    /* justify-content: right; */
     margin: 2px;
+    
 }
 
 .imp_btns button {
@@ -133,4 +156,77 @@
     aspect-ratio: 3/2;
     object-fit: contain;
     height: 1px;
+}
+
+.submit {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 45px;
+    color: #fff;
+    background: #4c00b4;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+/* customize number input  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.active {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+/* submit button styling */
+
+.submit_btn {
+    align-items: center;
+    background-color: #3c009d;
+    border: 0;
+    border-radius: 600px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 500px;
+    min-height: 40px;
+    min-width: 170px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    /* touch-action: manipulation; */
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.submit_btn:hover,
+.submit_btn:focus {
+    background-color: #16437e;
+    color: #ffffff;
+}
+
+
+.btn{
+    text-align: center;
 }
