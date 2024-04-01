@@ -25,6 +25,10 @@ function Navbar(props) {
             .catch((err) => console.log(err));
     };
 
+    const handleRedirectToEditprofile = () => {
+        navigate(`/edit_profile/${props.auth.userid}`);
+    };
+    console.log(props);
     return (
         <div className="Header">
             <div className="logo">
@@ -85,7 +89,9 @@ function Navbar(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <button className="viewandupdatebutton">
+                                <button
+                                    className="viewandupdatebutton"
+                                    onClick={handleRedirectToEditprofile}>
                                     View and edit profile
                                 </button>
                             </div>

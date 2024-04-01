@@ -9,7 +9,7 @@ import ChattingComponent from "./Components/ChattingComponent/Chatting";
 import Myads from "./Components/MyAds/Myads";
 import Pagenotfound from "./Components/NotfoundComponent/pagenotfound";
 import Wishlist from "./Components/WishList/Wishlist";
-
+import EditProfile from "./Components/EditProfile/EditProfile";
 function App() {
     return (
         <>
@@ -32,6 +32,7 @@ function App() {
                 />
                 <Route path="/myads/:userid" element={<Myads />} />
                 <Route path="/wishlist/:userid" element={<Wishlist />} />
+                <Route path="/edit_profile/:userid" element={<EditProfile />} />
                 <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>
