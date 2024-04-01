@@ -1,31 +1,28 @@
 .div-main {
     margin-top: 50px;
-    margin-left: 80px;
+    margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 50px; /* Adjust the gap value as needed */
-    /* justify-content: center; */
-    
-    
 }
 
 .cards {
-    /* border: 1px solid black; */
-    max-width: 270px;
+    max-width: 300px;
     max-height: 600px;
+    min-height: 300px;
+    min-width: 250px;
     flex: 1 0 calc(25% - 20px); /* Adjust the flex value to fit 4 cards per row */
     box-sizing: border-box;
     cursor: pointer;
     padding: 2px;
-    /* background-color: rgb(233, 225, 225); */
+    border: 1px solid rgba(14, 4, 5, 0.274);
     offset-distance: 2;
-    /* justify-content: space-evenly; */
-    box-shadow: 15px 15px 30px #bebebe,
-             -15px -15px 30px #ffffff;
-  border-radius: 10px;
-  background: #ffffff;
+    box-shadow: -1px 1px 13px 3px #362e2e52, 0px 20px 9px 20px #ffffff;
+    border-radius: 3px;
+    background: #ffffff;
 }
 
 .cards img {
@@ -35,41 +32,33 @@
 }
 
 .description-content {
-    /* padding: 5px; */
-    /* text-align: center; */
-    /* justify-content: flex-end; */
-}
-
-.price{
-    font-weight: 700;
-    /* justify-content: flex-end; */
     display: flex;
+    margin: 1.5em;
     flex-direction: column;
-    /* justify-content: left; */
-    /* margin-left: 20px; */
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
-.product_name{
-    text-align: center;
+.price {
+    font-weight: 700;
+    font-size: x-large;
 }
 
-.Ad-title{
-    font-weight: 300;
-    margin-bottom: 5px;
-    text-align: center;
+.product_name {
+    color: #000000;
+    font-size: larger;
 }
-
-.date{
-    font-size: smaller;
-    justify-items: right;
-    text-align: right;
-    font-weight: 300;
-    
+.cardbottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: small;
+    color: rgba(14, 4, 5, 0.989);
 }
-
-
-
-
+.Ad-title {
+    color: rgba(14, 4, 5, 0.751);
+    font-size: 1rem;
+}
 
 @media (max-width: 768px) {
     /* Adjust breakpoint as needed */
@@ -78,4 +67,12 @@
         margin-right: 10px;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
+}
+
+.proimage {
+    width: "100%";
+    aspect-ratio: 3/2;
+    height: "3em";
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.456);
 }

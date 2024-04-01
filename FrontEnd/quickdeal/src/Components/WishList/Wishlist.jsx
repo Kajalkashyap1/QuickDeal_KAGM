@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
 import Notfound from "../NotfoundComponent/Notfound";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -13,6 +13,24 @@ const Wishlist = () => {
     const { userid } = useParams();
     const [likedPosts, setlikedPosts] = useState([]);
     const [deleted, setdeleted] = useState(false);
+
+    axios.defaults.withCredentials = true;
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    // setauth(false);
+                    navigate("/login");
+                } else if (res.data.status === "success") {
+                    // setauth(true);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     useEffect(() => {
         axios
             .get(`http://localhost:8000/dashboard/getLikedPosts/${userid}`)
@@ -49,7 +67,7 @@ const Wishlist = () => {
 
     return (
         <>
-            <Header />
+            <Navbar searchbar={false} />
             <div className="wishlistContainer">
                 {/* <center className="wishlistmainheading">
                     <FavoriteBorderIcon

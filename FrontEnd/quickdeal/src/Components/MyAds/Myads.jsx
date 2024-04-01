@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./Myads.module.css";
-import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
@@ -11,7 +11,26 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useConfirm } from "material-ui-confirm";
 import { ToastContainer, toast } from "react-toastify";
 import Notfound from "../NotfoundComponent/Notfound";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 const Myads = () => {
+    const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    // setauth(false);
+                    navigate("/login");
+                } else if (res.data.status === "success") {
+                    // setauth(true);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
     // --------------------- Handle delete confirmation-------------
     const confirm = useConfirm();
 
@@ -178,7 +197,7 @@ const Myads = () => {
 
     return (
         <div className={style.main}>
-            <Header></Header>
+            <Navbar searchbar={false} />
             {/* --------------------- Toast container ---------------- */}
             <ToastContainer />
             {/* --------------------- Toast container ---------------- */}
@@ -197,41 +216,45 @@ const Myads = () => {
                             {/* all the details of the product */}
                             <div className={style.product_content}>
                                 {/* product price */}
-                                <div className={style.product_price}>
-                                    <b>&emsp;👉&emsp;Price:</b>₹ {item.price}
+                                <div className={style.productleftcontent}>
+                                    <div className={style.product_price}>
+                                        <b>&emsp;👉&emsp;Price:</b>₹{" "}
+                                        {item.price}
+                                    </div>
+                                    {/* products name */}
+                                    <div className={style.product_name}>
+                                        <b>&emsp;👉&emsp;Product Name:</b>{" "}
+                                        {item.productname}
+                                    </div>
+                                    {/* product title */}
+                                    <div className={style.product_title}>
+                                        <b>&emsp;👉&emsp;Product Title:</b>{" "}
+                                        {item.adtitle}
+                                    </div>
+                                    {/* product description */}
+                                    <div className={style.product_description}>
+                                        <b>&emsp;👉&emsp;Description:</b>{" "}
+                                        {item.description}
+                                    </div>
+                                    {/* product published date */}
+                                    <div className={style.publish_date}>
+                                        <b>&emsp;👉&emsp;Published on:</b> 📅
+                                        {formatDate(item.date)}
+                                    </div>
                                 </div>
-                                {/* products name */}
-                                <div className={style.product_name}>
-                                    <b>&emsp;👉&emsp;Product Name:</b>{" "}
-                                    {item.productname}
-                                </div>
-                                {/* product title */}
-                                <div className={style.product_title}>
-                                    <b>&emsp;👉&emsp;Product Title:</b>{" "}
-                                    {item.adtitle}
-                                </div>
-                                {/* product description */}
-                                <div className={style.product_description}>
-                                    <b>&emsp;👉&emsp;Description:</b>{" "}
-                                    {item.description}
-                                </div>
-                                {/* product published date */}
-                                <div className={style.publish_date}>
-                                    <b>&emsp;👉&emsp;Published on:</b> 📅
-                                    {formatDate(item.date)}
-                                </div>
-
                                 {/* card bottom starts */}
-                                <div className={style.card_bottom}>
+                                <div className={style.card_right}>
                                     {/* like icon and availablity icon */}
                                     <div className={style.imp_icons}>
                                         <div className={style.likes}>
                                             <FavoriteIcon
-                                                fontSize="large"
+                                                fontSize="medium"
                                                 className={style.Icon}
                                             />
-
-                                            <div>{item.likedby?.length}</div>
+                                            &ensp;
+                                            <span style={{ fontSize: "large" }}>
+                                                Likes : {item.likedby?.length}
+                                            </span>
                                         </div>
 
                                         {/* available or sold */}
@@ -259,6 +282,25 @@ const Myads = () => {
                                     {/* all the important links */}
                                     <div className={style.imp_btns}>
                                         <>
+                                            {" "}
+                                            <Tooltip
+                                                onClick={() => {
+                                                    handleMarkasSold(item._id);
+                                                }}
+                                                title="View ad"
+                                                arrow>
+                                                <IconButton
+                                                    onClick={() => {
+                                                        navigate(
+                                                            `/myads/preview/${
+                                                                item._id
+                                                            }/${true}`
+                                                        );
+                                                    }}>
+                                                    <RemoveRedEyeIcon fontSize="medium" />
+                                                    &nbsp;Preview
+                                                </IconButton>
+                                            </Tooltip>
                                             {/* -------------- Mark as Sold button  start------------- */}
                                             {!item.hasSold ? (
                                                 <Tooltip
@@ -301,9 +343,7 @@ const Myads = () => {
                                                     </IconButton>
                                                 </Tooltip>
                                             )}
-
                                             {/* -------------- Mark as Sold button end ------------- */}
-
                                             {/* ---------------------- Edit Button ----------------- */}
                                             <Tooltip
                                                 className={style.btn}

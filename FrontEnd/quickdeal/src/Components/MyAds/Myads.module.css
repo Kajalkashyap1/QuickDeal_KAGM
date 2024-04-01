@@ -30,8 +30,9 @@
     display: grid;
     justify-content: space-between;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: minmax(150px, auto);
-    padding: 5px;
+    grid-template-rows: minmax(80px, auto);
+    padding: 20px;
+
     box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
 }
 
@@ -55,38 +56,45 @@
     object-fit: contain;
     background-color: #5c424915;
 }
-
+.productleftcontent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 .product_content {
-    padding: 5px;
+    /* padding: 5px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .product_price {
     font-size: medium;
 }
-/* .Icon{
-    margin: 5px;
-    margin-right: 10px;
-    margin-left: 10px;
-} */
-
-.likes {
-    color: orangered;
-    /* background-color: orangered; */
-    /* align-items: left;
-    text-align: left;
-    justify-content: left; */
-    width: 10px;
-    height: 8px;
+.Icon {
+    color: rgb(60, 13, 13);
 }
 
-.likes, .available_icon{
+.likes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.likes,
+.available_icon {
     margin-top: 25px;
     margin-right: 50px;
 }
 
-
-
-.card_bottom{
+.card_bottom {
     display: flex;
     /* background-color: #4c00b4; */
     justify-content: space-between;
@@ -94,7 +102,6 @@
     align-items: center;
     text-align: center;
 }
-
 
 /* like icon and available icon */
 .imp_icons {
@@ -105,12 +112,10 @@
      */
 }
 
-
 .imp_btns button {
     /* align-items: right; */
     /* justify-content: right; */
     margin: 2px;
-    
 }
 
 .imp_btns button {
@@ -173,8 +178,6 @@
     cursor: pointer;
 }
 
-
-
 /* customize number input  */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -226,7 +229,6 @@ input::-webkit-inner-spin-button {
     color: #ffffff;
 }
 
-
-.btn{
+.btn {
     text-align: center;
 }

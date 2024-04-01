@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Carousel from "react-bootstrap/Carousel";
 import "./productdetails.css";
-import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -21,6 +21,7 @@ const formatDate = (dateString) => {
 const ProductDetails = () => {
     // let id = match.params.id;
     const { id } = useParams();
+    const { preview } = useParams();
     const [liked, setliked] = useState(false);
 
     const [item, setitem] = useState([]);
@@ -85,7 +86,7 @@ const ProductDetails = () => {
     };
     return (
         <>
-            <Header></Header>
+            <Navbar searchbar={false} />
             <div className="maincontainer">
                 <div className="leftdiv">
                     <div className="image">
@@ -124,34 +125,36 @@ const ProductDetails = () => {
                     <div className="productdetails">
                         <div className="priceandheart">
                             <h1> ₹ {item.price} /-</h1>
-                            <div className="favoriteIcon">
-                                {item?.likedby?.includes(userid) ? (
-                                    <Tooltip
-                                        title="Remove from wishlist"
-                                        onClick={handlelike}>
-                                        <IconButton>
-                                            <FavoriteIcon
-                                                fontSize="large"
-                                                className="likedIcon"
-                                            />
-                                        </IconButton>
-                                    </Tooltip>
-                                ) : (
-                                    <Tooltip
-                                        title="Add to wishlist"
-                                        onClick={handlelike}>
-                                        <IconButton>
-                                            <FavoriteBorderIcon
-                                                fontSize="large"
-                                                className="favoriteIcon"
-                                            />
-                                        </IconButton>
-                                    </Tooltip>
-                                )}
-                                <span className="likescount">
-                                    {item.likedby?.length}
-                                </span>
-                            </div>
+                            {!preview && (
+                                <div className="favoriteIcon">
+                                    {item?.likedby?.includes(userid) ? (
+                                        <Tooltip
+                                            title="Remove from wishlist"
+                                            onClick={handlelike}>
+                                            <IconButton>
+                                                <FavoriteIcon
+                                                    fontSize="large"
+                                                    className="likedIcon"
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
+                                    ) : (
+                                        <Tooltip
+                                            title="Add to wishlist"
+                                            onClick={handlelike}>
+                                            <IconButton>
+                                                <FavoriteBorderIcon
+                                                    fontSize="large"
+                                                    className="favoriteIcon"
+                                                />
+                                            </IconButton>
+                                        </Tooltip>
+                                    )}
+                                    <span className="likescount">
+                                        {item.likedby?.length}
+                                    </span>
+                                </div>
+                            )}
                         </div>
                         <hr />
                         <h4>{item.productname}</h4>
@@ -173,11 +176,13 @@ const ProductDetails = () => {
                             {item.useremail}
                         </p>
                         {/* <p>{item.userid}</p> */}
-                        <button
-                            className="chatbutton"
-                            onClick={handleGetBuyerinfo}>
-                            Chat with Seller
-                        </button>
+                        {!preview && (
+                            <button
+                                className="chatbutton"
+                                onClick={handleGetBuyerinfo}>
+                                Chat with Seller
+                            </button>
+                        )}
                     </div>
                     <div className="location">
                         <p>

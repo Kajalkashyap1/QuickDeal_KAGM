@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import style from "./Products.module.css";
 import axios from "axios";
-import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Hourglass } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
+import UploadIcon from "@mui/icons-material/Upload";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 const Products = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -19,6 +23,7 @@ const Products = () => {
             .then((res) => {
                 if (res.data.status === "error") {
                     setuserid(false);
+                    navigate("/login");
                 } else if (res.data.status === "success") {
                     setuserid(res.data.id);
                     setname(res.data.name);
@@ -72,9 +77,15 @@ const Products = () => {
                     style={{ maxWidth: "150px", maxHeight: "150px" }}
                 />
                 <br />
-                <button type="button" onClick={() => handleRemoveImage(index)}>
-                    Remove
-                </button>
+                <Tooltip title="Remove " arrow>
+                    <IconButton onClick={() => handleRemoveImage(index)}>
+                        <DeleteIcon
+                            fontSize="medium"
+                            className="deletebutton"
+                        />
+                    </IconButton>
+                    <span style={{ fontSize: "small" }}>Remove</span>
+                </Tooltip>
             </div>
         ));
     };
@@ -123,7 +134,7 @@ const Products = () => {
 
     return (
         <>
-            <Header></Header>
+            <Navbar searchbar={false} />
             <ToastContainer />
             {isloading ? (
                 <div
@@ -154,13 +165,21 @@ const Products = () => {
                     </div>
 
                     <div className={style.container}>
-                        <h3>INCLUDE THE DETAILS OF YOUR PRODUCT</h3>
-                        (field contains * is required)
+                        <h4>INCLUDE THE DETAILS OF YOUR PRODUCT</h4>
+                        <span className={style.requiredwarning}>
+                            field contains * are required
+                        </span>
+                        <hr
+                            style={{
+                                color: "black",
+                                borderTop: "2px solid black",
+                            }}
+                        />
                         <form
                             onSubmit={handleSubmit}
                             encType="multipart/form-data">
                             <div className={style.input_field}>
-                                <b>*Product Name:</b>
+                                <b>Product Name: *</b>
                                 <input
                                     type="text"
                                     name="productName"
@@ -202,8 +221,21 @@ const Products = () => {
                                 </span>
                             </div>
 
-                            <div>
-                                <h5>SET A PRICE (IN RUPEES) *</h5>
+                            <div className={style.input_field}>
+                                <b style={{ color: "black" }}>Location *</b>
+                                <input
+                                    type="text"
+                                    name="location"
+                                    value={formData.location}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <hr />
+                            <div className={style.input_number}>
+                                <b style={{ color: "black" }}>
+                                    Set a price (in Rupees) *
+                                </b>
                                 <input
                                     type="number"
                                     name="price"
@@ -212,16 +244,32 @@ const Products = () => {
                                     required
                                 />
                             </div>
-
+                            <hr />
                             <div className={style.photo}>
-                                <h5>UPLOAD PHOTOS (MAX-5) *</h5>
+                                <b style={{ color: "black" }}>
+                                    Upload Photos (Max-5 ) *
+                                </b>
                                 <div>
                                     {renderImages()}
                                     {images.length < 5 && (
                                         <div>
-                                            <label htmlFor="addImage">
-                                                Add Image:
-                                            </label>
+                                            <Tooltip
+                                                title="Upload Image "
+                                                arrow>
+                                                <label
+                                                    htmlFor="addImage"
+                                                    className={
+                                                        style.imageinputlable
+                                                    }>
+                                                    <UploadIcon
+                                                        fontSize="large"
+                                                        style={{
+                                                            color: "#272777",
+                                                        }}
+                                                    />
+                                                    Upload image
+                                                </label>
+                                            </Tooltip>
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -233,21 +281,15 @@ const Products = () => {
                                                         event
                                                     )
                                                 }
+                                                style={{
+                                                    display: "none", // Hide the default input
+                                                }}
                                             />
                                         </div>
                                     )}
                                 </div>
                             </div>
 
-                            <div className={style.input_field}>
-                                Location:
-                                <input
-                                    type="text"
-                                    name="location"
-                                    value={formData.location}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
                             <div className={style.btn}>
                                 <button
                                     type="submit"

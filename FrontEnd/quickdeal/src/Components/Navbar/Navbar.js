@@ -1,5 +1,6 @@
-import React from "react";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import React, { useState, useEffect } from "react";
+import { NavDropdown } from "react-bootstrap";
+import AddIcon from "@mui/icons-material/Add";
 import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -8,11 +9,37 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import admin from "../Assets/user1.png";
-function Navbar(props) {
-    console.log(props);
-    const navigate = useNavigate();
-    axios.defaults.withCredentials = true;
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+function Navbar(props) {
+    axios.defaults.withCredentials = true;
+    const navigate = useNavigate();
+    const [isauth, setauth] = useState("");
+    const [name, setname] = useState("");
+    const [useremail, setuseremail] = useState("");
+    const [image, setimage] = useState("");
+    const [userid, setuserid] = useState("");
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    setauth(false);
+                    // navigate("/login");
+                } else if (res.data.status === "success") {
+                    setauth(true);
+                    setuserid(res.data.id);
+                    setname(res.data.name);
+                    setuseremail(res.data.email);
+                    setimage(res.data.image);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+    const [arrowicon, setarrowicon] = useState(false);
     const handlelogout = () => {
         axios
             .get("http://localhost:8000/auth/logout")
@@ -24,11 +51,16 @@ function Navbar(props) {
             })
             .catch((err) => console.log(err));
     };
-
-    const handleRedirectToEditprofile = () => {
-        navigate(`/edit_profile/${props.auth.userid}`);
+    const handlearrow = () => {
+        setarrowicon(!arrowicon);
     };
-    console.log(props);
+    const handleDropdownClose = () => {
+        console.log("hellooooo");
+        setarrowicon(false);
+    };
+    const handleRedirectToEditprofile = () => {
+        navigate(`/edit_profile/${userid}`);
+    };
     return (
         <div className="Header">
             <div className="logo">
@@ -36,33 +68,47 @@ function Navbar(props) {
                     <img src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"></img>
                 </NavLink>
             </div>
-            <div class="InputContainer">
-                <input
-                    placeholder="Search.."
-                    id="input"
-                    class="input"
-                    name="text"
-                    type="text"
-                />
-            </div>
-            {props.auth.isauth ? (
+            {props.searchbar && (
+                <div class="InputContainer">
+                    <input
+                        placeholder="Search.."
+                        id="input"
+                        class="input"
+                        name="text"
+                        type="text"
+                    />
+                </div>
+            )}
+            {isauth ? (
                 <div className="profile_dragdown">
                     <NavDropdown
                         id="nav-dropdown-light-example"
                         className="custom-nav-dropdown"
+                        onClick={handlearrow}
+                        // onHide={handleDropdownClose}
+                        onTransitionEnd={handleDropdownClose}
                         title={
                             <>
                                 <img
                                     className="admin-icon"
                                     src={admin}
-                                    alt={props.auth.name}
-                                    height="60em"
+                                    alt={name}
                                     style={{
                                         borderRadius: "40px",
                                         marginRight: "1px",
                                     }}
                                 />
-                                <KeyboardArrowDownIcon fontSize="large" />
+                                {arrowicon ? (
+                                    <KeyboardArrowUpIcon
+                                        fontSize="large"
+                                        style={{ fill: "white" }}
+                                    />
+                                ) : (
+                                    <KeyboardArrowDownIcon
+                                        fontSize="large"
+                                        style={{ fill: "white" }}
+                                    />
+                                )}
                             </>
                         }
                         menuVariant="light">
@@ -74,17 +120,17 @@ function Navbar(props) {
                                 <div className="p-3">
                                     <div className="d-flex align-items-center p-0 ">
                                         <img
-                                            src={props.auth.image}
+                                            src={image}
                                             className="rounded-circle"
                                             width="58"
                                             height="54"
-                                            alt={props.auth.name}
+                                            alt={name}
                                         />
                                         <div className="userInfo w-auto d-flex">
                                             <span
                                                 className="truncate"
                                                 style={{ padding: "0px" }}>
-                                                {props.auth.name}
+                                                {name}
                                             </span>
                                         </div>
                                     </div>
@@ -98,7 +144,7 @@ function Navbar(props) {
                             <NavDropdown.Divider />
 
                             <NavLink
-                                to={`myads/${props.auth.userid}`}
+                                to={`/myads/${userid}`}
                                 className="dropdownitems">
                                 &ensp;
                                 <AddCardIcon
@@ -112,7 +158,7 @@ function Navbar(props) {
                             </NavLink>
 
                             <NavLink
-                                to={`/wishlist/${props.auth.userid}`}
+                                to={`/wishlist/${userid}`}
                                 className="dropdownitems">
                                 &ensp;
                                 <FavoriteBorderIcon
@@ -143,7 +189,13 @@ function Navbar(props) {
                     </NavDropdown>
 
                     <NavLink to="/sell">
-                        <button className="login-sell-btn">SELL</button>
+                        <button className="login-sell-btn">
+                            <AddIcon
+                                fontSize="medium"
+                                style={{ fill: "green" }}
+                            />
+                            SELL
+                        </button>
                     </NavLink>
                 </div>
             ) : (

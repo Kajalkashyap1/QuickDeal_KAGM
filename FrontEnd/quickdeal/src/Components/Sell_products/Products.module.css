@@ -1,11 +1,13 @@
-
-.wrapper{
+.wrapper {
     /* text-align: center; */
     /* padding-top: 50px; */
     /* margin: 50px; */
     margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .header {
@@ -17,7 +19,15 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
-
+.requiredwarning {
+    font-size: small;
+}
+.container {
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    padding: 4rem;
+    padding-right: 15em;
+    border-radius: 5px;
+}
 .title {
     color: #3c009d;
     font-size: 36px; /* Decreased font size */
@@ -31,37 +41,56 @@
     margin-bottom: 3px;
 }
 
-.input_field{
+.input_field {
     display: grid;
-    margin-bottom: 10px;
-    /* border-radius: 20px; */
-    
+    margin-bottom: 30px;
 }
-
-.input_field_area{
-    display: grid;
-    margin-bottom: 10px;
+.input_number {
+    width: 50%;
 }
-
-.inner_input_field{
-    display: flex;
-    
-}
-
-
-
-/* .input_area{
-    display: grid;
-} */
-
-.input_field input{
+.input_number input {
+    background: #eaeaea;
     background: transparent;
     border: none;
-    outline:none;
-    color: #797979;
-    font-size: 16px; 
-    background: #eaeaea ;
-    border-radius: 10px;
+    outline: none;
+    color: #000000dd;
+    font-size: 16px;
+    background: #eaeaea;
+    border-radius: 3px;
+    height: 30px;
+    width: 80%;
+    border: 1px solid rgb(175, 172, 172);
+    height: 35px;
+}
+.input_field_area {
+    display: grid;
+    margin-bottom: 30px;
+}
+
+.inner_input_field {
+    display: flex;
+}
+
+.imageinputlable {
+    background-color: #fff;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 7px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid rgba(14, 4, 5, 0.274);
+}
+
+.input_field input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #000000dd;
+    font-size: 16px;
+    background: #eaeaea;
+    border-radius: 3px;
     height: 30px;
     width: 100%;
     border: 1px solid rgb(175, 172, 172);
@@ -69,31 +98,32 @@
     height: 35px;
 }
 
-.input_field_area input{
+.input_field_area input {
     background: transparent;
     border: none;
-    outline:none;
-    color: #797979;
-    font-size: 16px; 
-    background: #eaeaea ;
-    border-radius: 10px;
+    outline: none;
+    color: #000000;
+    font-size: 16px;
+    background: #eaeaea;
+    border-radius: 3px;
     height: 30px;
     width: 100%;
     border: 1px solid rgb(175, 172, 172);
-    width: 500px;
+    width: 550px;
     height: 100px;
 }
 
-
-.btn{
-
+.btn {
     text-align: center;
     justify-content: center;
 }
-
+.photo {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
 .submit_btn {
     align-items: center;
-    
+
     background-color: #3c009d;
     border: 0;
     border-radius: 600px;

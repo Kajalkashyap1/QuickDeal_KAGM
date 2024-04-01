@@ -121,7 +121,7 @@ const Resetpassword = () => {
             <div className={style.center}>
                 {isloading ? (
                     <>
-                        <div 
+                        <div
                             style={{
                                 position: "fixed",
                                 top: "50%",
@@ -145,12 +145,14 @@ const Resetpassword = () => {
                 ) : (
                     <>
                         <div className={style.main}>
-                            <div >
+                            <div>
                                 <div className={style.header}>
-                                    <div className={style.text}><h2>Reset Password</h2></div>
+                                    <div className={style.text}>
+                                        <h2>Reset Password</h2>
+                                    </div>
                                     <div className={style.underline}></div>
                                 </div>
-                                
+
                                 <div className={style.container}>
                                     <span>Enter your registered email </span>
                                     <form onSubmit={sendotp}>
@@ -166,14 +168,16 @@ const Resetpassword = () => {
                                                 disabled={disable}
                                             />
                                         </div>
-                                        
-                                        <button className={style.submit} disabled={disable} type="submit">
+
+                                        <button
+                                            className={style.submit}
+                                            disabled={disable}
+                                            type="submit">
                                             Get OTP
                                         </button>
-                                        
                                     </form>
                                 </div>
-                                
+
                                 {showotpinput && (
                                     <div className={style.container}>
                                         <h3>Enter OTP:</h3>
@@ -252,7 +256,9 @@ const Resetpassword = () => {
                                                 )}
                                             </span>
                                         </div>
-                                        <button className={style.submit}>Submit</button>
+                                        <button className={style.submit}>
+                                            Submit
+                                        </button>
                                     </form>
                                 )}
                             </div>

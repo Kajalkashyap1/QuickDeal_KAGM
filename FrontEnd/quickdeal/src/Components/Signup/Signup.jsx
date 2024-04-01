@@ -30,6 +30,7 @@ const Signupui = () => {
                 if (res.data.status === "error") {
                     setauth(false);
                 } else if (res.data.status === "success") {
+                    navigate("/");
                     setauth(true);
                     setname(res.data.name);
                     setuseremail(res.data.email);

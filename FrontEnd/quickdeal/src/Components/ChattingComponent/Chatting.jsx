@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./chatting.css";
 import "react-chat-elements/dist/main.css";
-import Header from "../Header/Header";
 import { MessageList } from "react-chat-elements";
 import { MessageBox } from "react-chat-elements";
 import SendIcon from "@mui/icons-material/Send";
-import { ChatItem } from "react-chat-elements";
 import Card from "react-bootstrap/Card";
 import { io } from "socket.io-client";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import tune from "../../audio/notification.mpeg";
+import Navbar from "../Navbar/Navbar";
 const socket = io.connect("http://localhost:8000");
 const messageListReferance = React.createRef();
 
@@ -25,6 +24,23 @@ const Chatting = () => {
     const [Messages, setMessages] = useState([]);
     const [clickedItems, setClickedItems] = useState([]);
     const [clickedIndex, setClickedIndex] = useState(null);
+
+    axios.defaults.withCredentials = true;
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/auth/islogin")
+            .then((res) => {
+                if (res.data.status === "error") {
+                    // setauth(false);
+                    navigate("/login");
+                } else if (res.data.status === "success") {
+                    // setauth(true);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     const handleItemClick = (index) => {
         // Reset previously clicked item
@@ -179,7 +195,7 @@ const Chatting = () => {
     }, [messArray, Messages]);
     return (
         <>
-            <Header />
+            <Navbar searchbar={false} />
             <div className="maindiv">
                 <div className="inbox">
                     <Card>

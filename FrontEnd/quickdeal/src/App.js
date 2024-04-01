@@ -31,8 +31,12 @@ function App() {
                     element={<ChattingComponent />}
                 />
                 <Route path="/myads/:userid" element={<Myads />} />
+                <Route
+                    path="/myads/preview/:id/:preview"
+                    element={<ProductDetails />}
+                />
                 <Route path="/wishlist/:userid" element={<Wishlist />} />
-                <Route path="/edit_profile/:userid" element={<EditProfile/>} />
+                <Route path="/edit_profile/:userid" element={<EditProfile />} />
                 <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>

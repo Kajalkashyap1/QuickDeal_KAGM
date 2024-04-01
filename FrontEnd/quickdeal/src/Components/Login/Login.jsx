@@ -153,7 +153,9 @@ function LoginSignup() {
                             </div>
 
                             <div>
-                                <button className={style.submit_btn} type="submit">
+                                <button
+                                    className={style.submit_btn}
+                                    type="submit">
                                     Submit
                                 </button>
                             </div>
@@ -173,7 +175,6 @@ function LoginSignup() {
                                     </NavLink>
                                 </b>
                             </div>
-                           
                         </div>
                     </form>
                 </div>

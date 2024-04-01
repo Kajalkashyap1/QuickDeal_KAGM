@@ -38,8 +38,7 @@ const Home = () => {
     };
     return (
         <>
-            <Navbar auth={authdetail}></Navbar>
-            
+            <Navbar searchbar="true" />
 
             <Card onClick={handleClick} usermail={useremail}></Card>
         </>

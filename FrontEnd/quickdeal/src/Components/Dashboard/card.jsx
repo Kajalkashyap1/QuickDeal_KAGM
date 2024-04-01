@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./card.css";
 import axios from "axios";
-
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 const formatDate = (dateString) => {
     const options = { day: "numeric", month: "long", year: "numeric" };
     const date = new Date(dateString);
@@ -45,11 +45,7 @@ const Card = ({ onClick, usermail }) => {
                                 <img
                                     src={item.imageurl[0]}
                                     alt="item.productname"
-                                    style={{
-                                        width: "100%",
-                                        height: "250px",
-                                        objectFit: "contain",
-                                    }}
+                                    className="proimage"
                                 />
                                 <div className="description-content">
                                     <div>
@@ -63,11 +59,22 @@ const Card = ({ onClick, usermail }) => {
                                     </div>
                                     {/* Assuming you have a 'price' property in your item object */}
                                     <div className="Ad-title">
-                                        {cropText(item.adtitle, 35)}
+                                        {cropText(item.adtitle, 23)}
                                     </div>
                                     {/* Assuming you have an 'adTitle' property in your item object */}
-                                    <div className="date">
-                                        📅{formatDate(item.date)}
+                                    <div className="cardbottom">
+                                        <div className="cardlocation">
+                                            {item.location && (
+                                                <LocationOnIcon
+                                                    fontSize="small"
+                                                    style={{ fill: "red" }}
+                                                />
+                                            )}
+                                            {cropText(item.location, 10)}
+                                        </div>
+                                        <div className="date">
+                                            {formatDate(item.date)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
