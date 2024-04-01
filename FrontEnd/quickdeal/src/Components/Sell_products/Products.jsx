@@ -187,7 +187,7 @@ const Products = () => {
                                 </span>
                             </div>
 
-                            <div className={style.input_field}>
+                            <div className={style.input_field_area}>
                                 <b>Description: *</b>
                                 <input
                                     type="text"

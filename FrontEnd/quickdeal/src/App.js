@@ -32,7 +32,7 @@ function App() {
                 />
                 <Route path="/myads/:userid" element={<Myads />} />
                 <Route path="/wishlist/:userid" element={<Wishlist />} />
-                <Route path="/edit_profile/:userid" element={<EditProfile />} />
+                <Route path="/edit_profile/:userid" element={<EditProfile/>} />
                 <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>

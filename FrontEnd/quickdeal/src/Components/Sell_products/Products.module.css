@@ -38,16 +38,17 @@
     
 }
 
+.input_field_area{
+    display: grid;
+    margin-bottom: 10px;
+}
+
 .inner_input_field{
     display: flex;
     
 }
 
-.input_field input{
-    width: 10px;
-    height: auto;
-    
-}
+
 
 /* .input_area{
     display: grid;
@@ -64,6 +65,23 @@
     height: 30px;
     width: 100%;
     border: 1px solid rgb(175, 172, 172);
+    width: 550px;
+    height: 35px;
+}
+
+.input_field_area input{
+    background: transparent;
+    border: none;
+    outline:none;
+    color: #797979;
+    font-size: 16px; 
+    background: #eaeaea ;
+    border-radius: 10px;
+    height: 30px;
+    width: 100%;
+    border: 1px solid rgb(175, 172, 172);
+    width: 500px;
+    height: 100px;
 }
 
 

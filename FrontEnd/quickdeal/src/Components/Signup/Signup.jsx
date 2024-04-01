@@ -235,7 +235,7 @@ const Signupui = () => {
                                                 onChange={handeler}
                                                 value={user.contactNo}
                                                 name="contactNo"
-                                                required
+                                                // required
                                                 // onWheel={(e) => e.target.blur()}
                                             />
                                         </div>
