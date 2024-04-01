@@ -22,12 +22,20 @@
 .requiredwarning {
     font-size: small;
 }
+.formheading {
+    text-align: center;
+    padding-top: 1rem;
+}
 .container {
     border: 1px solid rgba(14, 4, 5, 0.274);
-    padding: 4rem;
-    padding-right: 15em;
+    width: 50%;
     border-radius: 5px;
 }
+.formcontainer {
+    display: flex;
+    justify-content: center;
+}
+
 .title {
     color: #3c009d;
     font-size: 36px; /* Decreased font size */
@@ -49,18 +57,22 @@
     width: 50%;
 }
 .input_number input {
-    background: #eaeaea;
     background: transparent;
     border: none;
     outline: none;
     color: #000000dd;
     font-size: 16px;
-    background: #eaeaea;
+    background: #f8fafdd6;
     border-radius: 3px;
     height: 30px;
     width: 80%;
     border: 1px solid rgb(175, 172, 172);
     height: 35px;
+}
+.input_number input:focus,
+.input_field input:focus,
+.input_field_area textarea:focus {
+    background-color: rgb(227, 227, 227);
 }
 .input_field_area {
     display: grid;
@@ -89,7 +101,8 @@
     outline: none;
     color: #000000dd;
     font-size: 16px;
-    background: #eaeaea;
+    background: #f8fafdd6;
+
     border-radius: 3px;
     height: 30px;
     width: 100%;
@@ -98,24 +111,23 @@
     height: 35px;
 }
 
-.input_field_area input {
+.input_field_area textarea {
     background: transparent;
     border: none;
     outline: none;
     color: #000000;
     font-size: 16px;
-    background: #eaeaea;
+    background: #f8fafdd6;
     border-radius: 3px;
-    height: 30px;
     width: 100%;
     border: 1px solid rgb(175, 172, 172);
-    width: 550px;
     height: 100px;
 }
 
 .btn {
     text-align: center;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 .photo {
     margin-bottom: 20px;

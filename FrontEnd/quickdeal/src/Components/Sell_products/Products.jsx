@@ -165,139 +165,143 @@ const Products = () => {
                     </div>
 
                     <div className={style.container}>
-                        <h4>INCLUDE THE DETAILS OF YOUR PRODUCT</h4>
-                        <span className={style.requiredwarning}>
-                            field contains * are required
-                        </span>
+                        <div className={style.formheading}>
+                            <h4>INCLUDE THE DETAILS OF YOUR PRODUCT</h4>
+                            <span className={style.requiredwarning}>
+                                field contains * are required
+                            </span>
+                        </div>
                         <hr
                             style={{
                                 color: "black",
                                 borderTop: "2px solid black",
                             }}
                         />
-                        <form
-                            onSubmit={handleSubmit}
-                            encType="multipart/form-data">
-                            <div className={style.input_field}>
-                                <b>Product Name: *</b>
-                                <input
-                                    type="text"
-                                    name="productName"
-                                    value={formData.productName}
-                                    onChange={handleInputChange}
-                                    required
-                                />
+                        <div className={style.formcontainer}>
+                            <form
+                                onSubmit={handleSubmit}
+                                encType="multipart/form-data">
+                                <div className={style.input_field}>
+                                    <b>Product Name: *</b>
+                                    <input
+                                        type="text"
+                                        name="productName"
+                                        value={formData.productName}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
 
-                                <span>example: mobile</span>
-                            </div>
-
-                            <div className={style.input_field}>
-                                <b>Ad Title: *</b>
-                                <input
-                                    type="text"
-                                    name="adTitle"
-                                    value={formData.adTitle}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <span>
-                                    mention the key features of your item(eg:
-                                    brand name, model, type)
-                                </span>
-                            </div>
-
-                            <div className={style.input_field_area}>
-                                <b>Description: *</b>
-                                <input
-                                    type="text"
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <span>
-                                    include the condition, features, reason for
-                                    selling
-                                </span>
-                            </div>
-
-                            <div className={style.input_field}>
-                                <b style={{ color: "black" }}>Location *</b>
-                                <input
-                                    type="text"
-                                    name="location"
-                                    value={formData.location}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <hr />
-                            <div className={style.input_number}>
-                                <b style={{ color: "black" }}>
-                                    Set a price (in Rupees) *
-                                </b>
-                                <input
-                                    type="number"
-                                    name="price"
-                                    value={formData.price}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                            <hr />
-                            <div className={style.photo}>
-                                <b style={{ color: "black" }}>
-                                    Upload Photos (Max-5 ) *
-                                </b>
-                                <div>
-                                    {renderImages()}
-                                    {images.length < 5 && (
-                                        <div>
-                                            <Tooltip
-                                                title="Upload Image "
-                                                arrow>
-                                                <label
-                                                    htmlFor="addImage"
-                                                    className={
-                                                        style.imageinputlable
-                                                    }>
-                                                    <UploadIcon
-                                                        fontSize="large"
-                                                        style={{
-                                                            color: "#272777",
-                                                        }}
-                                                    />
-                                                    Upload image
-                                                </label>
-                                            </Tooltip>
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                id="addImage"
-                                                required
-                                                onChange={(event) =>
-                                                    handleImageChange(
-                                                        images.length,
-                                                        event
-                                                    )
-                                                }
-                                                style={{
-                                                    display: "none", // Hide the default input
-                                                }}
-                                            />
-                                        </div>
-                                    )}
+                                    <span>example: mobile</span>
                                 </div>
-                            </div>
 
-                            <div className={style.btn}>
-                                <button
-                                    type="submit"
-                                    className={style.submit_btn}>
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
+                                <div className={style.input_field}>
+                                    <b>Ad Title: *</b>
+                                    <input
+                                        type="text"
+                                        name="adTitle"
+                                        value={formData.adTitle}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                    <span>
+                                        mention the key features of your
+                                        item(eg: brand name, model, type)
+                                    </span>
+                                </div>
+
+                                <div className={style.input_field_area}>
+                                    <b>Description: *</b>
+                                    <textarea
+                                        name="description"
+                                        value={formData.description}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+
+                                    <span>
+                                        include the condition, features, reason
+                                        for selling
+                                    </span>
+                                </div>
+
+                                <div className={style.input_field}>
+                                    <b style={{ color: "black" }}>Location *</b>
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        value={formData.location}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <hr />
+                                <div className={style.input_number}>
+                                    <b style={{ color: "black" }}>
+                                        Set a price (in Rupees) *
+                                    </b>
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        value={formData.price}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <hr />
+                                <div className={style.photo}>
+                                    <b style={{ color: "black" }}>
+                                        Upload Photos (Max-5 ) *
+                                    </b>
+                                    <div>
+                                        {renderImages()}
+                                        {images.length < 5 && (
+                                            <div>
+                                                <Tooltip
+                                                    title="Upload Image "
+                                                    arrow>
+                                                    <label
+                                                        htmlFor="addImage"
+                                                        className={
+                                                            style.imageinputlable
+                                                        }>
+                                                        <UploadIcon
+                                                            fontSize="large"
+                                                            style={{
+                                                                color: "#272777",
+                                                            }}
+                                                        />
+                                                        Upload image
+                                                    </label>
+                                                </Tooltip>
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    id="addImage"
+                                                    required
+                                                    onChange={(event) =>
+                                                        handleImageChange(
+                                                            images.length,
+                                                            event
+                                                        )
+                                                    }
+                                                    style={{
+                                                        display: "none", // Hide the default input
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className={style.btn}>
+                                    <button
+                                        type="submit"
+                                        className={style.submit_btn}>
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             )}
