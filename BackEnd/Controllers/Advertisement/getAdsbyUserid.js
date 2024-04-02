@@ -4,7 +4,7 @@ const getAdsbyUserid = async (req, res) => {
     try {
         const id = req.params.id;
 
-        const ads = await postdata.find({ userid: id });
+        const ads = await postdata.find({ userid: id }).sort({ date: -1 });
         return res.json({
             status: "success",
             message: "ok",
