@@ -74,7 +74,11 @@ const Products = () => {
                 <img
                     src={URL.createObjectURL(image)}
                     alt={`${index + 1}`}
-                    style={{ maxWidth: "150px", maxHeight: "150px" }}
+                    style={{
+                        maxWidth: "150px",
+                        maxHeight: "150px",
+                        marginTop: "2rem",
+                    }}
                 />
                 <br />
                 <Tooltip title="Remove " arrow>
@@ -249,7 +253,10 @@ const Products = () => {
                                 </div>
                                 <hr />
                                 <div className={style.photo}>
-                                    <b style={{ color: "black" }}>
+                                    <b
+                                        style={{
+                                            color: "black",
+                                        }}>
                                         Upload Photos (Max-5 ) *
                                     </b>
                                     <div>
@@ -292,7 +299,6 @@ const Products = () => {
                                         )}
                                     </div>
                                 </div>
-
                                 <div className={style.btn}>
                                     <button
                                         type="submit"

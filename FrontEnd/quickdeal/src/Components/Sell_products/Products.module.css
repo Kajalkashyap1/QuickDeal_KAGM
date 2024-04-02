@@ -1,15 +1,11 @@
 .wrapper {
-    /* text-align: center; */
-    /* padding-top: 50px; */
-    /* margin: 50px; */
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
     margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .header {
     display: flex;
     flex-direction: column;
@@ -21,19 +17,6 @@
 }
 .requiredwarning {
     font-size: small;
-}
-.formheading {
-    text-align: center;
-    padding-top: 1rem;
-}
-.container {
-    border: 1px solid rgba(14, 4, 5, 0.274);
-    width: 50%;
-    border-radius: 5px;
-}
-.formcontainer {
-    display: flex;
-    justify-content: center;
 }
 
 .title {
@@ -48,126 +31,97 @@
     border-radius: 9px;
     margin-bottom: 3px;
 }
-
-.input_field {
-    display: grid;
+.container {
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    width: 90%; /* Adjusted width for responsiveness */
+    max-width: 800px; /* Set a maximum width */
+    border-radius: 5px;
+    margin-top: 30px;
     margin-bottom: 30px;
+    padding: 2rem; /* Added padding for better spacing */
+}
+.formcontainer {
+}
+.input_field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+.input_field_area {
+    display: flex;
+    margin-top: 1em;
+    flex-direction: column;
 }
 .input_number {
-    width: 50%;
+    display: flex;
+    margin-top: 1em;
+    flex-direction: column;
 }
-.input_number input {
+.input_number input,
+.input_field input,
+.input_field_area textarea {
     background: transparent;
-    border: none;
-    outline: none;
-    color: #000000dd;
-    font-size: 16px;
-    background: #f8fafdd6;
-    border-radius: 3px;
-    height: 30px;
-    width: 80%;
+    background-color: rgb(249, 249, 249);
     border: 1px solid rgb(175, 172, 172);
+    border-radius: 3px;
     height: 35px;
+    min-width: 50%;
+    width: 100%; /* Make the input fields fill their parent container */
+    max-width: 80%; /* Ensure input fields don't exceed parent container width */
+    padding: 8px; /* Added padding for better spacing */
+    box-sizing: border-box; /* Include padding and border in the total width */
 }
+.input_field_area textarea {
+    height: 60px;
+}
+
 .input_number input:focus,
 .input_field input:focus,
 .input_field_area textarea:focus {
     background-color: rgb(227, 227, 227);
 }
-.input_field_area {
-    display: grid;
-    margin-bottom: 30px;
-}
 
-.inner_input_field {
-    display: flex;
-}
-
-.imageinputlable {
-    background-color: #fff;
-    color: black;
-    padding: 5px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 7px;
-    text-align: center;
-    display: inline-block;
-    border: 1px solid rgba(14, 4, 5, 0.274);
-}
-
-.input_field input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #000000dd;
-    font-size: 16px;
-    background: #f8fafdd6;
-
-    border-radius: 3px;
-    height: 30px;
-    width: 100%;
-    border: 1px solid rgb(175, 172, 172);
-    width: 550px;
-    height: 35px;
-}
-
-.input_field_area textarea {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #000000;
-    font-size: 16px;
-    background: #f8fafdd6;
-    border-radius: 3px;
-    width: 100%;
-    border: 1px solid rgb(175, 172, 172);
-    height: 100px;
-}
-
-.btn {
-    text-align: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-.photo {
-    margin-bottom: 20px;
-    margin-top: 30px;
-}
 .submit_btn {
-    align-items: center;
-
     background-color: #3c009d;
     border: 0;
     border-radius: 600px;
     box-sizing: border-box;
     color: #ffffff;
     cursor: pointer;
-    display: inline-flex;
     font-size: 16px;
     font-weight: 600;
-    justify-content: center;
     line-height: 20px;
-    max-width: 500px;
-    min-height: 40px;
-    min-width: 170px;
-    overflow: hidden;
-    padding: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 12px 24px; /* Adjusted padding for better button size */
     text-align: center;
-    /* touch-action: manipulation; */
     transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
         box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
         color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     user-select: none;
     -webkit-user-select: none;
-    vertical-align: middle;
     text-decoration: none;
-    margin-top: 20px;
+    margin-top: 30px;
+    width: 100%; /* Make the button fill its parent container */
+    max-width: 270px; /* Set a maximum width for the button */
 }
 
 .submit_btn:hover,
 .submit_btn:focus {
     background-color: #16437e;
-    color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        width: 70%; /* Adjusted width for larger screens */
+    }
+}
+.imageinputlable {
+    background-color: #fff;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid rgba(14, 4, 5, 0.274);
 }

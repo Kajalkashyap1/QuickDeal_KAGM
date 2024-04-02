@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./EditProfile.module.css";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
@@ -8,6 +8,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 const EditProfile = () => {
     const { userid } = useParams();
     axios.defaults.withCredentials = true;
+    const [userinfo, setuserinfo] = useState();
     const navigate = useNavigate();
     useEffect(() => {
         axios
@@ -24,6 +25,23 @@ const EditProfile = () => {
                 console.log(err);
             });
     }, []);
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/profile/getuserinfo/${userid}`)
+            .then((res) => {
+                if (res.data.status === "error") {
+                    // setauth(false);
+                    navigate("/login");
+                } else if (res.data.status === "success") {
+                    // setauth(true);
+                    setuserinfo(res.data.data[0]);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [userid]);
+    console.log(userinfo);
     return (
         <>
             <Navbar searchbar={false} />
@@ -31,7 +49,7 @@ const EditProfile = () => {
                 <div className={style.left}>
                     <h3>Profile Picture</h3>
                     <div className={style.profile_img}>
-                        <img src="https://res.cloudinary.com/dsaaqhang/image/upload/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"></img>
+                        <img src={userinfo?.imageurl}></img>
                     </div>
 
                     <div className={style.editprofile_btn}>
@@ -51,25 +69,24 @@ const EditProfile = () => {
                             className={style.input}
                             placeholder="Name"
                             required
-                        />
-                        <input
-                            type="text"
-                            className={style.input_area}
-                            placeholder="About me(optional)"
+                            value={userinfo?.fullname}
                         />
 
                         <hr />
                         <h5> Contact Information</h5>
+
                         <input
                             type="number"
                             className={style.input}
                             placeholder="Contact Number"
+                            defaultValue={userinfo?.contactNo || ""}
                         />
 
                         <input
                             type="email"
                             className={style.input}
                             placeholder="Email"
+                            value={userinfo?.email}
                         />
                     </div>
                 </div>
