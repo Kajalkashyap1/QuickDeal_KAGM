@@ -8,8 +8,6 @@ Quick Deal is a platform designed to facilitate buying and selling within colleg
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -27,17 +25,11 @@ Quick Deal is inspired by OLX but focuses specifically on the needs of college s
 ## Installation
 
 1. Clone the repository:
-
 2. Navigate to the project directory:
-
 3. Install dependencies:
-
 4. Set up the database (instructions may vary depending on the database used).
-
 5. Configure environment variables (e.g., database connection string, API keys, etc.).
-
 6. Start the server:
-
 
 ## Usage
 
