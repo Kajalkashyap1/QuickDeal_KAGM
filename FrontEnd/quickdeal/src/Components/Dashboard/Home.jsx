@@ -103,7 +103,7 @@ const Home = () => {
                             <Card key={index} style={{ width: "18rem" }}>
                                 <Card.Img
                                     variant="top"
-                                    src="https://res.cloudinary.com/dsaaqhang/image/upload/v1712132708/download_1_q8gnc7.jpg"
+                                    src="https://res.cloudinary.com/dsaaqhang/image/upload/v1712133539/searchnot_found_1_fp8qb2.png"
                                     height="190px"
                                 />
                                 <Card.Body>
