@@ -11,7 +11,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import admin from "../Assets/user1.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function Navbar(props) {
+function Navbar({ searchbar, onSearchChange }) {
     axios.defaults.withCredentials = true;
     const navigate = useNavigate();
     const [isauth, setauth] = useState("");
@@ -55,12 +55,18 @@ function Navbar(props) {
         setarrowicon(!arrowicon);
     };
     const handleDropdownClose = () => {
-        console.log("hellooooo");
         setarrowicon(false);
     };
     const handleRedirectToEditprofile = () => {
         navigate(`/edit_profile/${userid}`);
     };
+
+    // ------------ handle search input change ---------------
+    const handleInputChange = (event) => {
+        const keyword = event.target.value;
+        onSearchChange(keyword);
+    };
+
     return (
         <div className="Header">
             <div className="logo">
@@ -68,7 +74,7 @@ function Navbar(props) {
                     <img src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"></img>
                 </NavLink>
             </div>
-            {props.searchbar && (
+            {searchbar && (
                 <div class="InputContainer">
                     <input
                         placeholder="Search.."
@@ -76,6 +82,8 @@ function Navbar(props) {
                         class="input"
                         name="text"
                         type="text"
+                        onChange={handleInputChange}
+                        autoComplete="off"
                     />
                 </div>
             )}
