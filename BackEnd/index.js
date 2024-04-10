@@ -8,6 +8,7 @@ const port = process.env.PORT || 8000;
 const bodyParser = require("body-parser");
 const fileupload = require("express-fileupload");
 const userdata = require("./Models/userdata.js");
+const server = http.createServer(app);
 
 app.use(
     cors({
@@ -16,7 +17,6 @@ app.use(
         credentials: true,
     })
 );
-const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
@@ -24,17 +24,46 @@ const io = new Server(server, {
         methods: ["POST", "GET"],
     },
 });
-// ----------------------------------------Socket io implementations----------------------------------------------------------
+app.use(
+    fileupload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+    })
+);
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(express.json());
+
+// connect to cloudinary
+const cloudinary = require("./Connections/CloudinaryConn.js");
+cloudinary.cloudinaryConnect();
+
+//connect to database
+require("./Connections/DatabaseConn.js");
+
+app.get("/", (req, res) => {
+    res.send("ok");
+});
+
+app.use("/auth", require("./Routers/auth.js"));
+app.use("/dashboard", require("./Routers/HandleAds.js"));
+app.use("/profile", require("./Routers/users.js"));
+app.use("/chatting", require("./Routers/chatting.js"));
+// -------------------------------------------------------------------------------------------
+
 // Socket.io
+
+// ----------------------------------------Socket io implementations for chatting stars----------------------------------------------------------
+const chatNamespace = io.of("/chat"); // Create a namespace for /chat
 let users = [];
-io.on("connection", (socket) => {
-    // console.log("User connected", socket.id);
+chatNamespace.on("connection", (socket) => {
+    console.log("user joined chatting ", socket.id);
     socket.on("addUser", (userId) => {
         const isUserExist = users.find((user) => user.userId === userId);
         if (!isUserExist) {
             const user = { userId, socketId: socket.id };
             users.push(user);
-            io.emit("getUsers", users);
+            chatNamespace.emit("getUsers", users);
         }
     });
 
@@ -47,7 +76,8 @@ io.on("connection", (socket) => {
             const recieverinfo = await userdata.findById(receiverId);
             // console.log("sender :>> ", sender, receiver);
             if (receiver) {
-                io.to(receiver.socketId)
+                chatNamespace
+                    .to(receiver.socketId)
                     .to(sender.socketId)
                     .emit("getMessage", {
                         senderId,
@@ -68,7 +98,7 @@ io.on("connection", (socket) => {
                     });
                 // console.log(`Message sent from ${senderinfo.fullname}`);
             } else {
-                io.to(sender.socketId).emit("getMessage", {
+                chatNamespace.to(sender.socketId).emit("getMessage", {
                     senderId,
                     message,
                     conversationId,
@@ -86,37 +116,18 @@ io.on("connection", (socket) => {
 
     socket.on("disconnect", () => {
         users = users.filter((user) => user.socketId !== socket.id);
-        io.emit("getUsers", users);
+        chatNamespace.emit("getUsers", users);
     });
     // io.emit('getUsers', socket.userId);
 });
+// ----------------------------------------Socket io implementations for chatting ends----------------------------------------------------------
 
-// ----------------------------------------Socket io implementations----------------------------------------------------------
+// ----------------------------------------Socket io implementation for Auction starts
+let UsersInAuction = [];
+const auctionNamespace = io.of("/auction");
 
-// connect to cloudinary
-const cloudinary = require("./Connections/CloudinaryConn.js");
-cloudinary.cloudinaryConnect();
-
-//connect to database
-require("./Connections/DatabaseConn.js");
-
-app.use(
-    fileupload({
-        useTempFiles: true,
-        tempFileDir: "/tmp/",
-    })
-);
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.send("ok");
+auctionNamespace.on("connection", (socket) => {
+    console.log("User Joined auction : ", socket.id);
 });
-
-app.use("/auth", require("./Routers/auth.js"));
-app.use("/dashboard", require("./Routers/HandleAds.js"));
-app.use("/profile", require("./Routers/users.js"));
-app.use("/chatting", require("./Routers/chatting.js"));
 
 server.listen(port);

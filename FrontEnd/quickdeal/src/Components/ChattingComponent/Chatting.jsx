@@ -10,9 +10,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import tune from "../../audio/notification.mpeg";
 import Navbar from "../Navbar/Navbar";
-const socket = io.connect("http://localhost:8000");
+const socket = io.connect("http://localhost:8000/chat");
+const socketw = io.connect("http://localhost:8000/auction");
 const messageListReferance = React.createRef();
-
 const Chatting = () => {
     const navigate = useNavigate();
     let { buyer, seller } = useParams();
@@ -324,7 +324,7 @@ const Chatting = () => {
                                 )
                         )}
                     </div>
-                    <div messageinputdiv>
+                    <div messageinputdiv="true">
                         <input
                             type="text"
                             onChange={messagehandel}
