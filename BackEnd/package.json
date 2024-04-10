@@ -27,7 +27,7 @@
     "otp-generator": "^4.0.1",
     "requests": "^0.3.0",
     "socket.io": "^4.7.5",
-    "twilio": "^4.19.0",
+    "twilio": "^4.23.0",
     "validator": "^13.11.0"
   }
 }
