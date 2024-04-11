@@ -178,6 +178,19 @@ function Navbar({ searchbar, onSearchChange }) {
                                 &emsp;
                                 <span className="droptext">Wishlist</span>
                             </NavLink>
+                            <NavLink
+                                to={`/AuctionDashboard/${userid}`}
+                                className="dropdownitems">
+                                &ensp;
+                                <FavoriteBorderIcon
+                                    fontSize="medium"
+                                    style={{
+                                        fill: "orangered",
+                                    }}
+                                />
+                                &emsp;
+                                <span className="droptext">Auction</span>
+                            </NavLink>
 
                             <NavDropdown.Divider />
                             <NavLink
