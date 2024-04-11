@@ -37,6 +37,7 @@ const Products = () => {
     const creatorDetails = { userid, name, useremail };
     const [formData, setFormData] = useState({
         productName: "",
+        category:"",
         adTitle: "",
         description: "",
         price: "",
@@ -59,6 +60,18 @@ const Products = () => {
         newImages[index] = file;
         setImages(newImages);
     };
+
+    // Declaring the category list
+
+    const categoryList = [
+        { value: 'Electronics & Appliances' },
+        { value: 'Vehicles' },
+        { value: 'Furniture' },
+        { value: 'Fashion' },
+        { value: 'Mobiles' },
+        { value: 'Books' },
+        { value: 'Sports & Hobbies' },
+      ];
 
     const handleRemoveImage = (index) => {
         const newImages = [...images];
@@ -196,6 +209,21 @@ const Products = () => {
                                     />
 
                                     <span>example: mobile</span>
+                                </div>
+
+                                {/* Adding the category field here */}
+                                <div className={style.select_field}>
+                                    <b>Category: *</b>
+                                    {/* Dropdown input field */}
+                                    <select value={formData.category} name="category" onChange={handleInputChange}>
+                                        <option value="">Select an option</option>
+                                        {/* Mapping over the categoryList array to create option elements */}
+                                        {categoryList.map((category) => (
+                                        <option key={category.value} value={category.value} >
+                                            {category.value}
+                                        </option>
+                                        ))}
+                                    </select>
                                 </div>
 
                                 <div className={style.input_field}>

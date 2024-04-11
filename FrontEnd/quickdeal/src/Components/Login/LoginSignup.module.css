@@ -68,6 +68,33 @@
     font-size: 16px; 
 }
 
+.input select{
+    
+    /* outline: none;
+    color: #797979;
+    font-size: 16px;  */
+    background: transparent;
+    background-color: rgb(249, 249, 249);
+    border: 1px solid rgb(175, 172, 172);
+    border-radius: 3px;
+    height: 35px;
+    margin: 8px;
+    box-sizing: border-box;
+    min-width: 50%;
+    outline: none;
+}
+
+.input label{
+    /* height: 40px; 
+    width: 100%;  */
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #797979;
+    font-size: 16px; 
+    margin: 10px;
+}
+
 .forgot_password {
     padding-left: 15px; /* Adjusted padding */
     margin-top: 25px; /* Decreased margin top */

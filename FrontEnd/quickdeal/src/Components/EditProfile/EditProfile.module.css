@@ -25,6 +25,7 @@
     width: 300px;
     box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
     /* margin-bottom: 10px; */
+    height: auto;
 }
 
 .inputs{
@@ -74,6 +75,13 @@
 
 .profile_img{
     margin: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.profile_img img{
+    height: 200px;
+    width: 200px;
 }
 
 .editprofile_btn{

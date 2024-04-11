@@ -58,7 +58,7 @@ const Signupui = () => {
         isgoogle: false,
         fullname: "",
         email: "",
-        contactNo: "",
+        role: "",
         password: "",
         cnfpassword: "",
     });
@@ -228,7 +228,7 @@ const Signupui = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className={style.input}>
+                                        {/* <div className={style.input}>
                                             <img src={email_icon} alt="" />
                                             <input
                                                 type="number"
@@ -236,10 +236,26 @@ const Signupui = () => {
                                                 onChange={handeler}
                                                 value={user.contactNo}
                                                 name="contactNo"
-                                                // required
-                                                // onWheel={(e) => e.target.blur()}
+                                                
                                             />
+                                        </div> */}
+                                        {/* adding role file here */}
+
+                                        <div className={style.input}>
+
+                                        <label for="role"> Your role in MNNIT:</label>
+
+                                            <select name="role" id="role" onChange={handeler}>
+                                                <option value="">--Please choose an option--</option>
+                                                <option value="faculty">Faculty</option>
+                                                <option value="staff">Staff</option>
+                                                <option value="student">Student</option>
+                            
+                                            </select>
+
                                         </div>
+
+                                        
                                         <div className={style.input}>
                                             <img src={pwd_icon} alt="" />
                                             <input
