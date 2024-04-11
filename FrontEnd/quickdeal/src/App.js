@@ -10,6 +10,8 @@ import Myads from "./Components/MyAds/Myads";
 import Pagenotfound from "./Components/NotfoundComponent/pagenotfound";
 import Wishlist from "./Components/WishList/Wishlist";
 import EditProfile from "./Components/EditProfile/EditProfile";
+import AuctionDashboard from "./Components/Auction/AuctionDashboard";
+
 function App() {
     return (
         <>
@@ -37,6 +39,10 @@ function App() {
                 />
                 <Route path="/wishlist/:userid" element={<Wishlist />} />
                 <Route path="/edit_profile/:userid" element={<EditProfile />} />
+                <Route
+                    path="/AuctionDashboard/:userid"
+                    element={<AuctionDashboard />}
+                />
                 <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>

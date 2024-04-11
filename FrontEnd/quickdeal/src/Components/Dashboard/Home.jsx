@@ -83,6 +83,7 @@ const Home = () => {
     const handleClick = (id) => {
         if (isauth) navigate(`/product/${id}`);
     };
+
     return (
         <>
             <Navbar searchbar="true" onSearchChange={handleSearchChange} />
