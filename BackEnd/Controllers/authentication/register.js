@@ -7,10 +7,10 @@ const register = async (req, res) => {
     let fullname;
     let email;
     let Npassword;
-    let contactNo;
     var isGooglelogin = false;
     let imageurl = "";
     let inputotp;
+    let role;
     if (req.body.isgoogle) {
         fullname = req.body.fullname;
         email = req.body.email;
@@ -22,23 +22,10 @@ const register = async (req, res) => {
         fullname = req.body.fullname;
         email = req.body.email;
         Npassword = req.body.password;
-        contactNo = req.body.contactNo;
+        role = req.body.role;
         inputotp = req.body.inputotp;
         imageurl = `https://res.cloudinary.com/dsaaqhang/image/upload/v1711527687/QuickDeal/user_hl1hcs.png`;
     }
-
-    // if (!req.body.isgoogle && !checkpassword(Npassword)) {
-    //     return res.json({
-    //         status: "error",
-    //         message: "Password does not meet the criteria",
-    //     });
-    // }
-    // else if (!req.body.isgoogle && !checknumber(contactNo)) {
-    //     return res.json({
-    //         status: "error",
-    //         message: "Please enter valid Number",
-    //     });
-    // }
 
     if (!isGooglelogin) {
         const otpvalues = await optdata.findOne({ email: email });
@@ -63,7 +50,7 @@ const register = async (req, res) => {
         isGooglelogin,
         fullname,
         email,
-        contactNo,
+        role,
         password,
         imageurl,
     };
@@ -76,15 +63,16 @@ const register = async (req, res) => {
             message: "Registered succssfully ! Login now",
         });
     } catch (e) {
-        let error;
-        if (e.keyPattern != undefined) {
-            error = Object.keys(e.keyPattern)[0] + " already exists !";
-            error = error.charAt(0).toUpperCase() + error.slice(1);
-        } else {
-            const errortarget = Object.keys(e.errors)[0];
-            error = e.errors[errortarget].message;
-            error = error.charAt(0).toUpperCase() + error.slice(1);
-        }
+        console.log(e);
+        let error = "";
+        // if (e.keyPattern != undefined) {
+        //     error = Object.keys(e.keyPattern)[0] + " already exists !";
+        //     error = error.charAt(0).toUpperCase() + error.slice(1);
+        // } else {
+        //     const errortarget = Object.keys(e.errors)[0];
+        //     error = e.errors[errortarget].message;
+        //     error = error.charAt(0).toUpperCase() + error.slice(1);
+        // }
         return res.json({
             status: "error",
             message: error,

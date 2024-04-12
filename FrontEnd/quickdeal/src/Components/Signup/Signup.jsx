@@ -242,20 +242,31 @@ const Signupui = () => {
                                         {/* adding role file here */}
 
                                         <div className={style.input}>
+                                            <label for="role">
+                                                {" "}
+                                                Your role in MNNIT:
+                                            </label>
 
-                                        <label for="role"> Your role in MNNIT:</label>
-
-                                            <select name="role" id="role" onChange={handeler}>
-                                                <option value="">--Please choose an option--</option>
-                                                <option value="faculty">Faculty</option>
-                                                <option value="staff">Staff</option>
-                                                <option value="student">Student</option>
-                            
+                                            <select
+                                                name="role"
+                                                id="role"
+                                                onChange={handeler}
+                                                required>
+                                                <option value="">
+                                                    --Please choose an option--
+                                                </option>
+                                                <option value="faculty">
+                                                    Faculty
+                                                </option>
+                                                <option value="staff">
+                                                    Staff
+                                                </option>
+                                                <option value="student">
+                                                    Student
+                                                </option>
                                             </select>
-
                                         </div>
 
-                                        
                                         <div className={style.input}>
                                             <img src={pwd_icon} alt="" />
                                             <input

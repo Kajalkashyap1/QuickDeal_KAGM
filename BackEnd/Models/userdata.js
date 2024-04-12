@@ -18,6 +18,11 @@ const user = new mongoose.Schema({
         lowercase: true,
         required: true,
     },
+    role: {
+        type: String,
+        lowercase: true,
+        required: true,
+    },
     email: {
         type: String,
         required: true,

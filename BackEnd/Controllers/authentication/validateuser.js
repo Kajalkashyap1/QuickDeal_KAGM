@@ -14,14 +14,14 @@ function checkpassword(value) {
     });
 }
 
-function checknumber(value) {
-    const val = value.toString().length;
-    return val >= 10;
-}
+// function checknumber(value) {
+//     const val = value.toString().length;
+//     return val >= 10;
+// }
 
 const validateuser = async (req, res) => {
     try {
-        const { email, contactNo, password, cnfpassword, isgoogle } = req.body;
+        const { email, role, password, cnfpassword, isgoogle } = req.body;
 
         const result = await userdata.find({ email });
         if (isgoogle && result.length > 0) {
@@ -47,12 +47,12 @@ const validateuser = async (req, res) => {
                 message: "Invalid Email ! use @MNNIT.ac.in",
             });
         }
-        if (!checknumber(contactNo)) {
-            return res.json({
-                status: "error",
-                message: "Enter a valid Number",
-            });
-        }
+        // if (!checknumber(contactNo)) {
+        //     return res.json({
+        //         status: "error",
+        //         message: "Enter a valid Number",
+        //     });
+        // }
         if (cnfpassword != password) {
             return res.json({
                 status: "error",

@@ -8,7 +8,6 @@ const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options);
 };
-
 function cropText(text, maxLength) {
     if (text.length <= maxLength) {
         return text;
