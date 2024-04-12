@@ -78,7 +78,6 @@ const Home = () => {
             setrenderitems(filteredCards);
         }
     };
-    console.log("in home >> ", renderitems);
     // --------- handles click on cards------------
     const handleClick = (id) => {
         if (isauth) navigate(`/product/${id}`);

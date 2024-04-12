@@ -18,7 +18,6 @@ function cropText(text, maxLength) {
     }
 }
 const Cardcomponent = ({ onClick, usermail, item }) => {
-    console.log(item);
     return (
         <>
             {item.useremail !== usermail && !item.hasSold && (

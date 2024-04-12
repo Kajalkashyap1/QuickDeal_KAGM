@@ -184,19 +184,7 @@ const Signupui = () => {
                         <>
                             <Header></Header>
                             <div>
-                                <ToastContainer
-                                    position="top-right"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                    transition="Bounce"
-                                />
+                                <ToastContainer />
                             </div>
                             <div className={style.container}>
                                 <div className={style.header}>
@@ -359,19 +347,7 @@ const Signupui = () => {
                         <>
                             <Header></Header>
                             <div>
-                                <ToastContainer
-                                    position="top-right"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                    transition="Bounce"
-                                />
+                                <ToastContainer />
                             </div>
                             <div className={style.container}>
                                 <div className={style.header}>
@@ -380,26 +356,6 @@ const Signupui = () => {
                                 </div>
                                 <form onSubmit={submithandelregister}>
                                     <div className={style.inputs}>
-                                        {/* <div className="input">
-                                            <img src={pwd_icon} alt="" />
-                                            <input
-                                                type="number"
-                                                placeholder="Enter OPT"
-                                                onChange={otphandeler}
-                                                value={otp}
-                                                name="contactNo"
-                                                required
-                                                onWheel={(e) => e.target.blur()}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <button
-                                                className="submit_btn"
-                                                type="submit">
-                                                Submit
-                                            </button>
-                                        </div> */}
                                         <OtpInput
                                             value={otp}
                                             onChange={setotp}

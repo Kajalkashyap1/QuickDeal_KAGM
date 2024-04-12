@@ -13,12 +13,6 @@ function checkpassword(value) {
         minSymbols: 1,
     });
 }
-
-// function checknumber(value) {
-//     const val = value.toString().length;
-//     return val >= 10;
-// }
-
 const validateuser = async (req, res) => {
     try {
         const { email, role, password, cnfpassword, isgoogle } = req.body;
@@ -47,12 +41,7 @@ const validateuser = async (req, res) => {
                 message: "Invalid Email ! use @MNNIT.ac.in",
             });
         }
-        // if (!checknumber(contactNo)) {
-        //     return res.json({
-        //         status: "error",
-        //         message: "Enter a valid Number",
-        //     });
-        // }
+
         if (cnfpassword != password) {
             return res.json({
                 status: "error",

@@ -10,7 +10,7 @@ const register = async (req, res) => {
     var isGooglelogin = false;
     let imageurl = "";
     let inputotp;
-    let role;
+    let role = "";
     if (req.body.isgoogle) {
         fullname = req.body.fullname;
         email = req.body.email;
@@ -44,6 +44,14 @@ const register = async (req, res) => {
                 message: "Invalid OTP !",
             });
         }
+    } else {
+        const val = await userdata.findOne({ email: email });
+        if (val) {
+            return res.json({
+                status: "success",
+                message: "Already Registered ",
+            });
+        }
     }
     const password = await bcrypt.hash(Npassword, 12);
     const data = {
@@ -54,7 +62,6 @@ const register = async (req, res) => {
         password,
         imageurl,
     };
-
     const insertdata = new userdata(data);
     try {
         const indata = await insertdata.save();
@@ -65,14 +72,14 @@ const register = async (req, res) => {
     } catch (e) {
         console.log(e);
         let error = "";
-        // if (e.keyPattern != undefined) {
-        //     error = Object.keys(e.keyPattern)[0] + " already exists !";
-        //     error = error.charAt(0).toUpperCase() + error.slice(1);
-        // } else {
-        //     const errortarget = Object.keys(e.errors)[0];
-        //     error = e.errors[errortarget].message;
-        //     error = error.charAt(0).toUpperCase() + error.slice(1);
-        // }
+        if (e.keyPattern != undefined) {
+            error = Object.keys(e.keyPattern)[0] + " already exists !";
+            error = error.charAt(0).toUpperCase() + error.slice(1);
+        } else {
+            const errortarget = Object.keys(e.errors)[0];
+            error = e.errors[errortarget].message;
+            error = error.charAt(0).toUpperCase() + error.slice(1);
+        }
         return res.json({
             status: "error",
             message: error,
