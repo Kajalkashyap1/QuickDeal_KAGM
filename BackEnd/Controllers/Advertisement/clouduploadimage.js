@@ -37,7 +37,7 @@ const clouduploadimage = async (req, res) => {
             productname: req.body.productName,
             adtitle: req.body.adTitle,
             description: req.body.description,
-            category: [req.body.category],
+            category: req.body["category[]"],
             price: req.body.price,
             location: req.body.location,
             imageurl: imagesecureurl,
