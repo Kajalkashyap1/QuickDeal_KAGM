@@ -37,7 +37,7 @@ const Products = () => {
     const creatorDetails = { userid, name, useremail };
     const [formData, setFormData] = useState({
         productName: "",
-        category:"",
+        category: "",
         adTitle: "",
         description: "",
         price: "",
@@ -64,14 +64,14 @@ const Products = () => {
     // Declaring the category list
 
     const categoryList = [
-        { value: 'Electronics & Appliances' },
-        { value: 'Vehicles' },
-        { value: 'Furniture' },
-        { value: 'Fashion' },
-        { value: 'Mobiles' },
-        { value: 'Books' },
-        { value: 'Sports & Hobbies' },
-      ];
+        { value: "Electronics & Appliances" },
+        { value: "Vehicles" },
+        { value: "Furniture" },
+        { value: "Fashion" },
+        { value: "Mobiles" },
+        { value: "Books" },
+        { value: "Sports & Hobbies" },
+    ];
 
     const handleRemoveImage = (index) => {
         const newImages = [...images];
@@ -106,7 +106,6 @@ const Products = () => {
             </div>
         ));
     };
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -121,6 +120,7 @@ const Products = () => {
         const config = {
             headers: { "Content-Type": "multipart/form-data" },
         };
+        console.log(dataWithImages);
         setloading(true);
         axios
             .post(
@@ -215,13 +215,20 @@ const Products = () => {
                                 <div className={style.select_field}>
                                     <b>Category: *</b>
                                     {/* Dropdown input field */}
-                                    <select value={formData.category} name="category" onChange={handleInputChange}>
-                                        <option value="">Select an option</option>
+                                    <select
+                                        value={formData.category}
+                                        name="category"
+                                        onChange={handleInputChange}>
+                                        <option value="">
+                                            Select an option
+                                        </option>
                                         {/* Mapping over the categoryList array to create option elements */}
                                         {categoryList.map((category) => (
-                                        <option key={category.value} value={category.value} >
-                                            {category.value}
-                                        </option>
+                                            <option
+                                                key={category.value}
+                                                value={category.value}>
+                                                {category.value}
+                                            </option>
                                         ))}
                                     </select>
                                 </div>

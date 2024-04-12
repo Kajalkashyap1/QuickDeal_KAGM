@@ -37,6 +37,9 @@ const advertisementPostSchema = new mongoose.Schema({
     productname: {
         type: String,
     },
+    category: {
+        type: [String],
+    },
     adtitle: {
         type: String,
     },

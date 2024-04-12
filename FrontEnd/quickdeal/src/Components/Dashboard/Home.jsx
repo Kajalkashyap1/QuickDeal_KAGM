@@ -63,6 +63,7 @@ const Home = () => {
             // If the search bar is empty, render all items
             setrenderitems(items);
         } else {
+            console.log(items);
             filteredCards = items?.filter(
                 (card) =>
                     card.adtitle
@@ -73,7 +74,13 @@ const Home = () => {
                         .includes(searchKeyword.toLowerCase()) ||
                     card.productname
                         .toLowerCase()
-                        .includes(searchKeyword.toLowerCase())
+                        .includes(searchKeyword.toLowerCase()) ||
+                    (Array.isArray(card.category) &&
+                        card.category.some((category) =>
+                            category
+                                .toLowerCase()
+                                .includes(searchKeyword.toLowerCase())
+                        ))
             );
             setrenderitems(filteredCards);
         }
