@@ -7,8 +7,7 @@ const AuctionDashboard = () => {
     return (
         <>
             <Navbar />
-            <p>make a button for creation of Auction</p>
-            <br />
+            <p>Make a button for creation of Auction</p>
             <p>Live auction</p>
             <div>live auction cards</div>
             <div>live auction cards</div>

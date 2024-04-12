@@ -10,6 +10,8 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import admin from "../Assets/user1.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import PaidIcon from "@mui/icons-material/Paid";
+import GavelIcon from "@mui/icons-material/Gavel";
 
 function Navbar({ searchbar, onSearchChange }) {
     axios.defaults.withCredentials = true;
@@ -68,7 +70,7 @@ function Navbar({ searchbar, onSearchChange }) {
     };
 
     return (
-        <div className="Header">
+        <div className="Header navbar-content">
             <div className="logo">
                 <NavLink to="/">
                     <img src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"></img>
@@ -182,10 +184,10 @@ function Navbar({ searchbar, onSearchChange }) {
                                 to={`/AuctionDashboard/${userid}`}
                                 className="dropdownitems">
                                 &ensp;
-                                <FavoriteBorderIcon
+                                <GavelIcon
                                     fontSize="medium"
                                     style={{
-                                        fill: "orangered",
+                                        fill: "red",
                                     }}
                                 />
                                 &emsp;

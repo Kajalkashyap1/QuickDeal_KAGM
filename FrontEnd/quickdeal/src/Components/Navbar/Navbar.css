@@ -19,7 +19,7 @@
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
 }
 
 /* search bar styling */
@@ -62,17 +62,6 @@
 }
 
 /* Responsive Styling */
-@media only screen and (max-width: 768px) {
-    .Header {
-        padding: 1rem; /* Adjust padding for smaller screens */
-    }
-}
-
-@media only screen and (max-width: 576px) {
-    .Header {
-        font-size: 16px; /* Decrease font size for smaller screens */
-    }
-}
 
 /* login/sell button styling */
 
@@ -184,4 +173,45 @@
     cursor: pointer;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+/* Responsive Styling */
+@media only screen and (max-width: 768px) {
+    .Header {
+        flex-direction: row; /* Stack items vertically on smaller screens */
+        align-items: center; /* Stretch items to full width */
+        margin: 0;
+        padding: 8px;
+    }
+
+    .InputContainer {
+        width: 40%; /* Full width for search bar */
+        max-width: none; /* Remove max-width constraint */
+        margin-bottom: 0; /* Add space below search bar */
+        height: 35px;
+        margin-right: 4px;
+    }
+
+    .profile_dragdown {
+        flex-direction: row; /* Stack dropdown and button vertically */
+        align-items: center; /* Align items horizontally */
+    }
+
+    .login-sell-btn {
+        width: 70px; /* Allow button to adjust width based on content */
+        font-size: 10px;
+    }
+
+    .logo img {
+        width: 70px; /* Adjust logo size for smaller screens */
+        height: auto; /* Maintain aspect ratio */
+        margin-right: 0;
+    }
+    .custom-nav-dropdown img {
+        width: 40px; /* Adjust logo size for smaller screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+    .input {
+        width: 100%; /* Full width for input field */
+    }
 }
