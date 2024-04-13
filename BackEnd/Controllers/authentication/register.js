@@ -70,7 +70,7 @@ const register = async (req, res) => {
             message: "Registered succssfully ! Login now",
         });
     } catch (e) {
-        console.log(e);
+        console.log(e.message);
         let error = "";
         if (e.keyPattern != undefined) {
             error = Object.keys(e.keyPattern)[0] + " already exists !";

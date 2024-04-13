@@ -119,9 +119,11 @@ const Signupui = () => {
     const submithandelregister = (event) => {
         user.inputotp = otp;
         event.preventDefault();
+        console.log(user);
         axios
             .post("http://localhost:8000/auth/register", user)
             .then((res) => {
+                console.log(res.data);
                 if (res.data.status === "success") {
                     toast.success(res.data.message, {
                         autoClose: 1000,
