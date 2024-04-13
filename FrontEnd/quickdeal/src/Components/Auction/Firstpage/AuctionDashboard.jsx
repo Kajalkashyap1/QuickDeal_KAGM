@@ -1,22 +1,18 @@
 import React from "react";
-import style from "../MyAds/Myads.module.css";
-import panda from "../Assets/panda1.jpeg";
-import "./card.css";
+import style from "./liveauction.module.css";
+import panda from "../../Assets/panda1.jpeg";
 import { useParams, useNavigate } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import "./Auction.css";
-import Cardcomponent from "./Cardcomponent";
-import Card from "react-bootstrap/Card";
-import Placeholder from "react-bootstrap/Placeholder";
+import Navbar from "../../Navbar/Navbar";
+
 const AuctionDashboard = () => {
     const { userid } = useParams();
     const navigate = useNavigate();
     return (
         <>
             <Navbar />
-            <div className="auction-page">
+            <div className={style.auction_page}>
                 <button
-                    className="new-auction-btn"
+                    className={style.new_auction_btn}
                     onClick={() => {
                         navigate(`/NewAuction/${userid}`);
                     }}>
@@ -30,11 +26,8 @@ const AuctionDashboard = () => {
                     <div className={style.underline}></div>
                 </div>
 
-                <div className="auction-cards div-main">
+                <div className={`${style.auction_cards} ${style.div_main}`}>
                     {/* Assuming each card is represented by a component */}
-                    <AuctionCard />
-                    <AuctionCard />
-                    <AuctionCard />
                     <AuctionCard />
                 </div>
             </div>
@@ -43,8 +36,13 @@ const AuctionDashboard = () => {
 };
 
 function AuctionCard() {
+    const navigate = useNavigate();
     return (
-        <div className="cards">
+        <div
+            className="cards"
+            onClick={() => {
+                navigate("/auction_main_page/product/661a8bb869f06bba04b1f9d2");
+            }}>
             <img src={panda} alt="item.productname" className="proimage" />
             <div className="description-content">
                 <div>
