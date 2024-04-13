@@ -44,10 +44,7 @@ function App() {
                     path="/AuctionDashboard/:userid"
                     element={<AuctionDashboard />}
                 />
-                <Route 
-                    path="/NewAuction"
-                    element= {<NewAuction/>}
-                />
+                <Route path="/NewAuction/:userid" element={<NewAuction />} />
                 <Route path="*" element={<Pagenotfound />} />
             </Routes>
         </>

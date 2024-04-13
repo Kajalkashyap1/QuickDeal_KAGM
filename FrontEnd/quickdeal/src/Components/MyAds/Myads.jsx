@@ -283,12 +283,7 @@ const Myads = () => {
                                     <div className={style.imp_btns}>
                                         <>
                                             {" "}
-                                            <Tooltip
-                                                onClick={() => {
-                                                    handleMarkasSold(item._id);
-                                                }}
-                                                title="View ad"
-                                                arrow>
+                                            <Tooltip title="View ad" arrow>
                                                 <IconButton
                                                     onClick={() => {
                                                         navigate(
