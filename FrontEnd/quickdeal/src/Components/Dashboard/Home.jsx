@@ -39,20 +39,26 @@ const Home = () => {
     // ---------------------- geting posts from DB -------------------
 
     const [items, setitems] = useState([]);
+    const [renderitems, setrenderitems] = useState([]);
 
     useEffect(() => {
         axios
             .get(`http://localhost:8000/dashboard/getposts`)
             .then((res) => {
                 setitems(res.data.result);
-                setrenderitems(res.data.result);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
+    useEffect(() => {
+        setrenderitems(
+            items?.filter(
+                (item) => item.useremail !== useremail && !item.hasSold
+            )
+        );
+    }, [items]);
     const authdetail = { isauth, name, useremail, image, userid };
-    const [renderitems, setrenderitems] = useState([]);
     // ------------------- handle search bar keyword change---------------
     const [searchKeyword, setSearchKeyword] = useState("");
     let filteredCards = items;
