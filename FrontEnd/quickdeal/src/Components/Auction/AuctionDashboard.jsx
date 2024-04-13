@@ -8,6 +8,7 @@ import "./Auction.css";
 import Cardcomponent from "./Cardcomponent";
 import Card from "react-bootstrap/Card";
 import Placeholder from "react-bootstrap/Placeholder";
+import { NavLink } from "react-bootstrap";
 const AuctionDashboard = () => {
     const { userid } = useParams();
 
@@ -15,7 +16,12 @@ const AuctionDashboard = () => {
         <>
             <Navbar />
             <div className="auction-page">
-                <button className="new-auction-btn">New Auction</button>
+                <NavLink
+                    to = "/NewAuction"
+                >
+                    <button className="new-auction-btn">New Auction</button>
+                </NavLink>
+                
                 <div className={style.header}>
                 <div className={style.text}><h1>Live Auctions</h1></div>
                 <div className={style.underline}></div>

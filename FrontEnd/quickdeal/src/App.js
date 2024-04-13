@@ -11,6 +11,7 @@ import Pagenotfound from "./Components/NotfoundComponent/pagenotfound";
 import Wishlist from "./Components/WishList/Wishlist";
 import EditProfile from "./Components/EditProfile/EditProfile";
 import AuctionDashboard from "./Components/Auction/AuctionDashboard";
+import NewAuction from "./Components/Auction/SecondPage/NewAuction";
 
 function App() {
     return (
@@ -42,6 +43,10 @@ function App() {
                 <Route
                     path="/AuctionDashboard/:userid"
                     element={<AuctionDashboard />}
+                />
+                <Route 
+                    path="/NewAuction"
+                    element= {<NewAuction/>}
                 />
                 <Route path="*" element={<Pagenotfound />} />
             </Routes>

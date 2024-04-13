@@ -1,0 +1,33 @@
+
+.main_container{
+    width: 90%;
+    display: flex;
+    margin: 30px;
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    /* justify-content: center; */
+    text-align: center;
+     align-items: center;
+}
+
+.left_container{
+    flex: 1 1 70%; /* Take up 60% of the container's width */
+    max-width: 70%;
+    margin-right: 20px; /* Add some space between left and right div */
+
+}
+
+.right_container{
+    flex: 1 1 35%; /* Take up 35% of the container's width */
+    max-width: 35%;
+}
+
+.vertical_line {
+    width: 1px;
+    background-color: black; /* Adjust the color as needed */
+    height: 100%; /* Make the line take up full height */
+}
+
+
+
+
+
