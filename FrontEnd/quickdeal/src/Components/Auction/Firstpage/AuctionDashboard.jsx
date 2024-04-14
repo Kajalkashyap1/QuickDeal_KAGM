@@ -222,7 +222,6 @@ function AuctionCardPastAuction({ item, userid }) {
                     <div
                         className="date"
                         style={{ color: "red", fontSize: "large" }}>
-                        Ends in :
                         <CountdownTimer
                             targetDate={item?.activetill}
                             onTimeUp={handleReload}
