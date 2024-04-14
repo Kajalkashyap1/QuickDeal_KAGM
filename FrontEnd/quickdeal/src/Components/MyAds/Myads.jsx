@@ -199,7 +199,11 @@ const Myads = () => {
         <div className={style.main}>
             <Navbar searchbar={false} />
             {/* --------------------- Toast container ---------------- */}
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
             {/* --------------------- Toast container ---------------- */}
             <div className={style.header}>
                 <div className={style.text}>MyAds</div>

@@ -1,0 +1,116 @@
+.maincontainer {
+    display: flex;
+    width: 98%;
+    min-height: 77vh;
+    padding: 10px;
+    /* margin: 3px;
+     */
+    margin: auto;
+}
+
+.firstcol {
+    width: 33%;
+    background-color: rgb(251, 251, 251);
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.secondcol {
+    width: 73%;
+}
+.sellerinformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: medium;
+    background-color: #fffcfc;
+    width: 90%;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    align-items: center;
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    margin-top: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+    margin-left: 18px;
+}
+.horizontal {
+    width: 90%;
+    border-bottom: 1px solid rgb(164, 162, 162);
+    margin-bottom: 2px;
+}
+.rightdiv {
+    margin-right: 20px; /* Add some space between left and right div */
+    display: flex;
+    flex-direction: column;
+}
+.leadername,
+.leadercards {
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    font-size: x-large;
+    width: 100%;
+}
+.image {
+    background-color: rgba(14, 4, 5, 0.085);
+    border-radius: 2%;
+    width: 50%;
+    margin-left: 15px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+}
+.auctionheading {
+    display: flex;
+    justify-content: space-between;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    align-items: center;
+    background-color: #f3f0ec;
+}
+.leaderboard {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 2em;
+}
+.leaderlist {
+    width: 90%;
+    max-height: 69vh;
+    overflow-y: auto;
+}
+.auctionheading div span {
+    font-size: large;
+    color: rgb(255, 30, 0);
+}
+.auctionheading h4 {
+    margin-left: 20px;
+}
+.description {
+    width: 40%;
+    background-color: #fffcfc;
+    font-size: large;
+    padding: 20px;
+    border: 1px solid rgba(14, 4, 5, 0.274);
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    border-radius: 10px;
+    margin-left: 8px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+}
+.makebid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+.applyfont {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.applyfont h3 {
+    color: rgb(29, 88, 0);
+}

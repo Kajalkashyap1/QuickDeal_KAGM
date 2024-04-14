@@ -41,7 +41,7 @@ function App() {
                 />
                 <Route path="/NewAuction/:userid" element={<NewAuction />} />
                 <Route
-                    path="/auction_main_page/product/:productid"
+                    path="/auction_main_page/product/:auctionid"
                     element={<Mainauction />}
                 />
                 <Route path="*" element={<Pagenotfound />} />

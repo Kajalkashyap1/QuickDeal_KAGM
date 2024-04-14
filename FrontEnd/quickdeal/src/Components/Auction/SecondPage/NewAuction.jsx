@@ -19,12 +19,13 @@ import CurrencyInput from "react-currency-input-field";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { ToastContainer, toast } from "react-toastify";
-import { Hourglass } from "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
 const useStyles = makeStyles({
     selected: {
         border: "1px solid green",
         width: "100%",
         display: "flex",
+        height: "120px",
     },
     cardContent: {
         display: "flex",
@@ -38,16 +39,16 @@ const useStyles = makeStyles({
     smallImage: {
         marginRight: "10px",
         width: "200px",
+        height: "70px",
         aspectRatio: 3 / 2,
         objectFit: "contain",
     },
-    maindiv: {
-        // justifyContent: "space-",
-    },
+
     notselected: {
         width: "100%",
         backgroundColor: "#b7b7b745",
         display: "flex",
+        height: "120px",
         flexDirection: "row",
     },
 });
@@ -105,7 +106,7 @@ const NewAuction = () => {
                     });
                     setTimeout(() => {
                         navigate(
-                            `/auction_main_page/product/${selectedcard._id}`
+                            `/auction_main_page/product/${res.data.insertdata._id}`
                         );
                     }, 1400);
                 } else {
@@ -139,11 +140,8 @@ const NewAuction = () => {
         const newDate = new Date(
             currentDate.getTime() + minutes * 60000 + seconds * 1000
         );
-        console.log(minutes);
-        console.log(seconds);
         // Format the resulting date object back into the desired format
         const newDateTime = newDate.toISOString();
-        console.log(newDateTime);
         if (minutes == 0 && seconds == 0) setauctionEndtime("");
         else setauctionEndtime(newDateTime);
     }, [minutes, seconds]);
@@ -177,17 +175,17 @@ const NewAuction = () => {
                         transform: "translate(-50%, -50%)",
                         textAlign: "center",
                     }}>
-                    <Hourglass
+                    <Oval
                         visible={true}
-                        height="90"
-                        width="60"
-                        ariaLabel="hourglass-loading"
-                        colors={["#306cce", "#72a1ed"]}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
                     />
                     <br />
-                    <i>
-                        <h6>Creating auction </h6>
-                    </i>
+                    <i></i>
                 </div>
             )}
             <ToastContainer
@@ -248,51 +246,66 @@ const NewAuction = () => {
                     <div className={style.clockandamount}>
                         {selectedcard != "" && (
                             <div>
-                                <h4>Selected product for Auction</h4>
+                                <h5>Selected product for Auction</h5>
+
                                 <div
                                     className="card"
-                                    style={{ width: "18rem" }}>
-                                    <img
-                                        src={selectedcard.imageurl[0]}
-                                        className="card-img-top"
-                                        alt="..."
-                                        style={{
-                                            aspectRatio: 3 / 2,
-                                            objectFit: "contain",
-                                        }}
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">
-                                            {selectedcard.productname}
-                                        </h5>
+                                    aria-hidden="true"
+                                    style={{ width: "38rem" }}>
+                                    <div
+                                        className="card-body row-2 d-flex "
+                                        style={{ justifyContent: "center" }}>
+                                        <img
+                                            src={selectedcard.imageurl[0]}
+                                            className="card-img-top"
+                                            alt="..."
+                                            style={{
+                                                aspectRatio: 3 / 2,
+                                                objectFit: "contain",
+                                                width: "200px",
+                                                marginLeft: "10px",
+                                                marginRight: "10px",
+                                            }}
+                                        />
+                                        <div
+                                            className="d-flex"
+                                            style={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                justifyContent: "center",
+                                                fontFamily: "monospace",
+                                                fontWeight: "700",
+                                            }}>
+                                            <h3 className="card-text placeholder-glow">
+                                                ₹ {selectedcard.price}
+                                            </h3>
+                                            <h5 className="card-text placeholder-glow">
+                                                👉 {selectedcard.productname}
+                                            </h5>
+                                        </div>
                                     </div>
-                                    <ul className="list-group list-group-flush">
-                                        <li className="list-group-item">
-                                            <h4>₹ {selectedcard.price}</h4>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         )}
                         <br />
                         {selectedcard == "" && (
                             <div
-                                class="card"
+                                className="card"
                                 aria-hidden="true"
                                 style={{ width: "38rem" }}>
-                                <div class="card-body">
+                                <div className="card-body">
                                     <h5 style={{ color: "purple" }}>
                                         Please select a product from list
                                     </h5>
-                                    <h5 class="card-title placeholder-glow">
-                                        <span class="placeholder col-6"></span>
+                                    <h5 className="card-title placeholder-glow">
+                                        <span className="placeholder col-6"></span>
                                     </h5>
-                                    <p class="card-text placeholder-glow">
-                                        <span class="placeholder col-7"></span>
-                                        <span class="placeholder col-4"></span>
-                                        <span class="placeholder col-4"></span>
-                                        <span class="placeholder col-6"></span>
-                                        <span class="placeholder col-8"></span>
+                                    <p className="card-text placeholder-glow">
+                                        <span className="placeholder col-7"></span>
+                                        <span className="placeholder col-4"></span>
+                                        <span className="placeholder col-4"></span>
+                                        <span className="placeholder col-6"></span>
+                                        <span className="placeholder col-8"></span>
                                     </p>
                                 </div>
                             </div>
@@ -300,7 +313,8 @@ const NewAuction = () => {
                         <hr />
                         <h5 style={{ color: "purple" }}>
                             {" "}
-                            Set the ending time of Auction ansd update amount
+                            Set the auction closing time and update the selling
+                            price.
                         </h5>
                         <form>
                             <div className={style.amountanstimeflex}>

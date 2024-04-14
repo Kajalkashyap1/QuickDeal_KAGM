@@ -1,12 +1,12 @@
 const auctionproduct = require("../../Models/auctionproduct");
 
-const getLiveAuctions = async (req, res) => {
+const getPastAuctions = async (req, res) => {
     try {
         const date = new Date().toISOString();
 
         const liveAuctions = await auctionproduct
             .find({
-                activetill: { $gt: date },
+                activetill: { $lt: date },
             })
             .populate("owner")
             .populate("productid");
@@ -15,11 +15,11 @@ const getLiveAuctions = async (req, res) => {
             liveAuctions,
         });
     } catch (error) {
-        console.log("erro in getliveAuctions ", error);
+        console.log("erro in getpast Auctions ", error);
         return res.json({
             status: "error",
             message: "Live auction search error !",
         });
     }
 };
-module.exports = getLiveAuctions;
+module.exports = getPastAuctions;

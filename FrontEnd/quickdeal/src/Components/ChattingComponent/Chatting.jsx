@@ -10,9 +10,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import tune from "../../audio/notification.mpeg";
 import Navbar from "../Navbar/Navbar";
-const socket = io.connect("http://localhost:8000/chat");
 const messageListReferance = React.createRef();
+let socket;
 const Chatting = () => {
+    useEffect(() => {
+        socket = io.connect("http://localhost:8000/chat");
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
     const navigate = useNavigate();
     let { buyer, seller } = useParams();
     const [mess, setmess] = useState("");

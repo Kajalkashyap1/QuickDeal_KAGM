@@ -3,9 +3,7 @@
     display: flex;
     margin: 30px;
     border: 1px solid rgba(14, 4, 5, 0.274);
-    /* justify-content: center; */
     text-align: center;
-    /* align-items: center; */
 }
 
 .left_container {
@@ -33,7 +31,7 @@
 }
 
 .scroll {
-    max-height: 500px;
+    max-height: 460px;
     overflow-y: auto;
 }
 
@@ -57,14 +55,16 @@
 ::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* Change this to your desired hover color */
 }
-
+.cardContent {
+    height: 700px;
+}
 .clockandamount {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
-    align-content: center;
     align-items: center;
+    align-content: center;
+    margin-left: 0;
 }
 .amountanstimeflex {
     display: flex;

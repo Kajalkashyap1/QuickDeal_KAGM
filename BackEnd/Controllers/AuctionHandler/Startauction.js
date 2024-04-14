@@ -9,6 +9,7 @@ const startauction = async (req, res) => {
         return res.json({
             status: "success",
             message: "Auction created Successfully !",
+            insertdata,
         });
     } catch (error) {
         console.log(error);
