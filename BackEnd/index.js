@@ -48,6 +48,7 @@ app.get("/", (req, res) => {
 app.use("/auth", require("./Routers/auth.js"));
 app.use("/dashboard", require("./Routers/HandleAds.js"));
 app.use("/profile", require("./Routers/users.js"));
+app.use("/auction", require("./Routers/auction.js"));
 app.use("/chatting", require("./Routers/chatting.js"));
 // -------------------------------------------------------------------------------------------
 
@@ -117,6 +118,7 @@ chatNamespace.on("connection", (socket) => {
     socket.on("disconnect", () => {
         users = users.filter((user) => user.socketId !== socket.id);
         chatNamespace.emit("getUsers", users);
+        console.log("User Disconnected from chat : ", socket.id);
     });
     // io.emit('getUsers', socket.userId);
 });
@@ -128,6 +130,9 @@ const auctionNamespace = io.of("/auction");
 
 auctionNamespace.on("connection", (socket) => {
     console.log("User Joined auction : ", socket.id);
+    socket.on("disconnect", () => {
+        console.log("User Disconnected from auction : ", socket.id);
+    });
 });
 
 server.listen(port);

@@ -1,33 +1,74 @@
-
-.main_container{
+.main_container {
     width: 90%;
     display: flex;
     margin: 30px;
     border: 1px solid rgba(14, 4, 5, 0.274);
     /* justify-content: center; */
     text-align: center;
-     align-items: center;
+    /* align-items: center; */
 }
 
-.left_container{
-    flex: 1 1 70%; /* Take up 60% of the container's width */
-    max-width: 70%;
+.left_container {
+    flex: 1 170%;
+    max-width: 40%;
     margin-right: 20px; /* Add some space between left and right div */
-
+    border-right: 1px solid black;
 }
 
-.right_container{
+.right_container {
     flex: 1 1 35%; /* Take up 35% of the container's width */
-    max-width: 35%;
+    /* max-width: 35%; */
 }
 
-.vertical_line {
-    width: 1px;
-    background-color: black; /* Adjust the color as needed */
-    height: 100%; /* Make the line take up full height */
+.card_container {
+    max-height: 75vh;
+    overflow-y: auto;
+    width: 640px;
+}
+.price_name {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 8em;
 }
 
+.scroll {
+    max-height: 500px;
+    overflow-y: auto;
+}
 
+/* Apply styles to all scrollbars */
+::-webkit-scrollbar {
+    width: 5px; /* Slimmer width */
+}
 
+/* Customize scrollbar track */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Change this to your desired background color */
+}
 
+/* Customize scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Change this to your desired thumb color */
+    border-radius: 5px; /* Adjust border-radius if needed */
+}
 
+/* Hover effect on scrollbar thumb */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Change this to your desired hover color */
+}
+
+.clockandamount {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+.amountanstimeflex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

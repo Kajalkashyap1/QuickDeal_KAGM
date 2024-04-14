@@ -11,7 +11,6 @@ import axios from "axios";
 import tune from "../../audio/notification.mpeg";
 import Navbar from "../Navbar/Navbar";
 const socket = io.connect("http://localhost:8000/chat");
-const socketw = io.connect("http://localhost:8000/auction");
 const messageListReferance = React.createRef();
 const Chatting = () => {
     const navigate = useNavigate();
