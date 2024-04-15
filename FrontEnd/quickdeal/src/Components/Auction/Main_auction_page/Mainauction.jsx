@@ -273,6 +273,20 @@ const Mainauction = () => {
                                     <hr />
                                 </center>
                             )}
+                            {messArray.length === 0 &&
+                                uniquePastBids.length === 0 && (
+                                    <center
+                                        style={{
+                                            fontSize: "large",
+                                            color: "orangered",
+                                        }}>
+                                        <hr />
+                                        <strong>
+                                            <p>No offers till now ! </p>
+                                        </strong>
+                                        <hr />
+                                    </center>
+                                )}
                             {messArray?.map((item, index) => {
                                 return (
                                     <div
