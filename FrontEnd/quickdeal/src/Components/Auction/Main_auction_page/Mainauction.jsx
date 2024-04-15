@@ -20,12 +20,7 @@ const Mainauction = () => {
     const [statechanged, setstatechanged] = useState(false);
     const [bid, setbid] = useState();
     const currentdate = new Date();
-    useEffect(() => {
-        socket = io.connect("http://localhost:8000/auction");
-        return () => {
-            socket.disconnect();
-        };
-    }, []);
+    const [messArray, setMessArray] = useState([]);
     const [item, setitem] = useState([]);
     const [auctionended, setauctionended] = useState(true);
     useEffect(() => {
@@ -34,7 +29,7 @@ const Mainauction = () => {
                 `http://localhost:8000/auction/getCurrentAuctionbyid/${auctionid}`
             )
             .then((res) => {
-                if (res.data.status == "success") {
+                if (res.data.status === "success") {
                     setitem(res.data.liveAuctions);
                 }
             })
@@ -44,25 +39,21 @@ const Mainauction = () => {
                     err.message
                 );
             });
-    }, [statechanged]);
-    const [isauth, setauth] = useState("");
+    }, [statechanged, auctionid]);
+
     const [activename, setname] = useState("");
     const [activeuseremail, setuseremail] = useState("");
-    const [activeimage, setimage] = useState("");
     const [activeuserid, setuserid] = useState("");
     useEffect(() => {
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
                 if (res.data.status === "error") {
-                    setauth(false);
                     // navigate("/login");
                 } else if (res.data.status === "success") {
-                    setauth(true);
                     setuserid(res.data.id);
                     setname(res.data.name);
                     setuseremail(res.data.email);
-                    setimage(res.data.image);
                 }
             })
             .catch((err) => {
@@ -97,7 +88,141 @@ const Mainauction = () => {
                 }
             });
     };
+    const [activeusersinAuction, setactiveusersinAuction] = useState([]);
+    const [demo, setdemo] = useState([]);
+    // ---------------- socket for auction --------------------
 
+    useEffect(() => {
+        socket = io.connect("http://localhost:8000/auction");
+        return () => {
+            socket.disconnect();
+        };
+    }, [auctionid]);
+
+    useEffect(() => {
+        if (activename !== "") {
+            socket.emit("joinAuctionRoom", {
+                activeUserId: activeuserid,
+                auctionId: auctionid,
+                username: activename,
+                useremail: activeuseremail,
+            });
+        }
+    }, [activeuserid, auctionid, activename, activeuseremail]);
+
+    useEffect(() => {
+        console.log("Running useEffect");
+        const handleUpdateUsersInAuction = (message) => {
+            if (message.username !== "" && message.added === true) {
+                toast.info(`${message.username} Joined Auction`, {
+                    position: "top-right",
+                    autoClose: 1000,
+                });
+            }
+            if (message.username !== "" && message.added === false) {
+                toast.info(`${message.username} Left the Auction`, {
+                    position: "top-right",
+                    autoClose: 1000,
+                });
+            }
+
+            setactiveusersinAuction(message.users);
+        };
+
+        const handleMessage = (message) => {
+            setMessArray((prevMessages) => {
+                const newMessages = [
+                    ...prevMessages,
+                    {
+                        senderid: message.senderId,
+                        offer: message.message,
+                        sendername: message.sendername,
+                    },
+                ];
+                // Sort the messages array by the 'offer' property in descending order
+                newMessages.sort((a, b) => b.offer - a.offer);
+
+                // Return the sorted array
+                return newMessages;
+            });
+            axios
+                .post(
+                    `http://localhost:8000/auction/setBitAmount/${auctionid}`,
+                    message
+                )
+                .then((res) => {
+                    if (res.data.status === "success") {
+                    }
+                })
+                .catch((err) => {
+                    console.log("Error in Bid saving ", err.message);
+                });
+        };
+
+        socket.on("updateUsersInAuction", handleUpdateUsersInAuction);
+        socket.on("message", handleMessage);
+
+        return () => {
+            console.log("Closing useEffect");
+            socket.off("updateUsersInAuction", handleUpdateUsersInAuction);
+            socket.off("message", handleMessage);
+        };
+    }, [auctionid, activename, activeuserid]);
+
+    const [pastBids, setpastbids] = useState([]);
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/auction/getBitAmounts/${auctionid}`)
+            .then((res) => {
+                if (res.data.status === "success") {
+                    setpastbids(res.data.liveAuctions);
+                }
+            })
+            .catch((err) => {
+                console.log("error in get past auction bids ", err.message);
+            });
+    }, [auctionid]);
+
+    const handleSendOffer = (e) => {
+        const auctionid = item._id;
+        e.preventDefault();
+        if (bid !== 0) {
+            socket?.emit("sendMessage", auctionid, {
+                senderId: activeuserid,
+                sendername: activename,
+                message: bid,
+                date: new Date(),
+            });
+        }
+    };
+    useEffect(() => {
+        setdemo(activeusersinAuction);
+    }, [activeusersinAuction]);
+    // const [membersInAuction, setmembersInAuction] = useState([]);
+    // useEffect(() => {
+    //     axios
+    //         .get(
+    //             `http://localhost:8000/auction/getMemberInAuction/${auctionid}`
+    //         )
+    //         .then((res) => {
+    //             setmembersInAuction(res.data.info);
+    //         })
+    //         .catch((err) => {
+    //             console.log(
+    //                 "error in fetching active members in auction",
+    //                 err.message
+    //             );
+    //         });
+    // }, []);
+    const uniqueItems = new Set();
+    const uniquePastBids = pastBids.filter((item) => {
+        const key = `${item.senderId.fullname}-${item.amount}`;
+        if (!uniqueItems.has(key)) {
+            uniqueItems.add(key);
+            return true;
+        }
+        return false;
+    });
     return (
         <>
             <Navbar />
@@ -130,60 +255,80 @@ const Mainauction = () => {
                 </div>
             </div>
             <div className={stylemain.maincontainer}>
-                <div className={stylemain.firstcol}>
+                <div className={`${stylemain.firstcol} ${stylemain.widthhigh}`}>
                     <div className={stylemain.leaderboard}>
                         <h3>Leaderboard</h3>
                         <div className={stylemain.horizontal}></div>
+                        <div className={`${stylemain.leaderlist} `}>
+                            {messArray.length !== 0 && (
+                                <center
+                                    style={{
+                                        fontSize: "large",
+                                        color: "orangered",
+                                    }}>
+                                    <hr />
+                                    <strong>
+                                        <p>Live Offers</p>
+                                    </strong>
+                                    <hr />
+                                </center>
+                            )}
+                            {messArray?.map((item, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={stylemain.leadercards}>
+                                        <div className={stylemain.leadername}>
+                                            <span> {item.sendername}</span>
+                                            <span> ₹ {item.offer}</span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            {uniquePastBids && (
+                                <center
+                                    style={{
+                                        fontSize: "large",
+                                        color: "orangered",
+                                    }}>
+                                    <hr />
+                                    <strong></strong>
+                                    <hr />
+                                </center>
+                            )}
+                            {uniquePastBids?.map((item, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={stylemain.leadercards}>
+                                        <div className={stylemain.leadername}>
+                                            <span>
+                                                {item.senderId.fullname}
+                                            </span>
+                                            <span> ₹ {item.amount}</span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+                <div className={stylemain.firstcol}>
+                    <div className={stylemain.leaderboard}>
+                        <h3>Online Users</h3>
+                        <div className={stylemain.horizontal}></div>
                         <div className={stylemain.leaderlist}>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
-                            <div className={stylemain.leadercards}>
-                                <div className={stylemain.leadername}>
-                                    <span>1.</span>
-                                    <span> Gourav Karnor</span>{" "}
-                                    <span> ₹ 1000</span>
-                                </div>
-                            </div>
+                            {demo?.map((item, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={stylemain.leadercards}>
+                                        <div className={stylemain.leadername}>
+                                            <span> {item.name}</span>{" "}
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -200,7 +345,7 @@ const Mainauction = () => {
                                 </style>
 
                                 <Carousel>
-                                    {item?.productid?.imageurl != undefined &&
+                                    {item?.productid?.imageurl !== undefined &&
                                         item?.productid?.imageurl?.map(
                                             (images, index) => (
                                                 <Carousel.Item key={index}>
@@ -246,7 +391,7 @@ const Mainauction = () => {
                             </p>
                         </div>
                     </div>
-                    {item?.owner?._id != activeuserid &&
+                    {item?.owner?._id !== activeuserid &&
                         new Date(item?.activetill) > currentdate && (
                             <div className={stylemain.applyfont}>
                                 <form>
@@ -281,7 +426,7 @@ const Mainauction = () => {
                                         />
                                         <Button
                                             type="submit"
-                                            // onClick={handleStartAuction}
+                                            onClick={handleSendOffer}
                                             variant="outlined"
                                             startIcon={
                                                 <SendIcon fontSize="large" />
@@ -302,7 +447,7 @@ const Mainauction = () => {
                                 </form>
                             </div>
                         )}
-                    {item?.owner?._id == activeuserid &&
+                    {item?.owner?._id === activeuserid &&
                         new Date(item?.activetill) > currentdate && (
                             <Button
                                 onClick={() => {

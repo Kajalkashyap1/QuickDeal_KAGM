@@ -9,10 +9,12 @@
 }
 
 .firstcol {
-    width: 33%;
+    width: 20%;
     background-color: rgb(251, 251, 251);
     border: 1px solid rgba(14, 4, 5, 0.274);
     box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.4);
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .secondcol {
@@ -42,13 +44,16 @@
     display: flex;
     flex-direction: column;
 }
+.widthhigh {
+    width: 30%;
+}
 .leadername,
 .leadercards {
     border: 1px solid rgba(14, 4, 5, 0.274);
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    font-size: x-large;
+    font-size: large;
     width: 100%;
 }
 .image {
@@ -72,6 +77,8 @@
     align-items: center;
     flex-direction: column;
     font-size: 2em;
+}
+.leaderboard h3 {
 }
 .leaderlist {
     width: 90%;
