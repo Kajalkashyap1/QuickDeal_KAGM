@@ -314,7 +314,7 @@ const Chatting = () => {
                                                                     <FiberManualRecordIcon
                                                                         fontSize="small"
                                                                         style={{
-                                                                            fill: "green",
+                                                                            fill: "red",
                                                                         }}
                                                                     />
                                                                     Offline

@@ -17,7 +17,7 @@ const savechats = async (req, res) => {
                 members: [reciever],
             });
             const savedActiveChat = await newActiveChat.save();
-            console.log("New active chat created:", savedActiveChat);
+            // console.log("New active chat created:", savedActiveChat);
         } else {
             // If chat exists, check if receiver is present in members
             if (!existingChat.members.includes(reciever)) {
@@ -48,7 +48,7 @@ const savechats = async (req, res) => {
         const chatmessage = { sender, receiver: reciever, message };
         const insertchat = new messagedata(chatmessage);
         const data = await insertchat.save();
-        console.log("saved message >>> ", data);
+        // console.log("saved message >>> ", data);
 
         return res.json({
             status: "success",
