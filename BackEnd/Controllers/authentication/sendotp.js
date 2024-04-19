@@ -3,24 +3,6 @@ const otpgenerator = require("otp-generator");
 const userdata = require("../../Models/userdata");
 const validator = require("validator");
 
-function isMNNITEmail(email) {
-    return email.endsWith("@mnnit.ac.in") && validator.isEmail(email);
-}
-function checkpassword(value) {
-    return validator.isStrongPassword(value, {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-    });
-}
-
-function checknumber(value) {
-    const val = value.toString().length;
-    return val >= 10;
-}
-
 const sendotp = async (req, res) => {
     try {
         const { email, isgoogle, fullname } = req.body;

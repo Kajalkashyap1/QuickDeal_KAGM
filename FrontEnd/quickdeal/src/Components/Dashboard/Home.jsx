@@ -39,20 +39,26 @@ const Home = () => {
     // ---------------------- geting posts from DB -------------------
 
     const [items, setitems] = useState([]);
+    const [renderitems, setrenderitems] = useState([]);
 
     useEffect(() => {
         axios
             .get(`http://localhost:8000/dashboard/getposts`)
             .then((res) => {
                 setitems(res.data.result);
-                setrenderitems(res.data.result);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
+    useEffect(() => {
+        setrenderitems(
+            items?.filter(
+                (item) => item.useremail !== useremail && !item.hasSold
+            )
+        );
+    }, [items]);
     const authdetail = { isauth, name, useremail, image, userid };
-    const [renderitems, setrenderitems] = useState([]);
     // ------------------- handle search bar keyword change---------------
     const [searchKeyword, setSearchKeyword] = useState("");
     let filteredCards = items;
@@ -73,12 +79,19 @@ const Home = () => {
                         .includes(searchKeyword.toLowerCase()) ||
                     card.productname
                         .toLowerCase()
-                        .includes(searchKeyword.toLowerCase())
+                        .includes(searchKeyword.toLowerCase()) ||
+                    (Array.isArray(card.category) &&
+                        card.category.some(
+                            (category) =>
+                                typeof category === "string" && // Check if category is a string
+                                category
+                                    .toLowerCase()
+                                    .includes(searchKeyword.toLowerCase())
+                        ))
             );
             setrenderitems(filteredCards);
         }
     };
-    console.log("in home >> ", renderitems);
     // --------- handles click on cards------------
     const handleClick = (id) => {
         if (isauth) navigate(`/product/${id}`);

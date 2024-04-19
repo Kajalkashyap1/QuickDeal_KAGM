@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const CountdownTimer = ({ targetDate }) => {
+const CountdownTimer = ({ targetDate, onTimeUp }) => {
     const calculateTimeLeft = () => {
         const difference = +new Date(targetDate) - +new Date();
         let timeLeft = {};
@@ -22,8 +22,10 @@ const CountdownTimer = ({ targetDate }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setTimeLeft(calculateTimeLeft());
+            if (Object.values(timeLeft).every((val) => val === 0)) {
+                onTimeUp(); // Call callback function to trigger reload
+            }
         }, 1000);
-
         // Clear timeout if the component is unmounted
         return () => clearTimeout(timer);
     });

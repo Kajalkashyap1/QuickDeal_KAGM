@@ -18,6 +18,10 @@ const user = new mongoose.Schema({
         lowercase: true,
         required: true,
     },
+    role: {
+        type: String,
+        lowercase: true,
+    },
     email: {
         type: String,
         required: true,
@@ -36,8 +40,6 @@ const user = new mongoose.Schema({
     },
     contactNo: {
         type: Number,
-        unique: true,
-        default: 0,
     },
     password: {
         type: String,

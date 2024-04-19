@@ -10,10 +10,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import tune from "../../audio/notification.mpeg";
 import Navbar from "../Navbar/Navbar";
-const socket = io.connect("http://localhost:8000/chat");
-const socketw = io.connect("http://localhost:8000/auction");
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 const messageListReferance = React.createRef();
+let socket;
 const Chatting = () => {
+    useEffect(() => {
+        socket = io.connect("http://localhost:8000/chat");
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
     const navigate = useNavigate();
     let { buyer, seller } = useParams();
     const [mess, setmess] = useState("");
@@ -24,7 +30,7 @@ const Chatting = () => {
     const [Messages, setMessages] = useState([]);
     const [clickedItems, setClickedItems] = useState([]);
     const [clickedIndex, setClickedIndex] = useState(null);
-
+    const [onlineusers, setonlineusers] = useState([]);
     axios.defaults.withCredentials = true;
     useEffect(() => {
         axios
@@ -92,7 +98,8 @@ const Chatting = () => {
         socket?.emit("addUser", buyer);
         socket?.on("getUsers", (users) => {
             /// we can seee online users from here
-            // console.log("activeUsers :>> ", users);
+            console.log("activeUsers :>> ", users);
+            setonlineusers(users);
         });
         const audio = new Audio(tune);
 
@@ -257,9 +264,63 @@ const Chatting = () => {
                                                         alt={data.fullname}
                                                     />
                                                     <div className="chatuserinfo">
-                                                        <h5 className="mb-0">
-                                                            {data.fullname}
-                                                        </h5>
+                                                        <div
+                                                            style={{
+                                                                display: "flex",
+                                                                justifyContent:
+                                                                    "space-between",
+                                                                width: "100%",
+                                                            }}>
+                                                            <h5 className="mb-0">
+                                                                {data.fullname}
+                                                            </h5>
+                                                            {/* ------- Online---------- */}
+                                                            {onlineusers.some(
+                                                                (user) =>
+                                                                    user.userId ===
+                                                                    data._id
+                                                            ) && (
+                                                                <p
+                                                                    className="text-muted mb-0 fs-6"
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                    }}>
+                                                                    <FiberManualRecordIcon
+                                                                        fontSize="small"
+                                                                        style={{
+                                                                            fill: "green",
+                                                                        }}
+                                                                    />
+                                                                    Online
+                                                                </p>
+                                                            )}
+                                                            {/* ------- Offline---------- */}
+                                                            {!onlineusers.some(
+                                                                (user) =>
+                                                                    user.userId ===
+                                                                    data._id
+                                                            ) && (
+                                                                <p
+                                                                    className="text-muted mb-0 fs-6"
+                                                                    style={{
+                                                                        display:
+                                                                            "flex",
+                                                                        alignItems:
+                                                                            "center",
+                                                                    }}>
+                                                                    <FiberManualRecordIcon
+                                                                        fontSize="small"
+                                                                        style={{
+                                                                            fill: "red",
+                                                                        }}
+                                                                    />
+                                                                    Offline
+                                                                </p>
+                                                            )}
+                                                        </div>
                                                         <p className="text-muted mb-0">
                                                             {data.email}
                                                         </p>

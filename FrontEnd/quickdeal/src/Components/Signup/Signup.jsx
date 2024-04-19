@@ -119,9 +119,11 @@ const Signupui = () => {
     const submithandelregister = (event) => {
         user.inputotp = otp;
         event.preventDefault();
+        console.log(user);
         axios
             .post("http://localhost:8000/auth/register", user)
             .then((res) => {
+                console.log(res.data);
                 if (res.data.status === "success") {
                     toast.success(res.data.message, {
                         autoClose: 1000,
@@ -145,6 +147,12 @@ const Signupui = () => {
 
     return (
         <>
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
+
             {isloading ? (
                 <>
                     <Header></Header>
@@ -183,21 +191,7 @@ const Signupui = () => {
                     {!showotpui ? (
                         <>
                             <Header></Header>
-                            <div>
-                                <ToastContainer
-                                    position="top-right"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                    transition="Bounce"
-                                />
-                            </div>
+                            <div></div>
                             <div className={style.container}>
                                 <div className={style.header}>
                                     <div className={style.text}>Sign Up</div>
@@ -242,20 +236,31 @@ const Signupui = () => {
                                         {/* adding role file here */}
 
                                         <div className={style.input}>
+                                            <label for="role">
+                                                {" "}
+                                                Your role in MNNIT:
+                                            </label>
 
-                                        <label for="role"> Your role in MNNIT:</label>
-
-                                            <select name="role" id="role" onChange={handeler}>
-                                                <option value="">--Please choose an option--</option>
-                                                <option value="faculty">Faculty</option>
-                                                <option value="staff">Staff</option>
-                                                <option value="student">Student</option>
-                            
+                                            <select
+                                                name="role"
+                                                id="role"
+                                                onChange={handeler}
+                                                required>
+                                                <option value="">
+                                                    --Please choose an option--
+                                                </option>
+                                                <option value="faculty">
+                                                    Faculty
+                                                </option>
+                                                <option value="staff">
+                                                    Staff
+                                                </option>
+                                                <option value="student">
+                                                    Student
+                                                </option>
                                             </select>
-
                                         </div>
 
-                                        
                                         <div className={style.input}>
                                             <img src={pwd_icon} alt="" />
                                             <input
@@ -347,21 +352,7 @@ const Signupui = () => {
                     ) : (
                         <>
                             <Header></Header>
-                            <div>
-                                <ToastContainer
-                                    position="top-right"
-                                    autoClose={5000}
-                                    hideProgressBar={false}
-                                    newestOnTop={false}
-                                    closeOnClick
-                                    rtl={false}
-                                    pauseOnFocusLoss
-                                    draggable
-                                    pauseOnHover
-                                    theme="light"
-                                    transition="Bounce"
-                                />
-                            </div>
+                            <div></div>
                             <div className={style.container}>
                                 <div className={style.header}>
                                     <div className={style.text}>Enter OTP</div>
@@ -369,26 +360,6 @@ const Signupui = () => {
                                 </div>
                                 <form onSubmit={submithandelregister}>
                                     <div className={style.inputs}>
-                                        {/* <div className="input">
-                                            <img src={pwd_icon} alt="" />
-                                            <input
-                                                type="number"
-                                                placeholder="Enter OPT"
-                                                onChange={otphandeler}
-                                                value={otp}
-                                                name="contactNo"
-                                                required
-                                                onWheel={(e) => e.target.blur()}
-                                            />
-                                        </div>
-
-                                        <div>
-                                            <button
-                                                className="submit_btn"
-                                                type="submit">
-                                                Submit
-                                            </button>
-                                        </div> */}
                                         <OtpInput
                                             value={otp}
                                             onChange={setotp}

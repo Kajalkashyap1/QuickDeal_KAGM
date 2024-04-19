@@ -9,6 +9,8 @@ import UploadIcon from "@mui/icons-material/Upload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import options from "../Assets/categories";
+
 const Products = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -17,6 +19,20 @@ const Products = () => {
     const [useremail, setuseremail] = useState("");
     const [isloading, setloading] = useState(false);
 
+    // State to hold selected values
+    const [selectedValues, setSelectedValues] = useState([]);
+
+    // Event handler for checkbox change
+    const handleCheckboxChange = (event) => {
+        const value = event.target.value;
+        if (event.target.checked) {
+            // If checkbox is checked, add value to selected values array
+            setSelectedValues([...selectedValues, value]);
+        } else {
+            // If checkbox is unchecked, remove value from selected values array
+            setSelectedValues(selectedValues.filter((val) => val !== value));
+        }
+    };
     useEffect(() => {
         axios
             .get("http://localhost:8000/auth/islogin")
@@ -37,7 +53,6 @@ const Products = () => {
     const creatorDetails = { userid, name, useremail };
     const [formData, setFormData] = useState({
         productName: "",
-        category:"",
         adTitle: "",
         description: "",
         price: "",
@@ -62,16 +77,6 @@ const Products = () => {
     };
 
     // Declaring the category list
-
-    const categoryList = [
-        { value: 'Electronics & Appliances' },
-        { value: 'Vehicles' },
-        { value: 'Furniture' },
-        { value: 'Fashion' },
-        { value: 'Mobiles' },
-        { value: 'Books' },
-        { value: 'Sports & Hobbies' },
-      ];
 
     const handleRemoveImage = (index) => {
         const newImages = [...images];
@@ -106,13 +111,13 @@ const Products = () => {
             </div>
         ));
     };
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
         // Combine form data and images into an array
         const dataWithImages = {
             ...formData,
+            category: selectedValues,
             images,
             userid: creatorDetails.userid,
             useremail: creatorDetails.useremail,
@@ -121,6 +126,7 @@ const Products = () => {
         const config = {
             headers: { "Content-Type": "multipart/form-data" },
         };
+        console.log(dataWithImages);
         setloading(true);
         axios
             .post(
@@ -152,7 +158,11 @@ const Products = () => {
     return (
         <>
             <Navbar searchbar={false} />
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
             {isloading ? (
                 <div
                     style={{
@@ -211,21 +221,6 @@ const Products = () => {
                                     <span>example: mobile</span>
                                 </div>
 
-                                {/* Adding the category field here */}
-                                <div className={style.select_field}>
-                                    <b>Category: *</b>
-                                    {/* Dropdown input field */}
-                                    <select value={formData.category} name="category" onChange={handleInputChange}>
-                                        <option value="">Select an option</option>
-                                        {/* Mapping over the categoryList array to create option elements */}
-                                        {categoryList.map((category) => (
-                                        <option key={category.value} value={category.value} >
-                                            {category.value}
-                                        </option>
-                                        ))}
-                                    </select>
-                                </div>
-
                                 <div className={style.input_field}>
                                     <b>Ad Title: *</b>
                                     <input
@@ -240,7 +235,42 @@ const Products = () => {
                                         item(eg: brand name, model, type)
                                     </span>
                                 </div>
-
+                                {/* Adding the category field here */}
+                                <div className={style.select_field}>
+                                    <b>Category: *</b>
+                                    <br />
+                                    <span>
+                                        Please select the categories that best
+                                        describe the product you're advertising.
+                                    </span>
+                                    <div
+                                        className={style.select_field_checkbox}>
+                                        {options.map((option) => (
+                                            <div
+                                                key={option.value}
+                                                className={style.checkfield}>
+                                                <input
+                                                    type="checkbox"
+                                                    id={option.value}
+                                                    value={option.value}
+                                                    checked={selectedValues.includes(
+                                                        option.value
+                                                    )}
+                                                    onChange={
+                                                        handleCheckboxChange
+                                                    }
+                                                />
+                                                <label
+                                                    htmlFor={option.value}
+                                                    style={{
+                                                        cursor: "pointer",
+                                                    }}>
+                                                    {option.label}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                                 <div className={style.input_field_area}>
                                     <b>Description: *</b>
                                     <textarea

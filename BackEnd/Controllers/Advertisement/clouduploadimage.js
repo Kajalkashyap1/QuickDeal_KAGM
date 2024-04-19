@@ -3,7 +3,6 @@ require("dotenv").config();
 const postdata = require("../../Models/postdata");
 const nodemailer = require("nodemailer");
 const clouduploadimage = async (req, res) => {
-    // console.log(req.body);
     let imagesecureurl = [];
     try {
         const parentfile = req.files["images[]"];
@@ -38,6 +37,7 @@ const clouduploadimage = async (req, res) => {
             productname: req.body.productName,
             adtitle: req.body.adTitle,
             description: req.body.description,
+            category: req.body["category[]"],
             price: req.body.price,
             location: req.body.location,
             imageurl: imagesecureurl,
