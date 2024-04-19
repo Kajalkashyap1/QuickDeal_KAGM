@@ -232,3 +232,76 @@ input::-webkit-inner-spin-button {
 .btn {
     text-align: center;
 }
+
+
+/* Media queries for responsiveness */
+
+@media only screen and (max-width: 768px) {
+    .header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+  
+    .text {
+      font-size: 28px; /* Adjust font size for smaller screens */
+    }
+  
+    .cards {
+      margin: 20px;
+    }
+  
+    .card {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto 1fr;
+    }
+  
+    .product_img {
+      width: 100%;
+    }
+  
+    .product_img img {
+      width: 100%;
+      height: auto;
+    }
+  
+    .product_content {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .productleftcontent,
+    .card_right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+  
+    .likes,
+    .available_icon {
+      margin: 10px 0px;
+      margin-right: auto;
+    }
+  
+    .imp_btns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+  
+    .imp_btns button {
+      margin: 5px 0px;
+      width: 80%;
+    }
+  
+    .editfield {
+      margin-top: 10px;
+    }
+  }
+  
