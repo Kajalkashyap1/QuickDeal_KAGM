@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Categories.css'; // Assuming you've saved the CSS in a file named Categories.css
 import { NavLink } from 'react-bootstrap';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowDropDownCircleTwoToneIcon from '@mui/icons-material/ArrowDropDownCircleTwoTone';
 
 const CategoryBar = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -25,13 +26,12 @@ const CategoryBar = () => {
         {/* Logo */}
         <div className='logo-text'>
           <p className=''>All Category</p>
+          <ArrowDropDownCircleTwoToneIcon/>
           <select value={selectedCategory} onChange={handleCategoryChange}>
-            <option value="">Select Category</option>
+                
             <option value="all">All</option>
             <option value="stationary">Stationary</option>
-            <option value="gadgets">
-           Gadgets
-            </option>
+            <option value="gadgets">Gadgets</option>
             <option value="electronics">Electronics & Appliances</option>
             <option value="furniture">Furniture</option>
             <option value="fashion">Fashion</option>
