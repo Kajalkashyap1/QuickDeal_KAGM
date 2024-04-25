@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import OtpInput from "react-otp-input";
 import Header from "../Header/Header";
 import email_icon from "../Assets/email.png";
+import { ToastContainer, toast } from "react-toastify";
 import passicon from "../Assets/password.png";
 import { Hourglass } from "react-loader-spinner";
 import axios from "axios";
@@ -9,6 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import style from "./resetpass.module.css";
 import { useNavigate } from "react-router-dom";
+import ResetPassTimer from "../Timer/ResetPasswordCountdown";
 
 const Resetpassword = () => {
     const navigate = useNavigate();
@@ -21,6 +23,16 @@ const Resetpassword = () => {
     const [otp, setotp] = useState();
     const [disable, setdisable] = useState();
     const [newpassword, setnewpassword] = useState("");
+    const [OtpSent, setOtpSent] = useState(false);
+    const [OTPexpirydate, setOTPexpirydate] = useState("");
+
+    const handleTimeUp = () => {
+        toast.error("OTP has been expired ! ", {
+            autoClose: 1500,
+            position: "top-right",
+        });
+        return;
+    };
 
     const handeler = (event) => {
         setemail(event.target.value);
@@ -47,12 +59,21 @@ const Resetpassword = () => {
             .then((res) => {
                 setisloading(false);
                 if (res.data.status === "error") {
-                    alert(res.data.message);
+                    toast.error(res.data.message, {
+                        autoClose: 1500,
+                        position: "top-right",
+                    });
                 } else {
-                    alert(res.data.message);
-                    console.log(res.data.checkuser.password);
+                    toast.success(res.data.message, {
+                        autoClose: 1500,
+                        position: "top-right",
+                    });
+
                     setshowotpinput(true);
                     setdisable(true);
+                    const targetDate = new Date(); // Get the current time
+                    targetDate.setMinutes(targetDate.getMinutes() + 5);
+                    setOTPexpirydate(targetDate);
                 }
             })
             .catch((err) => {
@@ -73,12 +94,21 @@ const Resetpassword = () => {
             .then((res) => {
                 setisloading(false);
                 if (res.data.status === "error") {
-                    alert(res.data.message);
+                    // alert(res.data.message);
+                    toast.error(res.data.message, {
+                        autoClose: 1500,
+                        position: "top-right",
+                    });
                 } else {
-                    alert(res.data.message);
+                    // alert(res.data.message);
+                    toast.success(res.data.message, {
+                        autoClose: 1500,
+                        position: "top-right",
+                    });
                     setshowotpinput(false);
                     setdisable(true);
                     setpasswordinput(true);
+                    setOtpSent(true);
                 }
             })
             .catch((err) => {
@@ -102,10 +132,18 @@ const Resetpassword = () => {
             .then((res) => {
                 setisloading(false);
                 if (res.data.status === "error") {
-                    alert(res.data.message);
+                    toast.error(res.data.message, {
+                        autoClose: 1500,
+                        position: "top-right",
+                    });
                 } else {
-                    alert(res.data.message);
-                    navigate("/login");
+                    toast.success(res.data.message, {
+                        autoClose: 1500,
+                        position: "top-right",
+                    });
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 1700);
                     setshowotpinput(false);
                     setdisable(true);
                     setpasswordinput(true);
@@ -117,6 +155,7 @@ const Resetpassword = () => {
     };
     return (
         <>
+            <ToastContainer autoClose="5000" theme="dark" />
             <Header></Header>
             <div className={style.center}>
                 {isloading ? (
@@ -171,16 +210,18 @@ const Resetpassword = () => {
 
                                         <button
                                             className={style.submit}
-                                            disabled={disable}
-                                            type="submit">
-                                            Get OTP
+                                            type="submit"
+                                            disabled={OtpSent}>
+                                            {!disable
+                                                ? "Get OTP"
+                                                : "Resend OTP"}
                                         </button>
                                     </form>
                                 </div>
 
                                 {showotpinput && (
                                     <div className={style.container}>
-                                        <h3>Enter OTP:</h3>
+                                        <span>Enter OTP</span>
                                         <form onSubmit={handleVerifyOtp}>
                                             <OtpInput
                                                 value={otp}
@@ -212,8 +253,12 @@ const Resetpassword = () => {
                                                 }}
                                             />
                                             <span>
-                                                *verification code expires in 5
-                                                minutes
+                                                {/* *verification code expires in 5
+                                                minutes */}
+                                                <ResetPassTimer
+                                                    targetDate={OTPexpirydate}
+                                                    onTimeUp={handleTimeUp}
+                                                />
                                             </span>
                                             <br />
                                             <button className={style.submit}>

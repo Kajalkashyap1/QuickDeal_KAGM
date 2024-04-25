@@ -85,27 +85,26 @@ const Signupui = () => {
                             setloading(false);
                             if (res.data.status === "success") {
                                 toast.success(res.data.message, {
-                                    autoClose: 1000,
-                                    position: "top-center",
+                                    autoClose: 3000,
+                                    position: "top-right",
                                 });
                                 setotpui(true);
                             } else {
                                 let str = res.data.message;
                                 toast.error(str, {
-                                    autoClose: 1000,
-                                    position: "top-center",
+                                    autoClose: 3000,
+                                    position: "top-rght",
                                 });
                             }
                         })
                         .catch((err) => {
-                            console.log("second");
                             setloading(false);
                             console.log(err);
                         });
                 } else {
                     toast.error(res.data.message, {
-                        autoClose: 1000,
-                        position: "top-center",
+                        autoClose: 3000,
+                        position: "top-right",
                     });
                 }
             })
@@ -126,8 +125,8 @@ const Signupui = () => {
                 console.log(res.data);
                 if (res.data.status === "success") {
                     toast.success(res.data.message, {
-                        autoClose: 1000,
-                        position: "top-center",
+                        autoClose: 3000,
+                        position: "top-right",
                     });
                     setTimeout(() => {
                         navigate("/login");
@@ -135,8 +134,8 @@ const Signupui = () => {
                 } else {
                     let str = res.data.message;
                     toast.error(str, {
-                        autoClose: 1000,
-                        position: "top-center",
+                        autoClose: 3000,
+                        position: "top-right",
                     });
                     if (str === "OTP expired") window.location.reload();
                     return;

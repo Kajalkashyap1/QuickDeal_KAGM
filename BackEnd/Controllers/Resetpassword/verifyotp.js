@@ -6,7 +6,11 @@ const validator = require("validator");
 const verifyotp = async (req, res) => {
     try {
         const { email, otp } = req.body;
-        let otpval = await otpdata.findOne({ email: email });
+        let otpval = await otpdata.findOne(
+            { email: email },
+            {},
+            { sort: { generationtime: -1 } }
+        );
         if (!otpval) {
             return res.json({
                 status: "error",

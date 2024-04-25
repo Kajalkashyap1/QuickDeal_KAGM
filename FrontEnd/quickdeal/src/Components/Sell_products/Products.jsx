@@ -113,7 +113,13 @@ const Products = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        if (selectedValues.length === 0) {
+            toast.warning("Please select atleast one category !", {
+                position: "top-right",
+                autoClose: 3500,
+            });
+            return;
+        }
         // Combine form data and images into an array
         const dataWithImages = {
             ...formData,

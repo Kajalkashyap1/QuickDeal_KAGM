@@ -11,6 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function LoginSignup() {
+    // const [isToastActive, setIsToastActive] = useState();
     const nevigate = useNavigate();
     const [isauth, setauth] = useState("");
     const [name, setname] = useState("");
@@ -57,28 +58,27 @@ function LoginSignup() {
             };
         });
     };
+
     axios.defaults.withCredentials = true;
     const submithandel = (event) => {
         event.preventDefault();
-
         axios
             .post("http://localhost:8000/auth/login", user)
             .then((res) => {
                 if (res.data.status === "success") {
                     toast.success(res.data.message, {
-                        autoClose: 1000,
-                        position: "top-center",
+                        autoClose: 1500,
+                        position: "top-right",
                     });
                     setTimeout(() => {
                         nevigate("/");
-                    }, 1500);
+                    }, 1700);
                     setUser({ email: "", password: "" });
                 } else {
                     toast.error(res.data.message, {
-                        autoClose: 1000,
-                        position: "top-center",
+                        autoClose: 3000,
+                        position: "top-right",
                     });
-                    return;
                 }
             })
             .catch((err) => console.log(err));
@@ -86,13 +86,7 @@ function LoginSignup() {
 
     return (
         <>
-            <div>
-            <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                theme="dark"
-            />
-            </div>
+            <ToastContainer autoClose="5000" theme="dark" />
             <Header></Header>
             <div className={style.wrapper}>
                 <div className={style.container}>

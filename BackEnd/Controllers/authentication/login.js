@@ -1,7 +1,6 @@
 const userdata = require("../../Models/userdata");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const validator = require("validator");
 
 const login = async (req, res) => {
     try {
@@ -23,12 +22,10 @@ const login = async (req, res) => {
             imageurl: user.imageurl,
         };
         //verify password and generate a JWT token
-
         let flag = true;
         if (!req.body.isgoogle) {
             flag = await bcrypt.compare(password, user.password);
         }
-
         if (flag) {
             //password match
             const token = jwt.sign(payload, process.env.JWT_SECRET, {

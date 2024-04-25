@@ -67,27 +67,32 @@ const Home = () => {
 
         if (!keyword) {
             // If the search bar is empty, render all items
-            setrenderitems(items);
+            const withoutFilter = items?.filter(
+                (card) => !card.hasSold && card.useremail != useremail
+            );
+            setrenderitems(withoutFilter);
         } else {
             filteredCards = items?.filter(
                 (card) =>
-                    card.adtitle
+                    (card.adtitle
                         .toLowerCase()
                         .includes(searchKeyword.toLowerCase()) ||
-                    card.description
-                        .toLowerCase()
-                        .includes(searchKeyword.toLowerCase()) ||
-                    card.productname
-                        .toLowerCase()
-                        .includes(searchKeyword.toLowerCase()) ||
-                    (Array.isArray(card.category) &&
-                        card.category.some(
-                            (category) =>
-                                typeof category === "string" && // Check if category is a string
-                                category
-                                    .toLowerCase()
-                                    .includes(searchKeyword.toLowerCase())
-                        ))
+                        card.description
+                            .toLowerCase()
+                            .includes(searchKeyword.toLowerCase()) ||
+                        card.productname
+                            .toLowerCase()
+                            .includes(searchKeyword.toLowerCase()) ||
+                        (Array.isArray(card.category) &&
+                            card.category.some(
+                                (category) =>
+                                    typeof category === "string" && // Check if category is a string
+                                    category
+                                        .toLowerCase()
+                                        .includes(searchKeyword.toLowerCase())
+                            ))) &&
+                    !card.hasSold &&
+                    card.useremail != useremail
             );
             setrenderitems(filteredCards);
         }

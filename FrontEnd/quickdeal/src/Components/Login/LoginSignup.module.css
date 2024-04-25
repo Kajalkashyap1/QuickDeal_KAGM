@@ -83,7 +83,9 @@
     min-height: 40px;
     padding: 10px 20px; /* Adjusted padding */
     text-align: center;
-    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     user-select: none;
     -webkit-user-select: none;
     vertical-align: middle;
@@ -115,4 +117,7 @@
         min-width: 120px;
         padding: 8px 16px;
     }
+}
+.forgot_password {
+    cursor: pointer;
 }

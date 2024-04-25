@@ -21,8 +21,8 @@ const Googleloginhelp = () => {
             const { email, name, picture } = userdata;
             if (!email.endsWith("@mnnit.ac.in")) {
                 toast.error("Please use MNNIT email", {
-                    autoClose: 1000,
-                    position: "top-center",
+                    autoClose: 2500,
+                    position: "top-right",
                 });
                 return;
             }
@@ -36,16 +36,16 @@ const Googleloginhelp = () => {
                         .then((res) => {
                             if (res.data.status === "success") {
                                 toast.success(res.data.message, {
-                                    autoClose: 1000,
-                                    position: "top-center",
+                                    autoClose: 2500,
+                                    position: "top-right",
                                 });
                                 setTimeout(() => {
                                     navigate("/");
                                 }, 1500);
                             } else {
                                 toast.error(res.data.message, {
-                                    autoClose: 1000,
-                                    position: "top-center",
+                                    autoClose: 2500,
+                                    position: "top-right",
                                 });
                                 return;
                             }
@@ -59,13 +59,7 @@ const Googleloginhelp = () => {
 
     return (
         <div>
-            <div>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={1000}
-                    theme="dark"
-                />
-            </div>
+            <div></div>
             <GoogleOAuthProvider
                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
                 <GoogleLogin
