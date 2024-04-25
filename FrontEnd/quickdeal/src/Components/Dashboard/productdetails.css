@@ -16,6 +16,7 @@
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     margin: 50px;
     justify-content: center;
+    margin-top: 7.5rem;
 }
 
 .leftdiv {

@@ -68,7 +68,7 @@ const Wishlist = () => {
     return (
         <>
             <Navbar searchbar={false} />
-            <div className="wishlistContainer">
+            <div className="wishlistContainer formargin">
                 {/* <center className="wishlistmainheading">
                     <FavoriteBorderIcon
                         className="hearticon"

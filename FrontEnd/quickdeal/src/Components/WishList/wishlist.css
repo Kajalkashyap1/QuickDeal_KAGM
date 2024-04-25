@@ -26,7 +26,6 @@
     height: 30px;
     width: 40px;
 } */
-
 .admin-icon {
     height: 3.5rem;
     width: 3.5rem;
@@ -51,7 +50,7 @@
     border-radius: 10px;
     width: 77%;
     margin: auto;
-    margin-top: 3rem;
+    margin-top: 8rem;
     margin-bottom: 3rem;
     box-shadow: 2px 20px 22px 20px rgba(49, 40, 60, 0.2);
 }

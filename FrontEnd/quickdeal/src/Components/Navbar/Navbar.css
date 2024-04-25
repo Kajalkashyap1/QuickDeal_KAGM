@@ -1,4 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Inter:wght@800;900&family=Rubik:wght@800&display=swap");
+.HeaderContainer {
+    position: fixed;
+    width: 100%;
+    top: 0; /* Add this line to fix the header to the top of the viewport */
+    left: 0; /* Add this line to fix the header to the left of the viewport */
+    z-index: 1000; /* Add this line to ensure the header stays on top of other content */
+}
 .Header {
     background-color: var(--purple);
     color: var(--lp);
@@ -12,6 +19,7 @@
     align-items: center; /* Align items vertically */
     width: 100%; /* Ensure header covers full width */
     box-sizing: border-box; /* Include padding in width calculation */
+    /* Add this line */
 }
 
 /* Style for dummy link */

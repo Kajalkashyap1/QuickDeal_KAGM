@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import Cardcomponent from "./Cardcomponent";
 import Card from "react-bootstrap/Card";
 import Placeholder from "react-bootstrap/Placeholder";
 import { useNavigate } from "react-router-dom";
+import "./Home";
 const Home = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -97,6 +97,31 @@ const Home = () => {
             setrenderitems(filteredCards);
         }
     };
+
+    const handleCategoryFilterChange = (categoryArray) => {
+        // If categoryArray is empty, render all items
+        if (categoryArray.length === 0) {
+            const withoutFilter = items?.filter(
+                (card) => !card.hasSold && card.useremail !== useremail
+            );
+            setrenderitems(withoutFilter);
+        } else {
+            const filteredCards = items?.filter((card) => {
+                // Check if card matches any category in categoryArray
+                return (
+                    !card.hasSold &&
+                    card.useremail !== useremail &&
+                    categoryArray.some((category) =>
+                        Array.isArray(card.category)
+                            ? card.category.includes(category)
+                            : card.category === category
+                    )
+                );
+            });
+            setrenderitems(filteredCards);
+        }
+    };
+
     // --------- handles click on cards------------
     const handleClick = (id) => {
         if (isauth) navigate(`/product/${id}`);
@@ -104,11 +129,13 @@ const Home = () => {
 
     return (
         <>
-            <Navbar searchbar="true" onSearchChange={handleSearchChange} />
+            <Navbar
+                searchbar="true"
+                onSearchChange={handleSearchChange}
+                onCategoryFilterChange={handleCategoryFilterChange}
+            />
             <div className="main">
-                {/* <h2>Filters will appear here</h2>
-            <hr></hr> */}
-                <div className="div-main">
+                <div className="div-main formargin">
                     {renderitems.map((card) => (
                         <Cardcomponent
                             key={card._id}

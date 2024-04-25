@@ -7,8 +7,12 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 50px; /* Adjust the gap value as needed */
+    position: relative;
+    top: 20px;
 }
-
+.formargin {
+    margin-top: 200px;
+}
 .cards {
     max-width: 300px;
     max-height: 600px;
