@@ -1,0 +1,64 @@
+/* Categories.css */
+
+.navbar {
+  background-color: #f4f4f7;
+  color: #171717;
+  padding: 10px 20px; /* Adjust padding to provide space around the content */
+  width: 100%; /* Set width to 100% to make it responsive */
+  min-width: 800px; /* Set a minimum width to ensure all categories fit */
+  height: 90px;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between; /* Add space between items */
+  align-items: center;
+}
+
+.logo-text {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text p {
+  margin: 0;
+  font-size: 1.2rem;
+  white-space: nowrap; /* Ensure the text doesn't wrap */
+}
+
+select {
+  padding: 8px 30px 8px 8px; /* Add extra padding on the right to accommodate the arrow */
+  font-size: 1rem;
+  margin-left: 10px;
+  appearance: none; /* Remove default appearance */
+ 
+  background-size: 20px; /* Adjust size of the arrow */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #333;
+  cursor: pointer; /* Add pointer cursor */
+}
+
+.category-checkboxes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px;
+}
+
+.category-checkboxes li {
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.category-checkboxes label {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.category-dropdown:hover {
+  background-color: #510f83; /* Change background color on hover */
+}
