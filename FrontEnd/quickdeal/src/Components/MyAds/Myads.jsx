@@ -199,7 +199,11 @@ const Myads = () => {
         <div className={style.main}>
             <Navbar searchbar={false} />
             {/* --------------------- Toast container ---------------- */}
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
             {/* --------------------- Toast container ---------------- */}
             <div className={style.header}>
                 <div className={style.text}>MyAds</div>
@@ -283,12 +287,7 @@ const Myads = () => {
                                     <div className={style.imp_btns}>
                                         <>
                                             {" "}
-                                            <Tooltip
-                                                onClick={() => {
-                                                    handleMarkasSold(item._id);
-                                                }}
-                                                title="View ad"
-                                                arrow>
+                                            <Tooltip title="View ad" arrow>
                                                 <IconButton
                                                     onClick={() => {
                                                         navigate(

@@ -87,21 +87,11 @@ function LoginSignup() {
     return (
         <>
             <div>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    transition="Bounce"
-                />
-
-                <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
             </div>
             <Header></Header>
             <div className={style.wrapper}>

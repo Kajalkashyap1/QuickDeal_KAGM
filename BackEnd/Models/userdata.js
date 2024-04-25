@@ -40,8 +40,6 @@ const user = new mongoose.Schema({
     },
     contactNo: {
         type: Number,
-        unique: true,
-        default: 0,
     },
     password: {
         type: String,

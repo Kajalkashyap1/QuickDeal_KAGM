@@ -60,6 +60,7 @@ const validateuser = async (req, res) => {
             message: "Data is ok",
         });
     } catch (error) {
+        console.log("erro in validateuser ", error.message);
         return res.json({
             status: "error",
             message: error.message,

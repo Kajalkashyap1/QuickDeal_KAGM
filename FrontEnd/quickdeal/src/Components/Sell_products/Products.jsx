@@ -158,7 +158,11 @@ const Products = () => {
     return (
         <>
             <Navbar searchbar={false} />
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
             {isloading ? (
                 <div
                     style={{

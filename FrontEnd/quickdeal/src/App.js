@@ -10,19 +10,19 @@ import Myads from "./Components/MyAds/Myads";
 import Pagenotfound from "./Components/NotfoundComponent/pagenotfound";
 import Wishlist from "./Components/WishList/Wishlist";
 import EditProfile from "./Components/EditProfile/EditProfile";
+<<<<<<< HEAD
 import AuctionDashboard from "./Components/Auction/AuctionDashboard";
 import Categories from "./Components/Dashboard/Categories";
+=======
+import AuctionDashboard from "./Components/Auction/Firstpage/AuctionDashboard";
+import NewAuction from "./Components/Auction/SecondPage/NewAuction";
+import Mainauction from "./Components/Auction/Main_auction_page/Mainauction";
+>>>>>>> 72790e3df080f0b99d37c892830aa712a406b839
 
 function App() {
     return (
         <>
             <Routes>
-                {/* <Route
-                    path="/new/:id"
-                    render={(props) => (
-                        <NewComponent {...props} customProp="value" />
-                    )}
-                /> */}
                 <Route exact path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signin" element={<Signin />} />
@@ -44,7 +44,15 @@ function App() {
                     path="/AuctionDashboard/:userid"
                     element={<AuctionDashboard />}
                 />
+<<<<<<< HEAD
                 <Route path="/categories" element={<Categories />} />
+=======
+                <Route path="/NewAuction/:userid" element={<NewAuction />} />
+                <Route
+                    path="/auction_main_page/product/:auctionid"
+                    element={<Mainauction />}
+                />
+>>>>>>> 72790e3df080f0b99d37c892830aa712a406b839
                 <Route path="*" element={<Pagenotfound />} />
                 
             </Routes>

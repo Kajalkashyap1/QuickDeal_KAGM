@@ -62,19 +62,9 @@ const Googleloginhelp = () => {
             <div>
                 <ToastContainer
                     position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    transition="Bounce"
+                    autoClose={1000}
+                    theme="dark"
                 />
-
-                <ToastContainer />
             </div>
             <GoogleOAuthProvider
                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
