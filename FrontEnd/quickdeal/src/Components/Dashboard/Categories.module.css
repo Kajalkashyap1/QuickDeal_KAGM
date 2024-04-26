@@ -9,18 +9,18 @@
   height: 90px;
 }
 
-.navbar-content {
+.navbar_content {
   display: flex;
   justify-content: space-between; /* Add space between items */
   align-items: center;
 }
 
-.logo-text {
+.logo_text {
   display: flex;
   align-items: center;
 }
 
-.logo-text p {
+.logo_text p {
   margin: 0;
   font-size: 1.2rem;
   white-space: nowrap; /* Ensure the text doesn't wrap */
@@ -39,7 +39,7 @@ select {
   cursor: pointer; /* Add pointer cursor */
 }
 
-.category-checkboxes {
+.category_checkboxes {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -48,17 +48,17 @@ select {
   margin-left: 50px;
 }
 
-.category-checkboxes li {
+.category_checkboxes li {
   margin-right: 20px;
   margin-bottom: 10px;
 }
 
-.category-checkboxes label {
+.category_checkboxes label {
   font-size: 1rem;
   cursor: pointer;
 }
 
 /* Hover effect */
-.category-dropdown:hover {
+.category_dropdown:hover {
   background-color: #510f83; /* Change background color on hover */
 }
