@@ -23,6 +23,9 @@ const Mainauction = () => {
     const [messArray, setMessArray] = useState([]);
     const [item, setitem] = useState([]);
     const [auctionended, setauctionended] = useState(true);
+    const [auction_Winner, setauction_Winner] = useState("");
+    const [maxBid, setMAxbid] = useState(-1e9);
+    const [auctionResult, setauctionResult] = useState();
     useEffect(() => {
         axios
             .get(
@@ -79,7 +82,9 @@ const Mainauction = () => {
         setauctionended(false);
     };
     // ------------------- delete auction --------------------
+
     const handleEndAuction = (auctionid) => {
+        console.log(" >>>>> ", auctionResult);
         axios
             .post("http://localhost:8000/auction/endAuction", { auctionid })
             .then((res) => {
@@ -111,7 +116,6 @@ const Mainauction = () => {
     }, [activeuserid, auctionid, activename, activeuseremail]);
 
     useEffect(() => {
-        console.log("Running useEffect");
         const handleUpdateUsersInAuction = (message) => {
             if (message.username !== "" && message.added === true) {
                 toast.info(`${message.username} Joined Auction`, {
@@ -163,7 +167,6 @@ const Mainauction = () => {
         socket.on("message", handleMessage);
 
         return () => {
-            console.log("Closing useEffect");
             socket.off("updateUsersInAuction", handleUpdateUsersInAuction);
             socket.off("message", handleMessage);
         };
@@ -185,6 +188,14 @@ const Mainauction = () => {
 
     const handleSendOffer = (e) => {
         const auctionid = item._id;
+
+        if (maxBid < bid) {
+            setMAxbid(bid);
+            setauction_Winner(activeuserid);
+            setauctionResult({ bid, activeuserid });
+        }
+        console.log(maxBid, " >>>>>>  ", auction_Winner);
+
         e.preventDefault();
         if (bid !== 0) {
             socket?.emit("sendMessage", auctionid, {
