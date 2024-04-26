@@ -3,6 +3,8 @@ import style from "./Categories.module.css"; // Assuming you've saved the CSS in
 import options from "../Assets/categories";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { NavDropdown } from "react-bootstrap";
+import { withWidth } from "@material-ui/core";
 // import { NavDropdown } from "react-bootstrap";
 
 const CategoryBar = ({ onSelectedCategories2e }) => {
@@ -21,42 +23,40 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
             <div className={style.navbarcontent}>
                 {/* <span>All Category <KeyboardArrowDownIcon/> </span> */}
                 <div>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            All Category 
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            {options.map((item, index) => {
-                                return (
-                                    <li key={index}>
-                                        <input
-                                            type="checkbox"
-                                            id={item.value}
-                                            onChange={handleCategoryChange}
-                                        />
-                                        <label htmlFor={item.value}>{item.label}</label>
-                                    </li>
-                                );
-                            })}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                <NavDropdown title="All Categories" className={style.dropDownMenu}>
+                        {options
+                            .sort((a, b) => a.label.localeCompare(b.label)) // Sort options alphabetically by label
+                            .map((item, index) => (
+                                <NavDropdown.Item key={index}>
+                                    <input
+                                        type="checkbox"
+                                        id={item.value}
+                                        onChange={handleCategoryChange}
+                                    />
+                                    <label htmlFor={item.value}>{item.label}</label>
+                                </NavDropdown.Item>
+                            ))}
+                    </NavDropdown>
+                </div>
+                
+                <div>
+                    <ul className={style.category_checkboxes}>
+                        {options.slice(0,6).map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <input
+                                        type="checkbox"
+                                        id={item.value}
+                                        onChange={handleCategoryChange}
+                                    />
+                                    <label htmlFor={item.value}>{item.label}</label>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
                
-                <ul className={style.category_checkboxes}>
-                    {options.slice(0,8).map((item, index) => {
-                        return (
-                            <li key={index}>
-                                <input
-                                    type="checkbox"
-                                    id={item.value}
-                                    onChange={handleCategoryChange}
-                                />
-                                <label htmlFor={item.value}>{item.label}</label>
-                            </li>
-                        );
-                    })}
-                </ul>
+                
             </div>
         </nav>
     );

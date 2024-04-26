@@ -12,6 +12,8 @@ import admin from "../Assets/user1.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import GavelIcon from "@mui/icons-material/Gavel";
 import Categories from "../Dashboard/Categories";
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
     axios.defaults.withCredentials = true;
@@ -107,8 +109,14 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                             />
                         </div>
                     )}
+                    
+                    <div >
+                        
+                    </div>
+                    
                     {isauth ? (
                         <div className="profile_dragdown">
+                            <NotificationsIcon fontSize="large" className="notify_icon" style={{ fill: "#ebd04b" }}/>
                             <NavDropdown
                                 id="nav-dropdown-light-example"
                                 className="custom-nav-dropdown"
@@ -221,6 +229,20 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                                         </span>
                                     </NavLink>
 
+                                    <NavLink
+                                        className="dropdownitems"
+                                        onClick={handlelogout}>
+                                        &ensp;
+                                        <WhatsAppIcon
+                                            fontSize="medium"
+                                            style={{
+                                                fill: "#25D366",
+                                            }}
+                                        />
+                                        &emsp;
+                                        <span className="droptext">Chat</span>
+                                    </NavLink>
+
                                     <NavDropdown.Divider />
                                     <NavLink
                                         className="dropdownitems"
@@ -235,6 +257,8 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                                         &emsp;
                                         <span className="droptext">Logout</span>
                                     </NavLink>
+
+                                   
                                 </div>
                             </NavDropdown>
 

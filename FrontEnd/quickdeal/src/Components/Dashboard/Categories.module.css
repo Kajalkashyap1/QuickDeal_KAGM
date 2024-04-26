@@ -5,15 +5,18 @@
   color: #171717;
   padding: 10px 20px; /* Adjust padding to provide space around the content */
   width: 100%; /* Set width to 100% to make it responsive */
-  min-width: 800px; /* Set a minimum width to ensure all categories fit */
-  height: 90px;
+  /* min-width: 600px;  Set a minimum width to ensure all categories fit */
+  max-height: 70px;
 }
 
-.navbar_content {
+.navbarcontent {
   display: flex;
-  justify-content: space-between; /* Add space between items */
-  align-items: center;
+  /* justify-content: space-between;  */
+  /* align-items: center; */
+  padding: 10px;
 }
+
+
 
 .logo_text {
   display: flex;
@@ -58,7 +61,16 @@ select {
   cursor: pointer;
 }
 
+
+.category_dropdown {
+  background-color: #510f83; 
+}
+
 /* Hover effect */
 .category_dropdown:hover {
   background-color: #510f83; /* Change background color on hover */
 }
+
+
+
+

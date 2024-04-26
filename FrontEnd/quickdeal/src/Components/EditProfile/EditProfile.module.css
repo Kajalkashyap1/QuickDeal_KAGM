@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 20px; /* Adjusted margin */
+    margin-top: 150px;
 }
 
 .left {

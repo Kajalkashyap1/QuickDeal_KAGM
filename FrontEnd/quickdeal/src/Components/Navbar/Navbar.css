@@ -47,6 +47,7 @@
     overflow: hidden;
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+    margin-left: 100px;
 }
 
 .input {
@@ -67,6 +68,12 @@
     width: 100px;
     height: 60px;
     padding: "2px";
+}
+
+/* notification icon */
+.notify_icon{
+    margin: 10px;
+    margin-right: 10px;
 }
 
 /* Responsive Styling */
