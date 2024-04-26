@@ -5,7 +5,8 @@ const Categories = ({ onSelectedCategoriesChange }) => {
         onSelectedCategoriesChange(data);
     };
     return (
-        <div className="cat-container d-flex justify-content-between">
+        <div>
+            
             <CategoryBar onSelectedCategories2e={sendtoparent} />
         </div>
     );
