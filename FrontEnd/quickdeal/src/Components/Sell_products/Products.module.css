@@ -173,3 +173,37 @@
     display: inline-block;
     border: 1px solid rgba(14, 4, 5, 0.274);
 }
+.select_field_checkbox {
+    user-select: none;
+}
+.select_field_checkbox input[type="checkbox"] {
+    /* Ensure the default checkbox is hidden */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Use custom styles for the checkbox */
+    width: 15px;
+    height: 15px;
+    border: 1px solid #999; /* Border color for the checkbox */
+    border-radius: 3px;
+    background-color: white;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+}
+
+/* Define custom styles for the checked state */
+.select_field_checkbox input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: block;
+    width: 18px;
+    height: 15px;
+    text-align: center;
+    line-height: 10px;
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    color: #1c78da; /* Color of the checkmark */
+    font-size: 30px;
+    font-weight: 550;
+}

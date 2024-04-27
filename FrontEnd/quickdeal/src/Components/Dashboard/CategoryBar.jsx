@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./Categories.module.css"; // Assuming you've saved the CSS in a file named Categories.css
-import options from "../Assets/categories";
+import { options, staticOptions } from "../Assets/categories";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Dropdown from "react-bootstrap/Dropdown";
 import { NavDropdown } from "react-bootstrap";
@@ -11,11 +11,8 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const handleCategoryChange = (event) => {
         const { id, checked } = event.target;
+        console.log(id, checked);
         onSelectedCategories2e({ id, checked });
-    };
-
-    const toggleDropdown = () => {
-        setShowDropdown(!showDropdown);
     };
 
     return (
@@ -47,7 +44,7 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
                                             htmlFor={item.value}
                                             style={{
                                                 cursor: "pointer",
-                                                marginLeft: "5px",
+                                                marginLeft: "10px",
                                             }}>
                                             {item.label}
                                         </label>
@@ -59,16 +56,18 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
 
                 <div>
                     <ul className={style.category_checkboxes}>
-                        {options.slice(0, 7).map((item, index) => {
+                        {staticOptions.slice(0, 9).map((item2, index) => {
                             return (
                                 <li key={index}>
                                     <input
                                         type="checkbox"
-                                        id={item.value}
+                                        id={item2.value}
                                         onChange={handleCategoryChange}
                                     />
-                                    <label htmlFor={item.value}>
-                                        {item.label}
+                                    <label
+                                        htmlFor={item2.value}
+                                        style={{ marginLeft: "10px" }}>
+                                        {item2.label}
                                     </label>
                                 </li>
                             );

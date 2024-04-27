@@ -9,7 +9,7 @@ import UploadIcon from "@mui/icons-material/Upload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import options from "../Assets/categories";
+import { categoriesForForm } from "../Assets/categories";
 
 const Products = () => {
     const navigate = useNavigate();
@@ -251,7 +251,7 @@ const Products = () => {
                                     </span>
                                     <div
                                         className={style.select_field_checkbox}>
-                                        {options.map((option) => (
+                                        {categoriesForForm.map((option) => (
                                             <div
                                                 key={option.value}
                                                 className={style.checkfield}>

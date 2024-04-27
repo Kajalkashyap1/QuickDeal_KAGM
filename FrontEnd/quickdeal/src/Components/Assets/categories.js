@@ -1,11 +1,6 @@
-const options = [
-    { value: "electronics", label: "Electronics" },
-    { value: "Mobiles phone", label: "Mobiles" },
+export const options = [
     { value: "fashion beauty", label: "Fashion & Beauty" },
     { value: "home furniture", label: "Home & Furniture" },
-    { value: "books stationery", label: "Books & Stationery" },
-    { value: "sports fitness", label: "Sports & Fitness" },
-    { value: "Hobbies", label: "Hobbies" },
     { value: "vehicles", label: "Vehicles" },
     { value: "real estate", label: "Real Estate" },
     { value: "pets", label: "Pets" },
@@ -16,8 +11,6 @@ const options = [
     { value: "tools equipment", label: "Tools & Equipment" },
     { value: "antiques", label: "Antiques" },
     { value: "jewelry", label: "Jewelry" },
-    { value: "computers laptop", label: "Computers & Laptops" },
-    { value: "cell phones", label: "Cell Phones & Accessories" },
     { value: "home appliances", label: "Home Appliances" },
     { value: "toys games", label: "Toys & Games" },
     { value: "camera photo", label: "Cameras & Photography" },
@@ -26,7 +19,6 @@ const options = [
     { value: "office furniture", label: "Office Furniture" },
     { value: "textbooks", label: "Textbooks" },
     { value: "school supplies", label: "School Supplies" },
-    { value: "stationery", label: "Stationery" },
     {
         value: "backpacks bags luggage troly trolly bag",
         label: "Backpacks & Bags",
@@ -39,4 +31,56 @@ const options = [
     { value: "transportation", label: "Transportation" }, // Bicycles, scooters, etc.
     { value: "musical instruments", label: "Musical Instruments" },
 ];
-export default options;
+
+export const staticOptions = [
+    { value: "electronics", label: "Electronics" },
+    { value: "Mobiles phone", label: "Mobiles" },
+    { value: "books stationery", label: "Books & Stationery" },
+    { value: "sports fitness", label: "Sports & Fitness" },
+    { value: "Hobbies", label: "Hobbies" },
+    { value: "computers laptop", label: "Computers & Laptops" },
+    { value: "cell phones", label: "Cell Phones & Accessories" },
+    { value: "stationery", label: "Stationery" },
+];
+
+export const categoriesForForm = [
+    { value: "fashion beauty", label: "Fashion & Beauty" },
+    { value: "home furniture", label: "Home & Furniture" },
+    { value: "vehicles", label: "Vehicles" },
+    { value: "real estate", label: "Real Estate" },
+    { value: "pets", label: "Pets" },
+    { value: "Fashion", label: "Fashion" },
+    { value: "arts crafts", label: "Arts & Crafts" },
+    { value: "health wellness", label: "Health & Wellness" },
+    { value: "office supplies", label: "Office Supplies" },
+    { value: "tools equipment", label: "Tools & Equipment" },
+    { value: "antiques", label: "Antiques" },
+    { value: "jewelry", label: "Jewelry" },
+    { value: "home appliances", label: "Home Appliances" },
+    { value: "toys games", label: "Toys & Games" },
+    { value: "camera photo", label: "Cameras & Photography" },
+    { value: "video games consoles", label: "Video Games " },
+    { value: "gardening garden outdoor", label: "Gardening & Outdoor" },
+    { value: "office furniture", label: "Office Furniture" },
+    { value: "textbooks", label: "Textbooks" },
+    { value: "school supplies", label: "School Supplies" },
+    {
+        value: "backpacks bags luggage troly trolly bag",
+        label: "Backpacks & Bags",
+    },
+    { value: "furniture", label: "Furniture" },
+    { value: "decor", label: "Decor & Wall Art" },
+    { value: "clothing", label: "Clothing & Accessories" },
+    { value: "shoes Footwear", label: "Shoes & Footwear" },
+    { value: "fitness", label: "Fitness & Health" },
+    { value: "transportation", label: "Transportation" }, // Bicycles, scooters, etc.
+    { value: "musical instruments", label: "Musical Instruments" },
+    { value: "electronics", label: "Electronics" },
+    { value: "Mobiles phone", label: "Mobiles" },
+    { value: "books stationery", label: "Books & Stationery" },
+    { value: "sports fitness", label: "Sports & Fitness" },
+    { value: "Hobbies", label: "Hobbies" },
+    { value: "computers laptop", label: "Computers & Laptops" },
+    { value: "cell phones", label: "Cell Phones & Accessories" },
+    { value: "stationery", label: "Stationery" },
+];

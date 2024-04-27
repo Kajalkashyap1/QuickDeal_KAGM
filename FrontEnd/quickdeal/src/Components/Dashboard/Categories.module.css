@@ -90,3 +90,38 @@ select {
 .category_dropdown:hover {
     background-color: #510f83; /* Change background color on hover */
 }
+/* Add this CSS to your Categories.module.css file */
+
+.category_checkboxes input[type="checkbox"],
+.list input[type="checkbox"] {
+    /* Ensure the default checkbox is hidden */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Use custom styles for the checkbox */
+    width: 15px;
+    height: 15px;
+    border: 1px solid #999; /* Border color for the checkbox */
+    border-radius: 3px;
+    background-color: white;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+}
+
+/* Define custom styles for the checked state */
+.category_checkboxes input[type="checkbox"]:checked::before,
+.list input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: block;
+    width: 18px;
+    height: 15px;
+    text-align: center;
+    line-height: 10px;
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    color: #1c78da; /* Color of the checkmark */
+    font-size: 30px;
+    font-weight: 550;
+}
