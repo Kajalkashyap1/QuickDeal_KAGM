@@ -7,18 +7,23 @@ import { NavDropdown } from "react-bootstrap";
 import { withWidth } from "@material-ui/core";
 // import { NavDropdown } from "react-bootstrap";
 
-const CategoryBar = ({ onSelectedCategories2e }) => {
+const CategoryBar = ({ onSelectedCategories2e, onClearFilter2 }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const handleCategoryChange = (event) => {
         const { id, checked } = event.target;
-        console.log(id, checked);
         onSelectedCategories2e({ id, checked });
     };
-
+    const handleClearFilter = () => {
+        document
+            .querySelectorAll('input[type="checkbox"]')
+            .forEach((checkbox) => {
+                checkbox.checked = false;
+            });
+        onClearFilter2();
+    };
     return (
         <nav className={style.navbar}>
             <div className={style.navbarcontent}>
-                {/* <span>All Category <KeyboardArrowDownIcon/> </span> */}
                 <div>
                     <NavDropdown
                         title="All Categories"
@@ -75,9 +80,9 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
                     </ul>
                 </div>
 
-               
-                    <button className="clear-filter">Clear Filter</button>
-                
+                <button className="clear-filter" onClick={handleClearFilter}>
+                    Clear Filter
+                </button>
             </div>
         </nav>
     );

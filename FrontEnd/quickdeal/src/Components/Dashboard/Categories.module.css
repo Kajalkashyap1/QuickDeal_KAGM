@@ -16,6 +16,9 @@
     padding: 10px;
     position: relative;
     user-select: none;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
 }
 .list {
     padding-left: 5px;
@@ -36,7 +39,7 @@
 }
 
 /* notification dropdown styling */
-.notificationDropdown{
+.notificationDropdown {
     /* width: 250px; */
     max-height: 500px; /* Set your desired max height */
     overflow-y: auto;
@@ -47,13 +50,9 @@
 }
 
 .dropdown-toggle::after {
-    display: none !important; 
-  }
+    display: none !important;
+}
 
-/* .dropdown-menu {
-    overflow-y: auto;
-    max-height: 90px;
-} */
 .logo_text {
     display: flex;
     align-items: center;
@@ -140,4 +139,3 @@ select {
     font-size: 30px;
     font-weight: 550;
 }
-

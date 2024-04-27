@@ -24,7 +24,7 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
     const [image, setimage] = useState("");
     const [userid, setuserid] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
-    
+
     const handleSelectedCategoriesChange = (categories) => {
         const { id, checked } = categories;
         if (checked) {
@@ -36,7 +36,11 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
         }
     };
 
-    
+    const removeFilter = () => {
+        onCategoryFilterChange([]);
+        setSelectedCategories([]);
+    };
+
     useEffect(() => {
         if (onCategoryFilterChange !== undefined)
             onCategoryFilterChange(selectedCategories);
@@ -116,26 +120,21 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
 
                     {isauth ? (
                         <div className="profile_dragdown">
-                            
                             <NavDropdown
-                            // id="nav-dropdown-light-example"
-                            className="custom-nav-dropdown"
-                            title = {
-                                <NotificationsIcon
-                                    fontSize="large"
-                                    className="notify_icon"
-                                    style={{ fill: "#ebd04b" }}
-                                />
-                            }
-
-                            >
-
+                                // id="nav-dropdown-light-example"
+                                className="custom-nav-dropdown"
+                                title={
+                                    <NotificationsIcon
+                                        fontSize="large"
+                                        className="notify_icon"
+                                        style={{ fill: "#ebd04b" }}
+                                    />
+                                }>
                                 <div className="notificationDropdown">
                                     hello everyone
                                 </div>
-
                             </NavDropdown>
-                          
+
                             <NavDropdown
                                 id="nav-dropdown-light-example"
                                 className="custom-nav-dropdown"
@@ -304,6 +303,7 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                         onSelectedCategoriesChange={
                             handleSelectedCategoriesChange
                         }
+                        onClearFilter3={removeFilter}
                     />
                 )}
             </div>
