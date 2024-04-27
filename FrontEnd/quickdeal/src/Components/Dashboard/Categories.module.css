@@ -1,76 +1,92 @@
 /* Categories.css */
 
 .navbar {
-  background-color: #f4f4f7;
-  color: #171717;
-  padding: 10px 20px; /* Adjust padding to provide space around the content */
-  width: 100%; /* Set width to 100% to make it responsive */
-  /* min-width: 600px;  Set a minimum width to ensure all categories fit */
-  max-height: 70px;
+    background-color: #f4f4f7;
+    color: #171717;
+    padding: 10px 20px; /* Adjust padding to provide space around the content */
+    width: 100%; /* Set width to 100% to make it responsive */
+    /* min-width: 600px;  Set a minimum width to ensure all categories fit */
+    max-height: 70px;
 }
 
 .navbarcontent {
-  display: flex;
-  /* justify-content: space-between;  */
-  /* align-items: center; */
-  padding: 10px;
+    display: flex;
+    /* justify-content: space-between;  */
+    /* align-items: center; */
+    padding: 10px;
+    position: relative;
+    user-select: none;
+}
+.list {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    user-select: none;
 }
 
+.dropdownScroll {
+    width: 250px;
+    max-height: 500px; /* Set your desired max height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
 
-
+/* .dropdown-menu {
+    overflow-y: auto;
+    max-height: 90px;
+} */
 .logo_text {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .logo_text p {
-  margin: 0;
-  font-size: 1.2rem;
-  white-space: nowrap; /* Ensure the text doesn't wrap */
+    margin: 0;
+    font-size: 1.2rem;
+    white-space: nowrap; /* Ensure the text doesn't wrap */
 }
 
 select {
-  padding: 8px 30px 8px 8px; /* Add extra padding on the right to accommodate the arrow */
-  font-size: 1rem;
-  margin-left: 10px;
-  appearance: none; /* Remove default appearance */
- 
-  background-size: 20px; /* Adjust size of the arrow */
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  color: #333;
-  cursor: pointer; /* Add pointer cursor */
+    padding: 8px 30px 8px 8px; /* Add extra padding on the right to accommodate the arrow */
+    font-size: 1rem;
+    margin-left: 10px;
+    appearance: none; /* Remove default appearance */
+
+    background-size: 20px; /* Adjust size of the arrow */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer; /* Add pointer cursor */
 }
 
 .category_checkboxes {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 50px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 50px;
 }
 
 .category_checkboxes li {
-  margin-right: 20px;
-  margin-bottom: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
 .category_checkboxes label {
-  font-size: 1rem;
-  cursor: pointer;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-
 .category_dropdown {
-  background-color: #510f83; 
+    background-color: #510f83;
 }
 
 /* Hover effect */
 .category_dropdown:hover {
-  background-color: #510f83; /* Change background color on hover */
+    background-color: #510f83; /* Change background color on hover */
 }
-
-
-
-
