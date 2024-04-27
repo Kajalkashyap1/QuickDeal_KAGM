@@ -74,6 +74,10 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
                         })}
                     </ul>
                 </div>
+
+               
+                    <button className="clear-filter">Clear Filter</button>
+                
             </div>
         </nav>
     );
