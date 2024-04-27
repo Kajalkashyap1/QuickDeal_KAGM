@@ -24,7 +24,7 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
     const [image, setimage] = useState("");
     const [userid, setuserid] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
-
+    
     const handleSelectedCategoriesChange = (categories) => {
         const { id, checked } = categories;
         if (checked) {
@@ -35,6 +35,8 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
             );
         }
     };
+
+    
     useEffect(() => {
         if (onCategoryFilterChange !== undefined)
             onCategoryFilterChange(selectedCategories);
@@ -114,11 +116,26 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
 
                     {isauth ? (
                         <div className="profile_dragdown">
-                            <NotificationsIcon
-                                fontSize="large"
-                                className="notify_icon"
-                                style={{ fill: "#ebd04b" }}
-                            />
+                            
+                            <NavDropdown
+                            // id="nav-dropdown-light-example"
+                            className="custom-nav-dropdown"
+                            title = {
+                                <NotificationsIcon
+                                    fontSize="large"
+                                    className="notify_icon"
+                                    style={{ fill: "#ebd04b" }}
+                                />
+                            }
+
+                            >
+
+                                <div className="notificationDropdown">
+                                    hello everyone
+                                </div>
+
+                            </NavDropdown>
+                          
                             <NavDropdown
                                 id="nav-dropdown-light-example"
                                 className="custom-nav-dropdown"

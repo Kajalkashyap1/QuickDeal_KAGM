@@ -35,6 +35,21 @@
     margin-left: 30px;
 }
 
+/* notification dropdown styling */
+.notificationDropdown{
+    /* width: 250px; */
+    max-height: 500px; /* Set your desired max height */
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.dropdown-toggle::after {
+    display: none !important; 
+  }
+
 /* .dropdown-menu {
     overflow-y: auto;
     max-height: 90px;
