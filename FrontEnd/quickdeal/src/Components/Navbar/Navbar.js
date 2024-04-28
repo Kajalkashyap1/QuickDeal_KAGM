@@ -16,7 +16,7 @@ import Categories from "../Dashboard/Categories";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { ChatList } from "react-chat-elements";
-
+import Badge from "@material-ui/core/Badge";
 let socket;
 function Navbar({
     searchbar,
@@ -158,11 +158,29 @@ function Navbar({
                                 // id="nav-dropdown-light-example"
                                 className="custom-nav-dropdown"
                                 title={
-                                    <NotificationsIcon
-                                        fontSize="large"
-                                        className="notify_icon"
-                                        style={{ fill: "#ebd04b" }}
-                                    />
+                                    <>
+                                        <div
+                                            style={{
+                                                position: "relative",
+                                                display: "initial",
+                                                marginRight: "30px",
+                                                borderRadius: "50px",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                            }}>
+                                            <Badge
+                                                badgeContent={
+                                                    notifications.length - 1
+                                                }
+                                                color="error">
+                                                <NotificationsIcon
+                                                    fontSize="40px" // Adjust the fontSize to a custom value
+                                                    className="notify_icon"
+                                                    style={{ fill: "#ebd04b" }}
+                                                />
+                                            </Badge>
+                                        </div>
+                                    </>
                                 }>
                                 <ul className="notificationDropdown">
                                     {notifications &&

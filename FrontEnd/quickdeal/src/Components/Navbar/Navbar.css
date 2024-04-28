@@ -72,8 +72,7 @@
 
 /* notification icon */
 .notify_icon {
-    margin: 10px;
-    margin-right: 10px;
+    font-size: 50px;
 }
 
 /* Responsive Styling */
