@@ -61,9 +61,15 @@ navbarNamespace.on("connection", (socket) => {
         if (!isUserExist) {
             const user = { userId, socketId: socket.id };
             navbarsocketusers.push(user);
-            navbarNamespace.emit("getUsers", users);
+            navbarNamespace.emit("getUsers", navbarsocketusers);
             // console.log("user joined navbar ", userId);
         }
+    });
+    socket.on("disconnect", () => {
+        navbarsocketusers = navbarsocketusers.filter(
+            (user) => user.socketId !== socket.id
+        );
+        // console.log("User Disconnected from chat : ", socket.id);
     });
 });
 // Socket.io

@@ -98,7 +98,7 @@ const Chatting = () => {
         socket?.emit("addUser", buyer);
         socket?.on("getUsers", (users) => {
             /// we can seee online users from here
-            console.log("activeUsers :>> ", users);
+            // console.log("activeUsers :>> ", users);
             setonlineusers(users);
         });
         const audio = new Audio(tune);

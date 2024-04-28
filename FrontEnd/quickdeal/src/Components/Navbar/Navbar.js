@@ -90,14 +90,17 @@ function Navbar({
     // ------------------
     useEffect(() => {
         socket?.on("notification", (message) => {
-            console.log("recievec ", message);
+            // console.log("recievec ", message);
             setNoti(message);
+        });
+        socket?.on("getUsers", (message) => {
+            // console.log("Members in navbar  ", message);
         });
     }, []);
     useEffect(() => {
         if (noti) setNotifications([...notifications, { noti }]);
     }, [noti]);
-    console.log(notifications);
+    // console.log(notifications);
     // ------------------
     const [arrowicon, setarrowicon] = useState(false);
     const handlelogout = () => {
