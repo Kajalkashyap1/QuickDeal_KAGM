@@ -61,7 +61,7 @@ const CategoryBar = ({ onSelectedCategories2e, onClearFilter2 }) => {
 
                 <div>
                     <ul className={style.category_checkboxes}>
-                        {staticOptions.slice(0, 7).map((item2, index) => {
+                        {staticOptions.map((item2, index) => {
                             return (
                                 <li key={index}>
                                     <input

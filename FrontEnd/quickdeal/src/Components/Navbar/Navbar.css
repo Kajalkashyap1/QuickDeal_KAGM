@@ -209,7 +209,15 @@
     justify-content: center;
     margin-right: 40px;
 }
-
+.notificationDropdown {
+    padding: 0;
+}
+.chat-list {
+    width: 300px;
+}
+.rce-citem-body--top-time {
+    display: block;
+}
 .clear-filter::before {
     width: 70%;
     height: 2px;

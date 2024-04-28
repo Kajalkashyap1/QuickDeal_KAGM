@@ -24,7 +24,7 @@ const savechats = async (req, res) => {
                 // Add receiver to the members array if not already present
                 existingChat.members.push(reciever);
                 existingChat = await existingChat.save();
-                console.log("Receiver added to existing chat:", existingChat);
+                // console.log("Receiver added to existing chat:", existingChat);
             }
         }
         // Check if an active chat exists for the receiver

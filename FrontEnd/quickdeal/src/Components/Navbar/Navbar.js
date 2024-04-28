@@ -11,11 +11,29 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import admin from "../Assets/user1.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import GavelIcon from "@mui/icons-material/Gavel";
+import { io } from "socket.io-client";
 import Categories from "../Dashboard/Categories";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { ChatList } from "react-chat-elements";
 
-function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
+let socket;
+function Navbar({
+    searchbar,
+    onSearchChange,
+    onCategoryFilterChange,
+    message,
+    buyerinfo,
+    sellerinfo,
+    message2,
+}) {
+    useEffect(() => {
+        socket = io.connect("http://localhost:8000/navbar");
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
+
     axios.defaults.withCredentials = true;
     const navigate = useNavigate();
     const [isauth, setauth] = useState("");
@@ -24,7 +42,8 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
     const [image, setimage] = useState("");
     const [userid, setuserid] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
-
+    const [notifications, setNotifications] = useState([]);
+    const [noti, setNoti] = useState([]);
     const handleSelectedCategoriesChange = (categories) => {
         const { id, checked } = categories;
         if (checked) {
@@ -65,6 +84,21 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                 console.log(err);
             });
     }, []);
+    useEffect(() => {
+        socket?.emit("addUserfornotify", userid);
+    }, [userid]);
+    // ------------------
+    useEffect(() => {
+        socket?.on("notification", (message) => {
+            console.log("recievec ", message);
+            setNoti(message);
+        });
+    }, []);
+    useEffect(() => {
+        if (noti) setNotifications([...notifications, { noti }]);
+    }, [noti]);
+    console.log(notifications);
+    // ------------------
     const [arrowicon, setarrowicon] = useState(false);
     const handlelogout = () => {
         axios
@@ -130,16 +164,62 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                                         style={{ fill: "#ebd04b" }}
                                     />
                                 }>
-                                <div className="notificationDropdown">
-                                    hello everyone
-                                </div>
+                                <ul className="notificationDropdown">
+                                    {notifications &&
+                                        notifications.length > 0 && (
+                                            <ChatList
+                                                className="chat-list"
+                                                dataSource={notifications
+                                                    .map(
+                                                        (data, index) =>
+                                                            data.noti.length !==
+                                                            0
+                                                                ? {
+                                                                      avatar: data
+                                                                          .noti
+                                                                          .senderimg,
+                                                                      alt: "Reactjs",
+                                                                      title: data
+                                                                          .noti
+                                                                          .senderfullName,
+                                                                      subtitle:
+                                                                          data
+                                                                              ?.noti
+                                                                              .message,
+                                                                      date: data
+                                                                          ?.noti
+                                                                          .date,
+                                                                      unread: 0,
+                                                                  }
+                                                                : null // If data is empty array, return null
+                                                    )
+                                                    .filter(Boolean)} // Filter out null values
+                                            />
+                                        )}
+
+                                    {((!message && !notifications) ||
+                                        (notifications[0].noti.length == 0 &&
+                                            notifications.length == 1)) && (
+                                        <ChatList
+                                            className="chat-list"
+                                            dataSource={[
+                                                {
+                                                    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf-VoDNcIiUCfSHDAwPM2VS9uTpovBEPkIPA&s",
+                                                    alt: "Reactjs",
+                                                    title: "No new notifications ",
+                                                    date: new Date(),
+                                                    unread: 0,
+                                                },
+                                            ]}
+                                        />
+                                    )}
+                                </ul>
                             </NavDropdown>
 
                             <NavDropdown
                                 id="nav-dropdown-light-example"
                                 className="custom-nav-dropdown"
                                 onClick={handlearrow}
-                                // onHide={handleDropdownClose}
                                 onTransitionEnd={handleDropdownClose}
                                 title={
                                     <>

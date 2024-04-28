@@ -79,7 +79,7 @@
     padding: 0px;
 }
 .rce-citem-body--top-time {
-    display: none;
+    display: block;
 }
 
 .inboxHeading {

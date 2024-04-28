@@ -23,8 +23,10 @@ export const options = [
         value: "backpacks bags luggage troly trolly bag",
         label: "Backpacks & Bags",
     },
+    { value: "cell phones", label: "Cell Phones & Accessories" },
     { value: "furniture", label: "Furniture" },
     { value: "decor", label: "Decor & Wall Art" },
+    { value: "stationery", label: "Stationery" },
     { value: "clothing", label: "Clothing & Accessories" },
     { value: "shoes Footwear", label: "Shoes & Footwear" },
     { value: "fitness", label: "Fitness & Health" },
@@ -39,8 +41,6 @@ export const staticOptions = [
     { value: "sports fitness", label: "Sports & Fitness" },
     { value: "Hobbies", label: "Hobbies" },
     { value: "computers laptop", label: "Computers & Laptops" },
-    { value: "cell phones", label: "Cell Phones & Accessories" },
-    { value: "stationery", label: "Stationery" },
 ];
 
 export const categoriesForForm = [

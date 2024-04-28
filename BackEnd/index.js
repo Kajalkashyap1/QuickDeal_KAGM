@@ -51,7 +51,21 @@ app.use("/profile", require("./Routers/users.js"));
 app.use("/auction", require("./Routers/auction.js"));
 app.use("/chatting", require("./Routers/chatting.js"));
 // -------------------------------------------------------------------------------------------
-
+const navbarNamespace = io.of("/navbar");
+let navbarsocketusers = [];
+navbarNamespace.on("connection", (socket) => {
+    socket.on("addUserfornotify", (userId) => {
+        const isUserExist = navbarsocketusers.find(
+            (user) => user.userId === userId
+        );
+        if (!isUserExist) {
+            const user = { userId, socketId: socket.id };
+            navbarsocketusers.push(user);
+            navbarNamespace.emit("getUsers", users);
+            // console.log("user joined navbar ", userId);
+        }
+    });
+});
 // Socket.io
 
 // ----------------------------------------Socket io implementations for chatting stars----------------------------------------------------------
@@ -64,6 +78,7 @@ chatNamespace.on("connection", (socket) => {
             const user = { userId, socketId: socket.id };
             users.push(user);
             chatNamespace.emit("getUsers", users);
+            // console.log("user joined chat ", userId);
         }
     });
 
@@ -71,10 +86,12 @@ chatNamespace.on("connection", (socket) => {
         "sendMessage",
         async ({ senderId, receiverId, message, conversationId, date }) => {
             const receiver = users.find((user) => user.userId === receiverId);
+            const notifyreceiver = navbarsocketusers.find(
+                (user) => user.userId === receiverId
+            );
             const sender = users.find((user) => user.userId === senderId);
             const senderinfo = await userdata.findById(senderId);
             const recieverinfo = await userdata.findById(receiverId);
-            // console.log("sender :>> ", sender, receiver);
             if (receiver) {
                 chatNamespace
                     .to(receiver.socketId)
@@ -96,6 +113,7 @@ chatNamespace.on("connection", (socket) => {
                             email: recieverinfo.email,
                         },
                     });
+
                 // console.log(`Message sent from ${senderinfo.fullname}`);
             } else {
                 chatNamespace.to(sender.socketId).emit("getMessage", {
@@ -110,6 +128,21 @@ chatNamespace.on("connection", (socket) => {
                         email: senderinfo.email,
                     },
                 });
+            }
+
+            if (notifyreceiver) {
+                navbarNamespace
+                    .to(notifyreceiver.socketId)
+                    .emit("notification", {
+                        fullName: senderinfo.fullName,
+                        message,
+                        receiverId,
+                        date,
+                        senderid: senderinfo._id,
+                        senderimg: senderinfo.imageurl,
+                        senderfullName: senderinfo["fullname"],
+                        senderemail: senderinfo.email,
+                    });
             }
         }
     );
@@ -127,79 +160,6 @@ chatNamespace.on("connection", (socket) => {
 let UsersInAuction = [];
 const auctionNamespace = io.of("/auction");
 
-// auctionNamespace.on("connection", (socket) => {
-//     var auctionId;
-//     var activeUserId;
-//     console.log("User Joined auction : ", socket.id);
-//     socket.on(
-//         "joinAuctionRoom",
-//         ({ activeUserId, auctionId, username, useremail }) => {
-//             console.log(`Member ${activeUserId} joined ${auctionId}`);
-//             auctionId = auctionId;
-//             activeUserId = username;
-//             // Check if the user is already in the room
-//             const isUserInRoom =
-//                 UsersInAuction[auctionId] &&
-//                 UsersInAuction[auctionId].find(
-//                     (user) => user.userId === activeUserId
-//                 );
-
-//             if (!isUserInRoom) {
-//                 socket.join(auctionId);
-//                 console.log(`Member ${username} joined ${auctionId}`);
-
-//                 // Add user to UsersInAuction array for the auctionId
-//                 if (!UsersInAuction[auctionId]) {
-//                     UsersInAuction[auctionId] = [];
-//                 }
-//                 UsersInAuction[auctionId].push({
-//                     userId: activeUserId,
-//                     name: username,
-//                     email: useremail,
-//                 });
-
-//                 // Emit an event to update the UI with the updated list of users in the auction room
-//                 auctionNamespace.to(auctionId).emit("updateUsersInAuction", {
-//                     username,
-//                     users: UsersInAuction[auctionId],
-//                     added: true,
-//                 });
-//             } else {
-//                 console.log(`Member ${username} is already in ${auctionId}`);
-//             }
-//         }
-//     );
-
-//     socket.on("sendMessage", (room, message) => {
-//         auctionNamespace.to(room).emit("message", message);
-//         console.log(`Message sent to room ${room}: ${message}`);
-//     });
-//     socket.on("disconnect", () => {
-//         // Remove the user from UsersInAuction for this auction room
-//         console.log(activeUserId);
-//         if (UsersInAuction[auctionId]) {
-//             // Find the disconnected user and get their username
-//             const disconnectedUser = UsersInAuction[auctionId].find(
-//                 (user) => user.userId === activeUserId
-//             );
-//             const disconnectedUsername = disconnectedUser
-//                 ? disconnectedUser.name
-//                 : "";
-
-//             // Filter out the disconnected user
-//             UsersInAuction[auctionId] = UsersInAuction[auctionId].filter(
-//                 (user) => user.userId !== activeUserId
-//             );
-
-//             // Emit an event to update the UI with the updated list of users in the auction room
-//             auctionNamespace.to(auctionId).emit("updateUsersInAuction", {
-//                 username: disconnectedUsername,
-//                 users: UsersInAuction[auctionId],
-//                 added: false,
-//             });
-//         }
-//     });
-// });
 // Define variables outside the auctionNamespace.on("connection", ...) callback
 let auctionId;
 let activeUserId;

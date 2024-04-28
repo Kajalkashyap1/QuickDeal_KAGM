@@ -131,6 +131,7 @@ const Chatting = () => {
                     );
                 });
         });
+
         return () => {
             socket.off("getMessage");
             audio.pause();
@@ -202,7 +203,13 @@ const Chatting = () => {
     }, [messArray, Messages]);
     return (
         <>
-            <Navbar searchbar={false} />
+            <Navbar
+                searchbar={false}
+                message={messArray}
+                sellerinfo={sellerinfo}
+                buyerinfo={buyerinfo}
+                message2={Messages}
+            />
             <div className="maindiv">
                 <div className="inbox">
                     <Card>
