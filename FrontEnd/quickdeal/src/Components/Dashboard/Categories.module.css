@@ -1,70 +1,154 @@
 /* Categories.css */
 
 .navbar {
+<<<<<<< HEAD
   background-color: #f4f4f7;
   color: #171717;
   padding: 10px 20px; /* Adjust padding to provide space around the content */
   width: 100%; /* Set width to 100% to make it responsive */
   min-width: 900px; /* Set a minimum width to ensure all categories fit */
   height: 60px;
+=======
+    background-color: #f4f4f7;
+    color: #171717;
+    padding: 10px 20px; /* Adjust padding to provide space around the content */
+    width: 100%; /* Set width to 100% to make it responsive */
+    /* min-width: 600px;  Set a minimum width to ensure all categories fit */
+    max-height: 70px;
+>>>>>>> 45f5292d3f311570c8e8871b929ae4c0079bf43f
 }
 
-.navbar_content {
-  display: flex;
-  justify-content: space-between; /* Add space between items */
-  align-items: center;
+.navbarcontent {
+    display: flex;
+    /* justify-content: space-between;  */
+    /* align-items: center; */
+    padding: 10px;
+    position: relative;
+    user-select: none;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+.list {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdownScroll {
+    width: 250px;
+    max-height: 500px; /* Set your desired max height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+/* notification dropdown styling */
+.notificationDropdown {
+    /* width: 250px; */
+    max-height: 500px; /* Set your desired max height */
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
 }
 
 .logo_text {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
  
 
 .logo_text p {
-  margin: 0;
-  font-size: 1.2rem;
-  white-space: nowrap; /* Ensure the text doesn't wrap */
+    margin: 0;
+    font-size: 1.2rem;
+    white-space: nowrap; /* Ensure the text doesn't wrap */
 }
 
 select {
-  padding: 8px 30px 8px 8px; /* Add extra padding on the right to accommodate the arrow */
-  font-size: 1rem;
-  margin-left: 10px;
-  appearance: none; /* Remove default appearance */
- 
-  background-size: 20px; /* Adjust size of the arrow */
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  color: #333;
-  cursor: pointer; /* Add pointer cursor */
+    padding: 8px 30px 8px 8px; /* Add extra padding on the right to accommodate the arrow */
+    font-size: 1rem;
+    margin-left: 10px;
+    appearance: none; /* Remove default appearance */
+
+    background-size: 20px; /* Adjust size of the arrow */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer; /* Add pointer cursor */
 }
 
 
 .category_checkboxes {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 250px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 50px;
 }
 
 .category_checkboxes li {
-  margin-top: -30px;
-  display: inline-block; /* Display list items as inline-block */
-  margin-right: 20px;
-  margin-bottom: 0; /* Remove bottom margin */
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
 .category_checkboxes label {
-  font-size: 1rem;
-  cursor: pointer;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.category_dropdown {
+    background-color: #510f83;
 }
 
 /* Hover effect */
 .category_dropdown:hover {
-  background-color: #510f83; /* Change background color on hover */
+    background-color: #510f83; /* Change background color on hover */
+}
+/* Add this CSS to your Categories.module.css file */
+
+.category_checkboxes input[type="checkbox"],
+.list input[type="checkbox"] {
+    /* Ensure the default checkbox is hidden */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Use custom styles for the checkbox */
+    width: 15px;
+    height: 15px;
+    border: 1px solid #999; /* Border color for the checkbox */
+    border-radius: 3px;
+    background-color: white;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+}
+
+/* Define custom styles for the checked state */
+.category_checkboxes input[type="checkbox"]:checked::before,
+.list input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: block;
+    width: 18px;
+    height: 15px;
+    text-align: center;
+    line-height: 10px;
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    color: #1c78da; /* Color of the checkmark */
+    font-size: 30px;
+    font-weight: 550;
 }
 /*All category box*/
 .dropdown-basic {

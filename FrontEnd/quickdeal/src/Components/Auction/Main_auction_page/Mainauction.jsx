@@ -23,9 +23,6 @@ const Mainauction = () => {
     const [messArray, setMessArray] = useState([]);
     const [item, setitem] = useState([]);
     const [auctionended, setauctionended] = useState(true);
-    const [auction_Winner, setauction_Winner] = useState("");
-    const [maxBid, setMAxbid] = useState(-1e9);
-    const [auctionResult, setauctionResult] = useState();
     useEffect(() => {
         axios
             .get(
@@ -79,20 +76,10 @@ const Mainauction = () => {
             position: "top-right",
             autoClose: 1800,
         });
+
         setauctionended(false);
     };
-    // ------------------- delete auction --------------------
 
-    const handleEndAuction = (auctionid) => {
-        console.log(" >>>>> ", auctionResult);
-        axios
-            .post("http://localhost:8000/auction/endAuction", { auctionid })
-            .then((res) => {
-                if (res.data.status === "success") {
-                    setstatechanged(!statechanged);
-                }
-            });
-    };
     const [activeusersinAuction, setactiveusersinAuction] = useState([]);
     const [demo, setdemo] = useState([]);
     // ---------------- socket for auction --------------------
@@ -185,18 +172,11 @@ const Mainauction = () => {
                 console.log("error in get past auction bids ", err.message);
             });
     }, [auctionid]);
+    // console.log(auctionResult);
 
     const handleSendOffer = (e) => {
-        const auctionid = item._id;
-
-        if (maxBid < bid) {
-            setMAxbid(bid);
-            setauction_Winner(activeuserid);
-            setauctionResult({ bid, activeuserid });
-        }
-        console.log(maxBid, " >>>>>>  ", auction_Winner);
-
         e.preventDefault();
+        const auctionid = item._id;
         if (bid !== 0) {
             socket?.emit("sendMessage", auctionid, {
                 senderId: activeuserid,
@@ -206,6 +186,19 @@ const Mainauction = () => {
             });
         }
     };
+
+    // ------------------- delete auction --------------------
+
+    const handleEndAuction = (auctionid) => {
+        axios
+            .post("http://localhost:8000/auction/endAuction", { auctionid })
+            .then((res) => {
+                if (res.data.status === "success") {
+                    setstatechanged(!statechanged);
+                }
+            });
+    };
+
     useEffect(() => {
         setdemo(activeusersinAuction);
     }, [activeusersinAuction]);

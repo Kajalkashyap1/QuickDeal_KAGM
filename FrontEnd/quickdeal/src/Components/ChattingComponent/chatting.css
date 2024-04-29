@@ -79,7 +79,7 @@
     padding: 0px;
 }
 .rce-citem-body--top-time {
-    display: none;
+    display: block;
 }
 
 .inboxHeading {
@@ -137,4 +137,17 @@
     padding: 0;
     margin-right: 15px;
     margin-left: 15px;
+}
+
+.messagecontainer2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    color: rgba(23, 14, 84, 0.816);
+    font-weight: 600;
+}
+.rce-container-mbox {
+    margin-top: 8px;
+    width: 100%;
 }

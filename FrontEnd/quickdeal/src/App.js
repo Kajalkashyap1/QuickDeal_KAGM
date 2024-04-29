@@ -14,6 +14,7 @@ import Categories from "./Components/Dashboard/Categories";
 import AuctionDashboard from "./Components/Auction/Firstpage/AuctionDashboard";
 import NewAuction from "./Components/Auction/SecondPage/NewAuction";
 import Mainauction from "./Components/Auction/Main_auction_page/Mainauction";
+import ChattingLandingPage from "./Components/ChattingComponent/Chat_landing_page";
 
 function App() {
     return (
@@ -26,8 +27,14 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/resetpasscode" element={<Resetpassword />} />
                 <Route
+                    exact
                     path="/chat/:buyer/:seller"
                     element={<ChattingComponent />}
+                />
+                <Route
+                    exact
+                    path="/chat_landing_page/:buyer"
+                    element={<ChattingLandingPage />}
                 />
                 <Route path="/myads/:userid" element={<Myads />} />
                 <Route

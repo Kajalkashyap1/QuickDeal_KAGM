@@ -47,6 +47,7 @@
     overflow: hidden;
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+    margin-left: 100px;
 }
 
 .input {
@@ -67,6 +68,11 @@
     width: 100px;
     height: 60px;
     padding: "2px";
+}
+
+/* notification icon */
+.notify_icon {
+    font-size: 50px;
 }
 
 /* Responsive Styling */
@@ -181,6 +187,88 @@
     cursor: pointer;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+/* clear filter button */
+.clear-filter {
+    position: relative;
+    width: 95px;
+    min-width: 90px;
+    height: 35px;
+    border-radius: 45px;
+    border: none;
+    background-color: rgb(151, 95, 255);
+    color: white;
+    box-shadow: 0px 10px 10px rgb(210, 187, 253) inset,
+        0px 5px 10px rgba(5, 5, 5, 0.212),
+        0px -10px 10px rgb(124, 54, 255) inset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+}
+.notificationDropdown {
+    padding: 0;
+}
+.chat-list {
+    width: 300px;
+}
+.rce-citem-body--top-time {
+    display: block;
+}
+.clear-filter::before {
+    width: 70%;
+    height: 2px;
+    position: absolute;
+    background-color: rgba(250, 250, 250, 0.678);
+    filter: blur(1px);
+    top: 7px;
+    border-radius: 50%;
+}
+
+.clear-filter::after {
+    width: 70%;
+    height: 2px;
+    position: absolute;
+    background-color: rgba(250, 250, 250, 0.137);
+    filter: blur(1px);
+    bottom: 7px;
+    border-radius: 50%;
+}
+
+.clear-filter:hover {
+    animation: jello-horizontal 0.9s both;
+}
+
+@keyframes jello-horizontal {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
 }
 
 /* Responsive Styling */
