@@ -32,6 +32,10 @@ export const options = [
     { value: "fitness", label: "Fitness & Health" },
     { value: "transportation", label: "Transportation" }, // Bicycles, scooters, etc.
     { value: "musical instruments", label: "Musical Instruments" },
+    { value: "cooler fan", label: "Cooler & Fan" },
+    { value: "electronic appliances", label: "Electronic Appliances" },
+    { value: "earphones speaker", label: "Earphones & Headphones" },
+    { value: "speaker", label: "Speakers" },
 ];
 
 export const staticOptions = [
@@ -44,6 +48,10 @@ export const staticOptions = [
 ];
 
 export const categoriesForForm = [
+    { value: "cooler fan", label: "Cooler & Fan" },
+    { value: "electronic appliances", label: "Electronic Appliances" },
+    { value: "earphones speaker", label: "Earphones & Headphones" },
+    { value: "speaker", label: "Speakers" },
     { value: "fashion beauty", label: "Fashion & Beauty" },
     { value: "home furniture", label: "Home & Furniture" },
     { value: "vehicles", label: "Vehicles" },

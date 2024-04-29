@@ -20,6 +20,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { ChatList } from "react-chat-elements";
 import Badge from "@material-ui/core/Badge";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 let socket;
 function Navbar({
     searchbar,
@@ -166,27 +168,38 @@ function Navbar({
                                 className="custom-nav-dropdown"
                                 title={
                                     <>
-                                        <div
+                                        <Tooltip
+                                            title="Checkout"
+                                            arrow
                                             style={{
-                                                position: "relative",
-                                                display: "initial",
-                                                marginRight: "30px",
-                                                borderRadius: "50px",
-                                                alignItems: "center",
-                                                justifyContent: "center",
+                                                pointerEvents: "none",
                                             }}>
-                                            <Badge
-                                                badgeContent={
-                                                    notifications.length - 1
-                                                }
-                                                color="error">
-                                                <NotificationsIcon
-                                                    fontSize="40px" // Adjust the fontSize to a custom value
-                                                    className="notify_icon"
-                                                    style={{ fill: "#ebd04b" }}
-                                                />
-                                            </Badge>
-                                        </div>
+                                            <div
+                                                style={{
+                                                    position: "relative",
+                                                    display: "initial",
+                                                    marginRight: "30px",
+                                                    borderRadius: "50px",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                }}>
+                                                <Badge
+                                                    badgeContent={
+                                                        notifications.length - 1
+                                                    }
+                                                    color="error">
+                                                    <IconButton>
+                                                        <NotificationsIcon
+                                                            fontSize="40px" // Adjust the fontSize to a custom value
+                                                            className="notify_icon"
+                                                            style={{
+                                                                fill: "#ebd04b",
+                                                            }}
+                                                        />
+                                                    </IconButton>
+                                                </Badge>
+                                            </div>
+                                        </Tooltip>
                                     </>
                                 }>
                                 <ul className="notificationDropdown">
