@@ -12,6 +12,7 @@ import admin from "../Assets/user1.png";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import GavelIcon from "@mui/icons-material/Gavel";
 import Categories from "../Dashboard/Categories";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
     axios.defaults.withCredentials = true;
@@ -91,15 +92,15 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                 <div className="Header navbar-content">
                     <div className="logo">
                         <NavLink to="/">
-                            <img src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"></img>
+                            <img src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png" alt="logo"></img>
                         </NavLink>
                     </div>
                     {searchbar && (
-                        <div class="InputContainer">
+                        <div className="InputContainer">
                             <input
                                 placeholder="Search.."
                                 id="input"
-                                class="input"
+                                className="input"
                                 name="text"
                                 type="text"
                                 onChange={handleInputChange}
@@ -117,6 +118,8 @@ function Navbar({ searchbar, onSearchChange, onCategoryFilterChange }) {
                                 onTransitionEnd={handleDropdownClose}
                                 title={
                                     <>
+                                        {/* Notifications Icon */}
+                                        <NotificationsIcon style={{ marginRight: "10px" }} />
                                         <img
                                             className="admin-icon"
                                             src={admin}

@@ -22,7 +22,7 @@ const CategoryBar = ({ onSelectedCategories2e }) => {
                 {/* <span>All Category <KeyboardArrowDownIcon/> </span> */}
                 <div>
                     <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        <Dropdown.Toggle id="dropdown-basic">
                             All Category 
                         </Dropdown.Toggle>
 
