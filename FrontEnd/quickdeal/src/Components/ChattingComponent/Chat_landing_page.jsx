@@ -191,7 +191,12 @@ const ChattingLandingPage = () => {
                                                                 </p>
                                                             )}
                                                         </div>
-                                                        <p className="text-muted mb-0">
+                                                        <p
+                                                            className="text-muted mb-0"
+                                                            style={{
+                                                                textTransform:
+                                                                    "lowercase",
+                                                            }}>
                                                             {data.email}
                                                         </p>
                                                     </div>

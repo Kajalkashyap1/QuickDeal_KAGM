@@ -1,21 +1,18 @@
 /* Categories.css */
 
 .navbar {
-<<<<<<< HEAD
-  background-color: #f4f4f7;
-  color: #171717;
-  padding: 10px 20px; /* Adjust padding to provide space around the content */
-  width: 100%; /* Set width to 100% to make it responsive */
-  min-width: 900px; /* Set a minimum width to ensure all categories fit */
-  height: 60px;
-=======
+    background-color: #f4f4f7;
+    color: #171717;
+    padding: 10px 20px; /* Adjust padding to provide space around the content */
+    width: 100%; /* Set width to 100% to make it responsive */
+    min-width: 900px; /* Set a minimum width to ensure all categories fit */
+    height: 60px;
     background-color: #f4f4f7;
     color: #171717;
     padding: 10px 20px; /* Adjust padding to provide space around the content */
     width: 100%; /* Set width to 100% to make it responsive */
     /* min-width: 600px;  Set a minimum width to ensure all categories fit */
     max-height: 70px;
->>>>>>> 45f5292d3f311570c8e8871b929ae4c0079bf43f
 }
 
 .navbarcontent {
@@ -66,7 +63,6 @@
     display: flex;
     align-items: center;
 }
- 
 
 .logo_text p {
     margin: 0;
@@ -86,7 +82,6 @@ select {
     color: #333;
     cursor: pointer; /* Add pointer cursor */
 }
-
 
 .category_checkboxes {
     list-style: none;
@@ -152,5 +147,5 @@ select {
 }
 /*All category box*/
 .dropdown-basic {
-  background-color: #4a4360;
+    background-color: #4a4360;
 }
