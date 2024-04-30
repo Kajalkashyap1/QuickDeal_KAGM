@@ -44,7 +44,7 @@ require("./Connections/DatabaseConn.js");
 app.get("/", (req, res) => {
     res.send("ok");
 });
-
+app.get("/mail", require("./Controllers/mail.js"));
 app.use("/auth", require("./Routers/auth.js"));
 app.use("/dashboard", require("./Routers/HandleAds.js"));
 app.use("/profile", require("./Routers/users.js"));

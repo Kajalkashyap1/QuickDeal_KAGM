@@ -166,14 +166,24 @@ const NewAuction = () => {
     return (
         <>
             <Navbar />
-            {loading && (
+            <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                theme="dark"
+            />
+            {loading ? (
                 <div
                     style={{
                         position: "fixed",
                         top: "50%",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
                         textAlign: "center",
+                        alignContent: "center",
+                        alignItems: "center",
                     }}>
                     <Oval
                         visible={true}
@@ -185,207 +195,214 @@ const NewAuction = () => {
                         wrapperClass=""
                     />
                     <br />
-                    <i></i>
+                    <i>
+                        Creating Auction for you , please don't close the screen
+                    </i>
                 </div>
-            )}
-            <ToastContainer
-                position="top-right"
-                autoClose={1000}
-                theme="dark"
-            />
-            <div className={style.main_container}>
-                <div className={style.left_container}>
-                    <h2>Select a product</h2>
-                    <hr />
-                    <div className={style.scroll}>
-                        {ads?.map((item, index) => (
-                            <Card
-                                key={index}
-                                className={
-                                    index === selectedId
-                                        ? classes.selected
-                                        : classes.notselected
-                                }>
-                                <CardActionArea
-                                    onClick={handleClick(index, item)}>
-                                    <CardContent
-                                        className={classes.cardContent}>
-                                        <img
-                                            src={item.imageurl[0]}
-                                            alt=""
-                                            className={classes.smallImage}
-                                        />
-                                        <Typography className={classes.maindiv}>
-                                            <div>{item.productname}</div>
-                                        </Typography>
-                                        <Tooltip
-                                            onClick={() => {
-                                                navigate(
-                                                    `/myads/preview/${
-                                                        item._id
-                                                    }/${true}`
-                                                );
-                                            }}
-                                            title="View ad"
-                                            arrow>
-                                            <IconButton>
-                                                <VisibilityIcon fontSize="large" />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        ))}
+            ) : (
+                <div className={style.main_container}>
+                    <div className={style.left_container}>
+                        <h2>Select a product</h2>
+                        <hr />
+                        <div className={style.scroll}>
+                            {ads?.map((item, index) => (
+                                <Card
+                                    key={index}
+                                    className={
+                                        index === selectedId
+                                            ? classes.selected
+                                            : classes.notselected
+                                    }>
+                                    <CardActionArea
+                                        onClick={handleClick(index, item)}>
+                                        <CardContent
+                                            className={classes.cardContent}>
+                                            <img
+                                                src={item.imageurl[0]}
+                                                alt=""
+                                                className={classes.smallImage}
+                                            />
+                                            <Typography
+                                                className={classes.maindiv}>
+                                                <div>{item.productname}</div>
+                                            </Typography>
+                                            <Tooltip
+                                                onClick={() => {
+                                                    navigate(
+                                                        `/myads/preview/${
+                                                            item._id
+                                                        }/${true}`
+                                                    );
+                                                }}
+                                                title="View ad"
+                                                arrow>
+                                                <IconButton>
+                                                    <VisibilityIcon fontSize="large" />
+                                                </IconButton>
+                                            </Tooltip>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            ))}
+                        </div>
                     </div>
-                </div>
-                {/* Add a vertical line between left and right containers */}
-                <div className={style.vertical_line}></div>
-                <div className={style.right_container}>
-                    <h3>Set the ending time and Update amount</h3>
-                    <hr />
-                    <div className={style.clockandamount}>
-                        {selectedcard != "" && (
-                            <div>
-                                <h5>Selected product for Auction</h5>
+                    {/* Add a vertical line between left and right containers */}
+                    <div className={style.vertical_line}></div>
+                    <div className={style.right_container}>
+                        <h3>Set the ending time and Update amount</h3>
+                        <hr />
+                        <div className={style.clockandamount}>
+                            {selectedcard != "" && (
+                                <div>
+                                    <h5>Selected product for Auction</h5>
 
+                                    <div
+                                        className="card"
+                                        aria-hidden="true"
+                                        style={{ width: "38rem" }}>
+                                        <div
+                                            className="card-body row-2 d-flex "
+                                            style={{
+                                                justifyContent: "center",
+                                            }}>
+                                            <img
+                                                src={selectedcard.imageurl[0]}
+                                                className="card-img-top"
+                                                alt="..."
+                                                style={{
+                                                    aspectRatio: 3 / 2,
+                                                    objectFit: "contain",
+                                                    width: "200px",
+                                                    marginLeft: "10px",
+                                                    marginRight: "10px",
+                                                }}
+                                            />
+                                            <div
+                                                className="d-flex"
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    justifyContent: "center",
+                                                    fontFamily: "monospace",
+                                                    fontWeight: "700",
+                                                }}>
+                                                <h3 className="card-text placeholder-glow">
+                                                    ₹ {selectedcard.price}
+                                                </h3>
+                                                <h5 className="card-text placeholder-glow">
+                                                    👉{" "}
+                                                    {selectedcard.productname}
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            <br />
+                            {selectedcard == "" && (
                                 <div
                                     className="card"
                                     aria-hidden="true"
                                     style={{ width: "38rem" }}>
-                                    <div
-                                        className="card-body row-2 d-flex "
-                                        style={{ justifyContent: "center" }}>
-                                        <img
-                                            src={selectedcard.imageurl[0]}
-                                            className="card-img-top"
-                                            alt="..."
-                                            style={{
-                                                aspectRatio: 3 / 2,
-                                                objectFit: "contain",
-                                                width: "200px",
-                                                marginLeft: "10px",
-                                                marginRight: "10px",
-                                            }}
-                                        />
-                                        <div
-                                            className="d-flex"
-                                            style={{
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                justifyContent: "center",
-                                                fontFamily: "monospace",
-                                                fontWeight: "700",
-                                            }}>
-                                            <h3 className="card-text placeholder-glow">
-                                                ₹ {selectedcard.price}
-                                            </h3>
-                                            <h5 className="card-text placeholder-glow">
-                                                👉 {selectedcard.productname}
-                                            </h5>
-                                        </div>
+                                    <div className="card-body">
+                                        <h5 style={{ color: "purple" }}>
+                                            Please select a product from list
+                                        </h5>
+                                        <h5 className="card-title placeholder-glow">
+                                            <span className="placeholder col-6"></span>
+                                        </h5>
+                                        <p className="card-text placeholder-glow">
+                                            <span className="placeholder col-7"></span>
+                                            <span className="placeholder col-4"></span>
+                                            <span className="placeholder col-4"></span>
+                                            <span className="placeholder col-6"></span>
+                                            <span className="placeholder col-8"></span>
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                        <br />
-                        {selectedcard == "" && (
-                            <div
-                                className="card"
-                                aria-hidden="true"
-                                style={{ width: "38rem" }}>
-                                <div className="card-body">
-                                    <h5 style={{ color: "purple" }}>
-                                        Please select a product from list
-                                    </h5>
-                                    <h5 className="card-title placeholder-glow">
-                                        <span className="placeholder col-6"></span>
-                                    </h5>
-                                    <p className="card-text placeholder-glow">
-                                        <span className="placeholder col-7"></span>
-                                        <span className="placeholder col-4"></span>
-                                        <span className="placeholder col-4"></span>
-                                        <span className="placeholder col-6"></span>
-                                        <span className="placeholder col-8"></span>
-                                    </p>
-                                </div>
-                            </div>
-                        )}
-                        <hr />
-                        <h5 style={{ color: "purple" }}>
-                            {" "}
-                            Set the auction closing time and update the selling
-                            price.
-                        </h5>
-                        <form>
-                            <div className={style.amountanstimeflex}>
-                                <div
-                                    style={{
-                                        marginTop: "20px",
-                                        marginRight: "30px",
-                                    }}>
-                                    <LocalizationProvider
-                                        dateAdapter={AdapterDayjs}>
-                                        <DemoContainer
-                                            components={[
-                                                "MobileTimePicker",
-                                                "MobileTimePicker",
-                                            ]}>
-                                            <MobileTimePicker
-                                                label={'"Minutes:Seconds"'}
-                                                openTo="minutes"
-                                                views={["minutes", "seconds"]}
-                                                format="mm:ss"
-                                                value={selectedTime}
-                                                onChange={handleTimeChange}
-                                            />
-                                        </DemoContainer>
-                                    </LocalizationProvider>
-                                </div>
-                                <div
-                                    style={{
-                                        marginTop: "20px",
-                                        marginLeft: "30px",
-                                    }}>
-                                    <CurrencyInput
-                                        id="input-example"
-                                        name="input-name"
+                            )}
+                            <hr />
+                            <h5 style={{ color: "purple" }}>
+                                {" "}
+                                Set the auction closing time and update the
+                                selling price.
+                            </h5>
+                            <form>
+                                <div className={style.amountanstimeflex}>
+                                    <div
                                         style={{
-                                            height: "57px",
-                                            fontSize: "large",
-                                        }}
-                                        placeholder="Please enter amount"
-                                        value={price}
-                                        decimalsLimit={2}
-                                        prefix="₹"
-                                        onValueChange={(value, name, values) =>
-                                            setprice(value)
-                                        }
-                                        required
-                                    />
+                                            marginTop: "20px",
+                                            marginRight: "30px",
+                                        }}>
+                                        <LocalizationProvider
+                                            dateAdapter={AdapterDayjs}>
+                                            <DemoContainer
+                                                components={[
+                                                    "MobileTimePicker",
+                                                    "MobileTimePicker",
+                                                ]}>
+                                                <MobileTimePicker
+                                                    label={'"Minutes:Seconds"'}
+                                                    openTo="minutes"
+                                                    views={[
+                                                        "minutes",
+                                                        "seconds",
+                                                    ]}
+                                                    format="mm:ss"
+                                                    value={selectedTime}
+                                                    onChange={handleTimeChange}
+                                                />
+                                            </DemoContainer>
+                                        </LocalizationProvider>
+                                    </div>
+                                    <div
+                                        style={{
+                                            marginTop: "20px",
+                                            marginLeft: "30px",
+                                        }}>
+                                        <CurrencyInput
+                                            id="input-example"
+                                            name="input-name"
+                                            style={{
+                                                height: "57px",
+                                                fontSize: "large",
+                                            }}
+                                            placeholder="Please enter amount"
+                                            value={price}
+                                            decimalsLimit={2}
+                                            prefix="₹"
+                                            onValueChange={(
+                                                value,
+                                                name,
+                                                values
+                                            ) => setprice(value)}
+                                            required
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                            {/* <CountdownTimer targetDate={auctionEndtime} /> */}
-                            <br />
-                            <Button
-                                type="submit"
-                                onClick={handleStartAuction}
-                                variant="outlined"
-                                startIcon={<SendIcon fontSize="large" />}
-                                style={{
-                                    color: "orangered", // Green color
-                                    borderColor: "green", // Green color
-                                    fontWeight: "600",
-                                    fontSize: "large",
-                                    border: "1px solid green",
-                                    padding: "13px",
-                                    borderRadius: "12px",
-                                }}>
-                                Start Auction
-                            </Button>
-                        </form>
+                                {/* <CountdownTimer targetDate={auctionEndtime} /> */}
+                                <br />
+                                <Button
+                                    type="submit"
+                                    onClick={handleStartAuction}
+                                    variant="outlined"
+                                    startIcon={<SendIcon fontSize="large" />}
+                                    style={{
+                                        color: "orangered", // Green color
+                                        borderColor: "green", // Green color
+                                        fontWeight: "600",
+                                        fontSize: "large",
+                                        border: "1px solid green",
+                                        padding: "13px",
+                                        borderRadius: "12px",
+                                    }}>
+                                    Start Auction
+                                </Button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </>
     );
 };
