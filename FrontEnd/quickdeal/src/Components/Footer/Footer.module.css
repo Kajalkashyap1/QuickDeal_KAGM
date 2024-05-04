@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Inter:wght@800;900&family=Rubik:wght@800&display=swap");
+
+.main{
+    background-color: #4a4360;
+    font-family: "DM Sans", sans-serif;
+    padding: 20px;
+    color: white;
+}
+
+.info{
+    margin: 3px;
+    padding: 3px;
+    display: flex;
+    gap: 8px;
+}
+
+#link{
+    text-decoration: none;
+    /* text-underline-offset: none; */
+    color: white;
+}
+
