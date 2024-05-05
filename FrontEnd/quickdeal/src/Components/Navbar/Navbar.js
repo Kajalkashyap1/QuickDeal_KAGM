@@ -19,6 +19,8 @@ import { ChatList } from "react-chat-elements";
 import Badge from "@material-ui/core/Badge";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import MenuIcon from '@mui/icons-material/Menu';
+
 let socket;
 function Navbar({
     searchbar,
@@ -141,6 +143,7 @@ function Navbar({
         <>
             <div className="HeaderContainer">
                 <div className="Header navbar-content">
+
                     <div className="logo">
                         <NavLink to="/">
                             <img
@@ -148,6 +151,14 @@ function Navbar({
                                 alt="logo"></img>
                         </NavLink>
                     </div>
+
+                    {/* Adding the hamburger icon here for the smaller screen size */}
+                    {/* <div className="hambuger">
+                        <button>
+                          <MenuIcon style={{fill: "white"}}/>
+                        </button>
+                            
+                    </div> */}
                     {searchbar && (
                         <div className="InputContainer">
                             <input

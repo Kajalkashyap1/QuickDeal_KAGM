@@ -48,6 +48,15 @@
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
     margin-left: 100px;
+
+    @media only screen and (max-width: 500px)
+    {
+        width: 150px;
+        height:150px;
+        border-radius: 25px;
+        margin-left: 70px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.075);
+    }
 }
 
 .input {
@@ -68,11 +77,23 @@
     width: 100px;
     height: 60px;
     padding: "2px";
+
+    @media only screen and (max-width: 450px)
+    {
+        width: 70px;
+        height:40px;
+        padding: 1px;
+    }
+
 }
 
 /* notification icon */
 .notify_icon {
     font-size: 50px;
+
+    @media only screen and (max-width:550px) {
+        font-size: 30px;
+    }
 }
 
 /* Responsive Styling */
@@ -190,7 +211,10 @@
 }
 
 /* clear filter button */
-.clear-filter {
+/* .clear_div{
+    margin-bottom: 20px;
+} */
+.clear_filter  {
     position: relative;
     width: 95px;
     min-width: 90px;
@@ -207,6 +231,7 @@
     align-items: center;
     justify-content: center;
     margin-right: 40px;
+    /* margin-bottom: 50px; */
 }
 .notificationDropdown {
     padding: 0;
@@ -217,7 +242,7 @@
 .rce-citem-body--top-time {
     display: block;
 }
-.clear-filter::before {
+.clear_filter::before {
     width: 70%;
     height: 2px;
     position: absolute;
@@ -227,7 +252,7 @@
     border-radius: 50%;
 }
 
-.clear-filter::after {
+.clear_filter::after {
     width: 70%;
     height: 2px;
     position: absolute;
@@ -237,7 +262,7 @@
     border-radius: 50%;
 }
 
-.clear-filter:hover {
+.clear_filter:hover {
     animation: jello-horizontal 0.9s both;
 }
 
@@ -270,6 +295,7 @@
         transform: scale3d(1, 1, 1);
     }
 }
+
 
 /* Responsive Styling */
 @media only screen and (max-width: 768px) {
@@ -311,3 +337,12 @@
         width: 100%; /* Full width for input field */
     }
 }
+
+@media screen and (min-width:500px){
+    .hamburger{
+        display: none;
+        /* visibility: hidden; */
+    }
+}
+
+
