@@ -11,7 +11,7 @@
     top: 20px;
 }
 .formargin {
-    margin-top: 200px;
+    margin-top: 12em;
 }
 .cards {
     max-width: 300px;
@@ -70,6 +70,12 @@
         margin-left: 10px;
         margin-right: 10px;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+@media screen and (max-width: 600px) {
+    /* Adjust breakpoint as needed */
+    .formargin {
+        margin-top: 5em;
     }
 }
 

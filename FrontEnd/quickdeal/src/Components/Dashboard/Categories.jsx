@@ -8,7 +8,7 @@ const Categories = ({ onSelectedCategoriesChange, onClearFilter3 }) => {
         onClearFilter3();
     };
     return (
-        <div className="cat-container d-flex justify-content-between">
+        <div className="">
             <CategoryBar
                 onSelectedCategories2e={sendtoparent}
                 onClearFilter2={clearfilterparent}

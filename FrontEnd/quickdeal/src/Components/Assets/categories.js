@@ -39,12 +39,12 @@ export const options = [
 ];
 
 export const staticOptions = [
+    { value: "computers laptop", label: "Computers & Laptops" },
     { value: "electronics", label: "Electronics" },
     { value: "Mobiles phone", label: "Mobiles" },
     { value: "books stationery", label: "Books & Stationery" },
     { value: "sports fitness", label: "Sports & Fitness" },
     { value: "Hobbies", label: "Hobbies" },
-    { value: "computers laptop", label: "Computers & Laptops" },
 ];
 
 export const categoriesForForm = [

@@ -1,101 +1,33 @@
 /* Categories.css */
 
 .navbar {
-    background-color: #f4f4f7;
+    background-color: #ffffff;
     color: #171717;
-    padding: 10px 20px; /* Adjust padding to provide space around the content */
-    width: 100%; /* Set width to 100% to make it responsive */
-    min-width: 900px; /* Set a minimum width to ensure all categories fit */
-    height: 60px;
-    background-color: #f4f4f7;
-    color: #171717;
-    /* Adjust padding to provide space around the content */
-    width: 100%; /* Set width to 100% to make it responsive */
-    /* min-width: 600px;  Set a minimum width to ensure all categories fit */
-    max-height: 70px;
-
-    @media screen and (max-width:1000px)
-    {
-        height: 70px;
-        padding: 0px 0px;
-        max-height: 50px;
-        overflow-y: hidden;
-        width: auto;
-    }
+    padding: 10px 20px;
+    width: 100%;
+    min-width: 320px; /* Adjust the minimum width as per your design */
+    z-index: 10000;
 }
 
 .navbarcontent {
     display: flex;
-    /* justify-content: space-between;  */
-    /* align-items: center; */
     padding: 10px;
     position: relative;
     user-select: none;
     justify-content: space-between;
     align-items: center;
-    align-content: center;
-
-    @media screen and (min-width:1000px)
-    {
-        overflow-y: hidden;
-    }
-
 }
+
+.dropdownScroll {
+    max-height: 300px; /* Adjust max height as needed */
+    overflow-y: auto;
+}
+
 .list {
     padding-left: 5px;
     padding-right: 5px;
     margin-top: 5px;
     cursor: pointer;
-    user-select: none;
-}
-
-.dropdownScroll {
-    width: 250px;
-    max-height: 500px; /* Set your desired max height */
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    margin-left: 30px;
-}
-
-/* notification dropdown styling */
-.notificationDropdown {
-    /* width: 250px; */
-    max-height: 500px; /* Set your desired max height */
-    overflow-y: auto;
-    overflow-x: auto;
-    display: flex;
-    flex-direction: column;
-    margin: 30px;
-}
-
-.dropdown-toggle::after {
-    display: none !important;
-}
-
-.logo_text {
-    display: flex;
-    align-items: center;
-}
-
-.logo_text p {
-    margin: 0;
-    font-size: 1.2rem;
-    white-space: nowrap; /* Ensure the text doesn't wrap */
-}
-
-select {
-    padding: 8px 30px 8px 8px; /* Add extra padding on the right to accommodate the arrow */
-    font-size: 1rem;
-    margin-left: 10px;
-    appearance: none; /* Remove default appearance */
-
-    background-size: 20px; /* Adjust size of the arrow */
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    color: #333;
-    cursor: pointer; /* Add pointer cursor */
 }
 
 .category_checkboxes {
@@ -104,7 +36,7 @@ select {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 50px;
+    margin-left: 20px; /* Adjust margin as needed */
 }
 
 .category_checkboxes li {
@@ -117,16 +49,67 @@ select {
     cursor: pointer;
 }
 
-.category_dropdown {
-    background-color: #510f83;
+/* Add any additional responsive styles here */
+@media screen and (max-width: 600px) {
+    .navbarcontent {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .dropdownScroll {
+        width: 100%; /* Ensure full width on small screens */
+        margin-left: 0; /* Adjust margin as needed */
+    }
+    .category_checkboxes {
+        margin-left: 0; /* Adjust margin as needed */
+    }
+}
+@media screen and (max-width: 600px) {
+    .hide {
+        display: none;
+    }
+    /* Adjust checked state styles for small screens if necessary */
 }
 
-/* Hover effect */
-.category_dropdown:hover {
-    background-color: #510f83; /* Change background color on hover */
-}
-/* Add this CSS to your Categories.module.css file */
+/* Categories.css */
 
+.dropdownScroll {
+    max-height: 300px; /* Adjust max height as needed */
+    overflow-y: auto;
+    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 10px; /* Add padding for spacing */
+    background-color: #fff; /* Set background color */
+    width: 270px;
+}
+
+.list {
+    margin-bottom: 8px; /* Add margin between list items */
+}
+
+input[type="checkbox"] {
+    margin-right: 8px; /* Add margin between checkbox and label */
+}
+
+/* ------------------checkbox-------- */
+/* Define custom styles for the checked state */
+.category_checkboxes input[type="checkbox"]:checked::before,
+.list input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: block;
+    width: 18px;
+    height: 15px;
+    text-align: center;
+    line-height: 10px;
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    color: #1c78da; /* Color of the checkmark */
+    font-size: 30px;
+    font-weight: 550;
+}
+/*All category box*/
+.dropdown-basic {
+    background-color: #4a4360;
+}
 .category_checkboxes input[type="checkbox"],
 .list input[type="checkbox"] {
     /* Ensure the default checkbox is hidden */

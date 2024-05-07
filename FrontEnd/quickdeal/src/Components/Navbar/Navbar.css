@@ -21,7 +21,6 @@
     box-sizing: border-box; /* Include padding in width calculation */
     /* Add this line */
 }
-
 /* Style for dummy link */
 .Header a {
     color: white;
@@ -49,10 +48,9 @@
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
     margin-left: 100px;
 
-    @media only screen and (max-width: 500px)
-    {
+    @media only screen and (max-width: 500px) {
         width: 150px;
-        height:150px;
+        height: 150px;
         border-radius: 25px;
         margin-left: 70px;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.075);
@@ -78,20 +76,18 @@
     height: 60px;
     padding: "2px";
 
-    @media only screen and (max-width: 450px)
-    {
+    @media only screen and (max-width: 450px) {
         width: 70px;
-        height:40px;
+        height: 40px;
         padding: 1px;
     }
-
 }
 
 /* notification icon */
 .notify_icon {
     font-size: 50px;
 
-    @media only screen and (max-width:550px) {
+    @media only screen and (max-width: 550px) {
         font-size: 30px;
     }
 }
@@ -208,13 +204,14 @@
     cursor: pointer;
     padding-left: 5px;
     padding-right: 5px;
+    text-decoration: none;
 }
 
 /* clear filter button */
 /* .clear_div{
     margin-bottom: 20px;
 } */
-.clear_filter  {
+.clear_filter {
     position: relative;
     width: 95px;
     min-width: 90px;
@@ -296,7 +293,6 @@
     }
 }
 
-
 /* Responsive Styling */
 @media only screen and (max-width: 768px) {
     .Header {
@@ -307,7 +303,7 @@
     }
 
     .InputContainer {
-        width: 40%; /* Full width for search bar */
+        width: 70%; /* Full width for search bar */
         max-width: none; /* Remove max-width constraint */
         margin-bottom: 0; /* Add space below search bar */
         height: 35px;
@@ -338,11 +334,64 @@
     }
 }
 
-@media screen and (min-width:500px){
-    .hamburger{
+@media screen and (min-width: 600px) {
+    .hamburger1 {
         display: none;
-        /* visibility: hidden; */
     }
 }
+/* Display search input container on screens larger than 600px */
+@media screen and (max-width: 601px) {
+    .hide {
+        display: none;
+    }
+    .bellandburger {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .hamburger1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+}
+.hamburger {
+    background-color: var(--purple);
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none;
+}
+.hamburger {
+    margin: 10px;
+}
+/* YourComponent.css */
 
+.hamburger {
+    transition: transform 0.3s ease; /* Add transition property for smooth transformation */
+}
 
+.hamburger.open {
+    transform: rotate(90deg); /* Adjust transformation as needed */
+}
+
+.mobileView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    color: var(--lp);
+    width: 100%;
+}
+.dropdownitems2:hover {
+    background-color: #00a49e1d;
+}
+.mobileView .InputContainer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: var(--purple);
+    border: 2px solid rgb(40, 3, 3);
+    align-items: center;
+}

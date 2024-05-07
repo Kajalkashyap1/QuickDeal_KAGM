@@ -19,8 +19,9 @@ import { ChatList } from "react-chat-elements";
 import Badge from "@material-ui/core/Badge";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from '@mui/icons-material/Menu';
-
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import ClearIcon from "@mui/icons-material/Clear";
 let socket;
 function Navbar({
     searchbar,
@@ -138,12 +139,29 @@ function Navbar({
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
     };
+    const [mobileview, setmobileview] = useState(false);
+    const toggleMobileView = () => {
+        setmobileview(!mobileview);
+    };
+    useEffect(() => {
+        const handleResize = () => {
+            const screenWidth = window.innerWidth;
+            // If screen width is 600px or larger, set mobileView to false
+            if (screenWidth >= 600) {
+                setmobileview(false);
+            }
+        };
 
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [mobileview]); // Only run this effect once after initial render
     return (
         <>
             <div className="HeaderContainer">
                 <div className="Header navbar-content">
-
                     <div className="logo">
                         <NavLink to="/">
                             <img
@@ -152,15 +170,8 @@ function Navbar({
                         </NavLink>
                     </div>
 
-                    {/* Adding the hamburger icon here for the smaller screen size */}
-                    {/* <div className="hambuger">
-                        <button>
-                          <MenuIcon style={{fill: "white"}}/>
-                        </button>
-                            
-                    </div> */}
                     {searchbar && (
-                        <div className="InputContainer">
+                        <div className="InputContainer hide">
                             <input
                                 placeholder="Search.."
                                 id="input"
@@ -173,270 +184,451 @@ function Navbar({
                         </div>
                     )}
 
-                    <div></div>
+                    <div className="bellandburger">
+                        {isauth ? (
+                            <div className="profile_dragdown">
+                                <NavDropdown
+                                    // id="nav-dropdown-light-example"
+                                    className="custom-nav-dropdown notificationdiv"
+                                    title={
+                                        <>
+                                            <div
+                                                style={{
+                                                    position: "relative",
+                                                    display: "initial",
+                                                    marginRight: "30px",
+                                                    borderRadius: "50px",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                }}>
+                                                <IconButton>
+                                                    <Tooltip
+                                                        title="notifications"
+                                                        arrow
+                                                        style={{
+                                                            pointerEvents:
+                                                                "none",
+                                                        }}>
+                                                        <Badge
+                                                            badgeContent={
+                                                                notifications.length -
+                                                                1
+                                                            }
+                                                            color="error">
+                                                            <NotificationsIcon
+                                                                fontSize="40px" // Adjust the fontSize to a custom value
+                                                                className="notify_icon"
+                                                                style={{
+                                                                    fill: "#ebd04b",
+                                                                }}
+                                                            />
+                                                        </Badge>
+                                                    </Tooltip>
+                                                </IconButton>
+                                            </div>
+                                        </>
+                                    }>
+                                    <ul className="notificationDropdown">
+                                        {notifications &&
+                                            notifications.length > 0 && (
+                                                <ChatList
+                                                    className="chat-list"
+                                                    dataSource={notifications
+                                                        .map(
+                                                            (data, index) =>
+                                                                data.noti
+                                                                    .length !==
+                                                                0
+                                                                    ? {
+                                                                          avatar: data
+                                                                              .noti
+                                                                              .senderimg,
+                                                                          alt: "Reactjs",
+                                                                          title: data.noti.senderfullName?.capitalize(),
+                                                                          subtitle:
+                                                                              data
+                                                                                  ?.noti
+                                                                                  .message,
+                                                                          date: data
+                                                                              ?.noti
+                                                                              .date,
+                                                                          unread: 0,
+                                                                      }
+                                                                    : null // If data is empty array, return null
+                                                        )
+                                                        .filter(Boolean)} // Filter out null values
+                                                />
+                                            )}
 
-                    {isauth ? (
-                        <div className="profile_dragdown">
-                            <NavDropdown
-                                // id="nav-dropdown-light-example"
-                                className="custom-nav-dropdown"
-                                title={
-                                    <>
-                                        <div
-                                            style={{
-                                                position: "relative",
-                                                display: "initial",
-                                                marginRight: "30px",
-                                                borderRadius: "50px",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                            }}>
-                                            <IconButton>
-                                                <Tooltip
-                                                    title="notifications"
-                                                    arrow
-                                                    style={{
-                                                        pointerEvents: "none",
-                                                    }}>
-                                                    <Badge
-                                                        badgeContent={
-                                                            notifications.length -
-                                                            1
-                                                        }
-                                                        color="error">
-                                                        <NotificationsIcon
-                                                            fontSize="40px" // Adjust the fontSize to a custom value
-                                                            className="notify_icon"
-                                                            style={{
-                                                                fill: "#ebd04b",
-                                                            }}
-                                                        />
-                                                    </Badge>
-                                                </Tooltip>
-                                            </IconButton>
-                                        </div>
-                                    </>
-                                }>
-                                <ul className="notificationDropdown">
-                                    {notifications &&
-                                        notifications.length > 0 && (
+                                        {((!message && !notifications) ||
+                                            (notifications[0].noti.length ==
+                                                0 &&
+                                                notifications.length == 1)) && (
                                             <ChatList
                                                 className="chat-list"
-                                                dataSource={notifications
-                                                    .map(
-                                                        (data, index) =>
-                                                            data.noti.length !==
-                                                            0
-                                                                ? {
-                                                                      avatar: data
-                                                                          .noti
-                                                                          .senderimg,
-                                                                      alt: "Reactjs",
-                                                                      title: data.noti.senderfullName?.capitalize(),
-                                                                      subtitle:
-                                                                          data
-                                                                              ?.noti
-                                                                              .message,
-                                                                      date: data
-                                                                          ?.noti
-                                                                          .date,
-                                                                      unread: 0,
-                                                                  }
-                                                                : null // If data is empty array, return null
-                                                    )
-                                                    .filter(Boolean)} // Filter out null values
+                                                dataSource={[
+                                                    {
+                                                        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf-VoDNcIiUCfSHDAwPM2VS9uTpovBEPkIPA&s",
+                                                        alt: "Reactjs",
+                                                        title: "No new notifications ",
+                                                        date: new Date(),
+                                                        unread: 0,
+                                                    },
+                                                ]}
                                             />
                                         )}
+                                    </ul>
+                                </NavDropdown>
 
-                                    {((!message && !notifications) ||
-                                        (notifications[0].noti.length == 0 &&
-                                            notifications.length == 1)) && (
-                                        <ChatList
-                                            className="chat-list"
-                                            dataSource={[
-                                                {
-                                                    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf-VoDNcIiUCfSHDAwPM2VS9uTpovBEPkIPA&s",
-                                                    alt: "Reactjs",
-                                                    title: "No new notifications ",
-                                                    date: new Date(),
-                                                    unread: 0,
-                                                },
-                                            ]}
-                                        />
-                                    )}
-                                </ul>
-                            </NavDropdown>
-
-                            <NavDropdown
-                                id="nav-dropdown-light-example"
-                                className="custom-nav-dropdown"
-                                onClick={handlearrow}
-                                onTransitionEnd={handleDropdownClose}
-                                title={
-                                    <>
-                                        <img
-                                            className="admin-icon"
-                                            src={admin}
-                                            alt={name}
-                                            style={{
-                                                borderRadius: "40px",
-                                                marginRight: "1px",
-                                            }}
-                                        />
-                                        {arrowicon ? (
-                                            <KeyboardArrowUpIcon
-                                                fontSize="large"
-                                                style={{ fill: "white" }}
+                                <NavDropdown
+                                    id="nav-dropdown-light-example"
+                                    className="custom-nav-dropdown hide"
+                                    onClick={handlearrow}
+                                    onTransitionEnd={handleDropdownClose}
+                                    title={
+                                        <>
+                                            <img
+                                                className="admin-icon"
+                                                src={admin}
+                                                alt={name}
+                                                style={{
+                                                    borderRadius: "40px",
+                                                    marginRight: "1px",
+                                                }}
                                             />
-                                        ) : (
-                                            <KeyboardArrowDownIcon
-                                                fontSize="large"
-                                                style={{ fill: "white" }}
-                                            />
-                                        )}
-                                    </>
-                                }
-                                menuVariant="light">
-                                <div
-                                    style={{
-                                        boxShadow:
-                                            "0 0 10px rgba(0, 0, 0, 0.5)",
-                                    }}>
-                                    <div className="profilecard">
-                                        <div className="p-3">
-                                            <div className="d-flex align-items-center p-0 ">
-                                                <img
-                                                    src={image}
-                                                    className="rounded-circle"
-                                                    width="58"
-                                                    height="54"
-                                                    alt={name}
+                                            {arrowicon ? (
+                                                <KeyboardArrowUpIcon
+                                                    fontSize="large"
+                                                    style={{ fill: "white" }}
                                                 />
-                                                <div className="userInfo w-auto d-flex">
-                                                    <span
-                                                        className="truncate"
-                                                        style={{
-                                                            padding: "0px",
-                                                        }}>
-                                                        {name}
-                                                    </span>
+                                            ) : (
+                                                <KeyboardArrowDownIcon
+                                                    fontSize="large"
+                                                    style={{ fill: "white" }}
+                                                />
+                                            )}
+                                        </>
+                                    }
+                                    menuVariant="light">
+                                    <div
+                                        style={{
+                                            boxShadow:
+                                                "0 0 10px rgba(0, 0, 0, 0.5)",
+                                        }}>
+                                        <div className="profilecard">
+                                            <div className="p-3">
+                                                <div className="d-flex align-items-center p-0 ">
+                                                    <img
+                                                        src={image}
+                                                        className="rounded-circle"
+                                                        width="58"
+                                                        height="54"
+                                                        alt={name}
+                                                    />
+                                                    <div className="userInfo w-auto d-flex">
+                                                        <span
+                                                            className="truncate"
+                                                            style={{
+                                                                padding: "0px",
+                                                            }}>
+                                                            {name}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <button
+                                                className="viewandupdatebutton"
+                                                onClick={
+                                                    handleRedirectToEditprofile
+                                                }>
+                                                View and edit profile
+                                            </button>
                                         </div>
-                                        <button
-                                            className="viewandupdatebutton"
-                                            onClick={
-                                                handleRedirectToEditprofile
-                                            }>
-                                            View and edit profile
-                                        </button>
+                                        <NavDropdown.Divider />
+
+                                        <NavLink
+                                            to={`/myads/${userid}`}
+                                            className="dropdownitems">
+                                            &ensp;
+                                            <AddCardIcon
+                                                fontSize="medium"
+                                                style={{
+                                                    fill: "purple",
+                                                }}
+                                            />
+                                            &emsp;
+                                            <span className="droptext">
+                                                My ads
+                                            </span>
+                                        </NavLink>
+
+                                        <NavLink
+                                            to={`/wishlist/${userid}`}
+                                            className="dropdownitems">
+                                            &ensp;
+                                            <FavoriteBorderIcon
+                                                fontSize="medium"
+                                                style={{
+                                                    fill: "orangered",
+                                                }}
+                                            />
+                                            &emsp;
+                                            <span className="droptext">
+                                                Wishlist
+                                            </span>
+                                        </NavLink>
+                                        <NavLink
+                                            to={`/AuctionDashboard/${userid}`}
+                                            className="dropdownitems">
+                                            &ensp;
+                                            <GavelIcon
+                                                fontSize="medium"
+                                                style={{
+                                                    fill: "red",
+                                                }}
+                                            />
+                                            &emsp;
+                                            <span className="droptext">
+                                                Auction
+                                            </span>
+                                        </NavLink>
+
+                                        <NavLink
+                                            className="dropdownitems"
+                                            to={`/chat_landing_page/${userid}`}>
+                                            &ensp;
+                                            <WhatsAppIcon
+                                                fontSize="medium"
+                                                style={{
+                                                    fill: "#25D366",
+                                                }}
+                                            />
+                                            &emsp;
+                                            <span className="droptext">
+                                                Chat
+                                            </span>
+                                        </NavLink>
+
+                                        <NavDropdown.Divider />
+                                        <NavLink
+                                            className="dropdownitems"
+                                            onClick={handlelogout}>
+                                            &ensp;
+                                            <LogoutIcon
+                                                fontSize="medium"
+                                                style={{
+                                                    fill: "#0072ea",
+                                                }}
+                                            />
+                                            &emsp;
+                                            <span className="droptext">
+                                                Logout
+                                            </span>
+                                        </NavLink>
                                     </div>
-                                    <NavDropdown.Divider />
+                                </NavDropdown>
 
-                                    <NavLink
-                                        to={`/myads/${userid}`}
-                                        className="dropdownitems">
-                                        &ensp;
-                                        <AddCardIcon
+                                <NavLink to="/sell">
+                                    <button className="login-sell-btn hide">
+                                        <AddIcon
                                             fontSize="medium"
-                                            style={{
-                                                fill: "purple",
-                                            }}
+                                            style={{ fill: "green" }}
                                         />
-                                        &emsp;
-                                        <span className="droptext">My ads</span>
-                                    </NavLink>
+                                        SELL
+                                    </button>
+                                </NavLink>
+                            </div>
+                        ) : (
+                            <div>
+                                <NavLink
+                                    to="/login"
+                                    activeclassname="active_class">
+                                    <button className="login-sell-btn hide">
+                                        Login
+                                    </button>
+                                </NavLink>
+                            </div>
+                        )}
+                        {/* Adding the hamburger icon here for the smaller screen size */}
+                        <div className="hamburger1" onClick={toggleMobileView}>
+                            <div
+                                className={`hamburger ${
+                                    mobileview ? "open" : ""
+                                }`}>
+                                {!mobileview ? (
+                                    <Tooltip title="Menu" arrow>
+                                        <IconButton>
+                                            <MenuIcon
+                                                style={{ fill: "white" }}
+                                                fontSize="large"
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip title="Menu" arrow>
+                                        <IconButton>
+                                            <ClearIcon
+                                                style={{ fill: "white" }}
+                                                fontSize="large"
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                )}
+                            </div>
+                            {!isauth && (
+                                <NavLink
+                                    to="/login"
+                                    activeclassname="active_class">
+                                    <button className="login-sell-btn">
+                                        Login
+                                    </button>
+                                </NavLink>
+                            )}
+                        </div>
+                    </div>
+                </div>
+                {mobileview && (
+                    <div className="mobileView">
+                        {/* ------searchbar -------- */}
 
-                                    <NavLink
-                                        to={`/wishlist/${userid}`}
-                                        className="dropdownitems">
-                                        &ensp;
-                                        <FavoriteBorderIcon
-                                            fontSize="medium"
-                                            style={{
-                                                fill: "orangered",
-                                            }}
-                                        />
-                                        &emsp;
-                                        <span className="droptext">
-                                            Wishlist
-                                        </span>
-                                    </NavLink>
-                                    <NavLink
-                                        to={`/AuctionDashboard/${userid}`}
-                                        className="dropdownitems">
-                                        &ensp;
-                                        <GavelIcon
-                                            fontSize="medium"
-                                            style={{
-                                                fill: "red",
-                                            }}
-                                        />
-                                        &emsp;
-                                        <span className="droptext">
-                                            Auction
-                                        </span>
-                                    </NavLink>
-
-                                    <NavLink
-                                        className="dropdownitems"
-                                        to={`/chat_landing_page/${userid}`}>
-                                        &ensp;
-                                        <WhatsAppIcon
-                                            fontSize="medium"
-                                            style={{
-                                                fill: "#25D366",
-                                            }}
-                                        />
-                                        &emsp;
-                                        <span className="droptext">Chat</span>
-                                    </NavLink>
-
-                                    <NavDropdown.Divider />
-                                    <NavLink
-                                        className="dropdownitems"
-                                        onClick={handlelogout}>
-                                        &ensp;
-                                        <LogoutIcon
-                                            fontSize="medium"
-                                            style={{
-                                                fill: "#0072ea",
-                                            }}
-                                        />
-                                        &emsp;
-                                        <span className="droptext">Logout</span>
-                                    </NavLink>
-                                </div>
-                            </NavDropdown>
-
-                            <NavLink to="/sell">
-                                <button className="login-sell-btn">
-                                    <AddIcon
+                        {isauth && (
+                            <>
+                                <div
+                                    className="dropdownitems dropdownitems2"
+                                    onClick={handleRedirectToEditprofile}>
+                                    &ensp;
+                                    <AccountBoxIcon
                                         fontSize="medium"
-                                        style={{ fill: "green" }}
+                                        style={{
+                                            fill: "purple",
+                                        }}
                                     />
-                                    SELL
-                                </button>
+                                    &emsp;
+                                    <span className="droptext">
+                                        View and edit profile
+                                    </span>
+                                </div>
+                                <NavLink
+                                    to={`/myads/${userid}`}
+                                    className="dropdownitems dropdownitems2">
+                                    &ensp;
+                                    <AddCardIcon
+                                        fontSize="medium"
+                                        style={{
+                                            fill: "purple",
+                                        }}
+                                    />
+                                    &emsp;
+                                    <span className="droptext">My ads</span>
+                                </NavLink>
+                                <NavLink
+                                    to={`/wishlist/${userid}`}
+                                    className="dropdownitems dropdownitems2">
+                                    &ensp;
+                                    <FavoriteBorderIcon
+                                        fontSize="medium"
+                                        style={{
+                                            fill: "orangered",
+                                        }}
+                                    />
+                                    &emsp;
+                                    <span className="droptext">Wishlist</span>
+                                </NavLink>
+                                <NavLink
+                                    to={`/AuctionDashboard/${userid}`}
+                                    className="dropdownitems dropdownitems2">
+                                    &ensp;
+                                    <GavelIcon
+                                        fontSize="medium"
+                                        style={{
+                                            fill: "red",
+                                        }}
+                                    />
+                                    &emsp;
+                                    <span className="droptext">Auction</span>
+                                </NavLink>
+
+                                <NavLink
+                                    className="dropdownitems dropdownitems2"
+                                    to={`/chat_landing_page/${userid}`}>
+                                    &ensp;
+                                    <WhatsAppIcon
+                                        fontSize="medium"
+                                        style={{
+                                            fill: "#25D366",
+                                        }}
+                                    />
+                                    &emsp;
+                                    <span className="droptext">Chat</span>
+                                </NavLink>
+                            </>
+                        )}
+                        {/* ------------logout----------- */}
+                        {isauth ? (
+                            <NavLink
+                                className="dropdownitems dropdownitems2"
+                                onClick={handlelogout}>
+                                &ensp;
+                                <LogoutIcon
+                                    fontSize="medium"
+                                    style={{
+                                        fill: "#0072ea",
+                                    }}
+                                />
+                                &emsp;
+                                <span className="droptext">Logout</span>
                             </NavLink>
-                        </div>
-                    ) : (
-                        <div>
-                            <NavLink to="/login" activeclassname="active_class">
-                                <button className="login-sell-btn">
-                                    Login
-                                </button>
-                            </NavLink>
-                        </div>
+                        ) : (
+                            <div>
+                                <NavLink
+                                    className="dropdownitems dropdownitems2 "
+                                    to="/login">
+                                    &ensp;
+                                    <LogoutIcon
+                                        fontSize="medium"
+                                        style={{
+                                            fill: "#0072ea",
+                                        }}
+                                    />
+                                    &emsp;
+                                    <span className="droptext">Login</span>
+                                </NavLink>
+                            </div>
+                        )}
+                        {searchbar && (
+                            <div className="InputContainer">
+                                <input
+                                    placeholder="Search.."
+                                    id="input"
+                                    className="input"
+                                    name="text"
+                                    type="text"
+                                    onChange={handleInputChange}
+                                    autoComplete="off"
+                                />
+                            </div>
+                        )}
+                        {searchbar && (
+                            <Categories
+                                onSelectedCategoriesChange={
+                                    handleSelectedCategoriesChange
+                                }
+                                onClearFilter3={removeFilter}
+                            />
+                        )}
+                    </div>
+                )}
+                <div className="hide">
+                    {searchbar && (
+                        <Categories
+                            className="hide"
+                            onSelectedCategoriesChange={
+                                handleSelectedCategoriesChange
+                            }
+                            onClearFilter3={removeFilter}
+                        />
                     )}
                 </div>
-                {searchbar && (
-                    <Categories
-                        onSelectedCategoriesChange={
-                            handleSelectedCategoriesChange
-                        }
-                        onClearFilter3={removeFilter}
-                    />
-                )}
             </div>
         </>
     );
