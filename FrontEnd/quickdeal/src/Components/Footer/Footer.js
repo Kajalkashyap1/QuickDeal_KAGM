@@ -6,6 +6,12 @@ import ContactMailIcon from "@mui/icons-material/ContactMail";
 const Footer = () => {
     return (
         <div className={style.main}>
+            <div className={style.left}>
+                <img
+                    src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"
+                    alt="QuickDeal"
+                    height={60}></img>
+            </div>
             <div className={style.right}>
                 <div className={style.info}>
                     <LocationOnIcon />
@@ -18,11 +24,6 @@ const Footer = () => {
                     </a>
                 </div>
             </div>{" "}
-            <div className={style.left}>
-                <img
-                    src="https://res.cloudinary.com/dsaaqhang/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_80,q_auto:best,w_140,z_2/v1711003867/QuickDeal/onlinelogomaker-022024-0033-5725_u3lk5k.png"
-                    alt="QuickDeal"></img>
-            </div>
         </div>
     );
 };

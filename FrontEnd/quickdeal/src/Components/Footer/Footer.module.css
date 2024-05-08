@@ -8,8 +8,7 @@
     min-height: 80px; /* Change max-height to min-height */
     display: flex;
     flex-direction: row; /* Set flex-direction to column */
-    justify-content: flex-end; /* Align content to the bottom */
-    justify-content: space-between;
+    justify-content: flex-start; /* Align content to the bottom */
 }
 
 /* Add this to make the footer stretch across the width */
