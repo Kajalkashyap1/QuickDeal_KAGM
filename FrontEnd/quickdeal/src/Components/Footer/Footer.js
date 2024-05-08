@@ -18,7 +18,7 @@ const Footer = () => {
                 </div>
                 <div className={style.info}>
                     <ContactMailIcon/>
-                    <a id={style.link} href='mailto:kajal.2022ca041@mnnit.ac.in'>kajal.2022ca041@mnnit.ac.in</a>
+                    <a id={style.link} href='mailto:teamquickdeal@gmail.com'>teamquickdeal@gmail.com</a>
                 </div>
           </div>
     </div>
