@@ -464,9 +464,9 @@ const Signupui = () => {
                         </>
                     )}
 
-                    <div>
+                    {/* <div>
                         <Footer />
-                    </div>
+                    </div> */}
                 </>
             )}
         </>
