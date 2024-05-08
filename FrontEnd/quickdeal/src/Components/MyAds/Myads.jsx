@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Notfound from "../NotfoundComponent/Notfound";
 import { Oval } from "react-loader-spinner";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import Footer from "../Footer/Footer";
 const Myads = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;

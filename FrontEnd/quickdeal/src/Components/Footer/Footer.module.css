@@ -5,7 +5,16 @@
     font-family: "DM Sans", sans-serif;
     padding: 20px;
     color: white;
+    max-height: 150px;
+    display: flex;
+    /* bottom: 0; */
 }
+
+/* .left{
+    display: flex;
+    flex-direction: row;
+} */
+
 
 .info{
     margin: 3px;

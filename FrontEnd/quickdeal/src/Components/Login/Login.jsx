@@ -9,6 +9,7 @@ import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Footer from "../Footer/Footer";
 import { Oval } from "react-loader-spinner";
 function LoginSignup() {
     // const [isToastActive, setIsToastActive] = useState();
@@ -177,6 +178,40 @@ function LoginSignup() {
                                         </span>
                                     </div>
 
+                            <div>
+                                <button
+                                    className={style.submit_btn}
+                                    type="submit">
+                                    Submit
+                                </button>
+                            </div>
+                            <div
+                                className={style.forgot_password}
+                                onClick={handelforgetpassword}>
+                                <span>Forgot Password?</span>
+                            </div>
+                            <Googlelogin></Googlelogin>
+                            <div>
+                                Don't have an account? &emsp;
+                                <b>
+                                    <NavLink
+                                        to="/signin"
+                                        style={{ textDecoration: "none" }}>
+                                        Sign up
+                                    </NavLink>
+                                </b>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div>
+                    <Footer/>
+                </div>
+                
+            </div>
+            
+            
                                     <div>
                                         <button
                                             className={style.submit_btn}

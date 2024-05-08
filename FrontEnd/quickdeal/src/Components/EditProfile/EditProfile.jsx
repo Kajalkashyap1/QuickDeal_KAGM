@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import Footer from "../Footer/Footer";
 const EditProfile = () => {
     const { userid } = useParams();
     axios.defaults.withCredentials = true;
@@ -114,17 +115,18 @@ const EditProfile = () => {
                                     defaultValue={userinfo?.contactNo || ""}
                                 />
 
-                                <input
-                                    type="email"
-                                    className={style.input}
-                                    placeholder="Email"
-                                    value={userinfo?.email}
-                                />
-                            </div>
-                        </div>
+                        <input
+                            type="email"
+                            className={style.input}
+                            placeholder="Email"
+                            value={userinfo?.email}
+                        />
                     </div>
-                </>
-            )}
+                </div>
+            </div>
+            <>
+                <Footer/>
+            </>
         </>
     );
 };
