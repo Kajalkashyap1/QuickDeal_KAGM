@@ -44,7 +44,7 @@ Contributions to QuickDeal are welcome! Feel free to submit pull requests for bu
 
 ## Contact
 
-For any inquiries or support, please contact the project maintainer(s) at [email@example.com](mailto:teamquickdeal@gmail.com).
+For any inquiries or support, please contact the project maintainer(s) at [teamquickdeal@gmail.com](mailto:teamquickdeal@gmail.com).
 
 ## Acknowledgements
 
