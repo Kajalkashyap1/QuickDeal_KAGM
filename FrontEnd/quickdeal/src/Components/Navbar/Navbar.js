@@ -493,21 +493,26 @@ function Navbar({
 
                         {isauth && (
                             <>
-                                <div
-                                    className="dropdownitems dropdownitems2"
-                                    onClick={handleRedirectToEditprofile}>
+                                <NavLink
+                                    to="/sell"
+                                    className="dropdownitems dropdownitems2">
                                     &ensp;
-                                    <AccountBoxIcon
+                                    <AddIcon
                                         fontSize="medium"
-                                        style={{
-                                            fill: "purple",
-                                        }}
+                                        style={{ fill: "green" }}
                                     />
                                     &emsp;
-                                    <span className="droptext">
-                                        View and edit profile
-                                    </span>
-                                </div>
+                                    <span className="droptext">SELL</span>
+                                </NavLink>
+                                {/* <NavLink to="/sell">
+                                    <button className="login-sell-btn hide">
+                                        <AddIcon
+                                            fontSize="medium"
+                                            style={{ fill: "green" }}
+                                        />
+                                        SELL
+                                    </button>
+                                </NavLink> */}
                                 <NavLink
                                     to={`/myads/${userid}`}
                                     className="dropdownitems dropdownitems2">
@@ -561,6 +566,21 @@ function Navbar({
                                     &emsp;
                                     <span className="droptext">Chat</span>
                                 </NavLink>
+                                <div
+                                    className="dropdownitems dropdownitems2"
+                                    onClick={handleRedirectToEditprofile}>
+                                    &ensp;
+                                    <AccountBoxIcon
+                                        fontSize="medium"
+                                        style={{
+                                            fill: "blue",
+                                        }}
+                                    />
+                                    &emsp;
+                                    <span className="droptext">
+                                        View and edit profile
+                                    </span>
+                                </div>
                             </>
                         )}
                         {/* ------------logout----------- */}
