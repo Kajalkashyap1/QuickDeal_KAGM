@@ -16,7 +16,7 @@ const Home = () => {
     const [useremail, setuseremail] = useState("");
     const [image, setimage] = useState("");
     const [userid, setuserid] = useState("");
-    const [loading, setloading] = useState(false);
+    const [loading, setloading] = useState(true);
     // -------------- checking if user login or not --------------------
 
     useEffect(() => {
@@ -58,11 +58,12 @@ const Home = () => {
         setloading(false);
     }, []);
     useEffect(() => {
-        setrenderitems(
-            items?.filter(
-                (item) => item.useremail !== useremail && !item.hasSold
-            )
+        setloading(true);
+        const filteredItems = items?.filter(
+            (item) => item.useremail !== useremail && !item.hasSold
         );
+        setrenderitems(filteredItems);
+        setloading(false);
     }, [items]);
     const authdetail = { isauth, name, useremail, image, userid };
     // ------------------- handle search bar keyword change---------------
