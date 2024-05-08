@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Placeholder from "react-bootstrap/Placeholder";
 import { useNavigate } from "react-router-dom";
 import "./Home";
+import { Oval } from "react-loader-spinner";
 import Footer from "../Footer/Footer";
 const Home = () => {
     const navigate = useNavigate();
@@ -15,10 +16,11 @@ const Home = () => {
     const [useremail, setuseremail] = useState("");
     const [image, setimage] = useState("");
     const [userid, setuserid] = useState("");
-
+    const [loading, setloading] = useState(false);
     // -------------- checking if user login or not --------------------
 
     useEffect(() => {
+        setloading(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -35,6 +37,7 @@ const Home = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     }, []);
 
     // ---------------------- geting posts from DB -------------------
@@ -43,6 +46,7 @@ const Home = () => {
     const [renderitems, setrenderitems] = useState([]);
 
     useEffect(() => {
+        setloading(true);
         axios
             .get(`http://localhost:8000/dashboard/getposts`)
             .then((res) => {
@@ -51,6 +55,7 @@ const Home = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     }, []);
     useEffect(() => {
         setrenderitems(
@@ -130,52 +135,84 @@ const Home = () => {
 
     return (
         <>
-            <Navbar
-                searchbar="true"
-                onSearchChange={handleSearchChange}
-                onCategoryFilterChange={handleCategoryFilterChange}
-            />
-            <div className="main">
-                <div className="div-main formargin">
-                    {renderitems.map((card) => (
-                        <Cardcomponent
-                            key={card._id}
-                            onClick={handleClick}
-                            usermail={useremail}
-                            item={card}
-                        />
-                    ))}
-                    {renderitems.length === 0 &&
-                        Array.from({ length: 12 }).map((_, index) => (
-                            <Card key={index} style={{ width: "18rem" }}>
-                                <Card.Img
-                                    variant="top"
-                                    src="https://res.cloudinary.com/dsaaqhang/image/upload/v1712133539/searchnot_found_1_fp8qb2.png"
-                                    height="190px"
-                                />
-                                <Card.Body>
-                                    <Placeholder
-                                        as={Card.Title}
-                                        animation="glow">
-                                        <Placeholder xs={6} />
-                                    </Placeholder>
-                                    <Placeholder
-                                        as={Card.Text}
-                                        animation="glow">
-                                        <Placeholder xs={7} />{" "}
-                                        <Placeholder xs={4} />{" "}
-                                        <Placeholder xs={4} />{" "}
-                                        <Placeholder xs={6} />{" "}
-                                        <Placeholder xs={8} />
-                                    </Placeholder>
-                                </Card.Body>
-                            </Card>
-                        ))}
+            {loading ? (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                    }}>
+                    <Oval
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <br />
+                    <i>loading..</i>
                 </div>
-            </div>
-            <div>
-                <Footer/>
-            </div>
+            ) : (
+                <>
+                    <Navbar
+                        searchbar="true"
+                        onSearchChange={handleSearchChange}
+                        onCategoryFilterChange={handleCategoryFilterChange}
+                    />
+                    <div className="main">
+                        <div className="div-main formargin">
+                            {renderitems.map((card) => (
+                                <Cardcomponent
+                                    key={card._id}
+                                    onClick={handleClick}
+                                    usermail={useremail}
+                                    item={card}
+                                />
+                            ))}
+                            {renderitems.length === 0 &&
+                                Array.from({ length: 12 }).map((_, index) => (
+                                    <Card
+                                        key={index}
+                                        style={{ width: "18rem" }}>
+                                        <Card.Img
+                                            variant="top"
+                                            src="https://res.cloudinary.com/dsaaqhang/image/upload/v1712133539/searchnot_found_1_fp8qb2.png"
+                                            height="190px"
+                                        />
+                                        <Card.Body>
+                                            <Placeholder
+                                                as={Card.Title}
+                                                animation="glow">
+                                                <Placeholder xs={6} />
+                                            </Placeholder>
+                                            <Placeholder
+                                                as={Card.Text}
+                                                animation="glow">
+                                                <Placeholder xs={7} />{" "}
+                                                <Placeholder xs={4} />{" "}
+                                                <Placeholder xs={4} />{" "}
+                                                <Placeholder xs={6} />{" "}
+                                                <Placeholder xs={8} />
+                                            </Placeholder>
+                                        </Card.Body>
+                                    </Card>
+                                ))}
+                        </div>
+                    </div>
+                    <div>
+                        <Footer />
+                    </div>
+                </>
+            )}
         </>
     );
 };

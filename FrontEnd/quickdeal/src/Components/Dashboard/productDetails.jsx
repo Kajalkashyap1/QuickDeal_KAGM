@@ -10,6 +10,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import { Oval } from "react-loader-spinner";
 import Tooltip from "@mui/material/Tooltip";
 
 const formatDate = (dateString) => {
@@ -23,7 +24,7 @@ const ProductDetails = () => {
     const { id } = useParams();
     const { preview } = useParams();
     const [liked, setliked] = useState(false);
-
+    const [loading, setloading] = useState(false);
     const [item, setitem] = useState([]);
     const Navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -31,6 +32,7 @@ const ProductDetails = () => {
     const [userid, setuserid] = useState("");
 
     useEffect(() => {
+        setloading(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -45,8 +47,10 @@ const ProductDetails = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     }, []);
     const handlelike = () => {
+        setloading(true);
         axios
             .post(
                 `http://localhost:8000/dashboard/updatePostLikes/${id}/${userid}`
@@ -59,9 +63,11 @@ const ProductDetails = () => {
             .catch((err) => {
                 console.log("error in updating likes ", err.message);
             });
+        setloading(false);
     };
 
     useEffect(() => {
+        setloading(true);
         axios
             .get(`http://localhost:8000/dashboard/post/${id}`)
             .then((res) => {
@@ -70,10 +76,12 @@ const ProductDetails = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     }, [id, liked]);
 
     const formattedDate = formatDate(item.date);
     const handleGetBuyerinfo = () => {
+        setloading(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -83,115 +91,148 @@ const ProductDetails = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     };
     return (
         <>
-            <Navbar searchbar={false} />
-            <div className="maincontainer">
-                <div className="leftdiv">
-                    <div className="image">
-                        <style>
-                            {`
+            {loading ? (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                    }}>
+                    <Oval
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <br />
+                    <i>loading..</i>
+                </div>
+            ) : (
+                <>
+                    <Navbar searchbar={false} />
+                    <div className="maincontainer">
+                        <div className="leftdiv">
+                            <div className="image">
+                                <style>
+                                    {`
                             .carousel-inner .carousel-item {
                                 transition: transform 0.6s ease; /* Adjust transition duration */
                             }
                             `}
-                        </style>
-                        <Carousel>
-                            {item.imageurl &&
-                                item.imageurl.map((images, index) => (
-                                    <Carousel.Item key={index}>
-                                        <img
-                                            src={images}
-                                            alt="item.productname"
-                                            style={{
-                                                width: "100%",
-                                                height: "500px",
-                                                objectFit: "contain",
-                                            }}
-                                        />
-                                    </Carousel.Item>
-                                ))}
-                        </Carousel>
-                    </div>
-                    <br />
-                    <br />
-                    <div className="description">
-                        <b>Description</b> <br />
-                        {item.description}
-                    </div>
-                </div>
-                <div className="rightdiv">
-                    <div className="productdetails">
-                        <div className="priceandheart">
-                            <h1> ₹ {item.price} /-</h1>
-                            {!preview && (
-                                <div className="favoriteIcon">
-                                    {item?.likedby?.includes(userid) ? (
-                                        <Tooltip
-                                            title="Remove from wishlist"
-                                            onClick={handlelike}>
-                                            <IconButton>
-                                                <FavoriteIcon
-                                                    fontSize="large"
-                                                    className="likedIcon"
+                                </style>
+                                <Carousel>
+                                    {item.imageurl &&
+                                        item.imageurl.map((images, index) => (
+                                            <Carousel.Item key={index}>
+                                                <img
+                                                    src={images}
+                                                    alt="item.productname"
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "500px",
+                                                        objectFit: "contain",
+                                                    }}
                                                 />
-                                            </IconButton>
-                                        </Tooltip>
-                                    ) : (
-                                        <Tooltip
-                                            title="Add to wishlist"
-                                            onClick={handlelike}>
-                                            <IconButton>
-                                                <FavoriteBorderIcon
-                                                    fontSize="large"
-                                                    className="favoriteIcon"
-                                                />
-                                            </IconButton>
-                                        </Tooltip>
-                                    )}
-                                    <span className="likescount">
-                                        {item.likedby?.length}
-                                    </span>
-                                </div>
-                            )}
+                                            </Carousel.Item>
+                                        ))}
+                                </Carousel>
+                            </div>
+                            <br />
+                            <br />
+                            <div className="description">
+                                <b>Description</b> <br />
+                                {item.description}
+                            </div>
                         </div>
-                        <hr />
-                        <h4>{item.productname}</h4>
-                        <p>👉 {item.adtitle}</p>
-                        <p>👉 {item.description}</p>
-                        <p>📅 {formattedDate}</p>
+                        <div className="rightdiv">
+                            <div className="productdetails">
+                                <div className="priceandheart">
+                                    <h1> ₹ {item.price} /-</h1>
+                                    {!preview && (
+                                        <div className="favoriteIcon">
+                                            {item?.likedby?.includes(userid) ? (
+                                                <Tooltip
+                                                    title="Remove from wishlist"
+                                                    onClick={handlelike}>
+                                                    <IconButton>
+                                                        <FavoriteIcon
+                                                            fontSize="large"
+                                                            className="likedIcon"
+                                                        />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            ) : (
+                                                <Tooltip
+                                                    title="Add to wishlist"
+                                                    onClick={handlelike}>
+                                                    <IconButton>
+                                                        <FavoriteBorderIcon
+                                                            fontSize="large"
+                                                            className="favoriteIcon"
+                                                        />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            )}
+                                            <span className="likescount">
+                                                {item.likedby?.length}
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                                <hr />
+                                <h4>{item.productname}</h4>
+                                <p>👉 {item.adtitle}</p>
+                                <p>👉 {item.description}</p>
+                                <p>📅 {formattedDate}</p>
+                            </div>
+                            <div className="sellerinfo">
+                                <h5>Seller info </h5>
+                                <hr />
+                                <p style={{ textTransform: "capitalize" }}>
+                                    <AccountCircleIcon
+                                        style={{ fill: "#0072ea" }}
+                                    />
+                                    &nbsp;
+                                    {item.username}
+                                </p>
+                                <p>
+                                    <EmailIcon style={{ fill: "orangered" }} />
+                                    &nbsp;
+                                    {item.useremail}
+                                </p>
+                                {/* <p>{item.userid}</p> */}
+                                {!preview && (
+                                    <button
+                                        className="chatbutton"
+                                        onClick={handleGetBuyerinfo}>
+                                        Chat with Seller
+                                    </button>
+                                )}
+                            </div>
+                            <div className="location">
+                                <p>
+                                    <LocationOnIcon style={{ fill: "red" }} />
+                                    &nbsp; Location: {item.location}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="sellerinfo">
-                        <h5>Seller info </h5>
-                        <hr />
-                        <p style={{ textTransform: "capitalize" }}>
-                            <AccountCircleIcon style={{ fill: "#0072ea" }} />
-                            &nbsp;
-                            {item.username}
-                        </p>
-                        <p>
-                            <EmailIcon style={{ fill: "orangered" }} />
-                            &nbsp;
-                            {item.useremail}
-                        </p>
-                        {/* <p>{item.userid}</p> */}
-                        {!preview && (
-                            <button
-                                className="chatbutton"
-                                onClick={handleGetBuyerinfo}>
-                                Chat with Seller
-                            </button>
-                        )}
-                    </div>
-                    <div className="location">
-                        <p>
-                            <LocationOnIcon style={{ fill: "red" }} />
-                            &nbsp; Location: {item.location}
-                        </p>
-                    </div>
-                </div>
-            </div>
+                </>
+            )}
         </>
     );
 };

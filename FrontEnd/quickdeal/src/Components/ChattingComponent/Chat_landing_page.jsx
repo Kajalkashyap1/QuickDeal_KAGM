@@ -6,6 +6,7 @@ import { MessageBox } from "react-chat-elements";
 import SendIcon from "@mui/icons-material/Send";
 import Card from "react-bootstrap/Card";
 import { useParams, useNavigate } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
 import axios from "axios";
 import tune from "../../audio/notification.mpeg";
 import Navbar from "../Navbar/Navbar";
@@ -18,8 +19,10 @@ const ChattingLandingPage = () => {
     const [clickedItems, setClickedItems] = useState([]);
     const [clickedIndex, setClickedIndex] = useState(null);
     const [onlineusers, setonlineusers] = useState([]);
+    const [loading, setloading] = useState(false);
     axios.defaults.withCredentials = true;
     useEffect(() => {
+        setloading(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -31,6 +34,7 @@ const ChattingLandingPage = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     }, []);
 
     const handleItemClick = (index) => {
@@ -56,6 +60,7 @@ const ChattingLandingPage = () => {
     // --------------------- fetching active chats -----------------
 
     useEffect(() => {
+        setloading(true);
         axios
             .get(`http://localhost:8000/chatting/getactivechat/${buyer}`)
             .then((res) => {
@@ -64,6 +69,7 @@ const ChattingLandingPage = () => {
             .catch((err) => {
                 console.log("error while fetching active chats ", err.message);
             });
+        setloading(false);
     }, []);
     // console.log("Active users -> ", Activechats);
     const showMessages = (sender, reciever) => {
@@ -72,154 +78,207 @@ const ChattingLandingPage = () => {
 
     return (
         <>
-            <Navbar searchbar={false} />
-            <div className="maindiv">
-                <div className="inbox">
-                    <Card>
-                        <Card.Body
-                            className="inboxHeading p-2"
-                            style={{ color: "white" }}>
-                            INBOX
-                        </Card.Body>
-                    </Card>
-                    <div className="activechat">
-                        {Activechats.map(
-                            (data, index) =>
-                                data._id !== buyer && (
-                                    <div
-                                        className="chatitemcontainer"
-                                        key={index}>
-                                        <div
-                                            className="card"
-                                            onClick={() => {
-                                                showMessages(buyer, data._id);
-                                            }}>
+            {loading ? (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                    }}>
+                    <Oval
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <br />
+                    <i>loading..</i>
+                </div>
+            ) : (
+                <>
+                    <Navbar searchbar={false} />
+                    <div className="maindiv">
+                        <div className="inbox">
+                            <Card>
+                                <Card.Body
+                                    className="inboxHeading p-2"
+                                    style={{ color: "white" }}>
+                                    INBOX
+                                </Card.Body>
+                            </Card>
+                            <div className="activechat">
+                                {Activechats.map(
+                                    (data, index) =>
+                                        data._id !== buyer && (
                                             <div
-                                                key={index}
-                                                onClick={() =>
-                                                    handleItemClick(index)
-                                                }
-                                                className="card-body p-3"
-                                                style={{
-                                                    border: "1px solid rgb(5 23 29 / 34%)",
-                                                    backgroundColor:
-                                                        clickedItems[index]
-                                                            ? "#ebeeef"
-                                                            : "white",
-                                                    padding: clickedItems[index]
-                                                        ? ""
-                                                        : "2px",
-                                                    boxShadow: clickedItems[
-                                                        index
-                                                    ]
-                                                        ? "rgba(0, 0, 0, 0.4) 2px 1px 5px 0px"
-                                                        : "none", // Adding shadow effect
-                                                    overflowY: "auto",
-                                                    /* Hide scrollbar */
-                                                    scrollbarWidth:
-                                                        "none" /* Firefox */,
-                                                    msOverflowStyle:
-                                                        "none" /* IE/Edge */,
-                                                    "&::-webkit-scrollbar": {
-                                                        display:
-                                                            "none" /* Chrome, Safari, Opera */,
-                                                    },
-                                                }}>
-                                                <div className="d-flex align-items-center p-0 profileicon">
-                                                    <img
-                                                        src={data.imageurl}
-                                                        className="rounded-circle mr-3"
-                                                        width="40"
-                                                        height="40"
-                                                        alt={data.fullname}
-                                                    />
-                                                    <div className="chatuserinfo">
-                                                        <div
-                                                            style={{
-                                                                display: "flex",
-                                                                justifyContent:
-                                                                    "space-between",
-                                                                width: "100%",
-                                                            }}>
-                                                            <h5 className="mb-0">
-                                                                {data.fullname}
-                                                            </h5>
-                                                            {/* ------- Online---------- */}
-                                                            {onlineusers.some(
-                                                                (user) =>
-                                                                    user.userId ===
-                                                                    data._id
-                                                            ) && (
-                                                                <p
-                                                                    className="text-muted mb-0 fs-6"
+                                                className="chatitemcontainer"
+                                                key={index}>
+                                                <div
+                                                    className="card"
+                                                    onClick={() => {
+                                                        showMessages(
+                                                            buyer,
+                                                            data._id
+                                                        );
+                                                    }}>
+                                                    <div
+                                                        key={index}
+                                                        onClick={() =>
+                                                            handleItemClick(
+                                                                index
+                                                            )
+                                                        }
+                                                        className="card-body p-3"
+                                                        style={{
+                                                            border: "1px solid rgb(5 23 29 / 34%)",
+                                                            backgroundColor:
+                                                                clickedItems[
+                                                                    index
+                                                                ]
+                                                                    ? "#ebeeef"
+                                                                    : "white",
+                                                            padding:
+                                                                clickedItems[
+                                                                    index
+                                                                ]
+                                                                    ? ""
+                                                                    : "2px",
+                                                            boxShadow:
+                                                                clickedItems[
+                                                                    index
+                                                                ]
+                                                                    ? "rgba(0, 0, 0, 0.4) 2px 1px 5px 0px"
+                                                                    : "none", // Adding shadow effect
+                                                            overflowY: "auto",
+                                                            /* Hide scrollbar */
+                                                            scrollbarWidth:
+                                                                "none" /* Firefox */,
+                                                            msOverflowStyle:
+                                                                "none" /* IE/Edge */,
+                                                            "&::-webkit-scrollbar":
+                                                                {
+                                                                    display:
+                                                                        "none" /* Chrome, Safari, Opera */,
+                                                                },
+                                                        }}>
+                                                        <div className="d-flex align-items-center p-0 profileicon">
+                                                            <img
+                                                                src={
+                                                                    data.imageurl
+                                                                }
+                                                                className="rounded-circle mr-3"
+                                                                width="40"
+                                                                height="40"
+                                                                alt={
+                                                                    data.fullname
+                                                                }
+                                                            />
+                                                            <div className="chatuserinfo">
+                                                                <div
                                                                     style={{
                                                                         display:
                                                                             "flex",
-                                                                        alignItems:
-                                                                            "center",
+                                                                        justifyContent:
+                                                                            "space-between",
+                                                                        width: "100%",
                                                                     }}>
-                                                                    <FiberManualRecordIcon
-                                                                        fontSize="small"
-                                                                        style={{
-                                                                            fill: "green",
-                                                                        }}
-                                                                    />
-                                                                    Online
-                                                                </p>
-                                                            )}
-                                                            {/* ------- Offline---------- */}
-                                                            {!onlineusers.some(
-                                                                (user) =>
-                                                                    user.userId ===
-                                                                    data._id
-                                                            ) && (
+                                                                    <h5 className="mb-0">
+                                                                        {
+                                                                            data.fullname
+                                                                        }
+                                                                    </h5>
+                                                                    {/* ------- Online---------- */}
+                                                                    {onlineusers.some(
+                                                                        (
+                                                                            user
+                                                                        ) =>
+                                                                            user.userId ===
+                                                                            data._id
+                                                                    ) && (
+                                                                        <p
+                                                                            className="text-muted mb-0 fs-6"
+                                                                            style={{
+                                                                                display:
+                                                                                    "flex",
+                                                                                alignItems:
+                                                                                    "center",
+                                                                            }}>
+                                                                            <FiberManualRecordIcon
+                                                                                fontSize="small"
+                                                                                style={{
+                                                                                    fill: "green",
+                                                                                }}
+                                                                            />
+                                                                            Online
+                                                                        </p>
+                                                                    )}
+                                                                    {/* ------- Offline---------- */}
+                                                                    {!onlineusers.some(
+                                                                        (
+                                                                            user
+                                                                        ) =>
+                                                                            user.userId ===
+                                                                            data._id
+                                                                    ) && (
+                                                                        <p
+                                                                            className="text-muted mb-0 fs-6"
+                                                                            style={{
+                                                                                display:
+                                                                                    "flex",
+                                                                                alignItems:
+                                                                                    "center",
+                                                                            }}>
+                                                                            <FiberManualRecordIcon
+                                                                                fontSize="small"
+                                                                                style={{
+                                                                                    fill: "red",
+                                                                                }}
+                                                                            />
+                                                                            Offline
+                                                                        </p>
+                                                                    )}
+                                                                </div>
                                                                 <p
-                                                                    className="text-muted mb-0 fs-6"
+                                                                    className="text-muted mb-0"
                                                                     style={{
-                                                                        display:
-                                                                            "flex",
-                                                                        alignItems:
-                                                                            "center",
+                                                                        textTransform:
+                                                                            "lowercase",
                                                                     }}>
-                                                                    <FiberManualRecordIcon
-                                                                        fontSize="small"
-                                                                        style={{
-                                                                            fill: "red",
-                                                                        }}
-                                                                    />
-                                                                    Offline
+                                                                    {data.email}
                                                                 </p>
-                                                            )}
+                                                            </div>
                                                         </div>
-                                                        <p
-                                                            className="text-muted mb-0"
-                                                            style={{
-                                                                textTransform:
-                                                                    "lowercase",
-                                                            }}>
-                                                            {data.email}
-                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )
-                        )}
+                                        )
+                                )}
+                            </div>
+                        </div>
+                        <div className="chatbox">
+                            <Card.Body
+                                className="messagehading p-1"
+                                style={{
+                                    color: "black",
+                                    minHeight: "1.8em",
+                                }}></Card.Body>
+                            <div className="messagecontainer messagecontainer2">
+                                Please select a Conversation first !
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className="chatbox">
-                    <Card.Body
-                        className="messagehading p-1"
-                        style={{
-                            color: "black",
-                            minHeight: "1.8em",
-                        }}></Card.Body>
-                    <div className="messagecontainer messagecontainer2">
-                        Please select a Conversation first !
-                    </div>
-                </div>
-            </div>
+                </>
+            )}
         </>
     );
 };

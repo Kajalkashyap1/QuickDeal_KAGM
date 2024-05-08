@@ -14,6 +14,7 @@ import CurrencyInput from "react-currency-input-field";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import { Oval } from "react-loader-spinner";
 let socket;
 const Mainauction = () => {
     const { auctionid } = useParams();
@@ -23,6 +24,7 @@ const Mainauction = () => {
     const [messArray, setMessArray] = useState([]);
     const [item, setitem] = useState([]);
     const [auctionended, setauctionended] = useState(true);
+    const [loading, setloading] = useState(false);
     useEffect(() => {
         axios
             .get(
@@ -45,6 +47,7 @@ const Mainauction = () => {
     const [activeuseremail, setuseremail] = useState("");
     const [activeuserid, setuserid] = useState("");
     useEffect(() => {
+        setloading(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -59,6 +62,7 @@ const Mainauction = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading(false);
     }, []);
 
     useEffect(() => {
@@ -161,6 +165,8 @@ const Mainauction = () => {
 
     const [pastBids, setpastbids] = useState([]);
     useEffect(() => {
+        setloading(true);
+
         axios
             .get(`http://localhost:8000/auction/getBitAmounts/${auctionid}`)
             .then((res) => {
@@ -171,6 +177,7 @@ const Mainauction = () => {
             .catch((err) => {
                 console.log("error in get past auction bids ", err.message);
             });
+        setloading(false);
     }, [auctionid]);
     // console.log(auctionResult);
 
@@ -190,6 +197,7 @@ const Mainauction = () => {
     // ------------------- delete auction --------------------
 
     const handleEndAuction = (auctionid) => {
+        setloading(true);
         axios
             .post("http://localhost:8000/auction/endAuction", { auctionid })
             .then((res) => {
@@ -197,27 +205,13 @@ const Mainauction = () => {
                     setstatechanged(!statechanged);
                 }
             });
+        setloading(false);
     };
 
     useEffect(() => {
         setdemo(activeusersinAuction);
     }, [activeusersinAuction]);
-    // const [membersInAuction, setmembersInAuction] = useState([]);
-    // useEffect(() => {
-    //     axios
-    //         .get(
-    //             `http://localhost:8000/auction/getMemberInAuction/${auctionid}`
-    //         )
-    //         .then((res) => {
-    //             setmembersInAuction(res.data.info);
-    //         })
-    //         .catch((err) => {
-    //             console.log(
-    //                 "error in fetching active members in auction",
-    //                 err.message
-    //             );
-    //         });
-    // }, []);
+
     const uniqueItems = new Set();
     const uniquePastBids = pastBids.filter((item) => {
         const key = `${item.senderId.fullname}-${item.amount}`;
@@ -229,273 +223,335 @@ const Mainauction = () => {
     });
     return (
         <>
-            <Navbar />
-            <ToastContainer
-                position="top-center"
-                autoClose={2000}
-                theme="dark"
-            />
-            <div className={stylemain.auctionheading}>
-                <h4>Welcome to the Auction</h4>
+            {loading ? (
                 <div
                     style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
                         display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignContent: "center",
                         alignItems: "center",
-                        marginRight: "20px",
                     }}>
-                    {item.activetill && auctionended && (
-                        <>
-                            <AlarmIcon
-                                fontSize="large"
-                                style={{ fill: "#1679cb", marginRight: "10px" }}
-                            />
-                            Time remaining :&emsp;
-                            <CountdownTimer
-                                targetDate={item?.activetill}
-                                onTimeUp={handleTerminateAuction}
-                            />
-                        </>
-                    )}
+                    <Oval
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <br />
+                    <i>loading..</i>
                 </div>
-            </div>
-            <div className={stylemain.maincontainer}>
-                <div className={`${stylemain.firstcol} ${stylemain.widthhigh}`}>
-                    <div className={stylemain.leaderboard}>
-                        <h3>Leaderboard</h3>
-                        <div className={stylemain.horizontal}></div>
-                        <div className={`${stylemain.leaderlist} `}>
-                            {messArray.length !== 0 && (
-                                <center
-                                    style={{
-                                        fontSize: "large",
-                                        color: "orangered",
-                                    }}>
-                                    <hr />
-                                    <strong>
-                                        <p>Live Offers</p>
-                                    </strong>
-                                    <hr />
-                                </center>
-                            )}
-                            {messArray.length === 0 &&
-                                uniquePastBids.length === 0 && (
-                                    <center
+            ) : (
+                <>
+                    <Navbar />
+                    <ToastContainer
+                        position="top-center"
+                        autoClose={2000}
+                        theme="dark"
+                    />
+                    <div className={stylemain.auctionheading}>
+                        <h4>Welcome to the Auction</h4>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                marginRight: "20px",
+                            }}>
+                            {item.activetill && auctionended && (
+                                <>
+                                    <AlarmIcon
+                                        fontSize="large"
                                         style={{
-                                            fontSize: "large",
-                                            color: "orangered",
-                                        }}>
-                                        <hr />
-                                        <strong>
-                                            <p>No offers till now ! </p>
-                                        </strong>
-                                        <hr />
-                                    </center>
-                                )}
-                            {messArray?.map((item, index) => {
-                                return (
-                                    <div
-                                        key={index}
-                                        className={stylemain.leadercards}>
-                                        <div className={stylemain.leadername}>
-                                            <span> {item.sendername}</span>
-                                            <span> ₹ {item.offer}</span>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                            {uniquePastBids && (
-                                <center
-                                    style={{
-                                        fontSize: "large",
-                                        color: "orangered",
-                                    }}>
-                                    <hr />
-                                    <strong></strong>
-                                    <hr />
-                                </center>
+                                            fill: "#1679cb",
+                                            marginRight: "10px",
+                                        }}
+                                    />
+                                    Time remaining :&emsp;
+                                    <CountdownTimer
+                                        targetDate={item?.activetill}
+                                        onTimeUp={handleTerminateAuction}
+                                    />
+                                </>
                             )}
-                            {uniquePastBids?.map((item, index) => {
-                                return (
-                                    <div
-                                        key={index}
-                                        className={stylemain.leadercards}>
-                                        <div className={stylemain.leadername}>
-                                            <span>
-                                                {item.senderId.fullname}
-                                            </span>
-                                            <span> ₹ {item.amount}</span>
-                                        </div>
-                                    </div>
-                                );
-                            })}
                         </div>
                     </div>
-                </div>
-                <div className={stylemain.firstcol}>
-                    <div className={stylemain.leaderboard}>
-                        <h3>Online Users</h3>
-                        <div className={stylemain.horizontal}></div>
-                        <div className={stylemain.leaderlist}>
-                            {demo?.map((item, index) => {
-                                return (
-                                    <div
-                                        key={index}
-                                        className={stylemain.leadercards}>
-                                        <div className={stylemain.leadername}>
-                                            <span> {item.name}</span>{" "}
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                    <div className={stylemain.maincontainer}>
+                        <div
+                            className={`${stylemain.firstcol} ${stylemain.widthhigh}`}>
+                            <div className={stylemain.leaderboard}>
+                                <h3>Leaderboard</h3>
+                                <div className={stylemain.horizontal}></div>
+                                <div className={`${stylemain.leaderlist} `}>
+                                    {messArray.length !== 0 && (
+                                        <center
+                                            style={{
+                                                fontSize: "large",
+                                                color: "orangered",
+                                            }}>
+                                            <hr />
+                                            <strong>
+                                                <p>Live Offers</p>
+                                            </strong>
+                                            <hr />
+                                        </center>
+                                    )}
+                                    {messArray.length === 0 &&
+                                        uniquePastBids.length === 0 && (
+                                            <center
+                                                style={{
+                                                    fontSize: "large",
+                                                    color: "orangered",
+                                                }}>
+                                                <hr />
+                                                <strong>
+                                                    <p>No offers till now ! </p>
+                                                </strong>
+                                                <hr />
+                                            </center>
+                                        )}
+                                    {messArray?.map((item, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={
+                                                    stylemain.leadercards
+                                                }>
+                                                <div
+                                                    className={
+                                                        stylemain.leadername
+                                                    }>
+                                                    <span>
+                                                        {" "}
+                                                        {item.sendername}
+                                                    </span>
+                                                    <span> ₹ {item.offer}</span>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    {uniquePastBids && (
+                                        <center
+                                            style={{
+                                                fontSize: "large",
+                                                color: "orangered",
+                                            }}>
+                                            <hr />
+                                            <strong></strong>
+                                            <hr />
+                                        </center>
+                                    )}
+                                    {uniquePastBids?.map((item, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={
+                                                    stylemain.leadercards
+                                                }>
+                                                <div
+                                                    className={
+                                                        stylemain.leadername
+                                                    }>
+                                                    <span>
+                                                        {item.senderId.fullname}
+                                                    </span>
+                                                    <span>
+                                                        {" "}
+                                                        ₹ {item.amount}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div className={stylemain.secondcol}>
-                    <div className={stylemain.rightdiv}>
-                        <div style={{ display: "flex" }}>
-                            <div className={stylemain.image}>
-                                <style>
-                                    {`
+                        <div className={stylemain.firstcol}>
+                            <div className={stylemain.leaderboard}>
+                                <h3>Online Users</h3>
+                                <div className={stylemain.horizontal}></div>
+                                <div className={stylemain.leaderlist}>
+                                    {demo?.map((item, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={
+                                                    stylemain.leadercards
+                                                }>
+                                                <div
+                                                    className={
+                                                        stylemain.leadername
+                                                    }>
+                                                    <span> {item.name}</span>{" "}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={stylemain.secondcol}>
+                            <div className={stylemain.rightdiv}>
+                                <div style={{ display: "flex" }}>
+                                    <div className={stylemain.image}>
+                                        <style>
+                                            {`
                             .carousel-inner .carousel-item {
                                 transition: transform 0.6s ease; /* Adjust transition duration */
                             }
                             `}
-                                </style>
+                                        </style>
 
-                                <Carousel>
-                                    {item?.productid?.imageurl !== undefined &&
-                                        item?.productid?.imageurl?.map(
-                                            (images, index) => (
-                                                <Carousel.Item key={index}>
-                                                    <img
-                                                        src={images}
-                                                        alt="item.productname"
+                                        <Carousel>
+                                            {item?.productid?.imageurl !==
+                                                undefined &&
+                                                item?.productid?.imageurl?.map(
+                                                    (images, index) => (
+                                                        <Carousel.Item
+                                                            key={index}>
+                                                            <img
+                                                                src={images}
+                                                                alt="item.productname"
+                                                                style={{
+                                                                    width: "100%",
+                                                                    height: "290px",
+                                                                    objectFit:
+                                                                        "contain",
+                                                                    aspectRatio:
+                                                                        3 / 2,
+                                                                }}
+                                                            />
+                                                        </Carousel.Item>
+                                                    )
+                                                )}
+                                        </Carousel>
+                                    </div>
+                                    <div className={stylemain.description}>
+                                        <h1>₹ {item?.amountforauction}</h1>
+                                        <h4>{item?.productid?.productname}</h4>
+                                        <p>👉 {item?.productid?.adtitle}</p>
+                                        <p>👉 {item?.productid?.description}</p>
+                                        <p>👉 {item?.productid?.location}</p>
+                                        <p>📅 {formattedDate}</p>
+                                    </div>
+                                </div>
+                                <div className={stylemain.sellerinformation}>
+                                    <h5>Owner info</h5>
+                                    <div className={stylemain.horizontal}></div>
+                                    <p style={{ textTransform: "capitalize" }}>
+                                        <AccountCircleIcon
+                                            style={{ fill: "#0072ea" }}
+                                        />
+                                        &nbsp;
+                                        {item?.productid?.username}
+                                    </p>
+                                    <p>
+                                        <EmailIcon
+                                            style={{ fill: "orangered" }}
+                                        />
+                                        &nbsp;
+                                        {item?.productid?.useremail}
+                                    </p>
+                                </div>
+                            </div>
+                            {item?.owner?._id !== activeuserid &&
+                                new Date(item?.activetill) > currentdate && (
+                                    <div className={stylemain.applyfont}>
+                                        <form>
+                                            <div className={stylemain.makebid}>
+                                                <h3>
+                                                    <CurrencyRupeeIcon
+                                                        fontSize="large"
                                                         style={{
-                                                            width: "100%",
-                                                            height: "290px",
-                                                            objectFit:
-                                                                "contain",
-                                                            aspectRatio: 3 / 2,
+                                                            fill: "goldenrod",
                                                         }}
                                                     />
-                                                </Carousel.Item>
-                                            )
-                                        )}
-                                </Carousel>
-                            </div>
-                            <div className={stylemain.description}>
-                                <h1>₹ {item?.amountforauction}</h1>
-                                <h4>{item?.productid?.productname}</h4>
-                                <p>👉 {item?.productid?.adtitle}</p>
-                                <p>👉 {item?.productid?.description}</p>
-                                <p>👉 {item?.productid?.location}</p>
-                                <p>📅 {formattedDate}</p>
-                            </div>
-                        </div>
-                        <div className={stylemain.sellerinformation}>
-                            <h5>Owner info</h5>
-                            <div className={stylemain.horizontal}></div>
-                            <p style={{ textTransform: "capitalize" }}>
-                                <AccountCircleIcon
-                                    style={{ fill: "#0072ea" }}
-                                />
-                                &nbsp;
-                                {item?.productid?.username}
-                            </p>
-                            <p>
-                                <EmailIcon style={{ fill: "orangered" }} />
-                                &nbsp;
-                                {item?.productid?.useremail}
-                            </p>
+                                                    Make an Offer :
+                                                </h3>
+                                                <CurrencyInput
+                                                    id="input-example"
+                                                    name="input-name"
+                                                    style={{
+                                                        fontSize: "35px",
+                                                        width: "40%",
+                                                        marginRight: "40px",
+                                                    }}
+                                                    placeholder="Please enter amount"
+                                                    value={bid}
+                                                    decimalsLimit={2}
+                                                    prefix="₹"
+                                                    onValueChange={(
+                                                        value,
+                                                        name,
+                                                        values
+                                                    ) => setbid(value)}
+                                                    required
+                                                />
+                                                <Button
+                                                    type="submit"
+                                                    onClick={handleSendOffer}
+                                                    variant="outlined"
+                                                    startIcon={
+                                                        <SendIcon fontSize="large" />
+                                                    }
+                                                    style={{
+                                                        color: "purple", // Green color
+                                                        borderColor: "green", // Green color
+                                                        fontWeight: "600",
+                                                        fontSize: "large",
+                                                        border: "1px solid green",
+                                                        padding: "13px",
+                                                        borderRadius: "6px",
+                                                        marginLeft: "10px",
+                                                    }}>
+                                                    Send
+                                                </Button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                )}
+                            {item?.owner?._id === activeuserid &&
+                                new Date(item?.activetill) > currentdate && (
+                                    <Button
+                                        onClick={() => {
+                                            handleEndAuction(item?._id);
+                                        }}
+                                        variant="outlined"
+                                        style={{
+                                            color: "purple", // Green color
+                                            borderColor: "green", // Green color
+                                            fontWeight: "600",
+                                            fontSize: "large",
+                                            border: "1px solid green",
+                                            padding: "13px",
+                                            borderRadius: "6px",
+                                            margin: "20px",
+                                            float: "right",
+                                        }}>
+                                        End Auction
+                                    </Button>
+                                )}
+                            {new Date(item?.activetill) < currentdate && (
+                                <center
+                                    className="mt-4"
+                                    style={{ color: "red" }}>
+                                    <h4>
+                                        -------------- Auction has been ended
+                                        --------------
+                                    </h4>
+                                </center>
+                            )}
                         </div>
                     </div>
-                    {item?.owner?._id !== activeuserid &&
-                        new Date(item?.activetill) > currentdate && (
-                            <div className={stylemain.applyfont}>
-                                <form>
-                                    <div className={stylemain.makebid}>
-                                        <h3>
-                                            <CurrencyRupeeIcon
-                                                fontSize="large"
-                                                style={{
-                                                    fill: "goldenrod",
-                                                }}
-                                            />
-                                            Make an Offer :
-                                        </h3>
-                                        <CurrencyInput
-                                            id="input-example"
-                                            name="input-name"
-                                            style={{
-                                                fontSize: "35px",
-                                                width: "40%",
-                                                marginRight: "40px",
-                                            }}
-                                            placeholder="Please enter amount"
-                                            value={bid}
-                                            decimalsLimit={2}
-                                            prefix="₹"
-                                            onValueChange={(
-                                                value,
-                                                name,
-                                                values
-                                            ) => setbid(value)}
-                                            required
-                                        />
-                                        <Button
-                                            type="submit"
-                                            onClick={handleSendOffer}
-                                            variant="outlined"
-                                            startIcon={
-                                                <SendIcon fontSize="large" />
-                                            }
-                                            style={{
-                                                color: "purple", // Green color
-                                                borderColor: "green", // Green color
-                                                fontWeight: "600",
-                                                fontSize: "large",
-                                                border: "1px solid green",
-                                                padding: "13px",
-                                                borderRadius: "6px",
-                                                marginLeft: "10px",
-                                            }}>
-                                            Send
-                                        </Button>
-                                    </div>
-                                </form>
-                            </div>
-                        )}
-                    {item?.owner?._id === activeuserid &&
-                        new Date(item?.activetill) > currentdate && (
-                            <Button
-                                onClick={() => {
-                                    handleEndAuction(item?._id);
-                                }}
-                                variant="outlined"
-                                style={{
-                                    color: "purple", // Green color
-                                    borderColor: "green", // Green color
-                                    fontWeight: "600",
-                                    fontSize: "large",
-                                    border: "1px solid green",
-                                    padding: "13px",
-                                    borderRadius: "6px",
-                                    margin: "20px",
-                                    float: "right",
-                                }}>
-                                End Auction
-                            </Button>
-                        )}
-                    {new Date(item?.activetill) < currentdate && (
-                        <center className="mt-4" style={{ color: "red" }}>
-                            <h4>
-                                -------------- Auction has been ended
-                                --------------
-                            </h4>
-                        </center>
-                    )}
-                </div>
-            </div>
+                </>
+            )}
         </>
     );
 };

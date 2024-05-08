@@ -13,7 +13,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Hourglass } from "react-loader-spinner";
 import OtpInput from "react-otp-input";
-
+import { Oval } from "react-loader-spinner";
 const Signupui = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -21,9 +21,11 @@ const Signupui = () => {
     const [isauth, setauth] = useState("");
     const [name, setname] = useState("");
     const [useremail, setuseremail] = useState("");
+    const [loading2, setloading2] = useState(false);
     const [image, setimage] = useState("");
 
     useEffect(() => {
+        setloading2(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -41,6 +43,7 @@ const Signupui = () => {
             .catch((err) => {
                 console.log(err);
             });
+        setloading2(false);
     }, []);
 
     const [showPassword, setShowPassword] = useState(false);
@@ -116,9 +119,10 @@ const Signupui = () => {
 
     // adding data to databse and confirming the OTP
     const submithandelregister = (event) => {
+        setloading2(true);
+
         user.inputotp = otp;
         event.preventDefault();
-        console.log(user);
         axios
             .post("http://localhost:8000/auth/register", user)
             .then((res) => {
@@ -141,7 +145,10 @@ const Signupui = () => {
                     return;
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(() => {
+                setloading2(false);
+            });
     };
 
     return (
@@ -151,77 +158,105 @@ const Signupui = () => {
                 autoClose={1000}
                 theme="dark"
             />
-
-            {isloading ? (
-                <>
-                    <Header></Header>
-                    <div
-                        style={{
-                            position: "fixed",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            textAlign: "center",
-                        }}>
-                        {/* <RotatingLines
-                                visible={true}
-                                height="96"
-                                width="96"
-                                strokeColor="#4a4ad2"
-                                strokeWidth="5"
-                                animationDuration="1"
-                                ariaLabel="rotating-lines-loading"
-                            /> */}
-                        <Hourglass
-                            visible={true}
-                            height="90"
-                            width="60"
-                            ariaLabel="hourglass-loading"
-                            colors={["#306cce", "#72a1ed"]}
-                        />
-                        <br />
-                        <i>
-                            <h6>Sending verification code on Mail...</h6>
-                        </i>
-                    </div>
-                </>
+            {loading2 ? (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                    }}>
+                    <Oval
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <br />
+                    <i>loading..</i>
+                </div>
             ) : (
                 <>
-                    {!showotpui ? (
+                    {isloading ? (
                         <>
                             <Header></Header>
-                            <div></div>
-                            <div className={style.container}>
-                                <div className={style.header}>
-                                    <div className={style.text}>Sign Up</div>
-                                    <div className={style.underline}></div>
-                                </div>
+                            <div
+                                style={{
+                                    position: "fixed",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    textAlign: "center",
+                                }}>
+                                <Hourglass
+                                    visible={true}
+                                    height="90"
+                                    width="60"
+                                    ariaLabel="hourglass-loading"
+                                    colors={["#306cce", "#72a1ed"]}
+                                />
+                                <br />
+                                <i>
+                                    <h6>
+                                        Sending verification code on Mail...
+                                    </h6>
+                                </i>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            {!showotpui ? (
+                                <>
+                                    <Header></Header>
+                                    <div></div>
+                                    <div className={style.container}>
+                                        <div className={style.header}>
+                                            <div className={style.text}>
+                                                Sign Up
+                                            </div>
+                                            <div
+                                                className={
+                                                    style.underline
+                                                }></div>
+                                        </div>
 
-                                <form onSubmit={submithandel}>
-                                    <div className={style.inputs}>
-                                        <div className={style.input}>
-                                            <img src={userimg} alt="" />
-                                            <input
-                                                type="text"
-                                                placeholder="Full Name"
-                                                onChange={handeler}
-                                                value={user.fullname}
-                                                name="fullname"
-                                                required
-                                            />
-                                        </div>
-                                        <div className={style.input}>
-                                            <img src={email_icon} alt="" />
-                                            <input
-                                                type="email"
-                                                placeholder="Email"
-                                                onChange={handeler}
-                                                value={user.email}
-                                                name="email"
-                                                required
-                                            />
-                                        </div>
-                                        {/* <div className={style.input}>
+                                        <form onSubmit={submithandel}>
+                                            <div className={style.inputs}>
+                                                <div className={style.input}>
+                                                    <img src={userimg} alt="" />
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Full Name"
+                                                        onChange={handeler}
+                                                        value={user.fullname}
+                                                        name="fullname"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className={style.input}>
+                                                    <img
+                                                        src={email_icon}
+                                                        alt=""
+                                                    />
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        onChange={handeler}
+                                                        value={user.email}
+                                                        name="email"
+                                                        required
+                                                    />
+                                                </div>
+                                                {/* <div className={style.input}>
                                             <img src={email_icon} alt="" />
                                             <input
                                                 type="number"
@@ -232,173 +267,192 @@ const Signupui = () => {
                                                 
                                             />
                                         </div> */}
-                                        {/* adding role file here */}
+                                                {/* adding role file here */}
 
-                                        <div className={style.input}>
-                                            <label for="role">
-                                                {" "}
-                                                Your role in MNNIT:
-                                            </label>
+                                                <div className={style.input}>
+                                                    <label for="role">
+                                                        {" "}
+                                                        Your role in MNNIT:
+                                                    </label>
 
-                                            <select
-                                                name="role"
-                                                id="role"
-                                                onChange={handeler}
-                                                required>
-                                                <option value="">
-                                                    --Please choose an option--
-                                                </option>
-                                                <option value="faculty">
-                                                    Faculty
-                                                </option>
-                                                <option value="staff">
-                                                    Staff
-                                                </option>
-                                                <option value="student">
-                                                    Student
-                                                </option>
-                                            </select>
-                                        </div>
+                                                    <select
+                                                        name="role"
+                                                        id="role"
+                                                        onChange={handeler}
+                                                        required>
+                                                        <option value="">
+                                                            --Please choose an
+                                                            option--
+                                                        </option>
+                                                        <option value="faculty">
+                                                            Faculty
+                                                        </option>
+                                                        <option value="staff">
+                                                            Staff
+                                                        </option>
+                                                        <option value="student">
+                                                            Student
+                                                        </option>
+                                                    </select>
+                                                </div>
 
-                                        <div className={style.input}>
-                                            <img src={pwd_icon} alt="" />
-                                            <input
-                                                type={
-                                                    showPassword
-                                                        ? "text"
-                                                        : "password"
-                                                }
-                                                placeholder="Password"
-                                                onChange={handeler}
-                                                value={user.password}
-                                                name="password"
-                                                required
-                                            />
-                                            <span
-                                                style={{
-                                                    cursor: "pointer",
-                                                    marginRight: "7px",
-                                                }}
-                                                onMouseDown={
-                                                    handlepasswordtoggle
-                                                }
-                                                onMouseUp={
-                                                    handlepasswordtoggle
-                                                }>
-                                                {showPassword ? (
-                                                    <VisibilityIcon />
-                                                ) : (
-                                                    <VisibilityOffIcon />
-                                                )}
-                                            </span>
-                                        </div>
-                                        <div className={style.input}>
-                                            <img src={pwd_icon} alt="" />
-                                            <input
-                                                type={
-                                                    showPassword2
-                                                        ? "text"
-                                                        : "password"
-                                                }
-                                                placeholder="Confirm Password"
-                                                onChange={handeler}
-                                                value={user.cnfpassword}
-                                                name="cnfpassword"
-                                                required
-                                            />
-                                            <span
-                                                style={{
-                                                    cursor: "pointer",
-                                                    marginRight: "7px",
-                                                }}
-                                                onMouseDown={
-                                                    handlepasswordtoggle2
-                                                }
-                                                onMouseUp={
-                                                    handlepasswordtoggle2
-                                                }>
-                                                {showPassword2 ? (
-                                                    <VisibilityIcon />
-                                                ) : (
-                                                    <VisibilityOffIcon />
-                                                )}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <button
-                                                className={style.submit_btn}
-                                                type="submit">
-                                                Submit
-                                            </button>
-                                        </div>
-                                        <Googlelogin />
-                                        <div>
-                                            Already have an account? &emsp;
-                                            <b>
-                                                <NavLink
-                                                    to="/login"
-                                                    style={{
-                                                        textDecoration: "none",
-                                                    }}>
-                                                    LogIn
-                                                </NavLink>
-                                            </b>
-                                        </div>
+                                                <div className={style.input}>
+                                                    <img
+                                                        src={pwd_icon}
+                                                        alt=""
+                                                    />
+                                                    <input
+                                                        type={
+                                                            showPassword
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        placeholder="Password"
+                                                        onChange={handeler}
+                                                        value={user.password}
+                                                        name="password"
+                                                        required
+                                                    />
+                                                    <span
+                                                        style={{
+                                                            cursor: "pointer",
+                                                            marginRight: "7px",
+                                                        }}
+                                                        onClick={
+                                                            handlepasswordtoggle
+                                                        }>
+                                                        {showPassword ? (
+                                                            <VisibilityIcon />
+                                                        ) : (
+                                                            <VisibilityOffIcon />
+                                                        )}
+                                                    </span>
+                                                </div>
+                                                <div className={style.input}>
+                                                    <img
+                                                        src={pwd_icon}
+                                                        alt=""
+                                                    />
+                                                    <input
+                                                        type={
+                                                            showPassword2
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        placeholder="Confirm Password"
+                                                        onChange={handeler}
+                                                        value={user.cnfpassword}
+                                                        name="cnfpassword"
+                                                        required
+                                                    />
+                                                    <span
+                                                        style={{
+                                                            cursor: "pointer",
+                                                            marginRight: "7px",
+                                                        }}
+                                                        onClick={
+                                                            handlepasswordtoggle2
+                                                        }>
+                                                        {showPassword2 ? (
+                                                            <VisibilityIcon />
+                                                        ) : (
+                                                            <VisibilityOffIcon />
+                                                        )}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        className={
+                                                            style.submit_btn
+                                                        }
+                                                        type="submit">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                                <Googlelogin />
+                                                <div>
+                                                    Already have an account?
+                                                    &emsp;
+                                                    <b>
+                                                        <NavLink
+                                                            to="/login"
+                                                            style={{
+                                                                textDecoration:
+                                                                    "none",
+                                                            }}>
+                                                            LogIn
+                                                        </NavLink>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <Header></Header>
-                            <div></div>
-                            <div className={style.container}>
-                                <div className={style.header}>
-                                    <div className={style.text}>Enter OTP</div>
-                                    <div className={style.underline}></div>
-                                </div>
-                                <form onSubmit={submithandelregister}>
-                                    <div className={style.inputs}>
-                                        <OtpInput
-                                            value={otp}
-                                            onChange={setotp}
-                                            numInputs={6}
-                                            renderSeparator={<span>-</span>}
-                                            renderInput={(props) => (
-                                                <input {...props} required />
-                                            )}
-                                            inputStyle={{
-                                                width: "40px",
-                                                height: "40px",
-                                                fontSize: "20px",
-                                                margin: "0 10px",
-                                                textAlign: "center",
-                                                borderRadius: "5px",
-                                                border: "1px solid #4a4360",
-                                                WebkitUserSelect:
-                                                    "none" /* Safari */,
-                                                MozUserSelect:
-                                                    "none" /* Firefox */,
-                                                msUserSelect:
-                                                    "none" /* IE 10+/Edge */,
-                                                userSelect:
-                                                    "none" /* Standard syntax */,
-                                            }}
-                                        />
-                                        <span>
-                                            *verification code expires in 5
-                                            minutes
-                                        </span>
-                                        <div>
-                                            <button
-                                                className={style.submit_btn}
-                                                type="submit">
-                                                Submit
-                                            </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Header></Header>
+                                    <div></div>
+                                    <div className={style.container}>
+                                        <div className={style.header}>
+                                            <div className={style.text}>
+                                                Enter OTP
+                                            </div>
+                                            <div
+                                                className={
+                                                    style.underline
+                                                }></div>
                                         </div>
+                                        <form onSubmit={submithandelregister}>
+                                            <div className={style.inputs}>
+                                                <OtpInput
+                                                    value={otp}
+                                                    onChange={setotp}
+                                                    numInputs={6}
+                                                    renderSeparator={
+                                                        <span>-</span>
+                                                    }
+                                                    renderInput={(props) => (
+                                                        <input
+                                                            {...props}
+                                                            required
+                                                        />
+                                                    )}
+                                                    inputStyle={{
+                                                        width: "40px",
+                                                        height: "40px",
+                                                        fontSize: "20px",
+                                                        margin: "0 10px",
+                                                        textAlign: "center",
+                                                        borderRadius: "5px",
+                                                        border: "1px solid #4a4360",
+                                                        WebkitUserSelect:
+                                                            "none" /* Safari */,
+                                                        MozUserSelect:
+                                                            "none" /* Firefox */,
+                                                        msUserSelect:
+                                                            "none" /* IE 10+/Edge */,
+                                                        userSelect:
+                                                            "none" /* Standard syntax */,
+                                                    }}
+                                                />
+                                                <span>
+                                                    *verification code expires
+                                                    in 5 minutes
+                                                </span>
+                                                <div>
+                                                    <button
+                                                        className={
+                                                            style.submit_btn
+                                                        }
+                                                        type="submit">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
+                                </>
+                            )}
                         </>
                     )}
                 </>

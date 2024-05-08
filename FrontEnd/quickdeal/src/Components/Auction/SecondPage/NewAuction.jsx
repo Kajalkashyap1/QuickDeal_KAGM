@@ -147,6 +147,7 @@ const NewAuction = () => {
     }, [minutes, seconds]);
 
     useEffect(() => {
+        setloading(true);
         axios
             .get(`http://localhost:8000/dashboard/myads/${userid}`)
             .then((res) => {
@@ -155,6 +156,7 @@ const NewAuction = () => {
             .catch((err) => {
                 console.log("error in fetching ads in newauction ", err);
             });
+        setloading(false);
     }, [userid]);
     const classes = useStyles();
     const [selectedId, setSelectedId] = useState();
@@ -195,9 +197,7 @@ const NewAuction = () => {
                         wrapperClass=""
                     />
                     <br />
-                    <i>
-                        Creating Auction for you , please don't close the screen
-                    </i>
+                    <i>loading , please don't close the screen</i>
                 </div>
             ) : (
                 <div className={style.main_container}>

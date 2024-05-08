@@ -124,3 +124,8 @@ body {
     cursor: default;
     pointer-events: none;
 }
+@media screen and (max-width: 601px) {
+    .maincontainer {
+        margin-top: 7em;
+    }
+}

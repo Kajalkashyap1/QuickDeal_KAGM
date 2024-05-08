@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +6,14 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Oval } from "react-loader-spinner";
 const Googlelogin = () => {
     return <Googleloginhelp />;
 };
 
 const Googleloginhelp = () => {
     const navigate = useNavigate();
+    const [loading, setloading] = useState(false);
     axios.defaults.withCredentials = true;
     const sendCredentialsToServer = async (credentialResponse) => {
         try {
@@ -58,18 +59,48 @@ const Googleloginhelp = () => {
     };
 
     return (
-        <div>
-            <div></div>
-            <GoogleOAuthProvider
-                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                <GoogleLogin
-                    onSuccess={sendCredentialsToServer}
-                    onError={() => {
-                        console.log("Login Failed");
-                    }}
-                />
-            </GoogleOAuthProvider>
-        </div>
+        <>
+            {loading ? (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                    }}>
+                    <Oval
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="purple"
+                        ariaLabel="oval-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                    />
+                    <br />
+                    <i>loading..</i>
+                </div>
+            ) : (
+                <div>
+                    <div></div>
+                    <GoogleOAuthProvider
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                        <GoogleLogin
+                            onSuccess={sendCredentialsToServer}
+                            onError={() => {
+                                console.log("Login Failed");
+                            }}
+                        />
+                    </GoogleOAuthProvider>
+                </div>
+            )}
+        </>
     );
 };
 
