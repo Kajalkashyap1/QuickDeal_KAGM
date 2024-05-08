@@ -178,40 +178,6 @@ function LoginSignup() {
                                         </span>
                                     </div>
 
-                            <div>
-                                <button
-                                    className={style.submit_btn}
-                                    type="submit">
-                                    Submit
-                                </button>
-                            </div>
-                            <div
-                                className={style.forgot_password}
-                                onClick={handelforgetpassword}>
-                                <span>Forgot Password?</span>
-                            </div>
-                            <Googlelogin></Googlelogin>
-                            <div>
-                                Don't have an account? &emsp;
-                                <b>
-                                    <NavLink
-                                        to="/signin"
-                                        style={{ textDecoration: "none" }}>
-                                        Sign up
-                                    </NavLink>
-                                </b>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div>
-                    <Footer/>
-                </div>
-                
-            </div>
-            
-            
                                     <div>
                                         <button
                                             className={style.submit_btn}
@@ -240,6 +206,34 @@ function LoginSignup() {
                                 </div>
                             </form>
                         </div>
+
+                        <div>
+                            <Footer />
+                        </div>
+                    </div>
+
+                    <div>
+                        <button className={style.submit_btn} type="submit">
+                            Submit
+                        </button>
+                    </div>
+                    <div
+                        className={style.forgot_password}
+                        onClick={handelforgetpassword}>
+                        <span>Forgot Password?</span>
+                    </div>
+                    <Googlelogin></Googlelogin>
+                    <div>
+                        Don't have an account? &emsp;
+                        <b>
+                            <NavLink
+                                to="/signin"
+                                style={{
+                                    textDecoration: "none",
+                                }}>
+                                Sign up
+                            </NavLink>
+                        </b>
                     </div>
                 </>
             )}

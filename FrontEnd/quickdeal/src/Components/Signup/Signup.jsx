@@ -13,7 +13,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Hourglass } from "react-loader-spinner";
 import OtpInput from "react-otp-input";
-import { Oval } from "react-loader-spinner";import Footer from '../Footer/Footer'
+import { Oval } from "react-loader-spinner";
+import Footer from "../Footer/Footer";
 
 const Signupui = () => {
     const navigate = useNavigate();
@@ -297,154 +298,177 @@ const Signupui = () => {
                                                     </select>
                                                 </div>
 
-                                        <div className={style.input}>
-                                            <img src={pwd_icon} alt="" />
-                                            <input
-                                                type={
-                                                    showPassword
-                                                        ? "text"
-                                                        : "password"
-                                                }
-                                                placeholder="Password"
-                                                onChange={handeler}
-                                                value={user.password}
-                                                name="password"
-                                                required
-                                            />
-                                            <span
-                                                style={{
-                                                    cursor: "pointer",
-                                                    marginRight: "7px",
-                                                }}
-                                                onMouseDown={
-                                                    handlepasswordtoggle
-                                                }
-                                                onMouseUp={
-                                                    handlepasswordtoggle
-                                                }>
-                                                {showPassword ? (
-                                                    <VisibilityIcon />
-                                                ) : (
-                                                    <VisibilityOffIcon />
-                                                )}
-                                            </span>
-                                        </div>
-                                        <div className={style.input}>
-                                            <img src={pwd_icon} alt="" />
-                                            <input
-                                                type={
-                                                    showPassword2
-                                                        ? "text"
-                                                        : "password"
-                                                }
-                                                placeholder="Confirm Password"
-                                                onChange={handeler}
-                                                value={user.cnfpassword}
-                                                name="cnfpassword"
-                                                required
-                                            />
-                                            <span
-                                                style={{
-                                                    cursor: "pointer",
-                                                    marginRight: "7px",
-                                                }}
-                                                onMouseDown={
-                                                    handlepasswordtoggle2
-                                                }
-                                                onMouseUp={
-                                                    handlepasswordtoggle2
-                                                }>
-                                                {showPassword2 ? (
-                                                    <VisibilityIcon />
-                                                ) : (
-                                                    <VisibilityOffIcon />
-                                                )}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <button
-                                                className={style.submit_btn}
-                                                type="submit">
-                                                Submit
-                                            </button>
-                                        </div>
-                                        <Googlelogin />
-                                        <div>
-                                            Already have an account? &emsp;
-                                            <b>
-                                                <NavLink
-                                                    to="/login"
-                                                    style={{
-                                                        textDecoration: "none",
-                                                    }}>
-                                                    LogIn
-                                                </NavLink>
-                                            </b>
-                                        </div>
+                                                <div className={style.input}>
+                                                    <img
+                                                        src={pwd_icon}
+                                                        alt=""
+                                                    />
+                                                    <input
+                                                        type={
+                                                            showPassword
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        placeholder="Password"
+                                                        onChange={handeler}
+                                                        value={user.password}
+                                                        name="password"
+                                                        required
+                                                    />
+                                                    <span
+                                                        style={{
+                                                            cursor: "pointer",
+                                                            marginRight: "7px",
+                                                        }}
+                                                        onMouseDown={
+                                                            handlepasswordtoggle
+                                                        }
+                                                        onMouseUp={
+                                                            handlepasswordtoggle
+                                                        }>
+                                                        {showPassword ? (
+                                                            <VisibilityIcon />
+                                                        ) : (
+                                                            <VisibilityOffIcon />
+                                                        )}
+                                                    </span>
+                                                </div>
+                                                <div className={style.input}>
+                                                    <img
+                                                        src={pwd_icon}
+                                                        alt=""
+                                                    />
+                                                    <input
+                                                        type={
+                                                            showPassword2
+                                                                ? "text"
+                                                                : "password"
+                                                        }
+                                                        placeholder="Confirm Password"
+                                                        onChange={handeler}
+                                                        value={user.cnfpassword}
+                                                        name="cnfpassword"
+                                                        required
+                                                    />
+                                                    <span
+                                                        style={{
+                                                            cursor: "pointer",
+                                                            marginRight: "7px",
+                                                        }}
+                                                        onMouseDown={
+                                                            handlepasswordtoggle2
+                                                        }
+                                                        onMouseUp={
+                                                            handlepasswordtoggle2
+                                                        }>
+                                                        {showPassword2 ? (
+                                                            <VisibilityIcon />
+                                                        ) : (
+                                                            <VisibilityOffIcon />
+                                                        )}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        className={
+                                                            style.submit_btn
+                                                        }
+                                                        type="submit">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                                <Googlelogin />
+                                                <div>
+                                                    Already have an account?
+                                                    &emsp;
+                                                    <b>
+                                                        <NavLink
+                                                            to="/login"
+                                                            style={{
+                                                                textDecoration:
+                                                                    "none",
+                                                            }}>
+                                                            LogIn
+                                                        </NavLink>
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <Header></Header>
-                            <div></div>
-                            <div className={style.container}>
-                                <div className={style.header}>
-                                    <div className={style.text}>Enter OTP</div>
-                                    <div className={style.underline}></div>
-                                </div>
-                                <form onSubmit={submithandelregister}>
-                                    <div className={style.inputs}>
-                                        <OtpInput
-                                            value={otp}
-                                            onChange={setotp}
-                                            numInputs={6}
-                                            renderSeparator={<span>-</span>}
-                                            renderInput={(props) => (
-                                                <input {...props} required />
-                                            )}
-                                            inputStyle={{
-                                                width: "40px",
-                                                height: "40px",
-                                                fontSize: "20px",
-                                                margin: "0 10px",
-                                                textAlign: "center",
-                                                borderRadius: "5px",
-                                                border: "1px solid #4a4360",
-                                                WebkitUserSelect:
-                                                    "none" /* Safari */,
-                                                MozUserSelect:
-                                                    "none" /* Firefox */,
-                                                msUserSelect:
-                                                    "none" /* IE 10+/Edge */,
-                                                userSelect:
-                                                    "none" /* Standard syntax */,
-                                            }}
-                                        />
-                                        <span>
-                                            *verification code expires in 5
-                                            minutes
-                                        </span>
-                                        <div>
-                                            <button
-                                                className={style.submit_btn}
-                                                type="submit">
-                                                Submit
-                                            </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Header></Header>
+                                    <div></div>
+                                    <div className={style.container}>
+                                        <div className={style.header}>
+                                            <div className={style.text}>
+                                                Enter OTP
+                                            </div>
+                                            <div
+                                                className={
+                                                    style.underline
+                                                }></div>
                                         </div>
+                                        <form onSubmit={submithandelregister}>
+                                            <div className={style.inputs}>
+                                                <OtpInput
+                                                    value={otp}
+                                                    onChange={setotp}
+                                                    numInputs={6}
+                                                    renderSeparator={
+                                                        <span>-</span>
+                                                    }
+                                                    renderInput={(props) => (
+                                                        <input
+                                                            {...props}
+                                                            required
+                                                        />
+                                                    )}
+                                                    inputStyle={{
+                                                        width: "40px",
+                                                        height: "40px",
+                                                        fontSize: "20px",
+                                                        margin: "0 10px",
+                                                        textAlign: "center",
+                                                        borderRadius: "5px",
+                                                        border: "1px solid #4a4360",
+                                                        WebkitUserSelect:
+                                                            "none" /* Safari */,
+                                                        MozUserSelect:
+                                                            "none" /* Firefox */,
+                                                        msUserSelect:
+                                                            "none" /* IE 10+/Edge */,
+                                                        userSelect:
+                                                            "none" /* Standard syntax */,
+                                                    }}
+                                                />
+                                                <span>
+                                                    *verification code expires
+                                                    in 5 minutes
+                                                </span>
+                                                <div>
+                                                    <button
+                                                        className={
+                                                            style.submit_btn
+                                                        }
+                                                        type="submit">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                            
+                                </>
+                            )}
                         </>
                     )}
+
+                    <div>
+                        <Footer />
+                    </div>
                 </>
             )}
-
-            <div>
-                <Footer/>
-            </div>
         </>
     );
 };

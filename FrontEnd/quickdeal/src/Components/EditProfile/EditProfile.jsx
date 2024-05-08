@@ -115,18 +115,20 @@ const EditProfile = () => {
                                     defaultValue={userinfo?.contactNo || ""}
                                 />
 
-                        <input
-                            type="email"
-                            className={style.input}
-                            placeholder="Email"
-                            value={userinfo?.email}
-                        />
+                                <input
+                                    type="email"
+                                    className={style.input}
+                                    placeholder="Email"
+                                    value={userinfo?.email}
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <>
-                <Footer/>
-            </>
+                    <>
+                        <Footer />
+                    </>
+                </>
+            )}
         </>
     );
 };
