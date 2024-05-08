@@ -13,6 +13,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Hourglass } from "react-loader-spinner";
 import OtpInput from "react-otp-input";
+import Footer from '../Footer/Footer'
 
 const Signupui = () => {
     const navigate = useNavigate();
@@ -399,10 +400,15 @@ const Signupui = () => {
                                     </div>
                                 </form>
                             </div>
+                            
                         </>
                     )}
                 </>
             )}
+
+            <div>
+                <Footer/>
+            </div>
         </>
     );
 };

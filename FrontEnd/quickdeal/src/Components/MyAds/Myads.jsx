@@ -12,6 +12,7 @@ import { useConfirm } from "material-ui-confirm";
 import { ToastContainer, toast } from "react-toastify";
 import Notfound from "../NotfoundComponent/Notfound";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import Footer from "../Footer/Footer";
 const Myads = () => {
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
@@ -500,7 +501,9 @@ const Myads = () => {
                                 </div>
                             )}
                         </div>
+                        
                     </div>
+                    
                 ))
             ) : (
                 <Notfound
@@ -509,6 +512,8 @@ const Myads = () => {
                     name="myad"
                 />
             )}
+
+            
         </div>
     );
 };

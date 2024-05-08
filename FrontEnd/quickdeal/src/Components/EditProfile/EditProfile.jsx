@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import Footer from "../Footer/Footer";
 const EditProfile = () => {
     const { userid } = useParams();
     axios.defaults.withCredentials = true;
@@ -91,6 +92,9 @@ const EditProfile = () => {
                     </div>
                 </div>
             </div>
+            <>
+                <Footer/>
+            </>
         </>
     );
 };

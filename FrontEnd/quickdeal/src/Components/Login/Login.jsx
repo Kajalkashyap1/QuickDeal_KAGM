@@ -9,6 +9,7 @@ import axios from "axios";
 import Googlelogin from "../Googlelogin/Googleloginsignup";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Footer from "../Footer/Footer";
 
 function LoginSignup() {
     // const [isToastActive, setIsToastActive] = useState();
@@ -162,7 +163,14 @@ function LoginSignup() {
                         </div>
                     </form>
                 </div>
+
+                <div>
+                    <Footer/>
+                </div>
+                
             </div>
+            
+            
         </>
     );
 }

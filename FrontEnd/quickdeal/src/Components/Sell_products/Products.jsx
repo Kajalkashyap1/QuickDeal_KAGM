@@ -10,6 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { categoriesForForm } from "../Assets/categories";
+import Footer from "../Footer/Footer";
 
 const Products = () => {
     const navigate = useNavigate();
@@ -375,6 +376,9 @@ const Products = () => {
                     </div>
                 </div>
             )}
+            <div>
+                <Footer/>
+            </div>
         </>
     );
 };
