@@ -1,12 +1,14 @@
 /* Categories.css */
 
 .navbar {
-    background-color: #ffffff;
-    color: #171717;
+    background-color: #4a4360;
+
+    color: #ffffff;
     padding: 10px 20px;
     width: 100%;
     min-width: 320px; /* Adjust the minimum width as per your design */
     z-index: 10000;
+    font-size: 1rem;
 }
 
 .navbarcontent {
@@ -35,24 +37,50 @@
     padding: 0;
     margin: 0;
     display: flex;
-    flex-wrap: wrap;
-    margin-left: 20px; /* Adjust margin as needed */
+    flex-direction: row;
+    white-space: nowrap; /* Prevent items from wrapping */
+    user-select: none;
+    justify-content: space-evenly;
 }
 
 .category_checkboxes li {
-    margin-right: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px; /* Adjust spacing between items */
 }
-
 .category_checkboxes label {
     font-size: 1rem;
     cursor: pointer;
+}
+.categoryscroll {
+    /* style={{ overflowX: "auto", maxWidth: "1000px" }} */
+    overflow-x: auto;
+    max-width: 2000px;
+}
+/* Define scrollbar styles */
+.categoryscroll::-webkit-scrollbar {
+    margin-top: 3px;
+    height: 5px; /* Width of the scrollbar */
+    width: 1px;
+}
+
+/* Track */
+.categoryscroll::-webkit-scrollbar-track {
+    background: transparent; /* Color of the track */
+}
+
+/* Handle */
+.categoryscroll::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the handle */
+}
+
+/* Handle on hover */
+.categoryscroll::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the handle when hovered */
 }
 
 /* Add any additional responsive styles here */
 @media screen and (max-width: 600px) {
     .navbarcontent {
-        flex-direction: column;
         align-items: flex-start;
     }
     .dropdownScroll {

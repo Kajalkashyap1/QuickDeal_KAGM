@@ -171,7 +171,7 @@ function Navbar({
                     </div>
 
                     {searchbar && (
-                        <div className="InputContainer hide">
+                        <div className="InputContainer">
                             <input
                                 placeholder="Search.."
                                 id="input"
@@ -195,8 +195,6 @@ function Navbar({
                                             <div
                                                 style={{
                                                     position: "relative",
-                                                    display: "initial",
-                                                    marginRight: "30px",
                                                     borderRadius: "50px",
                                                     alignItems: "center",
                                                     justifyContent: "center",
@@ -294,6 +292,7 @@ function Navbar({
                                                 style={{
                                                     borderRadius: "40px",
                                                     marginRight: "1px",
+                                                    marginLeft: "15px",
                                                 }}
                                             />
                                             {arrowicon ? (
@@ -487,6 +486,14 @@ function Navbar({
                         </div>
                     </div>
                 </div>
+                {searchbar && (
+                    <Categories
+                        onSelectedCategoriesChange={
+                            handleSelectedCategoriesChange
+                        }
+                        onClearFilter3={removeFilter}
+                    />
+                )}
                 {mobileview && (
                     <div className="mobileView">
                         {/* ------searchbar -------- */}
@@ -615,7 +622,7 @@ function Navbar({
                                 </NavLink>
                             </div>
                         )}
-                        {searchbar && (
+                        {/* {searchbar && (
                             <div className="InputContainer">
                                 <input
                                     placeholder="Search.."
@@ -627,18 +634,18 @@ function Navbar({
                                     autoComplete="off"
                                 />
                             </div>
-                        )}
-                        {searchbar && (
+                        )} */}
+                        {/* {searchbar && (
                             <Categories
                                 onSelectedCategoriesChange={
                                     handleSelectedCategoriesChange
                                 }
                                 onClearFilter3={removeFilter}
                             />
-                        )}
+                        )} */}
                     </div>
                 )}
-                <div className="hide">
+                {/* <div className="hide">
                     {searchbar && (
                         <Categories
                             className="hide"
@@ -648,7 +655,7 @@ function Navbar({
                             onClearFilter3={removeFilter}
                         />
                     )}
-                </div>
+                </div> */}
             </div>
         </>
     );

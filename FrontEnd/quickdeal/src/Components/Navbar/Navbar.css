@@ -46,14 +46,13 @@
     overflow: hidden;
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
-    margin-left: 100px;
 
     @media only screen and (max-width: 500px) {
-        width: 150px;
+        /* width: 150px;
         height: 150px;
         border-radius: 25px;
         margin-left: 70px;
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.075);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.075); */
     }
 }
 
@@ -129,6 +128,7 @@
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     text-decoration: none;
     border: 2px solid #4a4360;
+    margin-left: 10px;
 }
 
 .login-sell-btn:hover,
@@ -213,9 +213,8 @@
 } */
 .clear_filter {
     position: relative;
-    width: 95px;
     min-width: 90px;
-    height: 35px;
+    height: 30px;
     border-radius: 45px;
     border: none;
     background-color: rgb(151, 95, 255);
@@ -227,8 +226,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 40px;
-    /* margin-bottom: 50px; */
 }
 .notificationDropdown {
     padding: 0;
@@ -304,7 +301,7 @@
 
     .InputContainer {
         width: 70%; /* Full width for search bar */
-        max-width: none; /* Remove max-width constraint */
+        min-width: 50%; /* Remove max-width constraint */
         margin-bottom: 0; /* Add space below search bar */
         height: 35px;
         margin-right: 4px;
@@ -326,7 +323,6 @@
         margin-right: 0;
     }
     .custom-nav-dropdown img {
-        width: 40px; /* Adjust logo size for smaller screens */
         height: auto; /* Maintain aspect ratio */
     }
     .input {
@@ -339,6 +335,7 @@
         display: none;
     }
 }
+
 /* Display search input container on screens larger than 600px */
 @media screen and (max-width: 601px) {
     .hide {
@@ -366,6 +363,7 @@
 }
 .hamburger {
     margin: 10px;
+    margin-left: 0;
 }
 /* YourComponent.css */
 
@@ -384,6 +382,7 @@
     background-color: white;
     color: var(--lp);
     width: 100%;
+    border: 2px solid var(--purple);
 }
 .dropdownitems2:hover {
     background-color: #00a49e1d;

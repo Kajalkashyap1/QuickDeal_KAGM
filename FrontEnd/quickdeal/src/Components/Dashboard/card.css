@@ -11,7 +11,7 @@
     top: 20px;
 }
 .formargin {
-    margin-top: 12em;
+    margin-top: 15em;
 }
 .cards {
     max-width: 300px;
@@ -75,7 +75,7 @@
 @media screen and (max-width: 600px) {
     /* Adjust breakpoint as needed */
     .formargin {
-        margin-top: 5em;
+        margin-top: 13em;
     }
 }
 

@@ -23,6 +23,26 @@ const CategoryBar = ({ onSelectedCategories2e, onClearFilter2 }) => {
     };
     return (
         <nav className={`${style.navbar} ${style.hide2}`}>
+            <div className={style.categoryscroll}>
+                <ul className={style.category_checkboxes}>
+                    {staticOptions.map((item2, index) => {
+                        return (
+                            <li key={index}>
+                                <input
+                                    type="checkbox"
+                                    id={item2.value}
+                                    onChange={handleCategoryChange}
+                                />
+                                <label
+                                    htmlFor={item2.value}
+                                    style={{ marginLeft: "10px" }}>
+                                    {item2.label}
+                                </label>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
             <div className={style.navbarcontent}>
                 <div>
                     <NavDropdown
@@ -57,27 +77,6 @@ const CategoryBar = ({ onSelectedCategories2e, onClearFilter2 }) => {
                                 ))}
                         </div>
                     </NavDropdown>
-                </div>
-
-                <div>
-                    <ul className={style.category_checkboxes}>
-                        {staticOptions.map((item2, index) => {
-                            return (
-                                <li key={index}>
-                                    <input
-                                        type="checkbox"
-                                        id={item2.value}
-                                        onChange={handleCategoryChange}
-                                    />
-                                    <label
-                                        htmlFor={item2.value}
-                                        style={{ marginLeft: "10px" }}>
-                                        {item2.label}
-                                    </label>
-                                </li>
-                            );
-                        })}
-                    </ul>
                 </div>
                 <div className={style.clear_div}>
                     <button

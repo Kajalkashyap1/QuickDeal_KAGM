@@ -81,7 +81,6 @@ const ProductDetails = () => {
 
     const formattedDate = formatDate(item.date);
     const handleGetBuyerinfo = () => {
-        setloading(true);
         axios
             .get("http://localhost:8000/auth/islogin")
             .then((res) => {
@@ -91,11 +90,10 @@ const ProductDetails = () => {
             .catch((err) => {
                 console.log(err);
             });
-        setloading(false);
     };
     return (
         <>
-            {loading ? (
+            {loading || item.length === 0 ? (
                 <div
                     style={{
                         position: "fixed",
